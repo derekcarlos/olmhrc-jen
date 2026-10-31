@@ -1,0 +1,152 @@
+[
+  {
+    "id": "all-saints-sunday",
+    "title": "All Saints' Day - Sunday Mass",
+    "date": "2026-11-01",
+    "celebration": "Sunday Mass",
+    "status": "upcoming",
+    "notes": "Placeholder selection. The final songs and musical settings will be confirmed before rehearsal.",
+    "items": [
+      {
+        "part": "processional",
+        "song": "bayan-magsiawit-na",
+        "used": true
+      },
+      {
+        "part": "penitential-rite",
+        "song": "panginoon-kaawaan-mo-kami-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "gloria",
+        "song": "papuri-sa-diyos-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "gospel-acclamation",
+        "song": "gospel-acclamation-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "offertory",
+        "song": "tanggapin-mo-ama-ang-aming-alay-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "sanctus",
+        "song": "santo-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "memorial-acclamation",
+        "song": "si-kristo-ay-gunitain-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "great-amen",
+        "song": "dakilang-amen-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "pater-noster",
+        "song": "ama-namin-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "doxology",
+        "song": null,
+        "used": false
+      },
+      {
+        "part": "agnus-dei",
+        "song": "kordero-ng-diyos-2015-papal-visit",
+        "used": true
+      },
+      {
+        "part": "communion",
+        "song": "anima-christi-bukas-palad",
+        "used": true
+      },
+      {
+        "part": "recessional",
+        "song": "salamat-sa-biyaya-missa-magnificat",
+        "used": true
+      }
+    ]
+  },
+  {
+    "id": "ot-sunday",
+    "title": "Ordinary Time - Sunday Mass",
+    "date": "2026-11-08",
+    "celebration": "Sunday Mass",
+    "status": "archived",
+    "notes": "Placeholder selection. The final songs and musical settings will be confirmed before rehearsal.",
+    "items": [
+      {
+        "part": "processional",
+        "song": "bayan-magsiawit-na",
+        "used": true
+      },
+      {
+        "part": "penitential-rite",
+        "song": "panginoon-kaawaan-mo-kami-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "gloria",
+        "song": "papuri-sa-diyos-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "gospel-acclamation",
+        "song": "gospel-acclamation-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "offertory",
+        "song": "tanggapin-mo-ama-ang-aming-alay-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "sanctus",
+        "song": "santo-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "memorial-acclamation",
+        "song": "si-kristo-ay-gunitain-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "great-amen",
+        "song": "dakilang-amen-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "pater-noster",
+        "song": "ama-namin-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "doxology",
+        "song": null,
+        "used": false
+      },
+      {
+        "part": "agnus-dei",
+        "song": "kordero-ng-diyos-2015-papal-visit",
+        "used": true
+      },
+      {
+        "part": "communion",
+        "song": "anima-christi-bukas-palad",
+        "used": true
+      },
+      {
+        "part": "recessional",
+        "song": "salamat-sa-biyaya-missa-magnificat",
+        "used": true
+      }
+    ]
+  }
+]

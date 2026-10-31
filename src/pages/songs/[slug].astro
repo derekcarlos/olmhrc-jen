@@ -1,0 +1,79 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import ContentPage from "@/layouts/ContentPage.astro";
+import PracticeAudio from "@/components/PracticeAudio.astro";
+import { getChoirLibrary } from "@/lib/songs";
+import { massPartLabel } from "@/lib/mass-parts";
+
+export async function getStaticPaths() {
+  return (await getChoirLibrary()).songs.map((song) => ({
+    params: { slug: song.id },
+    props: { song },
+  }));
+}
+interface Props {
+  song: CollectionEntry<"songs">;
+}
+const { song } = Astro.props;
+const { Content } = await render(song);
+---
+
+<ContentPage
+  title={song.data.title}
+  meta_title={`${song.data.title} | Rosarium`}
+  description={song.data.description}
+>
+  {
+    song.data.placeholder && (
+      <p class="mb-6 rounded bg-light p-4 dark:bg-darkmode-light">
+        This song entry is awaiting the choir’s lyrics and practice recording.
+      </p>
+    )
+  }
+  <div class="mb-8 space-y-2">
+    <p>
+      {
+        song.data.composer
+          ? `Composer / setting: ${song.data.composer}`
+          : "Musical setting to be confirmed"
+      }
+    </p>
+    {song.data.arranger && <p>Arrangement: {song.data.arranger}</p>}
+    {song.data.language && <p>Language: {song.data.language}</p>}
+    {
+      song.data.mass_parts.length > 0 && (
+        <p>Mass part: {song.data.mass_parts.map(massPartLabel).join("; ")}</p>
+      )
+    }
+    {song.data.marian && <p>Marian repertoire</p>}
+    {
+      song.data.seasons.length > 0 && (
+        <p>Seasons: {song.data.seasons.join(", ")}</p>
+      )
+    }
+    {
+      song.data.occasions.length > 0 && (
+        <p>Celebrations / devotions: {song.data.occasions.join(", ")}</p>
+      )
+    }
+  </div>
+  <PracticeAudio
+    src={song.data.audio}
+    title={song.data.title}
+    credit={song.data.audio_credit}
+    youtube={song.data.youtube}
+  />
+  <section aria-labelledby="lyrics-title">
+    <h2 id="lyrics-title" class="h2 mb-6">Lyrics</h2><div class="content">
+      <Content />
+    </div>
+  </section>
+  <nav class="mt-10 flex flex-wrap gap-4" aria-label="Song navigation">
+    <a href="/songs" class="btn btn-outline-primary">← Sunday selection</a>
+    <a
+      href={song.data.marian ? "/songs/marian" : "/songs/mass"}
+      class="btn btn-outline-primary">Back to repertoire</a
+    >
+  </nav>
+</ContentPage>

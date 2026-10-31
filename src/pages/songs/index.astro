@@ -1,0 +1,90 @@
+---
+import ContentPage from "@/layouts/ContentPage.astro";
+import SongSelection from "@/components/SongSelection.astro";
+import { getChoirLibrary } from "@/lib/songs";
+
+const { songs, selections } = await getChoirLibrary();
+const upcoming = selections.find(
+  (selection) => selection.status === "upcoming",
+);
+---
+
+<ContentPage
+  title="Songs"
+  description="Sunday song selections, lyrics, and practice recordings for the choir of Our Lady of the Most Holy Rosary Chapel."
+>
+  <p class="mb-10">
+    Prepare for Mass with our choir’s song selections, lyrics, and practice
+    recordings.
+  </p>
+  <section aria-labelledby="sunday-selection-title" class="mb-12">
+    <h2 id="sunday-selection-title" class="h2 mb-6">
+      {upcoming?.title ?? "Upcoming Sunday’s Songs"}
+    </h2>
+    {
+      upcoming ? (
+        <SongSelection selection={upcoming} songs={songs} />
+      ) : (
+        <p>The next Sunday selection will appear here once it is ready.</p>
+      )
+    }
+  </section>
+  <section aria-labelledby="repertoire-title">
+    <h2 id="repertoire-title" class="h2 mb-6">Browse the repertoire</h2>
+    <div class="grid gap-6 md:grid-cols-2">
+      <a href="/songs/mass" class="repertoire-tile"
+        ><h3 class="h3 mb-3">Mass Songs</h3><p>
+          Find songs by Mass part, season, or celebration.
+        </p><span>Browse Mass songs →</span></a
+      >
+      <a href="/songs/marian" class="repertoire-tile"
+        ><h3 class="h3 mb-3">Marian Songs</h3><p>
+          Explore songs for Marian devotion and community prayer.
+        </p><span>Browse Marian songs →</span></a
+      >
+    </div>
+  </section>
+  <section class="mt-12" aria-labelledby="previous-title">
+    <h2 id="previous-title" class="h2 mb-4">Previous selections</h2>
+    <p class="mb-4">
+      Return to the song lists used for earlier Sundays and celebrations.
+    </p>
+    <a class="btn btn-outline-primary" href="/songs/selections"
+      >View previous selections</a
+    >
+  </section>
+</ContentPage>
+
+<style>
+  .repertoire-tile {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.6rem;
+  }
+  .repertoire-tile p {
+    flex-grow: 1;
+  }
+  .repertoire-tile span {
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-top: 1.5rem;
+  }
+  .repertoire-tile:hover {
+    border-color: var(--color-accent);
+  }
+  .repertoire-tile:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+  :global(.dark) .repertoire-tile {
+    border-color: var(--color-darkmode-border);
+  }
+  :global(.dark) .repertoire-tile span {
+    color: var(--color-darkmode-primary);
+  }
+  :global(.dark) .repertoire-tile:hover {
+    border-color: var(--color-darkmode-accent);
+  }
+</style>

@@ -1,0 +1,53 @@
+{
+  "excluded_ids": ["commemoration_of_all_the_faithful_departed"],
+  "presentation": {
+    "nativity_of_the_lord": {
+      "title": "The Nativity of the Lord",
+      "description": "Christmas Day — we celebrate the birth of Jesus Christ.",
+      "category": "christmas"
+    },
+    "easter_sunday": {
+      "title": "Easter Sunday",
+      "description": "Christ is risen! Alleluia! We celebrate the Resurrection of our Lord Jesus Christ.",
+      "category": "easter"
+    },
+    "ash_wednesday": {
+      "include": true,
+      "description": "We begin our Lenten journey with prayer, repentance, and a renewed commitment to follow Christ.",
+      "category": "lent"
+    },
+    "holy_thursday": {
+      "include": true,
+      "title": "Maundy Thursday",
+      "description": "We remember the Last Supper and Jesus' commandment to love one another as he has loved us.",
+      "category": "holy-week"
+    },
+    "friday_of_the_passion_of_the_lord": {
+      "include": true,
+      "title": "Good Friday",
+      "description": "We reflect on the Passion and death of Jesus Christ and his saving love for the world.",
+      "category": "holy-week"
+    },
+    "holy_saturday": {
+      "include": true,
+      "title": "Black Saturday",
+      "description": "We wait in prayer and hope, remembering Christ in the tomb and looking forward to the joy of Easter.",
+      "category": "holy-week"
+    },
+    "advent_1_sunday": {
+      "include": true,
+      "description": "We begin Advent in prayerful preparation for the coming of Christ and the start of a new liturgical year.",
+      "category": "advent"
+    }
+  },
+  "supplements": [
+    {
+      "id": "santo_nino",
+      "title": "Santo Niño",
+      "description": "The Philippine feast of Santo Niño, the Holy Child Jesus.",
+      "category": "feast",
+      "rule": { "month": 1, "weekday": 0, "occurrence": 3 },
+      "source": "https://universalis.com/philippines/calendar-2027.htm"
+    }
+  ]
+}

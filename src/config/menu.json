@@ -1,0 +1,53 @@
+{
+  "main": [
+    {
+      "name": "Home",
+      "url": "/"
+    },
+    {
+      "name": "About",
+      "url": "/about"
+    },
+    {
+      "name": "Mass",
+      "url": "/mass"
+    },
+    {
+      "name": "Calendar",
+      "url": "/calendar"
+    },
+    {
+      "name": "Pray",
+      "url": "",
+      "hasChildren": true,
+      "children": [
+        {
+          "name": "Readings",
+          "url": "/readings"
+        },
+        {
+          "name": "Prayers",
+          "url": "/prayers"
+        },
+        {
+          "name": "Songs",
+          "url": "/songs"
+        }
+      ]
+    },
+    {
+      "name": "News",
+      "url": "/news"
+    }
+  ],
+  "footer": [
+    {
+      "name": "About",
+      "url": "/about"
+    },
+    {
+      "name": "Mass",
+      "url": "/mass"
+    }
+  ]
+}

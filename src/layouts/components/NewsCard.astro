@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ImageMod from "@/components/ImageMod.astro";
+import NewsMeta from "@/components/NewsMeta.astro";
+
+interface Props {
+  post: CollectionEntry<"news">;
+}
+const { post } = Astro.props;
+const url = `/news/${post.id}`;
+---
+
+<article class="border-b border-border pb-10 dark:border-darkmode-border">
+  {
+    post.data.image && (
+      <a href={url} tabindex="-1" aria-hidden="true">
+        <ImageMod
+          src={post.data.image}
+          alt=""
+          width={1200}
+          height={600}
+          class="mb-6 w-full rounded"
+          format="webp"
+        />
+      </a>
+    )
+  }
+  <h2 class="h3 mb-3">
+    <a href={url} class="hover:underline">{post.data.title}</a>
+  </h2>
+  <NewsMeta post={post} />
+  <p class="mb-5">{post.data.description}</p>
+  <a
+    class="btn btn-outline-primary"
+    href={url}
+    aria-label={`Read more: ${post.data.title}`}>Read more</a
+  >
+</article>

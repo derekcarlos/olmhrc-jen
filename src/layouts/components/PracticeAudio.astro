@@ -1,0 +1,129 @@
+---
+import { youtubeVideoId } from "@/lib/youtube.mjs";
+
+interface Props {
+  src: string;
+  title: string;
+  credit?: string;
+  youtube?: string;
+}
+const { src, title, credit, youtube = "" } = Astro.props;
+const videoId = youtubeVideoId(youtube);
+---
+
+<section
+  class="mb-10 rounded-lg border border-border p-6 dark:border-darkmode-border"
+  aria-labelledby="practice-heading"
+>
+  <h2 id="practice-heading" class="h3 mb-4">Listen and practise</h2>
+  {
+    src ? (
+      <>
+        <div data-practice-player>
+          <audio
+            controls
+            preload="none"
+            src={src}
+            aria-label={`Practice recording: ${title}`}
+            class="w-full"
+          >
+            Your browser does not support audio playback.
+          </audio>
+          <div class="mt-5 flex flex-wrap items-center gap-6">
+            <label class="flex flex-wrap items-center gap-3">
+              Playback speed
+              <select
+                data-playback-speed
+                class="rounded border border-border bg-body px-3 py-2 dark:border-darkmode-border dark:bg-darkmode-body"
+              >
+                <>
+                  <option value="0.75">0.75×</option>
+                  <option value="1" selected>
+                    Normal (1×)
+                  </option>
+                  <option value="1.25">1.25×</option>
+                  <option value="1.5">1.5×</option>
+                </>
+              </select>
+            </label>
+            <label class="inline-flex min-h-11 cursor-pointer items-center gap-3">
+              <input type="checkbox" data-repeat-audio class="h-5 w-5" />
+              Repeat recording
+            </label>
+          </div>
+          <p data-audio-error role="status" class="mt-4" hidden>
+            The recording could not be loaded. Please try the audio link below.
+          </p>
+        </div>
+        {credit && <p class="mt-4">{credit}</p>}
+        <a href={src} class="mt-4 inline-block underline underline-offset-4">
+          Open audio file
+        </a>
+      </>
+    ) : !videoId ? (
+      <p>Practice recording coming soon.</p>
+    ) : null
+  }
+  {
+    videoId && (
+      <div
+        class:list={[
+          src && "mt-8 border-t border-border pt-6 dark:border-darkmode-border",
+        ]}
+      >
+        <h3 class="h4 mb-4">YouTube practice video</h3>
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${videoId}`}
+          title={`Practice video: ${title}`}
+          width="560"
+          height="315"
+          loading="lazy"
+          allow="encrypted-media; picture-in-picture; fullscreen"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"
+          class="aspect-video min-h-[200px] w-full rounded border-0"
+          style="height: auto;"
+        />
+        <a
+          href={`https://www.youtube.com/watch?v=${videoId}`}
+          class="mt-4 inline-block underline underline-offset-4"
+        >
+          Open on YouTube
+        </a>
+        <p class="mt-3">If the video cannot play here, open it on YouTube.</p>
+      </div>
+    )
+  }
+</section>
+
+<script>
+  function preparePlayers() {
+    document
+      .querySelectorAll<HTMLElement>("[data-practice-player]")
+      .forEach((player) => {
+        if (player.dataset.ready) return;
+        player.dataset.ready = "true";
+        const audio = player.querySelector<HTMLAudioElement>("audio");
+        const speed = player.querySelector<HTMLSelectElement>(
+          "[data-playback-speed]",
+        );
+        const repeat = player.querySelector<HTMLInputElement>(
+          "[data-repeat-audio]",
+        );
+        if (!audio || !speed || !repeat) return;
+        speed.addEventListener("change", () => {
+          audio.playbackRate = Number(speed.value);
+        });
+        repeat.addEventListener("change", () => {
+          audio.loop = repeat.checked;
+        });
+        audio.addEventListener("error", () => {
+          const message =
+            player.querySelector<HTMLElement>("[data-audio-error]");
+          if (message) message.hidden = false;
+        });
+      });
+  }
+  preparePlayers();
+  document.addEventListener("astro:page-load", preparePlayers);
+</script>

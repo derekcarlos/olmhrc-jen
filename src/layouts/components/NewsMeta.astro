@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from "astro:content";
+import dateFormat from "@/lib/utils/dateFormat";
+
+interface Props {
+  post: CollectionEntry<"news">;
+}
+const { post } = Astro.props;
+---
+
+<div class="news-meta mb-5 text-text-light dark:text-darkmode-text-light">
+  <p>
+    <time datetime={post.data.date.toISOString()}
+      >{dateFormat(post.data.date)}</time>
+  </p>
+  <p>By {post.data.author}</p>
+  {post.data.categories.length > 0 && <p>{post.data.categories.join(" · ")}</p>}
+</div>
+
+<style>
+  .news-meta {
+    font-size: 18px;
+    line-height: 28px;
+  }
+</style>

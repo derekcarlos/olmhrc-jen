@@ -1,0 +1,265 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ContentPage from "@/layouts/ContentPage.astro";
+import { massParts, massPartLabel } from "@/lib/mass-parts";
+
+interface Props {
+  songs: CollectionEntry<"songs">[];
+  kind: "mass" | "marian";
+}
+const { songs, kind } = Astro.props;
+const title = kind === "mass" ? "Mass Song Library" : "Marian Songs";
+const seasons = [...new Set(songs.flatMap((song) => song.data.seasons))].sort();
+const occasions = [
+  ...new Set(songs.flatMap((song) => song.data.occasions)),
+].sort();
+---
+
+<ContentPage
+  title={title}
+  description={`${title}, lyrics, and practice recordings for the choir of Our Lady of the Most Holy Rosary Chapel.`}
+>
+  <p class="mb-8">
+    {
+      kind === "mass"
+        ? "Browse the choir’s repertoire by Mass part, season, or celebration."
+        : "Songs for Marian devotion, the novena, and community prayer."
+    }
+  </p>
+  <div data-song-library>
+    <form
+      class="library-filters mb-6"
+      role="search"
+      aria-label="Filter song library"
+    >
+      <label class="search-field"
+        >Search songs<input
+          name="query"
+          type="search"
+          placeholder="Title, composer or language"
+        /></label
+      >
+      {
+        kind === "mass" && (
+          <label>
+            Filter by Mass part
+            <select name="part">
+              <option value="">All Mass parts</option>
+              {massParts.map((part) => (
+                <option value={part.id}>
+                  {part.number}. {part.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        )
+      }
+      <label
+        >Season<select name="season"
+          ><option value="">All seasons</option><option value="__untagged"
+            >Not specified</option
+          >{
+            seasons.map((season) => <option value={season}>{season}</option>)
+          }</select
+        ></label
+      >
+      <label
+        >Celebration / devotion<select name="occasion"
+          ><option value="">All celebrations</option><option value="__untagged"
+            >Not specified</option
+          >{
+            occasions.map((occasion) => (
+              <option value={occasion}>{occasion}</option>
+            ))
+          }</select
+        ></label
+      >
+      <button type="reset" class="btn btn-outline-primary justify-self-start"
+        >Reset filters</button
+      >
+    </form>
+    <p class="mb-6" data-song-count role="status" aria-live="polite">
+      {songs.length}
+      {songs.length === 1 ? "song" : "songs"}
+    </p>
+    <div class="song-grid">
+      {
+        songs.map((song) => (
+          <a
+            class="song-card"
+            href={`/songs/${song.id}`}
+            data-song-record={JSON.stringify(song.data)}
+          >
+            <h2>{song.data.title}</h2>
+            <p>{song.data.composer || "Musical setting to be confirmed"}</p>
+            {song.data.mass_parts.length > 0 && (
+              <p class="song-meta">
+                {song.data.mass_parts.map(massPartLabel).join(" · ")}
+              </p>
+            )}
+            {song.data.seasons.length > 0 && (
+              <p class="song-meta">{song.data.seasons.join(" · ")}</p>
+            )}
+            <span class="song-open">Lyrics &amp; practice audio →</span>
+          </a>
+        ))
+      }
+    </div>
+    <p
+      data-no-songs
+      class="rounded border border-border p-6 dark:border-darkmode-border"
+      hidden={songs.length > 0}
+    >
+      No songs match these filters. Try another search or reset the filters.
+    </p>
+  </div>
+  <a href="/songs" class="btn btn-outline-primary mt-10">← Sunday selection</a>
+</ContentPage>
+
+<style>
+  .library-filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    background: var(--color-light);
+    border-radius: 0.6rem;
+  }
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .search-field {
+    grid-column: 1 / -1;
+  }
+  input,
+  select {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    border: 1px solid var(--color-border);
+    border-radius: 0.3rem;
+    background: var(--color-body);
+    color: var(--color-text-dark);
+    padding: 0.6rem;
+    font: inherit;
+  }
+  input:focus-visible,
+  select:focus-visible,
+  a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+  .song-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .song-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.6rem;
+  }
+  .song-card:hover {
+    border-color: var(--color-accent);
+  }
+  h2 {
+    font-size: 28px;
+    line-height: 1.25;
+  }
+  .song-meta {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .song-open {
+    margin-top: auto;
+    padding-top: 0.8rem;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+  :global(.dark) .library-filters {
+    background: var(--color-darkmode-light);
+  }
+  :global(.dark) input,
+  :global(.dark) select {
+    background: var(--color-darkmode-body);
+    color: var(--color-darkmode-text-dark);
+    border-color: var(--color-darkmode-border);
+  }
+  :global(.dark) .song-card {
+    border-color: var(--color-darkmode-border);
+  }
+  :global(.dark) .song-card:hover {
+    border-color: var(--color-darkmode-accent);
+  }
+  :global(.dark) .song-open {
+    color: var(--color-darkmode-primary);
+  }
+  @media (max-width: 640px) {
+    .library-filters,
+    .song-grid {
+      grid-template-columns: 1fr;
+    }
+    .library-filters {
+      padding: 1rem;
+    }
+  }
+</style>
+
+<script>
+  import { matchesSong } from "@/lib/song-filter.mjs";
+
+  function prepareLibraries() {
+    document
+      .querySelectorAll<HTMLElement>("[data-song-library]")
+      .forEach((library) => {
+        if (library.dataset.ready) return;
+        library.dataset.ready = "true";
+        const form = library.querySelector<HTMLFormElement>("form");
+        if (!form) return;
+        const cards = [
+          ...library.querySelectorAll<HTMLAnchorElement>("[data-song-record]"),
+        ].map((card) => ({
+          card,
+          song: JSON.parse(card.dataset.songRecord ?? "{}"),
+        }));
+        const apply = () => {
+          const values = new FormData(form);
+          const filters = {
+            query: String(values.get("query") ?? ""),
+            part: String(values.get("part") ?? ""),
+            season: String(values.get("season") ?? ""),
+            occasion: String(values.get("occasion") ?? ""),
+          };
+          let count = 0;
+          for (const { card, song } of cards) {
+            const visible = matchesSong(song, filters);
+            card.hidden = !visible;
+            if (visible) count++;
+          }
+          const status =
+            library.querySelector<HTMLElement>("[data-song-count]");
+          const empty = library.querySelector<HTMLElement>("[data-no-songs]");
+          if (status)
+            status.textContent = `${count} ${count === 1 ? "song" : "songs"}`;
+          if (empty) empty.hidden = count > 0;
+        };
+        form.addEventListener("submit", (event) => event.preventDefault());
+        form.addEventListener("input", apply);
+        form.addEventListener("change", apply);
+        form.addEventListener("reset", () => {
+          setTimeout(apply, 0);
+        });
+        apply();
+      });
+  }
+  prepareLibraries();
+  document.addEventListener("astro:page-load", prepareLibraries);
+</script>

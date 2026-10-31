@@ -1,0 +1,9 @@
+---
+import SongLibrary from "@/layouts/SongLibrary.astro";
+import { getChoirLibrary } from "@/lib/songs";
+const songs = (await getChoirLibrary()).songs.filter(
+  (song) => song.data.mass_parts.length > 0,
+);
+---
+
+<SongLibrary songs={songs} kind="mass" />

@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { SongSelection as SelectionData } from "@/lib/songs";
+import { getChoirLibrary } from "@/lib/songs";
+import ContentPage from "@/layouts/ContentPage.astro";
+import SongSelection from "@/components/SongSelection.astro";
+
+export async function getStaticPaths() {
+  const { songs, selections } = await getChoirLibrary();
+  return selections.map((selection) => ({
+    params: { id: selection.id },
+    props: { selection, songs },
+  }));
+}
+interface Props {
+  selection: SelectionData;
+  songs: CollectionEntry<"songs">[];
+}
+const { selection, songs } = Astro.props;
+---
+
+<ContentPage
+  title={selection.title}
+  description={`Choir song selection for ${selection.celebration} at Our Lady of the Most Holy Rosary Chapel.`}
+>
+  <SongSelection selection={selection} songs={songs} />
+  <a href="/songs" class="btn btn-outline-primary mt-10">← Songs</a>
+</ContentPage>

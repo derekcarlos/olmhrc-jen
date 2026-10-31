@@ -1,0 +1,35 @@
+---
+import ContentPage from "@/layouts/ContentPage.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import { render } from "astro:content";
+
+// get static paths for all pages
+export async function getStaticPaths() {
+  const COLLECTION_FOLDER = "pages";
+
+  const pages = await getSinglePage(COLLECTION_FOLDER);
+
+  const paths = pages.map((page) => ({
+    params: {
+      regular: page.id,
+    },
+    props: { page },
+  }));
+  return paths;
+}
+
+const { page } = Astro.props;
+const { title, meta_title, description, image } = page.data;
+const { Content } = await render(page);
+---
+
+<ContentPage
+  title={title}
+  meta_title={meta_title}
+  description={description}
+  image={image}
+  wide={page.data.wide}
+  compactHeader={page.data.compact_header}
+>
+  <div class="content"><Content /></div>
+</ContentPage>

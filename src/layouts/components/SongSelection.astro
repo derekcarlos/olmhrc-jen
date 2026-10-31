@@ -1,0 +1,122 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { SongSelection } from "@/lib/songs";
+import { selectionDate } from "@/lib/songs";
+import { massParts } from "@/lib/mass-parts";
+
+interface Props {
+  selection: SongSelection;
+  songs: CollectionEntry<"songs">[];
+}
+const { selection, songs } = Astro.props;
+const songMap = new Map(songs.map((song) => [song.id, song]));
+---
+
+<div class="selection">
+  <p class="mb-2 font-semibold">
+    {selection.celebration} · {selectionDate(selection.date)}
+  </p>
+  {selection.notes && <p class="mb-6">{selection.notes}</p>}
+  <ol class="selection-list">
+    {
+      massParts.map((part) => {
+        const item = selection.items.find((entry) => entry.part === part.id);
+        const song =
+          item?.used && item.song ? songMap.get(item.song) : undefined;
+        return (
+          <li>
+            <span class="part-number" aria-hidden="true">
+              {part.number}
+            </span>
+            <div>
+              <p class="part-label">{part.label}</p>
+              {song ? (
+                <>
+                  <a class="song-title" href={`/songs/${song.id}`}>
+                    {song.data.title}
+                  </a>
+                  <p class="setting">
+                    {song.data.composer
+                      ? `Setting: ${song.data.composer}`
+                      : "Musical setting to be confirmed"}
+                  </p>
+                </>
+              ) : (
+                <p>
+                  {item?.used === false
+                    ? "Not used for this celebration"
+                    : "Song to be chosen"}
+                </p>
+              )}
+            </div>
+          </li>
+        );
+      })
+    }
+  </ol>
+</div>
+
+<style>
+  .selection-list {
+    border: 1px solid var(--color-border);
+    border-radius: 0.6rem;
+    overflow: hidden;
+  }
+  li {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+  li + li {
+    border-top: 1px solid var(--color-border);
+  }
+  .part-number {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+  .part-label,
+  .setting {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .part-label {
+    margin-bottom: 0.3rem;
+  }
+  .song-title {
+    font-size: var(--reading-size);
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .setting {
+    margin-top: 0.25rem;
+    color: var(--color-text-light);
+  }
+  .song-title:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+  :global(.dark) .selection-list,
+  :global(.dark) li + li {
+    border-color: var(--color-darkmode-border);
+  }
+  :global(.dark) .song-title {
+    color: var(--color-darkmode-primary);
+  }
+  :global(.dark) .part-number {
+    color: var(--color-darkmode-accent);
+  }
+  :global(.dark) .setting {
+    color: var(--color-darkmode-text-light);
+  }
+  @media (max-width: 640px) {
+    li {
+      grid-template-columns: 1.75rem 1fr;
+      gap: 0.65rem;
+      padding: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,13 @@
+---
+import config from "@/config/config.json";
+import NewsListing from "@/layouts/NewsListing.astro";
+import { getNewsPosts } from "@/lib/news";
+
+const posts = await getNewsPosts();
+const pageSize = config.settings.pagination;
+---
+
+<NewsListing
+  posts={posts.slice(0, pageSize)}
+  totalPages={Math.ceil(posts.length / pageSize)}
+/>

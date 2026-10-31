@@ -1,0 +1,61 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import ContentPage from "@/layouts/ContentPage.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+
+export async function getStaticPaths() {
+  return (await getSinglePage("prayers")).map((prayer) => ({
+    params: { slug: prayer.id },
+    props: { prayer },
+  }));
+}
+
+interface Props {
+  prayer: CollectionEntry<"prayers">;
+}
+const { prayer } = Astro.props;
+const { Content } = await render(prayer);
+---
+
+<ContentPage
+  title={prayer.data.title}
+  meta_title={prayer.data.meta_title ?? `${prayer.data.title} | Rosarium`}
+  description={prayer.data.description}
+  image={prayer.data.image}
+>
+  <div class="content" lang={prayer.data.language}><Content /></div>
+  <a href="/prayers" class="btn btn-outline-primary mt-10">← Back to Prayers</a>
+</ContentPage>
+
+<style>
+  .content :global([id]) {
+    scroll-margin-top: 8rem;
+  }
+  .content :global(.novena-day) {
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    margin-block: 1rem;
+  }
+  .content :global(.novena-day > summary) {
+    cursor: pointer;
+    color: var(--color-primary);
+    font-size: var(--reading-size);
+    font-weight: 600;
+    line-height: 28px;
+  }
+  .content :global(.novena-day > summary:focus-visible) {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+  .content :global(.novena-day[open] > summary) {
+    margin-bottom: 1.25rem;
+  }
+  :global(.dark) .content :global(.novena-day) {
+    border-color: var(--color-darkmode-border);
+  }
+  :global(.dark) .content :global(.novena-day > summary) {
+    color: var(--color-darkmode-primary);
+  }
+</style>

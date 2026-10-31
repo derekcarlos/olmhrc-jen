@@ -1,0 +1,200 @@
+---
+import "@/styles/calendar.css";
+import { getCollection, render } from "astro:content";
+import { formatEventTime, manilaToday } from "@/lib/calendar.mjs";
+import { getLiturgicalYear } from "@/lib/liturgical-calendar.mjs";
+import { calendarCategories } from "@/lib/calendar-categories";
+import { LuClock, LuMapPin } from "react-icons/lu";
+
+// Calendar events intentionally include future dates.
+const events = await getCollection("events", ({ data }) => !data.draft);
+const records = events.map(({ id, data }) => ({ id, ...data }));
+const liturgicalYear = await getLiturgicalYear(
+  Number(manilaToday().slice(0, 4)),
+);
+const details = await Promise.all(
+  events.map(async (event) => ({ event, ...(await render(event)) })),
+);
+const weekdays = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+---
+
+<div
+  class="chapel-calendar"
+  data-chapel-calendar
+  data-events={JSON.stringify(records)}
+  data-liturgical-year={JSON.stringify(liturgicalYear)}
+  data-liturgical-base={import.meta.env.BASE_URL}
+>
+  <div data-calendar-interface hidden>
+    <div class="calendar-layout">
+      <section class="calendar-month-card" aria-label="Monthly calendar">
+        <div class="calendar-toolbar">
+          <div class="calendar-month-heading">
+            <h2
+              class="h3"
+              data-calendar-title
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              Chapel calendar
+            </h2>
+            <span class="calendar-cycle" data-calendar-cycle></span>
+          </div>
+          <div
+            class="calendar-controls"
+            role="group"
+            aria-label="Calendar navigation"
+          >
+            <button type="button" data-calendar-prev aria-label="Previous month"
+              >←</button
+            >
+            <button type="button" data-calendar-today>Today</button>
+            <button type="button" data-calendar-next aria-label="Next month"
+              >→</button
+            >
+          </div>
+        </div>
+        <div class="calendar-data-state" data-calendar-data-state hidden>
+          <p role="status" data-calendar-data-status></p>
+          <button type="button" data-calendar-data-retry hidden>Retry</button>
+        </div>
+        <p class="sr-only">
+          Select an event icon to see its details. All times are Philippine Time
+          (PHT).
+        </p>
+        <div class="calendar-month-grid">
+          <table aria-labelledby="calendar-grid-caption">
+            <caption
+              id="calendar-grid-caption"
+              class="sr-only"
+              data-calendar-caption>Monthly chapel events</caption
+            >
+            <thead
+              ><tr
+                >{
+                  weekdays.map((day) => (
+                    <th scope="col">
+                      <abbr title={day}>{day.slice(0, 3)}</abbr>
+                    </th>
+                  ))
+                }</tr
+              ></thead
+            >
+            <tbody data-calendar-days></tbody>
+          </table>
+        </div>
+        <ul class="calendar-legend" aria-label="Event legend">
+          {
+            calendarCategories.map(({ id, label, icon: Icon }) => (
+              <li data-category={id}>
+                <>
+                  <Icon aria-hidden="true" />
+                  <span>{label}</span>
+                </>
+              </li>
+            ))
+          }
+        </ul>
+        <details class="calendar-options">
+          <summary>Jump to month</summary>
+          <label
+            >Choose a month <input
+              type="month"
+              min="1900-01"
+              max="2100-12"
+              data-calendar-month
+            /></label
+          >
+        </details>
+      </section>
+      <section class="calendar-agenda" aria-labelledby="calendar-agenda-title">
+        <h2 id="calendar-agenda-title" class="h3">Upcoming Events</h2>
+        <p data-calendar-count role="status" class="calendar-count"></p>
+        <div
+          data-calendar-agenda
+          tabindex="0"
+          role="region"
+          aria-label="Upcoming events in the next seven days"
+        >
+        </div>
+      </section>
+    </div>
+    <dialog
+      data-calendar-dialog
+      aria-labelledby="calendar-event-title"
+      class="calendar-dialog"
+    >
+      <form method="dialog" class="calendar-dialog-close">
+        <button autofocus aria-label="Close event details">Close ×</button>
+      </form>
+      <h2 id="calendar-event-title" class="h3" data-event-title></h2>
+      <p data-event-date class="calendar-detail-date"></p>
+      <p data-event-time></p>
+      <p data-event-location class="calendar-detail-location"></p>
+      <div class="content" data-event-body></div>
+    </dialog>
+  </div>
+  <section data-calendar-fallback aria-labelledby="calendar-fallback-title">
+    <h2 id="calendar-fallback-title" class="h3 mb-6">
+      Chapel schedules and observances
+    </h2>
+    <p class="mb-6">
+      All times are Philippine Time (PHT). Enable JavaScript to browse the
+      monthly calendar.
+    </p>
+    {
+      details.length ? (
+        details.map(({ event, Content }) => (
+          <details class="calendar-fallback-event">
+            <summary>
+              {event.data.title} ·{" "}
+              {formatEventTime(event.data.time, event.data.all_day)}
+            </summary>
+            <p class="mt-4">
+              {event.data.repeat === "weekly"
+                ? `Every ${weekdays[event.data.weekday!]}`
+                : `${event.data.date}${event.data.end_date ? ` to ${event.data.end_date}` : ""}${event.data.repeat === "yearly" ? " · Repeats annually" : ""}`}
+            </p>
+            <div class="content mt-4">
+              <Content />
+            </div>
+          </details>
+        ))
+      ) : (
+        <p>No events have been announced yet.</p>
+      )
+    }
+  </section>
+  {
+    details.map(({ event, Content }) => (
+      <template data-event-template={event.id}>
+        <Content />
+      </template>
+    ))
+  }
+  {
+    calendarCategories.map(({ id, icon: Icon }) => (
+      <template data-calendar-icon={id}>
+        <Icon aria-hidden="true" />
+      </template>
+    ))
+  }
+  <template data-calendar-icon="clock"><LuClock aria-hidden="true" /></template>
+  <template data-calendar-icon="location"
+    ><LuMapPin aria-hidden="true" /></template
+  >
+</div>
+
+<script>
+  import { prepareCalendars } from "@/lib/calendar-client";
+  prepareCalendars();
+  document.addEventListener("astro:page-load", prepareCalendars);
+</script>

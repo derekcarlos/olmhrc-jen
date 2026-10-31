@@ -1,0 +1,28 @@
+---
+title: "Prayers"
+description: "Pray the Holy Rosary and join the September 28–October 6 novena to Our Lady of the Most Holy Rosary with our chapel community."
+draft: false
+---
+
+import PrayerTile from "@/components/PrayerTile.astro";
+
+Find prayers and devotions for personal prayer, family prayer, and the life of **Our Lady of the Most Holy Rosary Chapel**.
+
+<div className="not-prose my-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+  <PrayerTile
+    title="Novena to Our Lady of the Most Holy Rosary"
+    href="/prayers/novena-to-our-lady-of-the-most-holy-rosary"
+    description="Join our chapel community in nine days of prayer in honor of Our Lady of the Most Holy Rosary."
+    note="September 28–October 6"
+    label="Open the novena"
+    kind="novena"
+  />
+  <PrayerTile
+    title="How to Pray the Holy Rosary"
+    href="/prayers/how-to-pray-the-holy-rosary"
+    description="Follow the prayers step by step and find the four sets of mysteries for reflection."
+    note="A guide for personal and family prayer"
+    label="Read the guide"
+    kind="guide"
+  />
+</div>

@@ -1,0 +1,9 @@
+---
+import SongLibrary from "@/layouts/SongLibrary.astro";
+import { getChoirLibrary } from "@/lib/songs";
+const songs = (await getChoirLibrary()).songs.filter(
+  (song) => song.data.marian,
+);
+---
+
+<SongLibrary songs={songs} kind="marian" />

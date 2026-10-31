@@ -1,0 +1,38 @@
+---
+title: "Tanggapin Mo Ama Ang Aming Alay"
+description: "Lyrics and practice video for Tanggapin Mo Ama Ang Aming Alay from Missa Magnificat."
+composer: "Lester Delgado"
+arranger: "Lester Delgado"
+language: "Tagalog"
+mass_parts: ["offertory"]
+marian: false
+seasons: ["Ordinary Time"]
+occasions: []
+audio: ""
+audio_credit: ""
+youtube: "https://www.youtube.com/watch?v=noyJZaDQdXw"
+placeholder: false
+draft: false
+---
+
+Alay namin sa iyong hapag  
+ang tinapay na nagbibigay ng buhay.  
+Iyong basbasan upang maging katawan  
+ni Hesus na ating tagapagligtas!  
+  
+Alay namin sa iyong hapag  
+ang alak na nagbibigay lakas.  
+Iyong basbasan upang maging dugo  
+ni Hesus na ating tagapagligtas!  
+  
+Tanggapin mo Ama, ang aming alay  
+Inihahandog sa Iyong mga kamay  
+Sa iyong pagpapala kami'y tumalima  
+Sa pag-ibig mong walang hanggan.  
+  
+Tanggapin mo Ama, ang aming alay  
+Inihahandog sa Iyong mga kamay  
+Sa iyong pagpapala kami'y tumalima  
+Sa pag-ibig mong walang hanggan.  
+  
+Choir Note: Hindi na aawitin ang pangalawang Koro kapag nakapaghugas na ng kamay ang pari.  

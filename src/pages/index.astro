@@ -1,0 +1,510 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Base from "@/layouts/Base.astro";
+import { getListPage } from "@/lib/contentParser.astro";
+import { getNewsPosts } from "@/lib/news";
+import dateFormat from "@/lib/utils/dateFormat";
+import {
+  FaBookOpen,
+  FaPrayingHands,
+  FaMusic,
+  FaCross,
+  FaRegBell,
+  FaArrowRight,
+} from "react-icons/fa";
+
+const homepage = await getListPage("homepage", "-index");
+const { banner, mass, news, prayer, community } = homepage.data;
+const latestNews = (await getNewsPosts())[0];
+const resourceIcons = [FaBookOpen, FaPrayingHands, FaMusic];
+---
+
+<Base>
+  <div class="rosarium-home">
+    <section class="welcome container" aria-labelledby="welcome-title">
+      <div>
+        <p class="eyebrow">Faith · Prayer · Community</p>
+        <h1 id="welcome-title">{banner.title}</h1>
+        <p class="chapel-name">{banner.chapel}</p>
+        <p class="location">{banner.location}</p>
+        <p class="intro">{banner.content}</p>
+        <div class="actions">
+          <a class="btn btn-primary" href={banner.button.link}
+            >{banner.button.label}</a
+          >
+          <a class="btn btn-outline-primary" href={banner.secondary_button.link}
+            >{banner.secondary_button.label}</a
+          >
+        </div>
+      </div>
+      <div class="welcome-art">
+        {
+          banner.image ? (
+            <ImageMod
+              src={banner.image}
+              alt={banner.image_alt}
+              width={640}
+              height={960}
+              loading="eager"
+              fit="contain"
+              class="chapel-photo"
+            />
+          ) : (
+            <>
+              <img
+                src="/images/rosarium-window.svg"
+                alt=""
+                width="480"
+                height="520"
+                class="rose-window"
+              />
+            </>
+          )
+        }
+        <p class="art-caption">
+          Under the loving care of
+          <br />
+          <strong>Our Lady of the Most Holy Rosary</strong>
+        </p>
+      </div>
+    </section>
+
+    <section class="gather-section" aria-label="Chapel life">
+      <div class="container chapel-life">
+        <article class="life-panel" aria-labelledby="mass-title">
+          <span class="section-icon"><FaCross aria-hidden="true" /></span>
+          <p class="eyebrow">Together in worship</p>
+          <h2 id="mass-title">{mass.title}</h2>
+          <p>{mass.content}</p>
+          <p>{mass.detail}</p>
+          <p class="notice-line">{mass.notice}</p>
+          <a class="text-link" href={mass.button.link}
+            >{mass.button.label}<FaArrowRight aria-hidden="true" /></a
+          >
+        </article>
+        <article class="life-panel" aria-labelledby="news-title">
+          <span class="section-icon"><FaRegBell aria-hidden="true" /></span>
+          <p class="eyebrow">News &amp; announcements</p>
+          <h2 id="news-title">{news.title}</h2>
+          <p>{news.content}</p>
+          {
+            latestNews ? (
+              <div class="latest-news">
+                <p class="news-date">
+                  <time datetime={latestNews.data.date.toISOString()}>
+                    {dateFormat(latestNews.data.date)}
+                  </time>
+                </p>
+                <h3>
+                  <a href={`/news/${latestNews.id}`} class="hover:underline">
+                    {latestNews.data.title}
+                  </a>
+                </h3>
+                <p>{latestNews.data.description}</p>
+                <a class="text-link" href={`/news/${latestNews.id}`}>
+                  Read latest news
+                  <FaArrowRight aria-hidden="true" />
+                </a>
+              </div>
+            ) : (
+              <div class="news-empty">
+                <p>{news.notice}</p>
+              </div>
+            )
+          }
+          <a class="text-link" href={news.button.link}
+            >{news.button.label}<FaArrowRight aria-hidden="true" /></a
+          >
+        </article>
+      </div>
+    </section>
+
+    <section class="prayer-section container" aria-labelledby="prayer-title">
+      <div class="section-heading">
+        <p class="eyebrow">A moment with God</p>
+        <h2 id="prayer-title">{prayer.title}</h2>
+        <p>{prayer.content}</p>
+      </div>
+      <div class="resource-grid">
+        {
+          prayer.resources.map((resource, index) => {
+            const Icon = resourceIcons[index % resourceIcons.length];
+            return (
+              <article class="resource-card">
+                <span class="resource-icon">
+                  <Icon aria-hidden="true" />
+                </span>
+                <h3>{resource.title}</h3>
+                <p>{resource.content}</p>
+                <a class="text-link" href={resource.link}>
+                  {resource.label}
+                  <FaArrowRight aria-hidden="true" />
+                </a>
+              </article>
+            );
+          })
+        }
+      </div>
+    </section>
+
+    <section class="community-section" aria-labelledby="community-title">
+      <div class="container community-inner">
+        <div class="community-emblem" aria-hidden="true">
+          R<span>Rosarium</span>
+        </div>
+        <div>
+          <p class="eyebrow">Rooted in faith, close to home</p>
+          <h2 id="community-title">{community.title}</h2>
+          <p>{community.content}</p><p>{community.detail}</p>
+          <a class="text-link" href={community.button.link}
+            >{community.button.label}<FaArrowRight aria-hidden="true" /></a
+          >
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>
+<style>
+  .rosarium-home {
+    --home-accent: var(--color-accent);
+  }
+  .welcome {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    padding-block: 2.75rem 5rem;
+  }
+  .eyebrow {
+    color: var(--home-accent);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    margin-bottom: 1.5rem;
+  }
+  h2 {
+    font-size: clamp(1.85rem, 3vw, 2.65rem);
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+  h3 {
+    font-size: 1.7rem;
+    margin-bottom: 0.8rem;
+  }
+  .chapel-name {
+    font-family: var(--font-secondary);
+    color: var(--color-text-dark);
+    font-size: 1.5rem;
+  }
+  .location {
+    margin-top: 0.3rem;
+    font-size: var(--reading-size);
+  }
+  .intro {
+    margin-top: 1.75rem;
+    max-width: 36rem;
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+  .btn {
+    padding: 0.85rem 1.4rem;
+    border-radius: 0.35rem;
+  }
+  .welcome-art {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(
+      ellipse at 50% 42%,
+      #eadfc8 0%,
+      var(--color-light) 72%
+    );
+    border-radius: 15rem 15rem 1rem 1rem;
+    padding: 1.75rem 1.5rem 2rem;
+    border: 1px solid
+      color-mix(in srgb, var(--home-accent) 40%, var(--color-border));
+  }
+  .rose-window {
+    width: min(100%, 370px);
+    height: auto;
+  }
+  .art-caption {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.85rem;
+    line-height: 1.8;
+  }
+  .art-caption strong {
+    font-family: var(--font-secondary);
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  .welcome-art :global(.chapel-photo) {
+    width: min(100%, 340px);
+    height: auto;
+    object-fit: contain;
+  }
+  .gather-section {
+    border-block: 1px solid var(--color-border);
+    background: var(--color-light);
+  }
+  .chapel-life {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-block: 4rem;
+  }
+  .life-panel {
+    padding: 0 4rem 0 1rem;
+  }
+  .life-panel + .life-panel {
+    padding: 0 1rem 0 4rem;
+    border-left: 1px solid var(--color-border);
+  }
+  .section-icon {
+    display: inline-flex;
+    font-size: 1.4rem;
+    color: var(--home-accent);
+    margin-bottom: 1.5rem;
+  }
+  .life-panel > p:not(.eyebrow) {
+    margin-bottom: 1rem;
+  }
+  .notice-line {
+    font-size: var(--reading-size);
+    border-left: 2px solid var(--home-accent);
+    padding-left: 1rem;
+    margin-top: 1.5rem;
+  }
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    padding-block: 0.6rem;
+  }
+  .text-link :global(svg) {
+    width: 0.8rem;
+    transition: transform 0.2s;
+  }
+  .text-link:hover :global(svg) {
+    transform: translateX(4px);
+  }
+  a:focus-visible {
+    outline: 2px solid var(--home-accent);
+    outline-offset: 5px;
+  }
+  .news-empty {
+    border: 1px dashed var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-block: 1.5rem 0.5rem;
+    font-size: var(--reading-size);
+  }
+  .latest-news {
+    margin-block: 1.5rem 0.5rem;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--home-accent);
+  }
+  .news-date {
+    font-size: 18px;
+    margin-bottom: 0.5rem;
+  }
+  .prayer-section {
+    padding-block: 5.5rem;
+  }
+  .section-heading {
+    max-width: 43rem;
+    margin: 0 auto 2.75rem;
+    text-align: center;
+  }
+  .section-heading > p:not(.eyebrow) {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  @media (min-width: 768px) {
+    .intro,
+    .section-heading > p:not(.eyebrow) {
+      font-size: 20px;
+    }
+  }
+  .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .resource-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid var(--color-border);
+    border-radius: 0.7rem;
+    padding: 2.25rem;
+  }
+  .resource-icon {
+    display: inline-flex;
+    padding: 1rem;
+    color: var(--home-accent);
+    background: var(--color-light);
+    border-radius: 50%;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+  .resource-card p {
+    margin-bottom: 1.5rem;
+    font-size: 18px;
+    line-height: 28px;
+  }
+  @media (min-width: 768px) {
+    .resource-card p {
+      font-size: 20px;
+    }
+  }
+  .resource-card .text-link {
+    margin-top: auto;
+  }
+  .community-section {
+    background: var(--color-light);
+    padding-block: 4.5rem;
+  }
+  .community-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    gap: 4rem;
+    max-width: 1050px;
+  }
+  .community-emblem {
+    width: 220px;
+    height: 220px;
+    margin: auto;
+    border: 1px solid var(--home-accent);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Georgia, serif;
+    font-size: 6rem;
+    line-height: 1.1;
+    color: var(--home-accent);
+  }
+  .community-emblem span {
+    font-family: var(--font-primary);
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-top: 0.8rem;
+  }
+  .community-inner p:not(.eyebrow) {
+    margin-bottom: 1rem;
+  }
+  :global(.dark) .rosarium-home {
+    --home-accent: var(--color-darkmode-accent);
+  }
+  :global(.dark) .chapel-name {
+    color: var(--color-darkmode-text-dark);
+  }
+  :global(.dark) .gather-section,
+  :global(.dark) .community-section,
+  :global(.dark) .resource-icon {
+    background: var(--color-darkmode-light);
+  }
+  :global(.dark) .gather-section,
+  :global(.dark) .life-panel + .life-panel,
+  :global(.dark) .news-empty,
+  :global(.dark) .resource-card {
+    border-color: var(--color-darkmode-border);
+  }
+  :global(.dark) .text-link {
+    color: var(--color-darkmode-primary);
+  }
+  :global(.dark) .welcome-art {
+    background: radial-gradient(
+      ellipse at 50% 42%,
+      #514935 0%,
+      #28343c 45%,
+      var(--color-darkmode-light) 75%
+    );
+    border-color: color-mix(
+      in srgb,
+      var(--home-accent) 40%,
+      var(--color-darkmode-border)
+    );
+  }
+  @media (max-width: 900px) {
+    .welcome {
+      gap: 2rem;
+    }
+    .life-panel {
+      padding-right: 2rem;
+    }
+    .life-panel + .life-panel {
+      padding-left: 2rem;
+    }
+    .resource-card {
+      padding: 1.5rem;
+    }
+  }
+  @media (max-width: 640px) {
+    .welcome {
+      grid-template-columns: 1fr;
+      padding-block: 1.5rem 3rem;
+      gap: 2.5rem;
+    }
+    .welcome-art {
+      max-width: 420px;
+      width: 100%;
+      margin-inline: auto;
+    }
+    .rose-window {
+      max-width: 270px;
+    }
+    .welcome-art :global(.chapel-photo) {
+      max-width: 270px;
+    }
+    .chapel-life,
+    .resource-grid,
+    .community-inner {
+      grid-template-columns: 1fr;
+    }
+    .chapel-life {
+      padding-block: 2.5rem;
+      gap: 2.5rem;
+    }
+    .life-panel,
+    .life-panel + .life-panel {
+      padding: 0;
+      border-left: 0;
+    }
+    .life-panel + .life-panel {
+      border-top: 1px solid var(--color-border);
+      padding-top: 2.5rem;
+    }
+    .prayer-section {
+      padding-block: 3.5rem;
+    }
+    .community-inner {
+      gap: 2.5rem;
+    }
+    .community-emblem {
+      width: 160px;
+      height: 160px;
+      font-size: 4.5rem;
+    }
+  }
+</style>

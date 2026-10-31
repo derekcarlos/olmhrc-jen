@@ -1,0 +1,57 @@
+{
+  "site": {
+    "title": "Rosarium",
+    "base_url": "http://localhost:4321",
+    "base_path": "/",
+    "trailing_slash": false,
+    "favicon": "/images/rosarium-favicon.png",
+    "logo": "/images/rosarium-light.png",
+    "logo_darkmode": "/images/rosarium-dark.png",
+    "logo_width": "150",
+    "logo_height": "30",
+    "logo_text": "Rosarium"
+  },
+  "settings": {
+    "search": false,
+    "sticky_header": true,
+    "theme_switcher": true,
+    "default_theme": "system",
+    "pagination": 2,
+    "summary_length": 200,
+    "blog_folder": "blog"
+  },
+  "announcement": {
+    "enable": false,
+    "content": "",
+    "expire_days": 7
+  },
+  "params": {
+    "copyright": "Rosarium · Our Lady of the Most Holy Rosary Chapel<br />Jubilation Enclave North · Biñan, Laguna"
+  },
+  "navigation_button": {
+    "enable": false,
+    "label": "Github",
+    "link": "https://github.com/zeon-studio/astroplate"
+  },
+  "google_tag_manager": {
+    "enable": false,
+    "gtm_id": "GTM-XXXXXX"
+  },
+  "disqus": {
+    "enable": false,
+    "shortname": "",
+    "settings": {}
+  },
+  "metadata": {
+    "meta_author": "Our Lady of the Most Holy Rosary Chapel",
+    "meta_image": "/images/rosarium-window.svg",
+    "meta_description": "Rosarium is the online home of Our Lady of the Most Holy Rosary Chapel in Jubilation Enclave North, Biñan, Laguna. Chapel news, Mass information, readings, prayers, and songs."
+  },
+  "llms": {
+    "generate_llms_txt": true,
+    "generate_llms_full_txt": true,
+    "generate_individual_md": true,
+    "include": [],
+    "exclude": []
+  }
+}

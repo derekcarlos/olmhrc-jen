@@ -1,0 +1,42 @@
+---
+import ContentPage from "@/layouts/ContentPage.astro";
+import { getChoirLibrary, selectionDate } from "@/lib/songs";
+const archived = (await getChoirLibrary()).selections
+  .filter((selection) => selection.status === "archived")
+  .sort((a, b) => b.date.localeCompare(a.date));
+---
+
+<ContentPage
+  title="Previous Song Selections"
+  description="Earlier choir song lists for Sundays and celebrations at Our Lady of the Most Holy Rosary Chapel."
+>
+  {
+    archived.length ? (
+      <ul class="space-y-6">
+        {archived.map((selection) => (
+          <li class="border-b border-border pb-6 dark:border-darkmode-border">
+            <h2 class="h3 mb-3">
+              <a
+                href={`/songs/selections/${selection.id}`}
+                class="underline underline-offset-4"
+              >
+                {selection.title}
+              </a>
+            </h2>
+            <p>
+              {selection.celebration} · {selectionDate(selection.date)}
+            </p>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p>
+        No previous selections yet. Earlier Sunday and celebration song lists
+        will appear here when they are archived.
+      </p>
+    )
+  }
+  <a href="/songs" class="btn btn-outline-primary mt-10"
+    >← Upcoming Sunday’s songs</a
+  >
+</ContentPage>

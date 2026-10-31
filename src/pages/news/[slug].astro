@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import ContentPage from "@/layouts/ContentPage.astro";
+import NewsMeta from "@/components/NewsMeta.astro";
+import { getNewsPosts } from "@/lib/news";
+
+export async function getStaticPaths() {
+  return (await getNewsPosts()).map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<"news">;
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<ContentPage
+  title={post.data.title}
+  titleSize="h1"
+  meta_title={post.data.meta_title ?? `${post.data.title} | Rosarium`}
+  description={post.data.description}
+  image={post.data.image}
+>
+  <NewsMeta post={post} />
+  <div class="content"><Content /></div>
+  <a class="btn btn-outline-primary mt-10" href="/news">← Back to News</a>
+</ContentPage>

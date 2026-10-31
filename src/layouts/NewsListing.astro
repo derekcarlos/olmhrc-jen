@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ContentPage from "@/layouts/ContentPage.astro";
+import NewsCard from "@/components/NewsCard.astro";
+import Pagination from "@/components/Pagination.astro";
+
+interface Props {
+  posts: CollectionEntry<"news">[];
+  currentPage?: number;
+  totalPages: number;
+}
+const { posts, currentPage = 1, totalPages } = Astro.props;
+---
+
+<ContentPage
+  title="News"
+  meta_title={currentPage > 1
+    ? `News — Page ${currentPage} | Rosarium`
+    : "News | Rosarium"}
+  description="News and announcements from Our Lady of the Most Holy Rosary Chapel in Jubilation Enclave North, Biñan, Laguna."
+>
+  <p class="mb-10">
+    News, announcements, and updates from our chapel community.
+  </p>
+  {
+    posts.length > 0 ? (
+      <div class="space-y-10 mb-10">
+        {posts.map((post) => (
+          <NewsCard post={post} />
+        ))}
+      </div>
+    ) : (
+      <div class="rounded border border-border bg-light p-6 dark:border-darkmode-border dark:bg-darkmode-light">
+        <h2 class="h4 mb-3">No announcements yet</h2>
+        <p>
+          News and updates from Our Lady of the Most Holy Rosary Chapel will
+          appear here as they become available.
+        </p>
+      </div>
+    )
+  }
+  <Pagination
+    section="news"
+    currentPage={currentPage}
+    totalPages={totalPages}
+  />
+</ContentPage>

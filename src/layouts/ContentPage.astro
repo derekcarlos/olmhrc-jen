@@ -1,0 +1,74 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Base from "@/layouts/Base.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+
+interface Props {
+  title: string;
+  meta_title?: string;
+  description?: string;
+  image?: string;
+  titleSize?: "h1" | "h3";
+  wide?: boolean;
+  compactHeader?: boolean;
+}
+
+const {
+  title,
+  meta_title,
+  description,
+  image,
+  titleSize = "h1",
+  wide = false,
+  compactHeader = false,
+} = Astro.props;
+---
+
+<Base
+  title={title}
+  meta_title={meta_title}
+  description={description}
+  image={image}
+>
+  <section class:list={["section-sm", compactHeader && "content-page-compact"]}>
+    <div
+      class="container"
+      style={compactHeader ? "max-width: 1224px !important" : undefined}
+    >
+      <div class="row justify-center">
+        <div class:list={[wide ? "col-12" : "md:col-10 lg:col-8"]}>
+          {
+            image && (
+              <ImageMod
+                class="mx-auto mb-6 rounded"
+                src={image}
+                width={1200}
+                height={600}
+                alt={title}
+                format="webp"
+              />
+            )
+          }
+          <h1
+            set:html={markdownify(title)}
+            class:list={[titleSize, compactHeader ? "mb-2" : "mb-6"]}
+          />
+          <slot />
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .content-page-compact {
+    padding-top: 2rem;
+  }
+  .content-page-compact h1 {
+    font-size: 2.75rem;
+  }
+  .content-page-compact :global(.content > p:first-child) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+</style>

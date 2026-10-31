@@ -1,0 +1,61 @@
+---
+import { LuCalendar, LuClock } from "react-icons/lu";
+
+interface Props {
+  title: string;
+  day: string;
+  time: string;
+  timeValue: string;
+}
+
+const { title, day, time, timeValue } = Astro.props;
+---
+
+<article class="schedule-card">
+  <h3>{title}</h3>
+  <div class="schedule-row">
+    <LuCalendar className="schedule-icon" aria-hidden="true" />
+    <p>{day}</p>
+  </div>
+  <div class="schedule-row">
+    <LuClock className="schedule-icon" aria-hidden="true" />
+    <p>Starts at <time datetime={timeValue}>{time}</time></p>
+  </div>
+</article>
+
+<style>
+  .schedule-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-light);
+    padding: 1.5rem;
+    color: var(--color-text);
+  }
+  h3 {
+    font-size: 30px;
+    line-height: 1.25;
+    margin-bottom: 0.25rem;
+  }
+  .schedule-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: var(--font-primary);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+  }
+  .schedule-row :global(.schedule-icon) {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  :global(.dark) .schedule-card {
+    color: var(--color-darkmode-text);
+    background: var(--color-darkmode-light);
+    border-color: var(--color-darkmode-border);
+  }
+</style>

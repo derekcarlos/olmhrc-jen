@@ -1,0 +1,463 @@
+.chapel-calendar {
+  --calendar-accent: var(--color-primary);
+  --calendar-line: var(--color-border);
+  --calendar-soft: #faf8f4;
+  --calendar-paper: #fff;
+  --calendar-ink: var(--color-text-dark);
+  --calendar-text: var(--color-text);
+  color: var(--calendar-text);
+  margin-top: 2rem;
+}
+.dark .chapel-calendar {
+  --calendar-accent: var(--color-darkmode-primary);
+  --calendar-line: #6f8090;
+  --calendar-soft: var(--color-darkmode-light);
+  --calendar-paper: var(--color-darkmode-body);
+  --calendar-ink: var(--color-darkmode-text-dark);
+  --calendar-text: var(--color-darkmode-text);
+}
+.chapel-calendar [hidden] {
+  display: none !important;
+}
+.chapel-calendar [data-category] {
+  --event-color: #626262;
+}
+.chapel-calendar [data-category="mass"] {
+  --event-color: #a51d38;
+}
+.chapel-calendar [data-category="novena"],
+.chapel-calendar [data-category="memorial"] {
+  --event-color: #127da1;
+}
+.chapel-calendar [data-category="feast"] {
+  --event-color: #21813a;
+}
+.chapel-calendar [data-category="advent"],
+.chapel-calendar [data-category="lent"] {
+  --event-color: #7c3ac0;
+}
+.chapel-calendar [data-category="christmas"],
+.chapel-calendar [data-category="solemnity"],
+.chapel-calendar [data-category="easter"] {
+  --event-color: #856322;
+}
+.chapel-calendar [data-category="holy-week"] {
+  --event-color: #9d2b27;
+}
+.dark .chapel-calendar [data-category="general"] {
+  --event-color: #d1d5db;
+}
+.dark .chapel-calendar [data-category="mass"],
+.dark .chapel-calendar [data-category="holy-week"] {
+  --event-color: #f494a6;
+}
+.dark .chapel-calendar [data-category="novena"],
+.dark .chapel-calendar [data-category="memorial"] {
+  --event-color: #7dd3fc;
+}
+.dark .chapel-calendar [data-category="feast"] {
+  --event-color: #86d99b;
+}
+.dark .chapel-calendar [data-category="advent"],
+.dark .chapel-calendar [data-category="lent"] {
+  --event-color: #c4a0f1;
+}
+.dark .chapel-calendar [data-category="christmas"],
+.dark .chapel-calendar [data-category="solemnity"],
+.dark .chapel-calendar [data-category="easter"] {
+  --event-color: #dec482;
+}
+.chapel-calendar .calendar-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.chapel-calendar .calendar-month-card,
+.chapel-calendar .calendar-agenda {
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid var(--calendar-line);
+  background: var(--calendar-paper);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+}
+.chapel-calendar .calendar-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 16px;
+}
+.chapel-calendar .calendar-toolbar h2 {
+  font-size: 24px;
+  line-height: 1.3;
+}
+.chapel-calendar .calendar-month-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+.chapel-calendar .calendar-cycle {
+  color: var(--calendar-accent);
+  background: var(--calendar-soft);
+  border: 1px solid var(--calendar-line);
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.chapel-calendar .calendar-controls {
+  display: flex;
+  gap: 8px;
+}
+.chapel-calendar .calendar-controls button,
+.chapel-calendar [data-calendar-data-retry],
+.chapel-calendar .calendar-dialog-close button {
+  border: 1px solid var(--calendar-accent);
+  color: var(--calendar-accent);
+  background: transparent;
+  min-width: 38px;
+  min-height: 38px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.chapel-calendar .calendar-data-state {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--calendar-line);
+  background: var(--calendar-soft);
+  color: var(--calendar-text);
+}
+.chapel-calendar .calendar-data-state p {
+  margin: 0;
+}
+.chapel-calendar [data-calendar-data-retry] {
+  margin-top: 0.5rem;
+}
+.chapel-calendar .calendar-controls button:hover,
+.chapel-calendar .calendar-dialog-close button:hover {
+  background: var(--calendar-soft);
+}
+.chapel-calendar button:focus-visible,
+.chapel-calendar input:focus-visible,
+.chapel-calendar summary:focus-visible,
+.chapel-calendar [tabindex]:focus-visible {
+  outline: 3px solid var(--calendar-accent);
+  outline-offset: 2px;
+}
+.chapel-calendar button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.chapel-calendar .calendar-month-grid table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.chapel-calendar .calendar-month-grid th {
+  color: var(--calendar-ink);
+  height: 26px;
+  padding: 0 4px 8px;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.chapel-calendar th abbr {
+  text-decoration: none;
+}
+.chapel-calendar .calendar-month-grid td {
+  height: 88px;
+  padding: 10px;
+  vertical-align: top;
+  border: 1px solid var(--calendar-line);
+}
+.chapel-calendar .calendar-day-number {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--calendar-ink);
+}
+.chapel-calendar .calendar-other-month {
+  background: var(--calendar-soft);
+}
+.chapel-calendar .calendar-other-month .calendar-day-number {
+  opacity: 0.55;
+}
+.dark .chapel-calendar .calendar-other-month .calendar-day-number {
+  color: var(--color-darkmode-text-light);
+  opacity: 1;
+}
+.chapel-calendar [aria-current="date"] {
+  border-radius: 50%;
+  background: var(--calendar-accent);
+  color: var(--calendar-paper);
+  font-weight: 600;
+}
+.chapel-calendar .calendar-markers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.chapel-calendar .calendar-grid-event {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  min-height: 28px;
+  padding: 4px;
+  color: var(--event-color);
+  cursor: pointer;
+  border-radius: 3px;
+}
+.chapel-calendar .calendar-grid-event svg {
+  width: 18px;
+  height: 18px;
+}
+.chapel-calendar .calendar-grid-event:hover {
+  background: var(--calendar-soft);
+}
+.chapel-calendar .calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.chapel-calendar .calendar-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--event-color);
+}
+.chapel-calendar .calendar-legend svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.chapel-calendar .calendar-options {
+  margin-top: 16px;
+  font-size: 14px;
+}
+.chapel-calendar .calendar-options summary {
+  cursor: pointer;
+}
+.chapel-calendar .calendar-options label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.chapel-calendar input {
+  min-height: 38px;
+  border: 1px solid var(--calendar-line);
+  padding: 4px 8px;
+  background: var(--calendar-paper);
+  color: var(--calendar-ink);
+}
+.dark .chapel-calendar input {
+  color-scheme: dark;
+}
+.chapel-calendar .calendar-agenda > h2 {
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  color: var(--calendar-accent);
+}
+.chapel-calendar .calendar-count {
+  color: var(--calendar-text);
+  text-align: center;
+  margin: 12px 0 16px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.chapel-calendar [data-calendar-agenda] {
+  max-height: 560px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.chapel-calendar .calendar-agenda-date {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+.chapel-calendar .calendar-agenda-event {
+  color: var(--calendar-text);
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--calendar-line);
+  background: var(--calendar-soft);
+  margin-top: 16px;
+  padding: 14px;
+  cursor: pointer;
+}
+.chapel-calendar
+  .calendar-agenda-day:first-child
+  .calendar-agenda-event:first-of-type {
+  margin-top: 0;
+}
+.chapel-calendar .calendar-agenda-event:hover {
+  border-color: var(--event-color);
+}
+.chapel-calendar .calendar-event-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--event-color);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.chapel-calendar .calendar-event-meta svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.chapel-calendar .calendar-agenda-event strong {
+  display: block;
+  font-family: var(--font-secondary);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--calendar-ink);
+  margin-bottom: 10px;
+}
+.chapel-calendar .calendar-event-info {
+  color: var(--calendar-text);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+.chapel-calendar .calendar-event-info svg {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.chapel-calendar .calendar-empty {
+  color: var(--calendar-text);
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 16px;
+  background: var(--calendar-soft);
+}
+.chapel-calendar .calendar-fallback-event {
+  border: 1px solid var(--calendar-line);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.chapel-calendar .calendar-fallback-event summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.chapel-calendar .calendar-dialog {
+  width: min(640px, calc(100vw - 2rem));
+  max-height: calc(100dvh - 3rem);
+  margin: auto;
+  padding: 2rem;
+  border: 1px solid var(--calendar-line);
+  border-radius: 0.75rem;
+  background: var(--calendar-paper);
+  color: var(--calendar-text);
+  overflow-y: auto;
+}
+.chapel-calendar .calendar-dialog .content {
+  --tw-prose-body: var(--calendar-text);
+  --tw-prose-headings: var(--calendar-ink);
+  --tw-prose-links: var(--calendar-accent);
+  --tw-prose-bold: var(--calendar-ink);
+  color: var(--calendar-text);
+}
+.chapel-calendar .calendar-dialog::backdrop {
+  background: rgb(0 0 0 / 0.6);
+}
+.chapel-calendar .calendar-dialog-close {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+.chapel-calendar .calendar-detail-date {
+  margin: 1rem 0 0.35rem;
+  font-weight: 600;
+}
+.chapel-calendar .calendar-detail-location {
+  margin: 0.6rem 0 1.5rem;
+}
+@media (min-width: 1024px) {
+  .chapel-calendar .calendar-layout {
+    grid-template-columns: minmax(0, 806fr) minmax(0, 370fr);
+  }
+}
+@media (max-width: 1023px) {
+  .chapel-calendar .calendar-month-card,
+  .chapel-calendar .calendar-agenda {
+    width: 100%;
+    max-width: 806px;
+    margin-inline: auto;
+  }
+}
+@media (max-width: 767px) {
+  .chapel-calendar .calendar-month-grid,
+  .chapel-calendar .calendar-legend {
+    display: none;
+  }
+  .chapel-calendar .calendar-month-card,
+  .chapel-calendar .calendar-agenda {
+    padding: 16px;
+  }
+  .chapel-calendar .calendar-toolbar {
+    margin-bottom: 0;
+  }
+  .chapel-calendar .calendar-toolbar h2 {
+    font-size: 22px;
+  }
+  .chapel-calendar [data-calendar-agenda] {
+    max-height: none;
+    overflow-y: visible;
+  }
+  .chapel-calendar .calendar-agenda-event strong {
+    font-size: 22px;
+  }
+  .chapel-calendar .calendar-event-info {
+    font-size: 18px;
+  }
+  .chapel-calendar .calendar-event-meta {
+    font-size: 14px;
+  }
+  .chapel-calendar .calendar-dialog {
+    padding: 20px;
+  }
+}
