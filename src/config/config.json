@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Rosarium",
-    "base_url": "http://localhost:4321",
+    "base_url": "https://holyrosarychapel.com",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/rosarium-favicon.png",
