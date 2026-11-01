@@ -430,16 +430,44 @@
   }
 }
 @media (max-width: 767px) {
-  .chapel-calendar .calendar-month-grid,
-  .chapel-calendar .calendar-legend {
-    display: none;
+  .chapel-calendar .calendar-agenda {
+    grid-row: 1;
   }
   .chapel-calendar .calendar-month-card,
   .chapel-calendar .calendar-agenda {
     padding: 16px;
   }
   .chapel-calendar .calendar-toolbar {
-    margin-bottom: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .chapel-calendar .calendar-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .chapel-calendar .calendar-controls button {
+    min-height: 44px;
+  }
+  .chapel-calendar .calendar-month-grid th {
+    padding-inline: 0;
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+  .chapel-calendar .calendar-month-grid td {
+    height: 80px;
+    padding: 4px 0;
+  }
+  .chapel-calendar .calendar-markers {
+    justify-content: center;
+  }
+  .chapel-calendar .calendar-grid-event {
+    min-width: 0;
+    width: 100%;
+    min-height: 32px;
+  }
+  .chapel-calendar .calendar-legend {
+    gap: 12px;
   }
   .chapel-calendar .calendar-toolbar h2 {
     font-size: 22px;
