@@ -9,7 +9,7 @@
     "items": [
       {
         "part": "processional",
-        "song": "bayan-magsiawit-na",
+        "song": "sa-araw-ng-mga-banal",
         "used": true
       },
       {
@@ -49,7 +49,7 @@
       },
       {
         "part": "pater-noster",
-        "song": "ama-namin-missa-magnificat",
+        "song": "ama-namin-tinapay-ng-buhay",
         "used": true
       },
       {
@@ -64,12 +64,12 @@
       },
       {
         "part": "communion",
-        "song": "anima-christi-bukas-palad",
+        "song": "mga-punong-kabanalan",
         "used": true
       },
       {
         "part": "recessional",
-        "song": "salamat-sa-biyaya-missa-magnificat",
+        "song": "mapapalad",
         "used": true
       }
     ]
