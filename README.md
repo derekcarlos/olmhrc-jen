@@ -63,28 +63,28 @@ The development watcher uses polling for reliable change detection in this works
 
 ## Where to edit things
 
-| What to change                                        | Source                                                                     |
-| ----------------------------------------------------- | -------------------------------------------------------------------------- |
-| Homepage text, buttons, and hero image                | [src/content/homepage/-index.md](src/content/homepage/-index.md)           |
-| Homepage structure, artwork frame, and spacing        | [src/pages/index.astro](src/pages/index.astro)                             |
-| About text and chapel photograph                      | [src/content/about/-index.md](src/content/about/-index.md)                 |
-| Mass introduction and schedule tiles                  | [src/content/pages/mass.mdx](src/content/pages/mass.mdx)                   |
-| Calendar title and opening paragraph                  | [src/content/pages/calendar.mdx](src/content/pages/calendar.mdx)           |
-| Readings content                                      | [src/content/pages/readings.md](src/content/pages/readings.md)             |
-| Prayers hub and tiles                                 | [src/content/pages/prayers.mdx](src/content/pages/prayers.mdx)             |
-| Prayer guides and chapel novena                       | [src/content/prayers/](src/content/prayers/)                               |
-| News articles                                         | [src/content/news/](src/content/news/)                                     |
-| Songs, lyrics, and listening links                    | [src/content/songs/](src/content/songs/)                                   |
-| Upcoming and archived choir selections                | [src/config/song-selections.json](src/config/song-selections.json)         |
-| Local chapel events and schedules                     | [src/content/events/](src/content/events/)                                 |
-| Liturgical marker presentation and supplements        | [src/config/liturgical-calendar.json](src/config/liturgical-calendar.json) |
-| Header navigation and footer links                    | [src/config/menu.json](src/config/menu.json)                               |
-| Site identity, domain, metadata, and feature settings | [src/config/config.json](src/config/config.json)                           |
-| Fonts and light/dark color palettes                   | [src/config/theme.json](src/config/theme.json)                             |
-| Shared content typography                             | [src/styles/components.css](src/styles/components.css)                     |
-| Calendar appearance                                   | [src/styles/calendar.css](src/styles/calendar.css)                         |
-| Content field definitions and validation              | [src/content.config.ts](src/content.config.ts)                             |
-| Images, documents, and local audio                    | [public/](public/)                                                         |
+| What to change                                        | Source                                                                                                  |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Homepage text, buttons, and hero image                | [src/content/homepage/-index.md](src/content/homepage/-index.md)                                        |
+| Homepage structure, artwork frame, and spacing        | [src/pages/index.astro](src/pages/index.astro)                                                          |
+| About text and chapel photograph                      | [src/content/about/-index.md](src/content/about/-index.md)                                              |
+| Mass introduction and schedule tiles                  | [src/content/pages/mass.mdx](src/content/pages/mass.mdx)                                                |
+| Calendar title and opening paragraph                  | [src/content/pages/calendar.mdx](src/content/pages/calendar.mdx)                                        |
+| Filipino readings mode and syncing                    | [src/config/readings.json](src/config/readings.json) and [maintenance guide](docs/managing-readings.md) |
+| Prayers hub and tiles                                 | [src/content/pages/prayers.mdx](src/content/pages/prayers.mdx)                                          |
+| Prayer guides and chapel novena                       | [src/content/prayers/](src/content/prayers/)                                                            |
+| News articles                                         | [src/content/news/](src/content/news/)                                                                  |
+| Songs, lyrics, and listening links                    | [src/content/songs/](src/content/songs/)                                                                |
+| Upcoming and archived choir selections                | [src/config/song-selections.json](src/config/song-selections.json)                                      |
+| Local chapel events and schedules                     | [src/content/events/](src/content/events/)                                                              |
+| Liturgical marker presentation and supplements        | [src/config/liturgical-calendar.json](src/config/liturgical-calendar.json)                              |
+| Header navigation and footer links                    | [src/config/menu.json](src/config/menu.json)                                                            |
+| Site identity, domain, metadata, and feature settings | [src/config/config.json](src/config/config.json)                                                        |
+| Fonts and light/dark color palettes                   | [src/config/theme.json](src/config/theme.json)                                                          |
+| Shared content typography                             | [src/styles/components.css](src/styles/components.css)                                                  |
+| Calendar appearance                                   | [src/styles/calendar.css](src/styles/calendar.css)                                                      |
+| Content field definitions and validation              | [src/content.config.ts](src/content.config.ts)                                                          |
+| Images, documents, and local audio                    | [public/](public/)                                                                                      |
 
 Edit source files, then rebuild to publish. `dist/`, `.astro/`, and `.json/` are generated outputs or caches, not the source of the site's content.
 
@@ -113,7 +113,7 @@ The homepage uses portrait artwork without cropping the figure. The favicon is a
 
 ### Typography and themes
 
-Body and navigation use **Figtree**; headings use **Gentium Book Plus**. Fonts are configured in `theme.json` and loaded through Astro's font integration. Light and dark palettes are defined separately in that file, with shared component/typography overrides in the stylesheets.
+Body and navigation use **Figtree**; headings use **Gentium Book Plus**. Reading passages use **Gentium Plus**, scoped to `/readings`. Fonts are configured in `theme.json` and loaded through Astro's font integration. Light and dark palettes are defined separately in that file, with shared component/typography overrides in the stylesheets.
 
 Theme CSS is generated during development and builds. Edit `theme.json` rather than `src/styles/generated-theme.css`. Check both themes and a narrow screen after changing colors, typography, images, or layouts.
 
@@ -148,7 +148,7 @@ Prayer guides live in `src/content/prayers/`. Each needs a title, description, a
 
 The chapel's Tagalog novena runs **September 28–October 6**. Its text is in `novena-to-our-lady-of-the-most-holy-rosary.md`; the original reference is `public/documents/pagsisiyam-santo-rosaryo.pdf`. Preserve the chapel's wording and phrase divisions when editing it. The Holy Rosary guide is maintained separately in `how-to-pray-the-holy-rosary.md`.
 
-Readings currently contains introductory placeholder text in `src/content/pages/readings.md`; no daily-reading feed is connected. Update that page when the chosen resources are ready.
+Filipino readings use a rolling Awit at Papuri snapshot: next Sunday by default, or today plus six days when configured. Run `pnpm readings:sync` to refresh the local preview and visit `/readings`. Reading text uses Gentium Plus; headings retain Gentium Book Plus. The prepared daily GitHub workflow requires explicit production activation after confirming source reuse terms. See [Managing Filipino readings](docs/managing-readings.md) for modes, setup, recovery, and publishing.
 
 ## Songs and choir selections
 
@@ -275,7 +275,7 @@ Keep `package.json` and `pnpm-lock.yaml` together in version control. Keep gener
 
 ### Content still to prepare for launch
 
-- Readings currently has introductory placeholder text.
+- Confirm Filipino reading source reuse/attribution and enable the daily workflow when ready for full-text publication.
 - All News articles are drafted; publish a genuine first announcement when ready.
 - Review choir selection dates/statuses and “Placeholder selection” rehearsal notes.
 - Check the default sharing image and metadata.

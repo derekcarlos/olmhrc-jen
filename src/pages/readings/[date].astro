@@ -1,0 +1,22 @@
+---
+import ContentPage from "@/layouts/ContentPage.astro";
+import SundayReadings from "@/components/SundayReadings.astro";
+import { getReadingSnapshot } from "@/lib/readings-store.mjs";
+import { formatReadingDate } from "@/lib/readings.mjs";
+export function getStaticPaths() {
+  const snapshot = getReadingSnapshot();
+  return snapshot.dates.map((date) => ({
+    params: { date },
+    props: { snapshot, date },
+  }));
+}
+const { snapshot, date } = Astro.props;
+---
+
+<ContentPage
+  title="Mga Pagbasa"
+  meta_title={`Mga Pagbasa — ${formatReadingDate(date)} | Rosarium`}
+  description="Mga pagbasa sa Filipino para sa panalangin at paghahanda sa Banal na Misa."
+>
+  <SundayReadings snapshot={snapshot} date={date} />
+</ContentPage>

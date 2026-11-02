@@ -65,7 +65,15 @@ const { title, meta_title, description, image, noindex, canonical } =
     {
       fontEntries.map(([key]) => {
         const cssVar = `--font-${key}` as any;
-        return <Font cssVariable={cssVar} preload />;
+        return (
+          <Font
+            cssVariable={cssVar}
+            preload={
+              key !== "readings" ||
+              /\/readings(?:\/|$)/.test(Astro.url.pathname)
+            }
+          />
+        );
       })
     }
 

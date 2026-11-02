@@ -38,7 +38,9 @@
       "secondary": "Gentium+Book+Plus:wght@400;700",
       "secondary_type": "serif",
       "navigation": "Figtree:wght@500",
-      "navigation_type": "sans-serif"
+      "navigation_type": "sans-serif",
+      "readings": "Gentium+Plus:wght@400;700",
+      "readings_type": "serif"
     },
     "font_size": {
       "base": "16",

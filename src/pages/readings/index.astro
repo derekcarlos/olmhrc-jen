@@ -1,0 +1,13 @@
+---
+import ContentPage from "@/layouts/ContentPage.astro";
+import SundayReadings from "@/components/SundayReadings.astro";
+import { getReadingSnapshot } from "@/lib/readings-store.mjs";
+const snapshot = getReadingSnapshot();
+---
+
+<ContentPage
+  title="Mga Pagbasa"
+  description="Mga pagbasa sa Filipino para sa panalangin at paghahanda sa Banal na Misa."
+>
+  <SundayReadings snapshot={snapshot} />
+</ContentPage>

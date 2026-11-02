@@ -1,0 +1,183 @@
+---
+import "@/styles/readings.css";
+import { formatReadingDate, sundayDate } from "@/lib/readings.mjs";
+import type { ReadingSnapshot } from "@/lib/readings.mjs";
+interface Props {
+  snapshot: ReadingSnapshot;
+  date?: string;
+}
+const { snapshot, date } = Astro.props;
+const selected = date || sundayDate();
+const record = snapshot.records.find((r) => r.date === selected);
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const readingUrl = (day: string) => `${base}/readings/${day}`;
+const isEntry = !date;
+const sectionLabels: Record<string, string> = {
+  first: "Unang Pagbasa",
+  psalm: "Salmong Tugunan",
+  second: "Ikalawang Pagbasa",
+  acclamation:
+    record?.sections.find((s) => s.type === "acclamation")?.heading ===
+    "ALELUYA"
+      ? "Aleluya"
+      : "Bago ang Mabuting Balita",
+  gospel: "Mabuting Balita",
+};
+---
+
+<div
+  class="sunday-readings"
+  lang="fil"
+  data-readings
+  data-selected={selected}
+  data-entry={String(isEntry)}
+  data-dates={JSON.stringify(snapshot.dates)}
+  data-available={JSON.stringify(snapshot.records.map((r) => r.date))}
+  data-mode={snapshot.mode}
+  data-base={base}
+>
+  <p class="reading-intro">
+    Makinig, magnilay, at maghanda para sa pagdiriwang ng Banal na Misa.
+  </p>
+  <div class="reading-window">
+    <span
+      >{
+        snapshot.mode === "next-seven-days"
+          ? "Mga pagbasa sa susunod na 7 araw"
+          : "Mga pagbasa para sa darating na Linggo"
+      }</span
+    >
+    <a
+      href={`${base}/readings`}
+      aria-label="Bumalik sa mga pagbasa ngayong Linggo">Linggong Ito</a
+    >
+  </div>
+  {
+    snapshot.mode === "next-seven-days" && (
+      <nav class="reading-dates" aria-label="Pumili ng araw">
+        {snapshot.dates.map((day) => (
+          <a
+            href={readingUrl(day)}
+            data-reading-day={day}
+            aria-current={day === selected ? "date" : undefined}
+          >
+            <span>{formatReadingDate(day)}</span>
+            {!snapshot.records.some((r) => r.date === day) && (
+              <small>Hindi pa available</small>
+            )}
+          </a>
+        ))}
+      </nav>
+    )
+  }
+  <div class="reading-notice" data-readings-stale role="status" hidden>
+    <p data-readings-stale-text>
+      Hindi pa available ang mga pagbasa para sa kasalukuyang petsa. Subukang
+      muli mamaya.
+    </p>
+    <a href="https://www.awitatpapuri.com/">Bisitahin ang Awit at Papuri →</a>
+  </div>
+  <div data-readings-content>
+    <header class="reading-header">
+      <p class="reading-date">
+        <time datetime={selected}>{formatReadingDate(selected)}</time>
+      </p>
+      {record && <h2 class="reading-celebration">{record.celebration}</h2>}
+    </header>
+    {
+      record ? (
+        <>
+          <nav class="reading-contents" aria-label="Mga bahagi ng pagbasa">
+            {record.sections.map((section) => (
+              <a href={`#reading-${section.type}`}>
+                {sectionLabels[section.type]}
+              </a>
+            ))}
+          </nav>
+          <article aria-label={`Mga pagbasa — ${formatReadingDate(selected)}`}>
+            {record.sections.map((section) => (
+              <section
+                class="reading-section"
+                aria-labelledby={`reading-${section.type}`}
+              >
+                <h3 id={`reading-${section.type}`}>
+                  {sectionLabels[section.type]}
+                </h3>
+                <p class="reading-reference">{section.reference}</p>
+                <div class="reading-text">
+                  {section.blocks.map((block) =>
+                    block.type === "response" ? (
+                      <div class="content reading-response-wrapper">
+                        <blockquote class="reading-response">
+                          <p class="reading-block" set:text={block.text} />
+                        </blockquote>
+                      </div>
+                    ) : (
+                      <p class="reading-block" set:text={block.text} />
+                    ),
+                  )}
+                </div>
+              </section>
+            ))}
+          </article>
+          <footer class="reading-source">
+            <p>
+              Pinagmulan:{" "}
+              <a href={record.source_url}>
+                Awit at Papuri — {formatReadingDate(selected)}
+              </a>
+            </p>
+            <p>
+              Teksto mula sa <cite>Ang Pagpapahayag ng Salita ng Diyos</cite>{" "}
+              (Tagalog Lectionary), ayon sa pagkakakilanlan ng Awit at Papuri.
+              Karapatang-sipi © CBCP 2014.{" "}
+              <a href="https://www.awitatpapuri.com/faqs/">
+                Tungkol sa pinagmulan
+              </a>
+              .
+            </p>
+            <p>
+              Huling nakuha:{" "}
+              <time datetime={record.retrieved_at}>
+                {new Intl.DateTimeFormat("fil-PH", {
+                  dateStyle: "medium",
+                  timeStyle: "short",
+                  timeZone: "Asia/Manila",
+                }).format(new Date(record.retrieved_at))}{" "}
+                PHT
+              </time>
+            </p>
+          </footer>
+        </>
+      ) : (
+        <div class="reading-notice">
+          <p>
+            Hindi pa available ang mga pagbasa para sa araw na ito. Mangyaring
+            bumalik muli.
+          </p>
+          <a href="https://www.awitatpapuri.com/">
+            Basahin sa Awit at Papuri →
+          </a>
+        </div>
+      )
+    }
+  </div>
+  {
+    isEntry && (
+      <noscript>
+        <p class="reading-source">
+          Ang petsang nasa itaas ay pinili noong huling pag-update ng site.{" "}
+          <a href="https://www.awitatpapuri.com/">
+            Tingnan ang pinakabagong mga pagbasa sa Awit at Papuri.
+          </a>
+        </p>
+      </noscript>
+    )
+  }
+</div>
+
+<script>
+  import { prepareReadings } from "@/lib/readings-client";
+  prepareReadings();
+  document.addEventListener("astro:page-load", prepareReadings);
+</script>
