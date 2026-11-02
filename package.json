@@ -8,6 +8,8 @@
   "type": "module",
   "scripts": {
     "readings:sync": "node scripts/sync-readings.mjs --refresh",
+    "readings:validate": "node scripts/validate-readings.mjs",
+    "readings:publish": "bash scripts/publish-readings.sh",
     "dev": "concurrently \"node scripts/themeGenerator.js --watch\" \"node scripts/jsonGenerator.js && astro dev\"",
     "build": "node scripts/themeGenerator.js && node scripts/jsonGenerator.js && astro build && node scripts/llmsGenerator.js",
     "preview": "astro preview",

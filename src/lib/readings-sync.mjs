@@ -17,7 +17,11 @@ export async function refreshReadings(
       incoming.push(result.record);
       evaluated = true;
     } else {
-      errors.push({ date, message: result.message || "Source unavailable" });
+      errors.push({
+        date,
+        message: result.message || "Source unavailable",
+        kind: result.unavailable ? "unavailable" : "error",
+      });
       if (result.unavailable) evaluated = true;
     }
   }

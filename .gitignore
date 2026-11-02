@@ -22,6 +22,7 @@ pnpm-debug.log*
 
 # ignore .astro directory
 .astro
+src/data/readings/*.tmp
 
 # ide
 .idea/

@@ -7,14 +7,6 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-    inputs:
-      refresh_readings:
-        description: "Refresh Filipino readings from Awit at Papuri (requires READINGS_SYNC_ENABLED)"
-        type: boolean
-        default: true
-  # 04:17 Philippine Time; importing stays opt-in until source reuse is confirmed.
-  schedule:
-    - cron: "17 20 * * *"
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -34,7 +26,6 @@ env:
 jobs:
   build:
     name: Build
-    if: github.event_name != 'schedule' || vars.READINGS_SYNC_ENABLED == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -55,19 +46,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
         working-directory: ${{ env.BUILD_PATH }}
-      - name: Prepare Filipino readings
-        env:
-          READINGS_SYNC_ENABLED: ${{ vars.READINGS_SYNC_ENABLED }}
-          EVENT_NAME: ${{ github.event_name }}
-          REFRESH_READINGS: ${{ inputs.refresh_readings }}
-        run: |
-          if [ "$READINGS_SYNC_ENABLED" != "true" ]; then
-            node scripts/sync-readings.mjs --disabled
-          elif [ "$EVENT_NAME" = "schedule" ] || [ "$REFRESH_READINGS" = "true" ]; then
-            node scripts/sync-readings.mjs --published --refresh
-          else
-            node scripts/sync-readings.mjs --published
-          fi
+      - name: Validate committed Filipino readings
+        run: pnpm readings:validate
         working-directory: ${{ env.BUILD_PATH }}
       - name: Test calendar and readings logic
         run: node --test tests/*.test.mjs

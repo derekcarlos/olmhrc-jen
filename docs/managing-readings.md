@@ -1,72 +1,97 @@
 # Managing Filipino readings
 
-Rosarium's `/readings` page renders Filipino readings with Gentium Plus body text and Gentium Book Plus headings. Existing Figtree text elsewhere is unchanged. It uses a small rolling snapshot, not a full lectionary archive.
+Rosarium uses a small committed readings snapshot at `src/data/readings/snapshot.json`. A local computer or VM downloads it from Awit at Papuri; GitHub Actions only validates, builds, and deploys the committed data. Cloudflare challenges requests from GitHub-hosted runners, so deployment never downloads from the provider.
 
-## Preview on localhost
+Reading text uses Gentium Plus and headings use Gentium Book Plus. The rest of the site keeps Figtree. Imported text remains attributed to its source; confirm applicable reuse terms when maintaining the site.
 
-From the project directory, using the documented local Node installation if necessary:
+## Download and preview only
 
 ```sh
-export PATH="$PWD/.local-tools/node_modules/.bin:$PATH"
+export PATH="$PWD/.local-tools/node_modules/.bin:$PATH" # this workstation
 pnpm readings:sync
+pnpm readings:validate
 pnpm dev
 ```
 
-Open `http://localhost:4321/readings`. The sync command retrieves Awit at Papuri's public reading page(s) once and stores normalized text in `.astro/readings/snapshot.json`, which Git ignores. Reload after syncing. The development server reads the snapshot when rendering the page; font configuration changes may require restarting Astro.
+Open `http://localhost:4321/readings`. The download command updates the tracked snapshot but does not commit or push. It refreshes the current target date(s), validates the source date and sections, and writes atomically. A download/parser failure exits unsuccessfully without changing the saved snapshot. A completely unavailable window is not saved over existing data.
 
-This local source preview does not establish permission to republish the text. Before activating production imports, confirm the provider's access/reuse terms and required attribution. The source identifies its text as the Tagalog Lectionary; see [Awit at Papuri's FAQ](https://www.awitatpapuri.com/faqs/).
+If content is unchanged, the existing snapshot and its published retrieval timestamps stay unchanged. The console reports the successful check, but no timestamp-only Git commit is created. The page's “Kopyang nakuha noong” identifies when the published copy was obtained.
 
-## Choose the window
+## Download, validate, commit, and push
 
-Edit `mode` in `src/config/readings.json`:
-
-- `next-sunday`: today when it is Sunday, otherwise the coming Sunday. This is the default.
-- `next-seven-days`: today plus six following Philippine dates. Includes weekday readings when the source supports them; a second reading is not required for ordinary weekdays.
-
-Then run `pnpm readings:sync` again. Only the chosen day's text appears on a page; seven-day mode adds date links to separate pages. Sunday remains the default through the whole day. Generated expired pages are removed on the next successful deployment; there is no historical archive.
-
-For a one-off importer test without changing configuration:
+From a clean checkout on `main`, run:
 
 ```sh
-pnpm readings:sync --mode=next-seven-days
+pnpm readings:publish
 ```
 
-The page still follows the configured mode. To display all seven date choices, change the configuration as well.
+Or run the scheduler-friendly entry point from any working directory:
 
-## Daily production sync — activation is optional
+```sh
+bash /absolute/path/to/holyrosarychapel/scripts/publish-readings.sh
+```
 
-The prepared workflow runs at **04:17 Philippine Time daily** (20:17 UTC the preceding day), but scheduled builds are skipped unless the repository Actions variable `READINGS_SYNC_ENABLED` equals `true`.
+The wrapper selects this workstation's project-local Node installation when present. Otherwise, it uses Node and pnpm from the environment's `PATH`. Use Node 22.18 or newer; Node 22.23.4 and pnpm 11.17.0 are the tested versions.
 
-After source reuse is confirmed and the implementation is reviewed and published:
+The job:
 
-1. Open **GitHub repository → Settings → Secrets and variables → Actions → Variables**.
-2. Add `READINGS_SYNC_ENABLED` with the value `true`.
-3. In **Actions → Deploy Astro site to GitHub Pages → Run workflow**, leave **Refresh Filipino readings** checked and run on `main`.
-4. Verify the job summary, `/readings-data/index.json`, `/readings`, and the dated page. Confirm the provider's actual date and content before leaving unattended syncing enabled.
-5. Review failure notifications. GitHub schedules can be delayed, and public-repository schedules may be disabled after 60 days of inactivity. [GitHub schedule behavior](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)
+1. Acquires `.astro/readings-publish.lock` to prevent overlapping runs.
+2. Requires `main` with no pending tracked/staged edits. Unrelated untracked files are allowed and left untouched.
+3. Pulls `origin/main` using fast-forward only and installs dependencies from the frozen lockfile.
+4. Downloads the selected dates and validates them.
+5. Runs unit tests, Astro checking, the production build, and the readings HTML integration check.
+6. Stages only `src/data/readings/snapshot.json`, commits when that file changed, and pushes `main`.
 
-Daily/manual refreshes recover the last published snapshot and replace valid retrieved dates. Ordinary source pushes recover/prune the published snapshot without requesting Awit at Papuri again. The workflow writes no content commits and requires no repository write permission. Disabling the variable publishes an empty readings window on the next source/manual deployment; it does not immediately change a live deployment.
+The job also retries pushing a previously committed snapshot update. It refuses to publish existing unpushed commits that touch any other file; review and push those manually first. It never force-pushes or automatically rebases conflicts. If downloading or checking fails before commit, it restores only its own snapshot change and leaves unrelated files alone. If pushing fails after commit, the local commit is retained for inspection/retry.
 
-## Missing dates and failures
+If you previously ran `readings:sync` and the tracked snapshot is now modified, validate and commit it manually before using the publication job, or intentionally restore that file first. The job will not overwrite an existing pending tracked edit.
 
-Dates not yet available from the source are labeled unavailable. A failed date refresh retains a previously validated record for that date only while it remains in the active window. A complete provider outage on first bootstrap fails instead of publishing a fake success. A malformed published baseline also stops deployment. A successfully evaluated but unpublished date can produce a truthful empty window.
+## Choose dates to retain
 
-The source importer validates the page date and supported section structure. It preserves paragraph/line breaks, excludes audio/video and prayers of the faithful, and renders plain escaped text. Unsupported alternative structures are rejected rather than guessed. This version uses the main reading form on the provider's dated page; it does not combine vigil/weekday alternatives.
+Edit `mode` in `src/config/readings.json`, then commit that configuration change before running the publication job:
 
-The displayed retrieval timestamp belongs to the actual record. Reusing it during an outage does not make it newly retrieved. A date check in the browser prevents the entry page from presenting an expired Sunday as current after a missed deployment; native date links and reading text remain available without JavaScript, with a build-date caveat.
+- `next-sunday` (default): today's readings if it is Sunday; otherwise the coming Sunday.
+- `next-seven-days`: today plus the following six Philippine dates. The page defaults to the target Sunday and offers links to the other available dates.
 
-If a source markup change breaks parsing, review `src/lib/readings-source.mjs`, add a small original-prose regression fixture, and run the tests before retrying. Do not bypass date/section validation. Do not copy the whole provider archive to repair a single missing day.
+Dates are calculated in `Asia/Manila`, independently of the machine's time zone. Expired dates leave the snapshot on a successful refresh. Sunday stays selected through midnight; a failed or missed refresh is shown as stale/unavailable rather than relabeling an old reading as current.
+
+Some future dates may not be published yet. Seven-day mode can retain a partial window when the source explicitly returns 404 and at least one valid reading is available. Transport failures, 403 responses, and unsupported source markup fail the local job rather than producing a successful empty publication.
+
+## Prepare a VM later
+
+1. Test the provider URL directly from that VM first. A cloud VM can encounter the same Cloudflare challenge as GitHub; do not assume local success transfers to every server.
+2. Install Git, Node 22.23.4 (or another supported version), and pnpm 11.17.0. Clone this repository on `main` into a dedicated automation checkout.
+3. Configure a Git author and noninteractive authentication limited to this repository, such as a repository deploy key with write access. Do not put credentials in the job script or repository.
+4. Run `pnpm install --frozen-lockfile`, then run the job manually and confirm the push and Pages deployment succeed.
+5. Schedule the wrapper and collect its output in a log. A Linux cron example, when the VM's system time zone is **Asia/Manila**, is:
+
+   ```cron
+   17 4 * * * /bin/bash /absolute/path/to/repo/scripts/publish-readings.sh >> /absolute/path/to/readings-job.log 2>&1
+   ```
+
+   Ensure cron's `PATH` includes Node and pnpm (or configure it explicitly in the crontab). On a UTC-configured VM, use `17 20 * * *` for 04:17 PHT the next day.
+
+6. Monitor logs/failures and periodically confirm the published dates. The prepared script does not install cron or a background service automatically.
+
+The previous `READINGS_SYNC_ENABLED` GitHub variable and daily GitHub download schedule are no longer used. The Actions **Run workflow** button rebuilds the committed snapshot; it cannot download newer readings. To update readings, run the local/VM job and let its push trigger deployment.
+
+## Recovery
+
+- **403 or timeout:** leave the saved data intact and resolve source access. Do not remove date/content validation or repeatedly hammer the provider.
+- **Dirty working tree:** finish the existing tracked edits before retrying. Prefer a dedicated checkout on a VM.
+- **Pull/push divergence:** inspect and reconcile the Git history manually; no automatic force-push occurs.
+- **Stale lock after a crash:** inspect `.astro/readings-publish.lock/owner.json`, confirm no job is running, then remove that lock directory and retry.
+- **Source layout changes:** add an original-prose regression fixture and fix the adapter in `src/lib/readings-source.mjs`. The importer rejects incomplete reading bodies and response-only psalms.
 
 ## Validation
 
 ```sh
-node --test tests/*.test.mjs
+pnpm readings:validate
+node --test tests/*.test.mjs tests/readings-client.integration.mjs tests/calendar-client.integration.mjs
 pnpm check
 pnpm build
 node tests/readings.integration.mjs
-node --test tests/readings-client.integration.mjs
 node tests/calendar.integration.mjs
-node --test tests/calendar-client.integration.mjs
 ```
 
-Source text, celebration choices, and optional forms still need editorial review; passing tests checks structure and behavior, not the provider's liturgical accuracy.
+Publication job tests use isolated temporary Git repositories and local bare remotes under ignored `.astro/`; they do not push test data to GitHub. Automated checks verify structure and behavior, while celebration choices and the source's text still need editorial review.

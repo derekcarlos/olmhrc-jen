@@ -1,11 +1,15 @@
 import { readFileSync, mkdirSync, writeFileSync, renameSync } from "node:fs";
-import { resolve } from "node:path";
-import { reconcileSnapshot, validateSnapshot } from "./readings.mjs";
+import { resolve, dirname } from "node:path";
+import {
+  reconcileSnapshot,
+  validateSnapshot,
+  sameReadingContent,
+} from "./readings.mjs";
 
 export const readingsConfig = JSON.parse(
   readFileSync(resolve("src/config/readings.json"), "utf8"),
 );
-export const snapshotPath = resolve(".astro/readings/snapshot.json");
+export const snapshotPath = resolve("src/data/readings/snapshot.json");
 export function readSnapshot() {
   let raw;
   try {
@@ -24,12 +28,14 @@ export function readSnapshot() {
 export function writeSnapshot(snapshot) {
   if (!validateSnapshot(snapshot))
     throw new Error("Refusing to save invalid readings snapshot");
-  mkdirSync(resolve(".astro/readings"), { recursive: true });
+  if (sameReadingContent(readSnapshot(), snapshot)) return false;
+  mkdirSync(dirname(snapshotPath), { recursive: true });
   writeFileSync(
     `${snapshotPath}.tmp`,
     `${JSON.stringify(snapshot, null, 2)}\n`,
   );
   renameSync(`${snapshotPath}.tmp`, snapshotPath);
+  return true;
 }
 export function getReadingSnapshot() {
   const saved = readSnapshot();

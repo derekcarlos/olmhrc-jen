@@ -5,6 +5,7 @@ import {
   sundayDate,
   reconcileSnapshot,
   validateSnapshot,
+  sameReadingContent,
 } from "../src/lib/readings.mjs";
 import {
   parseReadingPage,
@@ -27,6 +28,33 @@ const sample = (date = "2026-11-08") => ({
       blocks: [{ type: "paragraph", text: "Original test prose." }],
     }),
   ),
+});
+
+test("timestamp-only refresh does not require a content commit", () => {
+  const original = reconcileSnapshot(
+    null,
+    [sample()],
+    "next-sunday",
+    new Date("2026-11-02T01:00:00Z"),
+  );
+  const refreshed = structuredClone(original);
+  refreshed.last_attempt = "2026-11-03T01:00:00Z";
+  refreshed.records[0].retrieved_at = "2026-11-03T01:00:00Z";
+  assert.equal(sameReadingContent(original, refreshed), true);
+  refreshed.records[0].celebration = "Updated celebration";
+  assert.equal(sameReadingContent(original, refreshed), false);
+  assert.equal(
+    sameReadingContent(
+      original,
+      reconcileSnapshot(
+        null,
+        [],
+        "next-sunday",
+        new Date("2026-11-09T01:00:00Z"),
+      ),
+    ),
+    false,
+  );
 });
 
 // Original sample prose, not a copied lectionary fixture.

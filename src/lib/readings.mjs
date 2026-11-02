@@ -13,6 +13,18 @@ export function validDate(value) {
     !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value
   );
 }
+export function sameReadingContent(previous, next) {
+  if (!previous || !next) return false;
+  const content = (snapshot) => ({
+    schema_version: snapshot.schema_version,
+    source: snapshot.source,
+    mode: snapshot.mode,
+    dates: snapshot.dates,
+    errors: snapshot.errors,
+    records: snapshot.records.map(({ retrieved_at, ...record }) => record),
+  });
+  return JSON.stringify(content(previous)) === JSON.stringify(content(next));
+}
 export function addDays(day, amount) {
   const date = new Date(`${day}T12:00:00Z`);
   date.setUTCDate(date.getUTCDate() + amount);

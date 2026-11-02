@@ -1,5 +1,7 @@
 # Filipino readings with a daily rolling sync
 
+**Implementation update, November 2, 2026:** GitHub runners receive Cloudflare challenges for both source HTML and JSON. The user approved local/VM downloading and committing a tracked snapshot instead. The current job and deployment behavior are documented in [Managing Filipino readings](../../managing-readings.md) and the [local job plan](../plans/2026-11-02-local-readings-job.md). Earlier GitHub-hosted download and ignored-staging recommendations below are retained as design history and superseded by that change.
+
 **Status:** Proposed design and setup guide. No site implementation, source import, or deployment authorized by this document.
 
 **Site:** Rosarium — Our Lady of the Most Holy Rosary Chapel, Jubilation Enclave North, Biñan, Laguna.

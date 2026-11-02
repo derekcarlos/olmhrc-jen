@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "source": "awit-at-papuri",
+  "mode": "next-sunday",
+  "dates": [
+    "2026-11-08"
+  ],
+  "last_attempt": "2026-11-02T10:23:39.484Z",
+  "records": [
+    {
+      "date": "2026-11-08",
+      "celebration": "Ika-32 Linggo sa Karaniwang Panahon (A)",
+      "language": "fil",
+      "source_url": "https://www.awitatpapuri.com/2026/11/08/linggo-nobyembre-8-2026/",
+      "retrieved_at": "2026-11-02T10:23:40.938Z",
+      "sections": [
+        {
+          "type": "first",
+          "heading": "UNANG PAGBASA",
+          "reference": "Karunungan 6, 12-16",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Pagbasa mula sa aklat ng Karunungan"
+            },
+            {
+              "type": "stanza",
+              "text": "Ang Karunungan ay maningning at di kumukupas,\nmadaling natatagpuan ng naghahanap sa kanya,\nat nakikita agad ng mga nagpapahalaga sa kanya.\nMadali siyang nagpapakilala sa mga naghahangad sa kanya.\nHanapin mo siyang maaga at agad mo siyang matatagpuan,\nMakikita mo siyang nag-aabang sa iyong tarangkahan.\nIsipin mo lamang siya’y magkakaroon ka ng ganap na pagkaunawa;\nhanapin mo siya’t matatahimik ang iyong kalooban.\nPagkat hinahanap niya ang mga karapat-dapat sa kanya.\nat makikita ka niya saan ka man naroon.\nSiya’y maamo at sasamahan ka niya sa bawat iniisip mo."
+            },
+            {
+              "type": "paragraph",
+              "text": "Ang Salita ng Diyos."
+            }
+          ]
+        },
+        {
+          "type": "psalm",
+          "heading": "SALMONG TUGUNAN",
+          "reference": "Salmo 62, 2. 3-4. 5-6. 7-8",
+          "blocks": [
+            {
+              "type": "response",
+              "text": "Aking kinasasabikan,\nPanginoon, ikaw lamang."
+            },
+            {
+              "type": "stanza",
+              "text": "O Diyos, ikaw ang aking Diyos na lagi kong hinahanap;\nang uhaw kong kaluluwa’y tanging ikaw yaong hangad;\nPara akong tuyong lupa na tubig ang siyang lunas."
+            },
+            {
+              "type": "response",
+              "text": "Aking kinasasabikan,\nPanginoon, ikaw lamang."
+            },
+            {
+              "type": "stanza",
+              "text": "Bayaan mong sa santwaryo, sa lugar na dakong banal,\nikaw roo’y mamasdan ko, sa likas mong karangalan.\nAng wagas na pag-ibig mo’y mahigit pa kaysa buhay.\nKaya ako’y magpupuri’t ikaw ang pag-uukulan."
+            },
+            {
+              "type": "response",
+              "text": "Aking kinasasabikan,\nPanginoon, ikaw lamang."
+            },
+            {
+              "type": "stanza",
+              "text": "Habang ako’y nabubuhay, ako’y magpapasalamat,\nat ako ay dadalangin na kamay ko’y nakataas.\nItong aking kaluluwa’y kakaing may kasiyahan,\nmagagalak na umawit ng papuring iaalay."
+            },
+            {
+              "type": "response",
+              "text": "Aking kinasasabikan,\nPanginoon, ikaw lamang."
+            },
+            {
+              "type": "stanza",
+              "text": "Laman ka ng gunita ko samantalang nahihimlay,\nmagdamag na ang palaging iniisip ko ay ikaw;\npagkat ikaw sa tuwina ang katulong na malapit,\nsa lilim ng iyong pakpak galak akong umaawit."
+            },
+            {
+              "type": "response",
+              "text": "Aking kinasasabikan,\nPanginoon, ikaw lamang."
+            }
+          ]
+        },
+        {
+          "type": "second",
+          "heading": "IKALAWANG PAGBASA",
+          "reference": "1 Tesalonica 4, 13-18",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Pagbasa mula sa unang sulat ni Apostol San Pablo sa mga taga-Tesalonica"
+            },
+            {
+              "type": "paragraph",
+              "text": "Mga kapatid, ibig naming malaman ninyo ang katotohanan tungkol sa mga namatay na, nang hindi kayo magdalamhati, tulad ng mga taong walang pag-asa. Naniniwala tayong si Hesus ay namatay at muling nabuhay. Kaya naman, naniniwala tayong bubuhayin din ng Diyos ang lahat ng namatay na nananalig kay Hesus — upang isama sa kanya."
+            },
+            {
+              "type": "paragraph",
+              "text": "Ito ang aral ng Panginoon na sinasabi namin sa inyo: pagparito ng Panginoon, tayong mga buhay ay hindi mauuna sa mga namatay na. Sa araw na yaon, kasabay ng malakas na utos, ng tinig ng arkanghel, at ng tunog ng trumpeta ng Diyos, bababa ang Panginoon mula sa langit. Bubuhayin muna ang mga namatay na nananalig kay Kristo. Pagkatapos, tayong mga buhay pa ay titipunin niya sa ulap at isasama sa mga binuhay upang salubungin sa papawirin ang Panginoon. Sa gayo’y makakapiling niya tayo magpakailanman. Kaya nga, mag-aliwan kayo sa pamamagitan ng mga aral na ito."
+            },
+            {
+              "type": "paragraph",
+              "text": "Ang Salita ng Diyos."
+            },
+            {
+              "type": "stanza",
+              "text": "o kaya: Maikling Pagbasa\n1 Tesalonica 4, 13-14"
+            },
+            {
+              "type": "paragraph",
+              "text": "Pagbasa mula sa unang sulat ni Apostol San Pablo sa mga taga-Tesalonica"
+            },
+            {
+              "type": "paragraph",
+              "text": "Mga kapatid, ibig naming malaman ninyo ang katotohanan tungkol sa mga namatay na, nang hindi kayo magdalamhati, tulad ng mga taong walang pag-asa. Naniniwala tayong si Hesus ay namatay at muling nabuhay. Kaya naman, naniniwala tayong bubuhayin din ng Diyos ang lahat ng namatay na nananalig kay Hesus — upang isama sa kanya."
+            },
+            {
+              "type": "paragraph",
+              "text": "Ang Salita ng Diyos."
+            }
+          ]
+        },
+        {
+          "type": "acclamation",
+          "heading": "ALELUYA",
+          "reference": "Mateo 24, 42a. 44",
+          "blocks": [
+            {
+              "type": "stanza",
+              "text": "Aleluya! Aleluya!\nTayo ay laging magtanod\nsapagkat di natin talos\nang pagbabalik ni Hesus.\nAleluya! Aleluya!"
+            }
+          ]
+        },
+        {
+          "type": "gospel",
+          "heading": "MABUTING BALITA",
+          "reference": "Mateo 25, 1-13",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Ang Mabuting Balita ng Panginoon ayon kay San Mateo"
+            },
+            {
+              "type": "paragraph",
+              "text": "Noong panahong iyon, sinabi ni Hesus sa kanyang mga alagad ang talinghagang ito: “Dito maitutulad ang pagpasok sa kaharian ng Diyos: may sampung dalagang lumabas upang sumalubong sa lalaking ikakasal. Bawat isa’y may dalang ilawan. Ang lima sa kanila’y hangal at ang lima’y matalino. Ang mga hangal ay nagdala ng kanilang mga ilawan ngunit hindi nagbaon ng langis. Subalit ang matatalino’y nagdala ng langis bukod pa sa nasa kanilang ilawan. Nabalam ng dating ang lalaking ikakasal, kaya’t inantok silang lahat at nakatulog."
+            },
+            {
+              "type": "paragraph",
+              "text": "Ngunit nang hatinggabi na’y may sumigaw: ‘Narito na ang lalaking ikakasal! Salubungin ninyo!’ Agad nagbangon ang sampung dalaga at inayos ang kanilang ilawan. Sinabi ng mga hangal sa matatalino, ‘Bigyan naman ninyo kami ng kaunting langis. Aandap-andap na ang aming mga ilawan, e!’ ‘Baka hindi magkasiya ito sa ating lahat,’ tugon ng matatalino. ‘Mabuti pa’y pumunta muna kayo sa nagtitinda at bumili ng para sa inyo.’ Kaya’t lumakad ang limang hangal na dalaga. Samantalang bumibili sila, dumating ang lalaking ikakasal. Ang limang nakahanda ay kasama niyang pumasok sa kasalan, at ipininid ang pinto."
+            },
+            {
+              "type": "paragraph",
+              "text": "Pagkatapos, dumating naman ang limang hangal na dalaga. ‘Panginoon, papasukin po ninyo kami!’ sigaw nila. Ngunit tumugon siya, ‘Sinasabi ko sa inyo: hindi ko kayo nakikilala.’ Kaya magbantay kayo, sapagkat hindi ninyo alam ang araw ni ang oras.”"
+            },
+            {
+              "type": "paragraph",
+              "text": "Ang Mabuting Balita ng Panginoon."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

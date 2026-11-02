@@ -148,7 +148,7 @@ Prayer guides live in `src/content/prayers/`. Each needs a title, description, a
 
 The chapel's Tagalog novena runs **September 28–October 6**. Its text is in `novena-to-our-lady-of-the-most-holy-rosary.md`; the original reference is `public/documents/pagsisiyam-santo-rosaryo.pdf`. Preserve the chapel's wording and phrase divisions when editing it. The Holy Rosary guide is maintained separately in `how-to-pray-the-holy-rosary.md`.
 
-Filipino readings use a rolling Awit at Papuri snapshot: next Sunday by default, or today plus six days when configured. Run `pnpm readings:sync` to refresh the local preview and visit `/readings`. Reading text uses Gentium Plus; headings retain Gentium Book Plus. The prepared daily GitHub workflow requires explicit production activation after confirming source reuse terms. See [Managing Filipino readings](docs/managing-readings.md) for modes, setup, recovery, and publishing.
+Filipino readings use a rolling Awit at Papuri snapshot committed at `src/data/readings/snapshot.json`: next Sunday by default, or today plus six days when configured. Run `pnpm readings:sync` to download locally without committing, or `pnpm readings:publish` to download, validate, commit the snapshot if content changed, and push. GitHub Pages deploys the committed data and does not contact Awit at Papuri. A VM can schedule `scripts/publish-readings.sh`; test source access from that VM first. Reading text uses Gentium Plus; headings retain Gentium Book Plus. See [Managing Filipino readings](docs/managing-readings.md) for setup, scheduling, and recovery.
 
 ## Songs and choir selections
 
@@ -275,7 +275,7 @@ Keep `package.json` and `pnpm-lock.yaml` together in version control. Keep gener
 
 ### Content still to prepare for launch
 
-- Confirm Filipino reading source reuse/attribution and enable the daily workflow when ready for full-text publication.
+- Maintain Filipino reading source attribution and run/schedule the local publication job to keep the rolling snapshot current.
 - All News articles are drafted; publish a genuine first announcement when ready.
 - Review choir selection dates/statuses and “Placeholder selection” rehearsal notes.
 - Check the default sharing image and metadata.
