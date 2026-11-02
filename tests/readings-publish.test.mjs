@@ -28,6 +28,7 @@ function git(cwd, ...args) {
   return r.stdout.trim();
 }
 function fixture(failBuild = false) {
+  mkdirSync(resolve(".astro"), { recursive: true });
   const dir = mkdtempSync(resolve(".astro/readings-publish-test-"));
   const repo = join(dir, "repo"),
     remote = join(dir, "remote.git");
