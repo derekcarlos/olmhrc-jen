@@ -4,8 +4,9 @@
     "title": "All Saints' Day - Sunday Mass",
     "date": "2026-11-01",
     "celebration": "Sunday Mass",
-    "status": "archived",
-    "notes": "Placeholder selection. The final songs and musical settings will be confirmed before rehearsal.",
+    "status": "published",
+    "readiness": "confirmed",
+    "notes": "This lineup was used during the celebration of the Solemnity of All Saints.",
     "items": [
       {
         "part": "processional",
@@ -79,8 +80,161 @@
     "title": "Ordinary Time - Sunday Mass",
     "date": "2026-11-08",
     "celebration": "Sunday Mass",
-    "status": "upcoming",
+    "status": "published",
+    "readiness": "confirmed",
     "notes": "Please check the upcoming song line up this coming Sunday.",
+    "items": [
+      {
+        "part": "processional",
+        "song": "bayan-magsiawit-na",
+        "used": true
+      },
+      {
+        "part": "penitential-rite",
+        "song": "panginoon-kaawaan-mo-kami-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "gloria",
+        "song": "papuri-sa-diyos-tinapay-ng-buhay",
+        "used": true
+      },
+      {
+        "part": "gospel-acclamation",
+        "song": "gospel-acclamation-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "offertory",
+        "song": "tanggapin-mo-ama-ang-aming-alay-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "sanctus",
+        "song": "santo-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "memorial-acclamation",
+        "song": "si-kristo-ay-gunitain-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "great-amen",
+        "song": "dakilang-amen-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "pater-noster",
+        "song": "ama-namin-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "doxology",
+        "song": null,
+        "used": false
+      },
+      {
+        "part": "agnus-dei",
+        "song": "kordero-ng-diyos-2015-papal-visit",
+        "used": true
+      },
+      {
+        "part": "communion",
+        "song": "anima-christi-bukas-palad",
+        "used": true
+      },
+      {
+        "part": "recessional",
+        "song": "salamat-sa-biyaya-missa-magnificat",
+        "used": true
+      }
+    ]
+  },
+  {
+    "id": "christ-the-king-2026",
+    "title": "Solemnity of Our Lord Jesus Christ, King of the Universe",
+    "date": "2026-11-22",
+    "celebration": "Solemnity of Our Lord Jesus Christ, King of the Universe",
+    "status": "published",
+    "readiness": "preliminary",
+    "notes": "Preliminary line up for the last Sunday of Ordinary Time, most commonly known as Christ the King.",
+    "items": [
+      {
+        "part": "processional",
+        "song": "pambungad-na-awit-antipona-kristong-hari",
+        "used": true
+      },
+      {
+        "part": "penitential-rite",
+        "song": "panginoon-kaawaan-mo-kami-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "gloria",
+        "song": "papuri-sa-diyos-tinapay-ng-buhay",
+        "used": true
+      },
+      {
+        "part": "gospel-acclamation",
+        "song": "gospel-acclamation-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "offertory",
+        "song": "tanggapin-mo-ama-ang-aming-alay-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "sanctus",
+        "song": "santo-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "memorial-acclamation",
+        "song": "si-kristo-ay-gunitain-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "great-amen",
+        "song": "dakilang-amen-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "pater-noster",
+        "song": "ama-namin-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "doxology",
+        "song": null,
+        "used": false
+      },
+      {
+        "part": "agnus-dei",
+        "song": "kordero-ng-diyos-2015-papal-visit",
+        "used": true
+      },
+      {
+        "part": "communion",
+        "song": "tinapay-ng-buhay-bukas-palad",
+        "used": true
+      },
+      {
+        "part": "recessional",
+        "song": "salamat-sa-biyaya-missa-magnificat",
+        "used": true
+      }
+    ]
+  },
+  {
+    "id": "first-sunday-of-advent-2026",
+    "title": "First Sunday of Advent",
+    "date": "2026-11-29",
+    "celebration": "First Sunday of Advent",
+    "status": "published",
+    "readiness": "preliminary",
+    "notes": "This is to be used as the line for the entire Advent and Christmas Season.",
     "items": [
       {
         "part": "processional",

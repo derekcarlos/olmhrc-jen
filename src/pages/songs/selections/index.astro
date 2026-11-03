@@ -1,42 +1,37 @@
 ---
-import ContentPage from "@/layouts/ContentPage.astro";
-import { getChoirLibrary, selectionDate } from "@/lib/songs";
-const archived = (await getChoirLibrary()).selections
-  .filter((selection) => selection.status === "archived")
-  .sort((a, b) => b.date.localeCompare(a.date));
+import Base from "@/layouts/Base.astro";
+import SelectionCards from "@/components/SelectionCards.astro";
+import { getChoirLibrary } from "@/lib/songs";
+import "@/styles/songs-hub.css";
+const { selections } = await getChoirLibrary();
+const summaries = selections.map(({ id, date, status }) => ({
+  id,
+  date,
+  status,
+}));
 ---
 
-<ContentPage
-  title="Previous Song Selections"
-  description="Earlier choir song lists for Sundays and celebrations at Our Lady of the Most Holy Rosary Chapel."
+<Base
+  title="Previous Song Selections | Rosarium"
+  description="Previous choir lineups, lyrics and practice recordings."
 >
-  {
-    archived.length ? (
-      <ul class="space-y-6">
-        {archived.map((selection) => (
-          <li class="border-b border-border pb-6 dark:border-darkmode-border">
-            <h2 class="h3 mb-3">
-              <a
-                href={`/songs/selections/${selection.id}`}
-                class="underline underline-offset-4"
-              >
-                {selection.title}
-              </a>
-            </h2>
-            <p>
-              {selection.celebration} · {selectionDate(selection.date)}
-            </p>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <p>
-        No previous selections yet. Earlier Sunday and celebration song lists
-        will appear here when they are archived.
-      </p>
-    )
-  }
-  <a href="/songs" class="btn btn-outline-primary mt-10"
-    >← Upcoming Sunday’s songs</a
+  <main
+    class="songs-hub container"
+    data-selection-browser
+    data-selections={JSON.stringify(summaries)}
   >
-</ContentPage>
+    <header class="hub-heading">
+      <div>
+        <p class="hub-kicker">Rosarium · Choir archive</p><h1>
+          Sing it again.
+        </h1><p><a href="/songs">← This Sunday and future lineups</a></p>
+      </div>
+    </header>
+    <SelectionCards selections={selections} mode="past" />
+  </main>
+</Base>
+<script>
+  import { prepareSelectionBrowser } from "@/lib/selection-browser";
+  prepareSelectionBrowser();
+  document.addEventListener("astro:page-load", () => prepareSelectionBrowser());
+</script>

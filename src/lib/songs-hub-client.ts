@@ -3,6 +3,7 @@ import {
   practiceProgress,
   practiceSource,
 } from "./songs-hub.mjs";
+import { selectionSongPath } from "./selection-dates.mjs";
 
 interface HubTrack {
   key: string;
@@ -46,7 +47,7 @@ export function prepareSongsHub(scope: ParentNode = document) {
       tracks[0];
     let source = practiceSource(active);
     const path = (track: HubTrack) =>
-      `${base}/songs/${encodeURIComponent(track.id)}`;
+      selectionSongPath(root.dataset.selectionId, track.id, base);
     function setText(selector: string, text: string) {
       const node = root.querySelector<HTMLElement>(selector);
       if (node) node.textContent = text;

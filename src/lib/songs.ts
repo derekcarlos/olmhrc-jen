@@ -1,61 +1,58 @@
 import { z } from "astro/zod";
+import type { CollectionEntry } from "astro:content";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import selectionsData from "@/config/song-selections.json";
 import { massParts } from "@/lib/mass-parts";
 
-const selectionSchema = z.object({
-  id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
-  title: z.string(),
-  date: z.union([z.literal(""), z.iso.date()]),
-  celebration: z.string(),
-  status: z.enum(["upcoming", "archived"]),
-  notes: z.string().default(""),
-  items: z.array(
-    z.object({
-      part: z
-        .string()
-        .refine(
-          (id) => massParts.some((part) => part.id === id),
-          "Unknown Mass part",
-        ),
-      song: z.string().nullable(),
-      used: z.boolean().default(true),
-    }),
-  ),
-});
+import { selectionSchema, parseSelections } from "./selection-catalog.mjs";
+import { manilaToday } from "./calendar.mjs";
 export type SongSelection = z.infer<typeof selectionSchema>;
+
+export function selectionSongTracks(
+  selection: SongSelection | null,
+  songMap: Map<string, CollectionEntry<"songs">>,
+) {
+  const seen = new Set<string>();
+  return massParts.flatMap((part) => {
+    const item = selection?.items.find((item) => item.part === part.id);
+    const song = item?.used && item.song ? songMap.get(item.song) : undefined;
+    if (!song || seen.has(song.id)) return [];
+    seen.add(song.id);
+    return [{ id: song.id, title: song.data.title, part: part.label }];
+  });
+}
+
+export function defaultSongSelection(
+  selections: SongSelection[],
+  songId: string,
+) {
+  const matches = selections.filter((s) =>
+    s.items.some((item) => item.used && item.song === songId),
+  );
+  const today = manilaToday();
+  return (
+    matches
+      .filter((s) => s.date >= today)
+      .sort((a, b) => a.date.localeCompare(b.date))[0] ||
+    matches.sort((a, b) => b.date.localeCompare(a.date))[0] ||
+    null
+  );
+}
 
 export async function getChoirLibrary() {
   const songs = (await getSinglePage("songs")).sort((a, b) =>
     a.data.title.localeCompare(b.data.title),
   );
-  const selections = z.array(selectionSchema).parse(selectionsData);
-  const ids = new Set<string>();
   const songMap = new Map(songs.map((song) => [song.id, song]));
   for (const song of songs) {
     if (["mass", "marian", "selections"].includes(song.id))
       throw new Error(`Reserved song filename: ${song.id}`);
   }
-  for (const selection of selections) {
-    if (ids.has(selection.id))
-      throw new Error(`Duplicate selection: ${selection.id}`);
-    ids.add(selection.id);
-    if (
-      new Set(selection.items.map((item) => item.part)).size !==
-      selection.items.length
-    )
-      throw new Error(`Duplicate Mass part in ${selection.id}`);
-    for (const item of selection.items) {
-      if (item.used && item.song && !songMap.has(item.song))
-        throw new Error(
-          `Selection ${selection.id} references a missing or draft song: ${item.song}`,
-        );
-    }
-  }
-  if (
-    selections.filter((selection) => selection.status === "upcoming").length > 1
-  )
-    throw new Error("Only one choir selection can be upcoming");
+  const selections = parseSelections(
+    selectionsData,
+    massParts.map((part) => part.id),
+    new Set(songMap.keys()),
+  );
   return { songs, songMap, selections };
 }
 

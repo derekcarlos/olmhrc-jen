@@ -1,0 +1,103 @@
+---
+import type { SongSelection } from "@/lib/songs";
+import { selectionDate } from "@/lib/songs";
+import { groupSelections } from "@/lib/selection-dates.mjs";
+import { FaArrowRight } from "react-icons/fa";
+interface Props {
+  selections: SongSelection[];
+  mode: "future" | "past";
+}
+const { selections, mode } = Astro.props;
+const grouped = groupSelections(selections);
+const visible = new Set(
+  (mode === "past" ? grouped.past : grouped.future).map((s) => s.id),
+);
+const ordered = [...selections].sort((a, b) =>
+  mode === "past" ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date),
+);
+---
+
+<section
+  class="lineup-collection"
+  data-lineup-collection
+  data-mode={mode}
+  aria-labelledby={`${mode}-lineups-title`}
+>
+  <div class="lineup-section-heading">
+    <div>
+      <p class="hub-kicker">
+        {
+          mode === "future"
+            ? "A little practice today, a confident choir tomorrow"
+            : "Return to a familiar celebration"
+        }
+      </p><h2 id={`${mode}-lineups-title`}>
+        {mode === "future" ? "Prepare ahead" : "Previous selections"}
+      </h2>
+    </div><span data-lineup-count
+      >{visible.size} {visible.size === 1 ? "lineup" : "lineups"}</span>
+  </div>
+  {
+    mode === "future" && (
+      <p class="lineup-section-intro">
+        Start learning the songs for future celebrations. Preliminary choices
+        may change before the final lineup is confirmed.
+      </p>
+    )
+  }
+  <ul class="lineup-cards">
+    {
+      ordered.map((selection) => {
+        const count = selection.items.filter(
+          (item) => item.used && item.song,
+        ).length;
+        return (
+          <li
+            class="lineup-card"
+            data-selection-card
+            data-selection-id={selection.id}
+            data-selection-date={selection.date}
+            hidden={!visible.has(selection.id)}
+          >
+            <p class="lineup-card-date">
+              <time datetime={selection.date}>
+                {selectionDate(selection.date)}
+              </time>
+            </p>
+            <h3>
+              <a href={`/songs/selections/${selection.id}`}>
+                {selection.title}
+              </a>
+            </h3>
+            <p class:list={["lineup-readiness", selection.readiness]}>
+              {selection.readiness === "confirmed"
+                ? "Confirmed lineup"
+                : "Preliminary · choices may change"}
+            </p>
+            {selection.notes && (
+              <p class="lineup-card-notes">{selection.notes}</p>
+            )}
+            <div class="lineup-card-action">
+              <>
+                <span>
+                  {count} {count === 1 ? "song" : "songs"} selected
+                </span>
+                <a href={`/songs/selections/${selection.id}`}>
+                  Preview &amp; practise
+                  <FaArrowRight aria-hidden="true" />
+                </a>
+              </>
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
+  <p class="lineup-empty" data-lineup-empty hidden={visible.size > 0}>
+    {
+      mode === "future"
+        ? "More lineups will appear here as they are published."
+        : "No previous selections yet. Completed celebrations will appear here automatically."
+    }
+  </p>
+</section>

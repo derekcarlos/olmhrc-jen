@@ -1,0 +1,366 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { SongSelection } from "@/lib/songs";
+import { selectionDate } from "@/lib/songs";
+import { selectionSongPath } from "@/lib/selection-dates.mjs";
+import { massParts } from "@/lib/mass-parts";
+import { youtubeVideoId } from "@/lib/youtube.mjs";
+import {
+  FaArrowRight,
+  FaBookOpen,
+  FaMusic,
+  FaHeadphones,
+} from "react-icons/fa";
+import "@/styles/songs-hub.css";
+interface Props {
+  selection: SongSelection | null;
+  songs: CollectionEntry<"songs">[];
+}
+const { selection: upcoming, songs } = Astro.props;
+const songMap = new Map(songs.map((song) => [song.id, song]));
+const rows = massParts.map((part) => {
+  const item = upcoming?.items.find((entry) => entry.part === part.id);
+  const song = item?.used && item.song ? songMap.get(item.song) : null;
+  return { part, item, song };
+});
+const tracks = rows.flatMap(({ part, song }) =>
+  song
+    ? [
+        {
+          key: `${part.id}:${song.id}`,
+          id: song.id,
+          anchor: `song-${part.id}`,
+          title: song.data.title,
+          part: part.label,
+          composer: song.data.composer,
+          audio: song.data.audio,
+          audioCredit: song.data.audio_credit,
+          videoId: youtubeVideoId(song.data.youtube),
+        },
+      ]
+    : [],
+);
+const first = tracks[0];
+const date = upcoming?.date ? new Date(`${upcoming.date}T12:00:00Z`) : null;
+const month = date
+  ? new Intl.DateTimeFormat("en-PH", {
+      month: "short",
+      year: "numeric",
+      timeZone: "UTC",
+    }).format(date)
+  : "Date to be confirmed";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<section
+  class="selection-rehearsal"
+  data-selection-rehearsal
+  data-songs-hub
+  data-selection-id={upcoming?.id}
+  data-tracks={JSON.stringify(tracks)}
+  data-initial-key={first?.key}
+  data-progress-key={upcoming
+    ? `rosarium-practice:${upcoming.id}:${upcoming.date}`
+    : undefined}
+  data-base={base}
+>
+  <section class="hub-selection-cover" aria-labelledby="selection-title">
+    <div class="cover-copy">
+      <p class="cover-kicker">
+        {upcoming ? "Choir selection" : "Gathering our next selection"}
+      </p>
+      {
+        upcoming && (
+          <p class:list={["lineup-readiness", upcoming.readiness]}>
+            {upcoming.readiness === "confirmed"
+              ? "Confirmed lineup"
+              : "Preliminary · choices may change"}
+          </p>
+        )
+      }
+      <h2 id="selection-title">
+        {upcoming?.title || "This Sunday’s lineup is being prepared."}
+      </h2>
+      <p class="cover-notes">
+        {
+          upcoming?.notes ||
+            "Browse the songbook while our next Mass selection is being prepared."
+        }
+      </p>
+      <div class="cover-actions">
+        {
+          first && (
+            <a
+              class="hub-start"
+              href={selectionSongPath(upcoming?.id, first.id, base)}
+              data-hub-resume
+            >
+              <>
+                <span data-hub-resume-label>Start practising</span>
+                <FaArrowRight aria-hidden="true" />
+              </>
+            </a>
+          )
+        }
+        <a href="/songs/mass" class="cover-browse">Browse all Mass songs</a>
+      </div>
+    </div>
+    <div class="cover-date">
+      <FaMusic aria-hidden="true" />{
+        date ? (
+          <>
+            <>
+              <strong>{upcoming!.date.slice(-2)}</strong>
+              <span>{month}</span>
+              <time datetime={upcoming!.date}>
+                {selectionDate(upcoming!.date)}
+              </time>
+            </>
+          </>
+        ) : (
+          <strong class="cover-no-date">
+            Sing
+            <br />
+            together.
+          </strong>
+        )
+      }
+    </div>
+  </section>
+
+  {
+    tracks.length > 0 && (
+      <section
+        class="hub-progress"
+        data-hub-progress-area
+        aria-label="Your rehearsal progress"
+        hidden
+      >
+        <div>
+          <>
+            <strong>Your practice</strong>
+            <span data-hub-count aria-live="polite">
+              0 of {tracks.length} practised
+            </span>
+          </>
+        </div>
+        <progress
+          data-hub-progress
+          value="0"
+          max={tracks.length}
+          aria-label="Songs you have practised"
+        />
+        <p data-hub-storage>Saved only on this device.</p>
+      </section>
+    )
+  }
+
+  {
+    upcoming && (
+      <div class="hub-workspace">
+        <section class="hub-queue" aria-labelledby="queue-title">
+          <header class="queue-heading">
+            <>
+              <div>
+                <>
+                  <p class="hub-kicker">From entrance to sending forth</p>
+                  <h2 id="queue-title">The Mass, in order</h2>
+                </>
+              </div>
+              <span>{tracks.length} songs</span>
+            </>
+          </header>
+          <p class="queue-guide">
+            Open a title for the lyrics.
+            <span data-hub-enhanced hidden>
+              {" "}
+              You can also preview a recording here and tick the songs you’ve
+              practised.
+            </span>
+          </p>
+          <ol class="hub-track-list">
+            {rows.map(({ part, item, song }) => (
+              <li
+                id={`song-${part.id}`}
+                class:list={[
+                  "hub-track",
+                  !song && "hub-track-empty",
+                  first?.key === `${part.id}:${song?.id}` && "is-selected",
+                ]}
+                data-hub-track
+                data-key={song ? `${part.id}:${song.id}` : undefined}
+              >
+                <span class="hub-track-number" aria-hidden="true">
+                  {part.number}
+                </span>
+                <div class="hub-track-copy">
+                  <p class="hub-track-part">{part.label}</p>
+                  {song ? (
+                    <>
+                      <a
+                        href={selectionSongPath(upcoming?.id, song.id, base)}
+                        class="hub-track-title"
+                      >
+                        {song.data.title}
+                      </a>
+                      <p class="hub-track-composer">
+                        {song.data.composer || "Setting to be confirmed"}
+                      </p>
+                    </>
+                  ) : (
+                    <p class="hub-track-unavailable">
+                      {item?.used === false
+                        ? "Not used for this celebration"
+                        : "Song to be chosen"}
+                    </p>
+                  )}
+                </div>
+                {song && (
+                  <div class="hub-track-actions">
+                    <button
+                      type="button"
+                      class="hub-preview-button"
+                      data-hub-preview
+                      data-key={`${part.id}:${song.id}`}
+                      aria-label={`Preview ${song.data.title}`}
+                      aria-pressed={
+                        first?.key === `${part.id}:${song.id}`
+                          ? "true"
+                          : "false"
+                      }
+                      hidden
+                    >
+                      <FaHeadphones aria-hidden="true" />
+                      <span>Preview</span>
+                    </button>
+                    <label class="hub-practised" data-hub-mark-wrap hidden>
+                      <input
+                        type="checkbox"
+                        data-hub-mark
+                        value={`${part.id}:${song.id}`}
+                        aria-label={`Mark ${song.data.title} for ${part.label} as practised`}
+                        disabled
+                      />
+                      <span>Practised</span>
+                    </label>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {first && (
+          <aside
+            class="hub-player"
+            id="song-preview"
+            data-hub-player
+            aria-labelledby="hub-player-title"
+          >
+            <div class="player-heading">
+              <span>Practice preview</span>
+              <FaHeadphones aria-hidden="true" />
+            </div>
+            <p class="player-part" data-hub-part>
+              {first.part}
+            </p>
+            <h2 id="hub-player-title" data-hub-title>
+              {first.title}
+            </h2>
+            <p class="player-composer" data-hub-composer>
+              {first.composer || "Setting to be confirmed"}
+            </p>
+            <div
+              class="hub-source-controls"
+              role="group"
+              aria-label="Choose a practice recording"
+              data-hub-source-controls
+              hidden
+            >
+              <button type="button" data-hub-source="audio" aria-pressed="true">
+                Audio
+              </button>
+              <button
+                type="button"
+                data-hub-source="video"
+                aria-pressed="false"
+              >
+                Video
+              </button>
+            </div>
+            <div
+              class="hub-media"
+              data-hub-media
+              data-mode={
+                first.audio ? "audio" : first.videoId ? "video" : "none"
+              }
+            >
+              {first.audio ? (
+                <>
+                  <p>Practice recording</p>
+                  <audio
+                    controls
+                    preload="none"
+                    src={first.audio}
+                    aria-label={`Practice recording: ${first.title}`}
+                  />
+                </>
+              ) : first.videoId ? (
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${first.videoId}`}
+                  title={`Practice video: ${first.title}`}
+                  width="560"
+                  height="315"
+                  loading="lazy"
+                  allow="encrypted-media; picture-in-picture; fullscreen"
+                  allowfullscreen
+                  referrerpolicy="strict-origin-when-cross-origin"
+                />
+              ) : (
+                <p>
+                  A recording hasn’t been added yet. Open the lyrics to
+                  practise.
+                </p>
+              )}
+            </div>
+            <p
+              class="hub-audio-credit"
+              data-hub-credit
+              hidden={!first.audio || !first.audioCredit}
+            >
+              {first.audioCredit}
+            </p>
+            <a
+              class="hub-external"
+              href={
+                first.audio ||
+                `https://www.youtube.com/watch?v=${first.videoId}`
+              }
+              data-hub-external
+              target="_blank"
+              rel="noopener noreferrer"
+              hidden={!first.audio && !first.videoId}
+            >
+              {first.audio ? "Open audio file ↗" : "Open on YouTube ↗"}
+            </a>
+            <a
+              class="hub-open-lyrics"
+              href={selectionSongPath(upcoming?.id, first.id, base)}
+              data-hub-open
+            >
+              <FaBookOpen aria-hidden="true" />
+              Open lyrics &amp; practise
+              <FaArrowRight aria-hidden="true" />
+            </a>
+            <p class="hub-player-status" data-hub-status role="status">
+              Press play when you’re ready.
+            </p>
+            <a class="hub-return" href={`#${first.anchor}`} data-hub-back>
+              Back to selected song ↓
+            </a>
+          </aside>
+        )}
+      </div>
+    )
+  }
+</section>

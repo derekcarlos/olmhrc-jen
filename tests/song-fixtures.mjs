@@ -49,7 +49,8 @@ if (mode === "create") {
     title: "Verification archived selection",
     date: "2026-10-25",
     celebration: "Verification only",
-    status: "archived",
+    status: "published",
+    readiness: "confirmed",
     items: [
       { part: "processional", song: "verify-practice-song", used: true },
       { part: "gloria", song: null, used: false },

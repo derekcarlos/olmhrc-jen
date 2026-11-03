@@ -9,7 +9,7 @@
 | Audio files                                         | `public/audio/`                   |
 | Mass-part names and the 13-slot order               | `src/lib/mass-parts.ts`           |
 
-The Songs page shows the selection marked `upcoming` first. Mass and Marian libraries share the same song entries. Empty placeholder songs have been removed; create a new entry when adding a song.
+The Songs page features this/next Sunday's published lineup using Philippine dates. **Prepare ahead** gives the choir access to other published celebrations, and previous dates appear in the archive automatically. Mass and Marian libraries share the same song entries. Empty placeholder songs have been removed; create a new entry when adding a song.
 
 ## Add or update a song
 
@@ -80,15 +80,16 @@ You can provide audio, YouTube, or both. A YouTube video appears in the “Liste
 
 Leave `youtube: ""` or omit it when there is no video. Existing song files continue to work without adding this field.
 
-## Update the Sunday selection
+## Plan Sunday and future lineups
 
 Edit `src/config/song-selections.json`:
 
 - `title`: display name for this selection.
-- `date`: actual celebration date as `YYYY-MM-DD`; `""` displays “Date to be confirmed.”
+- `date`: actual celebration date as `YYYY-MM-DD`, required for published lineups. An undated draft can use `""`.
 - `celebration`: Sunday or solemnity name.
 - `notes`: rehearsal or preparation notes.
-- `status`: `upcoming` or `archived`. Only one selection may be upcoming.
+- `status`: `draft` or `published`. Any number of lineups can be published. Drafts are hidden from listings, metadata and generated routes.
+- `readiness`: `preliminary` (the default) or `confirmed`. Publish preliminary choices when the choir needs to practise before the final selection is agreed.
 - `items`: links from each Mass part to the song’s filename without `.md`.
 
 For example:
@@ -107,9 +108,17 @@ The part IDs are `processional`, `penitential-rite`, `gloria`, `gospel-acclamati
 
 ## Keep previous selections
 
-Change the previous selection’s status to `archived`, then copy its object within the JSON array to start a new upcoming selection. Give the new object a unique `id`, update its title/date/celebration, and select its songs. Earlier lists appear at `/songs/selections`; each list has its own `/songs/selections/<id>` page.
+Keep completed lineups published. They move into `/songs/selections` when their date is past in the Philippines; there is no manual archived status. Copy a lineup within the JSON array to prepare another celebration, then give the copy a unique `id`, actual date, title, celebration and notes. Set `readiness: "preliminary"` until its choices are agreed. The November 22 and November 29, 2026 lineups are currently preliminary; review their songs and Mass parts before confirming them.
+
+Each published lineup has a complete `/songs/selections/<id>` rehearsal page: the ordered Mass parts, one MP3/YouTube recording preview at a time, lyric links, and a personal practice checklist. Progress is stored under the lineup's ID and date on the current device. Reusing the same songs in another lineup does not mark that lineup practised. Changing a song in one part removes that part's obsolete practice mark; preserve IDs/dates once shared when possible.
+
+Links from a lineup open `/songs/selections/<id>/<song-id>`. The next/previous songs, “In this selection”, and the return link all keep that lineup's context. The original `/songs/<song-id>` addresses continue to work. Both routes read the same Markdown song; no duplicate lyrics or recordings are needed.
+
+The browser checks Philippine dates on load, each minute, and when the tab becomes visible. Sunday's lineup remains featured for the whole Sunday. From Monday it looks for the following Sunday. If that Sunday is unprepared, it says so and leaves future solemnities available under Prepare ahead. It does not silently label a distant celebration as this Sunday. The landing page loads only the featured rehearsal when it changes, with a direct-link fallback if loading fails. New published lineups and song edits still require rebuilding and deploying; no daily workflow is required for dates to advance.
 
 Songs are shared between selections. Updating a song’s lyrics or audio updates it wherever that song is used. Keep referenced songs published (`draft: false`); the build rejects missing or draft song references to prevent broken choir links. Draft songs are excluded from both libraries and normal song routes.
+
+Selection drafts may refer to songs still being prepared, but all used songs must exist and be published before changing the selection to `status: "published"`. A published partial lineup may use `"song": null` for choices not yet made. Do not use `"used": false` to represent an undecided song; it means that part is intentionally omitted.
 
 ## Preview and verify
 
@@ -124,4 +133,6 @@ pnpm dev
 
 This is a static site: rebuild and redeploy to publish changes. During development, saved Markdown and MDX changes update automatically; the dev server uses polling to detect file changes reliably. Check the terminal for schema errors if an edit does not appear.
 
-`node --test tests/song-filter.test.mjs tests/youtube.test.mjs` checks filtering and supported YouTube URL formats. The production build validates selection references and content fields. Full release checks are documented in the [README](../README.md#validation).
+`node --test tests/*.test.mjs tests/*client.integration.mjs` checks selection rules, Philippine dates, rollover/fallback behavior, scoped practice links, independent checklists, song filtering and supported YouTube URL formats. After building, `node tests/songs.integration.mjs` verifies every published rehearsal and contextual lyric route. The build validates selection references and content fields. Full release checks are documented in the [README](../README.md#validation).
+
+With the dev server running on port 4321 and a current build available, `node tests/songs.integration.mjs --live` also checks date promotion against actual local HTTP routes. This catches URL-format mismatches that mocked responses cannot detect. Set `ROSARIUM_PREVIEW_URL` when testing another local preview address.

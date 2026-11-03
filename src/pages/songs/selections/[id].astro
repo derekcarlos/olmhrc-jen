@@ -1,10 +1,7 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import type { SongSelection as SelectionData } from "@/lib/songs";
 import { getChoirLibrary } from "@/lib/songs";
-import ContentPage from "@/layouts/ContentPage.astro";
-import SongSelection from "@/components/SongSelection.astro";
-
+import Base from "@/layouts/Base.astro";
+import SelectionRehearsal from "@/components/SelectionRehearsal.astro";
 export async function getStaticPaths() {
   const { songs, selections } = await getChoirLibrary();
   return selections.map((selection) => ({
@@ -12,17 +9,26 @@ export async function getStaticPaths() {
     props: { selection, songs },
   }));
 }
-interface Props {
-  selection: SelectionData;
-  songs: CollectionEntry<"songs">[];
-}
 const { selection, songs } = Astro.props;
 ---
 
-<ContentPage
-  title={selection.title}
-  description={`Choir song selection for ${selection.celebration} at Our Lady of the Most Holy Rosary Chapel.`}
+<Base
+  title={`${selection.title} | Rosarium`}
+  description={`Choir rehearsal for ${selection.title}. Lyrics, practice recordings and your personal checklist.`}
 >
-  <SongSelection selection={selection} songs={songs} />
-  <a href="/songs" class="btn btn-outline-primary mt-10">← Songs</a>
-</ContentPage>
+  <main class="songs-hub container">
+    <header class="hub-heading">
+      <div>
+        <p class="hub-kicker">Rosarium · Choir rehearsal</p><h1>
+          Prepare in song.
+        </h1><p><a href="/songs">← All song selections</a></p>
+      </div>
+    </header>
+    <SelectionRehearsal selection={selection} songs={songs} />
+  </main>
+</Base>
+<script>
+  import { prepareSongsHub } from "@/lib/songs-hub-client";
+  prepareSongsHub();
+  document.addEventListener("astro:page-load", () => prepareSongsHub());
+</script>

@@ -161,7 +161,9 @@ Each entry contains its title, description, composer/arranger, language, Mass-pa
 - Set `marian: true` for the Marian library. Mass-part tags control inclusion/filtering in the Mass library.
 - Keep credit fields and season/occasion labels consistent.
 
-Edit `src/config/song-selections.json` for the next celebration. Only one selection may have `status: "upcoming"`; it appears first on Songs. Archive the previous selection, then create a uniquely identified new list with the actual date and song IDs. Dates do not automatically change selection status.
+Edit `src/config/song-selections.json` for Sunday and future celebrations. Any number of lineups may use `status: "published"`; `status: "draft"` hides a lineup and its routes. Published lineups require an actual date. Use `readiness: "preliminary"` while choices may change, or `"confirmed"` when agreed. The Songs page features this/next Sunday in Philippine Time, shows other available lineups under **Prepare ahead**, and moves past dates into Previous Selections automatically in the browser. A missing Sunday's lineup stays visibly unprepared rather than being replaced by a later solemnity.
+
+Every published lineup has a complete practice page at `/songs/selections/<id>`, with recording previews and a checklist saved separately on the current device. Lyrics opened from that lineup use `/songs/selections/<id>/<song-id>` so Previous/Next, the setlist and return links stay in the chosen celebration. The ordinary `/songs/<song-id>` links remain available for the shared songbook. New or edited lineups still require a rebuild and deployment; date rollover needs no daily workflow.
 
 ```json
 {
@@ -269,7 +271,7 @@ The build produces HTML, optimized assets, yearly calendar JSON, and a sitemap. 
 
 | When                               | Review                                                                                              |
 | ---------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Before each choir celebration      | Confirm selection, date, notes, and practice links; archive the previous list.                      |
+| Before each choir celebration      | Review date, songs, notes and practice links; set readiness to confirmed when agreed. Previous dates archive automatically. |
 | When chapel times change           | Update event files, the Mass page, and homepage Mass notice together.                               |
 | Before the novena/Christmas season | Confirm prayer and Mass times and seasonal exceptions with the chapel.                              |
 | When publishing news               | Confirm facts/dates, review images, and publish only intended articles.                             |
@@ -298,7 +300,7 @@ Comments and analytics are disabled. Contact, Blog, Authors, Categories, Tags, a
 | Future-year markers fail                | Check `/calendar-data/<year>.json` on the deployed site and ensure the full `dist/` was deployed. Retry after a network failure. |
 | A marker is absent from Upcoming Events | `all_day: true` is calendar-only. Scheduled entries must fall within the next-seven-day window.                                  |
 | A News article is missing               | Check `draft`, publication time, and whether a rebuild ran after that time.                                                      |
-| A choir selection fails the build       | Check unique IDs, one upcoming selection at most, valid Mass parts, and published song IDs matching filenames.                   |
+| A choir selection fails the build       | Check unique IDs, published dates, draft/published status, readiness, valid Mass parts, and published song IDs matching filenames. |
 | YouTube will not play inline            | Check the URL and try Open on YouTube; video owners can disable embedding.                                                       |
 | An image/favicon remains old            | Check the path, reload, or use a new filename to avoid a cached asset.                                                           |
 | A font build fails                      | Astro's Google font provider may need network access to obtain fonts; inspect the error before retrying.                         |

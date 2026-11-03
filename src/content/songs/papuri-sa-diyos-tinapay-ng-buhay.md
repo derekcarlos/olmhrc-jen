@@ -1,8 +1,8 @@
 ---
 title: "Papuri sa Diyos"
 description: "Lyrics and practice video for Papuri sa Diyos from Tinapay ng Buhay."
-composer: "Manoling Francisco"
-arranger: "Manoling Francisco"
+composer: "Manoling Francisco, SJ"
+arranger: "Manoling Francisco, SJ"
 language: "Tagalog"
 mass_parts: ["gloria"]
 marian: false

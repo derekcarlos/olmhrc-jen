@@ -190,6 +190,12 @@
   @apply prose-td:relative prose-td:z-10 prose-td:px-3 prose-td:py-[18px] dark:prose-td:text-darkmode-text;
 }
 
+/* Typography adds quotation marks to the first and last paragraphs by default. */
+.content blockquote p:first-of-type::before,
+.content blockquote p:last-of-type::after {
+  content: none;
+}
+
 .dark .content {
   color: var(--color-darkmode-text);
   --tw-prose-body: var(--color-darkmode-text);

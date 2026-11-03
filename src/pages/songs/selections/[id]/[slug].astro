@@ -1,0 +1,16 @@
+---
+import { getChoirLibrary, selectionSongTracks } from "@/lib/songs";
+import SongPractice from "@/components/SongPractice.astro";
+export async function getStaticPaths() {
+  const { selections, songMap } = await getChoirLibrary();
+  return selections.flatMap((selection) => {
+    const tracks = selectionSongTracks(selection, songMap);
+    return tracks.map((track) => ({
+      params: { id: selection.id, slug: track.id },
+      props: { song: songMap.get(track.id)!, selection, tracks },
+    }));
+  });
+}
+---
+
+<SongPractice {...Astro.props} />

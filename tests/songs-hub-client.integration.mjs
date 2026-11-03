@@ -42,6 +42,41 @@ function fixture(run) {
     globalThis.window = old;
   }
 }
+test("lineup links preserve celebration context and repeated songs have independent progress", () =>
+  fixture((window, document) => {
+    const root = document.querySelector("[data-songs-hub]");
+    root.dataset.selectionId = "christ-the-king-2026";
+    root.dataset.progressKey =
+      "rosarium-practice:christ-the-king-2026:2026-11-22";
+    prepareSongsHub(document);
+    assert.equal(
+      root.querySelector("[data-hub-open]").getAttribute("href"),
+      "/songs/selections/christ-the-king-2026/a",
+    );
+    const mark = root.querySelector("[data-hub-mark]");
+    mark.checked = true;
+    mark.dispatchEvent(new window.Event("change"));
+    assert.equal(
+      root.querySelector("[data-hub-resume]").getAttribute("href"),
+      "/songs/selections/christ-the-king-2026/b",
+    );
+    const other = root.cloneNode(true);
+    delete other.dataset.hubReady;
+    other.dataset.selectionId = "first-sunday-of-advent-2026";
+    other.dataset.progressKey =
+      "rosarium-practice:first-sunday-of-advent-2026:2026-11-29";
+    document.body.append(other);
+    prepareSongsHub(document);
+    assert.equal(other.querySelector("[data-hub-mark]").checked, false);
+    assert.equal(
+      other.querySelector("[data-hub-count]").textContent,
+      "0 of 2 practised",
+    );
+    assert.equal(
+      other.querySelector("[data-hub-open]").getAttribute("href"),
+      "/songs/selections/first-sunday-of-advent-2026/a",
+    );
+  }));
 test("selecting another track replaces media and points to its full lyrics", () =>
   fixture((window, document) => {
     prepareSongsHub(document);

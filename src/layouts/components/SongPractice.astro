@@ -1,0 +1,265 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import Base from "@/layouts/Base.astro";
+import PracticeAudio from "@/components/PracticeAudio.astro";
+import { selectionDate } from "@/lib/songs";
+import { selectionSongPath } from "@/lib/selection-dates.mjs";
+import { massPartLabel } from "@/lib/mass-parts";
+import { FaArrowLeft, FaArrowRight, FaMusic } from "react-icons/fa";
+import "@/styles/song-practice.css";
+
+interface Props {
+  song: CollectionEntry<"songs">;
+  tracks: { id: string; title: string; part: string }[];
+  selection: { title: string; date: string; id: string } | null;
+}
+const { song, tracks, selection } = Astro.props;
+const songHref = (id: string) =>
+  selectionSongPath(selection?.id, id, import.meta.env.BASE_URL);
+const { Content } = await render(song);
+const position = tracks.findIndex((track) => track.id === song.id);
+const previous = position > 0 ? tracks[position - 1] : null;
+const next = position >= 0 ? tracks[position + 1] : null;
+const languageCodes: Record<string, string> = {
+  Tagalog: "fil",
+  Filipino: "fil",
+  English: "en",
+  Latin: "la",
+};
+---
+
+<Base
+  title={`${song.data.title} | Rosarium`}
+  description={song.data.description}
+  canonical={new URL(
+    selectionSongPath(null, song.id, import.meta.env.BASE_URL),
+    Astro.site || Astro.url,
+  ).href}
+>
+  <main class="rehearsal-page container" data-song-rehearsal>
+    <nav class="rehearsal-breadcrumb" aria-label="Song navigation">
+      <a href={selection ? `/songs/selections/${selection.id}` : "/songs"}
+        ><FaArrowLeft aria-hidden="true" />{
+          selection ? "Back to this lineup" : "Song selections"
+        }</a
+      >
+      <a href={song.data.marian ? "/songs/marian" : "/songs/mass"}
+        >Browse the repertoire</a
+      >
+    </nav>
+    <header class="rehearsal-heading">
+      <div>
+        <p class="rehearsal-kicker">The Rosarium songbook</p>
+        <h1>{song.data.title}</h1>
+        <p class="rehearsal-composer">
+          {song.data.composer || "Musical setting to be confirmed"}
+        </p>
+        <ul class="song-context" aria-label="Song context">
+          {song.data.language && <li>{song.data.language}</li>}
+          {song.data.mass_parts.map((part) => <li>{massPartLabel(part)}</li>)}
+          {song.data.marian && <li>Marian repertoire</li>}
+        </ul>
+      </div>
+      <div class="rehearsal-mark" aria-hidden="true">
+        <FaMusic /><span>Listen.<br />Learn.<br />Sing together.</span>
+      </div>
+    </header>
+    {
+      song.data.placeholder && (
+        <p class="song-pending">
+          This song entry is awaiting the choir’s lyrics and practice recording.
+        </p>
+      )
+    }
+
+    <nav class="rehearsal-jumps" aria-label="Practice page sections">
+      <a href="#lyrics-title">Read the lyrics</a><a href="#practice-heading"
+        >Listen &amp; practise</a
+      >
+    </nav>
+    <div class="rehearsal-workspace">
+      <section class="lyric-sheet" aria-labelledby="lyrics-title">
+        <div class="lyric-sheet-toolbar">
+          <div>
+            <span class="sheet-caption">Your voice, on the page</span><h2
+              id="lyrics-title"
+            >
+              Lyrics
+            </h2>
+          </div>
+          <div
+            class="lyric-size-controls"
+            data-lyric-controls
+            role="group"
+            aria-label="Lyrics text size"
+            hidden
+          >
+            <button
+              type="button"
+              data-lyrics-smaller
+              aria-label="Make lyrics smaller"
+              >A<span aria-hidden="true">−</span></button
+            >
+            <output data-lyrics-size aria-live="polite" aria-atomic="true"
+              >24 px</output
+            >
+            <button
+              type="button"
+              data-lyrics-larger
+              aria-label="Make lyrics larger"
+              >A<span aria-hidden="true">+</span></button
+            >
+          </div>
+        </div>
+        <div
+          class="content lyrics-copy"
+          data-lyrics-copy
+          lang={languageCodes[song.data.language]}
+        >
+          <Content />
+        </div>
+        {
+          selection && (
+            <div class="sheet-selection-label">
+              From {selection.title} · Song {position + 1} of {tracks.length}
+            </div>
+          )
+        }
+        {
+          (previous || next) && (
+            <nav
+              class="song-steps"
+              aria-label="Continue practising this selection"
+            >
+              {previous && (
+                <a href={songHref(previous.id)} class="previous-song">
+                  <span>
+                    <FaArrowLeft aria-hidden="true" />
+                    Previous song
+                  </span>
+                  <strong>{previous.title}</strong>
+                </a>
+              )}
+              {next && (
+                <a href={songHref(next.id)} class="next-song">
+                  <span>
+                    Next song
+                    <FaArrowRight aria-hidden="true" />
+                  </span>
+                  <strong>{next.title}</strong>
+                </a>
+              )}
+            </nav>
+          )
+        }
+      </section>
+
+      <aside
+        class="practice-rail"
+        aria-label="Practice recording and song details"
+      >
+        <div class="practice-panel">
+          <div class="practice-panel-masthead">
+            <span>Make it familiar</span><span
+              class="practice-bars"
+              aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span
+            >
+          </div>
+          <PracticeAudio
+            src={song.data.audio}
+            title={song.data.title}
+            credit={song.data.audio_credit}
+            youtube={song.data.youtube}
+          />
+          <details class="practice-details">
+            <summary>Song credits &amp; context</summary>
+            <dl>
+              <dt>Composer / setting</dt><dd>
+                {song.data.composer || "To be confirmed"}
+              </dd>
+              {
+                song.data.arranger &&
+                  song.data.arranger !== song.data.composer && (
+                    <>
+                      <>
+                        <dt>Arrangement</dt>
+                        <dd>{song.data.arranger}</dd>
+                      </>
+                    </>
+                  )
+              }
+              {
+                song.data.seasons.length > 0 && (
+                  <>
+                    <>
+                      <dt>Seasons</dt>
+                      <dd>{song.data.seasons.join(", ")}</dd>
+                    </>
+                  </>
+                )
+              }
+              {
+                song.data.occasions.length > 0 && (
+                  <>
+                    <>
+                      <dt>Celebrations / devotions</dt>
+                      <dd>{song.data.occasions.join(", ")}</dd>
+                    </>
+                  </>
+                )
+              }
+            </dl>
+          </details>
+        </div>
+        {
+          selection && (
+            <div class="practice-setlist-frame">
+              <details class="practice-setlist">
+                <summary>
+                  <FaMusic aria-hidden="true" />
+                  In this selection<span>{tracks.length} songs</span>
+                </summary>
+                <div class="practice-setlist-heading">
+                  <p>{selection.title}</p>
+                  {selection.date && (
+                    <time datetime={selection.date}>
+                      {selectionDate(selection.date)}
+                    </time>
+                  )}
+                  <a href={`/songs/selections/${selection.id}`}>
+                    View full selection →
+                  </a>
+                </div>
+                <ol>
+                  {tracks.map((track, index) => (
+                    <li>
+                      <a
+                        href={songHref(track.id)}
+                        aria-current={track.id === song.id ? "page" : undefined}
+                      >
+                        <span class="setlist-number">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <span>
+                          <small>{track.part}</small>
+                          <strong>{track.title}</strong>
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </details>
+            </div>
+          )
+        }
+      </aside>
+    </div>
+  </main>
+</Base>
+
+<script>
+  import { prepareSongPractice } from "@/lib/song-practice-client";
+  prepareSongPractice();
+  document.addEventListener("astro:page-load", () => prepareSongPractice());
+</script>
