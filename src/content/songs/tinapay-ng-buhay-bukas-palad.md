@@ -1,8 +1,8 @@
 ---
 title: "Tinapay ng Buhay"
 description: "Lyrics and practice video for Tinapay ng Buhay."
-composer: "Bukas Palad"
-arranger: "Bukas Palad"
+composer: "Manoling Francisco, SJ"
+arranger: "Manoling Francisco, SJ"
 language: "Tagalog"
 mass_parts: ["communion"]
 marian: false
