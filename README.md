@@ -226,6 +226,22 @@ October 7 uses `replaces_liturgical_id: "our_lady_of_the_rosary"` to replace the
 
 See [Managing chapel events](docs/managing-events.md) for complete examples, categories, exceptions, and the generated-calendar configuration.
 
+## Sharing previews
+
+Link-preview PNGs are generated automatically during `pnpm build`:
+
+- `/share/rosarium.png` is the general site fallback.
+- `/share/songs.png` is the undated Coro de Rosarium cover.
+- `/share/lineup-<id>.png` uses a published lineup's title, date and preliminary/confirmed label. Draft lineups have no image route.
+
+These are 1200 × 630 PNGs in the site's navy/gold style. The main Songs cover is deliberately undated because the featured Sunday changes in the browser without rebuilding. Share an individual lineup URL when its celebration/date should appear in the preview.
+
+The generator is `src/lib/social-preview-render.mjs`; text and metadata rules are in `src/lib/social-preview.mjs`, and the static endpoint is `src/pages/share/[image].png.ts`. `Base.astro` emits absolute Open Graph/Twitter image URLs, type, alt text, and known dimensions. Existing per-page raster cover photos are preserved; SVG metadata images use the generated PNG fallback. The page's on-screen artwork is unaffected.
+
+Fonts and their licenses are bundled in `assets/social-fonts/`; build-time Fontconfig files/cache stay under ignored `.astro/social-fonts/`. No font download or external image API is needed during generation. Preserve the supplied licenses when updating the fonts.
+
+After building, run `node tests/social-preview.integration.mjs`. With localhost running, add `--live` to verify actual image responses. Local image URLs can be reviewed directly in the browser. Public sharing previews change only after deployment, and existing app previews may need a fresh scrape if cached.
+
 ## Validation
 
 Run from the project root with the required Node/pnpm versions:

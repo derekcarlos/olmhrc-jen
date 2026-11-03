@@ -6,6 +6,8 @@ import { getChoirLibrary } from "@/lib/songs";
 import { groupSelections } from "@/lib/selection-dates.mjs";
 import { FaArrowRight, FaMusic, FaPrayingHands } from "react-icons/fa";
 import "@/styles/songs-hub.css";
+import { songsSocialCard, socialImagePath } from "@/lib/social-preview.mjs";
+const shareCard = songsSocialCard();
 const { songs, selections } = await getChoirLibrary();
 const grouped = groupSelections(selections);
 const countMass = songs.filter(
@@ -22,6 +24,8 @@ const summaries = selections.map(({ id, date, status }) => ({
 <Base
   title="Songs | Rosarium"
   description="This Sunday's choir lineup, future celebrations, practice recordings and lyrics."
+  image={socialImagePath(shareCard.key)}
+  image_alt={shareCard.alt}
 >
   <main
     class="songs-hub container"

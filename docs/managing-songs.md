@@ -118,6 +118,8 @@ The browser checks Philippine dates on load, each minute, and when the tab becom
 
 Songs are shared between selections. Updating a song’s lyrics or audio updates it wherever that song is used. Keep referenced songs published (`draft: false`); the build rejects missing or draft song references to prevent broken choir links. Draft songs are excluded from both libraries and normal song routes.
 
+For sharing, each published lineup generates a PNG preview using its title, date and readiness label during the build. Share `/songs/selections/<id>` for that dated preview. The main `/songs` link uses an undated Coro de Rosarium image so it remains accurate when the featured Sunday rolls forward. Editing the lineup and rebuilding updates both its page and preview image; draft lineups have neither a public rehearsal page nor an image route.
+
 Selection drafts may refer to songs still being prepared, but all used songs must exist and be published before changing the selection to `status: "published"`. A published partial lineup may use `"song": null` for choices not yet made. Do not use `"used": false` to represent an undecided song; it means that part is intentionally omitted.
 
 ## Preview and verify

@@ -2,6 +2,7 @@
 import { getChoirLibrary } from "@/lib/songs";
 import Base from "@/layouts/Base.astro";
 import SelectionRehearsal from "@/components/SelectionRehearsal.astro";
+import { lineupSocialCard, socialImagePath } from "@/lib/social-preview.mjs";
 export async function getStaticPaths() {
   const { songs, selections } = await getChoirLibrary();
   return selections.map((selection) => ({
@@ -10,11 +11,14 @@ export async function getStaticPaths() {
   }));
 }
 const { selection, songs } = Astro.props;
+const shareCard = lineupSocialCard(selection)!;
 ---
 
 <Base
   title={`${selection.title} | Rosarium`}
   description={`Choir rehearsal for ${selection.title}. Lyrics, practice recordings and your personal checklist.`}
+  image={socialImagePath(shareCard.key)}
+  image_alt={shareCard.alt}
 >
   <main class="songs-hub container">
     <header class="hub-heading">

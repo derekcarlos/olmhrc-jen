@@ -1,5 +1,6 @@
 ---
 import config from "@/config/config.json";
+import { resolveSocialImage } from "@/lib/social-preview.mjs";
 import theme from "@/config/theme.json";
 import { plainify } from "@/lib/utils/textConverter";
 import Footer from "@/partials/Footer.astro";
@@ -25,13 +26,20 @@ export interface Props {
   meta_title?: string;
   description?: string;
   image?: string;
+  image_alt?: string;
   noindex?: boolean;
   canonical?: string;
 }
 
 // destructure frontmatter
-const { title, meta_title, description, image, noindex, canonical } =
+const { title, meta_title, description, image, image_alt, noindex, canonical } =
   Astro.props;
+const shareImage = resolveSocialImage({
+  image: image || config.metadata.meta_image,
+  alt: image_alt,
+  baseUrl: config.site.base_url,
+});
+const pageUrl = new URL(Astro.url.pathname, config.site.base_url).href;
 ---
 
 <!doctype html>
@@ -123,10 +131,8 @@ const { title, meta_title, description, image, noindex, canonical } =
       )}
     />
     <meta property="og:type" content="website" />
-    <meta
-      property="og:url"
-      content={`${config.site.base_url}/${Astro.url.pathname.replace("/", "")}`}
-    />
+    <meta property="og:site_name" content={config.site.title} />
+    <meta property="og:url" content={pageUrl} />
 
     <!-- twitter-title -->
     <meta
@@ -145,20 +151,32 @@ const { title, meta_title, description, image, noindex, canonical } =
     />
 
     <!-- og-image -->
-    <meta
-      property="og:image"
-      content={`${config.site.base_url}${
-        image ? image : config.metadata.meta_image
-      }`}
-    />
+    <meta property="og:image" content={shareImage.url} />
+    {
+      shareImage.url.startsWith("https:") && (
+        <meta property="og:image:secure_url" content={shareImage.url} />
+      )
+    }
+    {
+      shareImage.type && (
+        <meta property="og:image:type" content={shareImage.type} />
+      )
+    }
+    {
+      shareImage.width && (
+        <meta property="og:image:width" content={String(shareImage.width)} />
+      )
+    }
+    {
+      shareImage.height && (
+        <meta property="og:image:height" content={String(shareImage.height)} />
+      )
+    }
+    <meta property="og:image:alt" content={shareImage.alt} />
 
     <!-- twitter-image -->
-    <meta
-      name="twitter:image"
-      content={`${config.site.base_url}${
-        image ? image : config.metadata.meta_image
-      }`}
-    />
+    <meta name="twitter:image" content={shareImage.url} />
+    <meta name="twitter:image:alt" content={shareImage.alt} />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body class="flex flex-col min-h-screen">
