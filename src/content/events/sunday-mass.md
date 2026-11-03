@@ -4,6 +4,7 @@ description: "Join our community for Sunday Mass at 3:30 PM."
 location: "Our Lady of the Most Holy Rosary Chapel"
 time: "15:30"
 category: "mass"
+is_mass: true
 repeat: "weekly"
 weekday: 0
 excluded_dates: []

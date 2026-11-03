@@ -1,4 +1,4 @@
-/** @typedef {{ id: string, title: string, time: string, all_day?: boolean, date: string, end_date: string, repeat: string, weekday?: number, excluded_dates: string[], excluded_annual_ranges?: {start: string, end: string}[], location?: string, description?: string, category?: string, liturgical_id?: string, replaces_liturgical_id?: string }} CalendarEvent */
+/** @typedef {{ id: string, title: string, time: string, all_day?: boolean, is_mass?: boolean, date: string, end_date: string, repeat: string, weekday?: number, excluded_dates: string[], excluded_annual_ranges?: {start: string, end: string}[], location?: string, description?: string, category?: string, liturgical_id?: string, replaces_liturgical_id?: string }} CalendarEvent */
 
 /** Validate the month picker even in browsers that display it as a text input.
  * @param {string} value

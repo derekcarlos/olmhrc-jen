@@ -1,0 +1,653 @@
+---
+import { getCollection } from "astro:content";
+import { nextHomeMass } from "@/lib/home-bulletin.mjs";
+import { massInvitation } from "@/lib/mass-invitation.mjs";
+import { formatEventTime } from "@/lib/calendar.mjs";
+import {
+  FaArrowRight,
+  FaBookOpen,
+  FaMusic,
+  FaRegCalendarPlus,
+} from "react-icons/fa";
+
+interface Props {
+  banner: {
+    title: string;
+    chapel: string;
+    location: string;
+    content: string;
+    button: { label: string; link: string };
+    secondary_button: { label: string; link: string };
+  };
+}
+const { banner } = Astro.props;
+const chapelNameParts = banner.chapel.split(/ (?=Most Holy Rosary Chapel$)/);
+const schedules = (
+  await getCollection("events", ({ data }) => !data.draft)
+).map(({ id, data }) => ({ id, ...data }));
+const mass = nextHomeMass(schedules);
+const invitation = massInvitation(mass);
+---
+
+<section class="welcome-stage" aria-labelledby="welcome-title">
+  <div class="welcome-edition container">
+    <div class="welcome-copy">
+      <p class="welcome-kicker">
+        <span aria-hidden="true"></span>Faith · Prayer · Community
+      </p>
+      <h1 id="welcome-title">{banner.title}</h1>
+      <p class="welcome-chapel">
+        {
+          chapelNameParts.map((part, index) => (
+            <>
+              {index > 0 && " "}
+              <span>{part}</span>
+            </>
+          ))
+        }
+      </p>
+      <p class="welcome-location">{banner.location}</p>
+      <p class="welcome-intro">{banner.content}</p>
+      <div class="welcome-actions">
+        <a class="welcome-primary" href={banner.button.link}
+          >{banner.button.label}<FaArrowRight aria-hidden="true" /></a
+        >
+        <a class="welcome-secondary" href={banner.secondary_button.link}
+          >{banner.secondary_button.label}</a
+        >
+      </div>
+    </div>
+
+    <section
+      class="chapel-bulletin"
+      aria-labelledby="bulletin-title"
+      data-home-mass
+      data-schedules={JSON.stringify(schedules)}
+    >
+      <div class="bulletin-masthead">
+        <h2 id="bulletin-title">Next at our chapel</h2>
+        <a href="/calendar">Calendar <FaArrowRight aria-hidden="true" /></a>
+      </div>
+      <div class="mass-invitation">
+        <div class="mass-feature">
+          <time
+            class="mass-date"
+            data-home-mass-date
+            datetime={mass?.day}
+            aria-label={invitation.dateLabel}
+          >
+            <span class="mass-date-month" data-home-mass-month
+              >{invitation.month}</span
+            >
+            <strong data-home-mass-number>{invitation.number}</strong>
+            <span class="mass-date-day" data-home-mass-day
+              >{invitation.weekday}</span
+            >
+            <span class="mass-date-year" data-home-mass-year
+              >{invitation.year}</span
+            >
+          </time>
+          <div class="mass-information">
+            <p class="mass-welcome">There’s a place for you.</p>
+            <h3 data-home-mass-title>{mass?.title || "Gather for Mass"}</h3>
+            <time
+              class="next-mass-time"
+              data-home-mass-time
+              datetime={invitation.dateTime || undefined}
+              >{mass ? formatEventTime(mass.time) : "See schedule"}</time
+            >
+            <span class="mass-zone" data-home-mass-zone hidden={!mass?.time}
+              >Philippine Time</span
+            >
+          </div>
+        </div>
+        <p
+          class="mass-location"
+          data-home-mass-location
+          hidden={!mass?.location}
+        >
+          {mass?.location}
+        </p>
+        <div class="mass-actions">
+          <a class="mass-save" data-home-mass-save hidden
+            ><FaRegCalendarPlus aria-hidden="true" />Save this Mass</a
+          >
+          <a class="mass-details" href="/mass"
+            >Mass information<FaArrowRight aria-hidden="true" /></a
+          >
+        </div>
+      </div>
+      <div class="bulletin-preparation">
+        <p class="preparation-label">Prepare for Mass</p>
+        <div class="bulletin-grid">
+          <a class="bulletin-route" href="/readings">
+            <FaBookOpen aria-hidden="true" />
+            <span
+              ><strong>Readings</strong><span>Make room for the Word.</span
+              ></span
+            >
+          </a>
+          <a class="bulletin-route" href="/songs">
+            <FaMusic aria-hidden="true" />
+            <span
+              ><strong>Songs</strong><span>Listen, learn, sing together.</span
+              ></span
+            >
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+
+<script>
+  import { prepareHomeBulletin } from "@/lib/home-bulletin-client";
+  prepareHomeBulletin();
+  document.addEventListener("astro:page-load", () => prepareHomeBulletin());
+</script>
+
+<style>
+  .welcome-stage {
+    --edition-ink: #263c50;
+    --edition-paper: #fffdf8;
+    --edition-gold: #e8d4ae;
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+    background: var(--edition-paper);
+  }
+  .welcome-edition {
+    width: 100%;
+    max-width: 1500px;
+    padding-inline: clamp(1.5rem, 3vw, 3rem);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "copy bulletin";
+    align-items: center;
+    gap: clamp(1.5rem, 2.5vw, 2.5rem);
+    padding-block: 2.5rem 4rem;
+  }
+  .welcome-copy {
+    grid-area: copy;
+    min-width: 0;
+  }
+  .welcome-kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--home-accent);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .welcome-kicker span {
+    width: 2rem;
+    height: 1px;
+    background: currentColor;
+  }
+  h1 {
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    font-size: clamp(3.1rem, 4.5vw, 4.8rem);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    max-width: 11ch;
+    text-wrap: balance;
+    margin: 0 0 1.5rem;
+  }
+  .welcome-chapel {
+    font-family: var(--font-secondary);
+    font-size: 24px;
+    line-height: 1.25;
+    color: var(--color-text-dark);
+  }
+  .welcome-chapel span {
+    display: inline-block;
+    max-width: 100%;
+  }
+  .welcome-location {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-top: 0.5rem;
+  }
+  .welcome-intro {
+    max-width: 37rem;
+    font-size: 20px;
+    line-height: 1.6;
+    margin-top: 1.5rem;
+  }
+  .welcome-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
+    margin-top: 1.75rem;
+  }
+  .welcome-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: 48px;
+    padding: 0.8rem 1.25rem;
+    background: var(--edition-ink);
+    color: var(--edition-paper);
+    border: 1px solid var(--edition-ink);
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: background 180ms;
+  }
+  .welcome-primary:hover {
+    background: #3c5366;
+  }
+  .welcome-primary :global(svg) {
+    width: 13px;
+  }
+  .welcome-secondary {
+    font-size: 18px;
+    padding-block: 0.75rem;
+    border-bottom: 1px solid var(--home-accent);
+    color: var(--color-text-dark);
+  }
+  .chapel-bulletin {
+    --prep-paper: #f4f0e7;
+    --prep-ink: #263c50;
+    --prep-muted: #505b63;
+    --prep-line: #d8cdbb;
+    grid-area: bulletin;
+    min-width: 0;
+    border: 1px solid #62717a;
+    border-top: 3px solid var(--edition-gold);
+    background: var(--edition-ink);
+    color: var(--edition-paper);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgb(38 60 80 / 16%);
+  }
+  .chapel-bulletin [hidden] {
+    display: none;
+  }
+  .bulletin-masthead {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.1rem 1.75rem;
+    border-bottom: 1px solid rgb(232 212 174 / 25%);
+  }
+  .bulletin-masthead h2 {
+    font-family: var(--font-primary);
+    font-size: 13px;
+    line-height: 1.5;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--edition-gold);
+    margin: 0;
+  }
+  .bulletin-masthead a {
+    display: inline-flex;
+    gap: 0.65rem;
+    align-items: center;
+    min-height: 44px;
+    font-size: 16px;
+    color: var(--edition-paper);
+  }
+  .bulletin-masthead :global(svg) {
+    width: 11px;
+  }
+  .mass-invitation {
+    padding: 1.75rem;
+  }
+  .mass-feature {
+    display: grid;
+    grid-template-columns: 100px minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .mass-date {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 0.8rem;
+    color: #263c50;
+    background: #fffdf8;
+    border: 1px solid #d0c8bb;
+    border-radius: 0.35rem;
+    box-shadow:
+      0 3px 0 #d9d1c3,
+      0 6px 0 -1px #b8b9b5;
+    text-align: center;
+  }
+  .mass-date::before,
+  .mass-date::after {
+    content: "";
+    position: absolute;
+    top: -7px;
+    width: 5px;
+    height: 14px;
+    border: 1px solid #c6cdd3;
+    border-radius: 3px;
+    background: #66757e;
+  }
+  .mass-date::before {
+    left: 25px;
+  }
+  .mass-date::after {
+    right: 25px;
+  }
+  .mass-date-month {
+    width: 100%;
+    padding: 0.6rem 0.3rem;
+    background: #9d413c;
+    color: #fffdf8;
+    border-radius: 0.3rem 0.3rem 0 0;
+    font-size: 15px;
+    line-height: 1.4;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .mass-date strong {
+    margin-top: 0.35rem;
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    font-size: 68px;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+  .mass-date-day {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .mass-date-year {
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0.8;
+  }
+  .mass-information {
+    min-width: 0;
+  }
+  .mass-welcome {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--edition-gold);
+    margin: 0 0 0.5rem;
+  }
+  .mass-information h3 {
+    font-family: var(--font-secondary);
+    font-size: clamp(1.9rem, 2.5vw, 2.4rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--edition-paper);
+    margin: 0;
+    text-wrap: balance;
+  }
+  .next-mass-time {
+    display: block;
+    font-family: var(--font-secondary);
+    font-size: clamp(2.8rem, 4.5vw, 4rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    margin-top: 0.6rem;
+    color: #fff7e8;
+  }
+  .next-mass-time:not([datetime*="T"]) {
+    font-size: 1.8rem;
+    letter-spacing: 0;
+  }
+  .mass-zone {
+    display: block;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #d0d9de;
+    margin-top: 0.3rem;
+  }
+  .mass-location {
+    color: #dce2e5;
+    font-size: var(--reading-size);
+    line-height: 1.5;
+    border-top: 1px solid rgb(232 212 174 / 25%);
+    padding-top: 1.15rem;
+    margin: 1.4rem 0 0;
+  }
+  .mass-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.4rem;
+    margin-top: 1.15rem;
+  }
+  .mass-save,
+  .mass-details {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    min-height: 48px;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  .mass-save {
+    background: #e8d4ae;
+    color: #263c50;
+    border: 1px solid #e8d4ae;
+    border-radius: 0.35rem;
+    padding: 0.65rem 1rem;
+    font-weight: 600;
+  }
+  .mass-save:hover {
+    background: #f3e4c7;
+  }
+  .mass-details {
+    color: #fff7e8;
+    padding-block: 0.65rem;
+  }
+  .mass-details:hover,
+  .bulletin-masthead a:hover {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+  }
+  .mass-actions :global(svg) {
+    width: 14px;
+    flex-shrink: 0;
+  }
+  .bulletin-preparation {
+    background: var(--prep-paper);
+    color: var(--prep-ink);
+  }
+  .preparation-label {
+    display: flex;
+    align-items: center;
+    min-height: 2.125rem;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0.5rem 1.5rem;
+    text-align: left;
+    color: var(--prep-muted);
+  }
+  .bulletin-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .bulletin-route {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem 1.4rem;
+    color: var(--prep-ink);
+  }
+  .bulletin-route + .bulletin-route {
+    border-left: 1px solid var(--prep-line);
+  }
+  .bulletin-route > :global(svg) {
+    flex-shrink: 0;
+    width: 17px;
+    height: 17px;
+    margin-top: 0.35rem;
+    color: var(--prep-ink);
+  }
+  .bulletin-route > span {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .bulletin-route strong {
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 1.2;
+  }
+  .bulletin-route span span {
+    font-size: var(--reading-size);
+    line-height: 1.5;
+    color: var(--prep-muted);
+  }
+  .bulletin-route:hover {
+    background: rgb(128 98 56 / 8%);
+  }
+  .welcome-edition a:focus-visible {
+    outline: 3px solid var(--home-accent);
+    outline-offset: 4px;
+  }
+  .chapel-bulletin a:focus-visible {
+    outline-color: var(--edition-gold);
+    outline-offset: -5px;
+  }
+  .chapel-bulletin .mass-save:focus-visible {
+    outline-color: var(--edition-ink);
+  }
+  .chapel-bulletin .bulletin-route:focus-visible {
+    outline-color: var(--prep-ink);
+  }
+  :global(.dark) .welcome-stage {
+    background: var(--color-darkmode-body);
+  }
+  :global(.dark) .welcome-chapel,
+  :global(.dark) .welcome-secondary {
+    color: var(--color-darkmode-text-dark);
+  }
+  :global(.dark) .welcome-primary {
+    background: var(--edition-gold);
+    color: #17212b;
+    border-color: var(--edition-gold);
+  }
+  :global(.dark) .welcome-primary:hover {
+    background: #f3e4c7;
+  }
+  :global(.dark) .chapel-bulletin {
+    --prep-paper: #293b4a;
+    --prep-ink: #fff7e8;
+    --prep-muted: #d0d9de;
+    --prep-line: #66757e;
+    background: #202d39;
+  }
+  @media (max-width: 900px) {
+    .welcome-edition {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "copy" "bulletin";
+      min-height: 0;
+      gap: 2rem;
+      padding-block: 1.5rem 3rem;
+    }
+    .welcome-copy {
+      max-width: 43rem;
+    }
+    h1 {
+      max-width: 12ch;
+      font-size: clamp(3.25rem, 10vw, 5rem);
+    }
+  }
+  @media (max-width: 520px) {
+    .bulletin-masthead {
+      padding-inline: 1.25rem;
+    }
+    .mass-invitation {
+      padding: 1.5rem 1.25rem;
+    }
+    .mass-feature {
+      grid-template-columns: 72px minmax(0, 1fr);
+      gap: 1rem;
+    }
+    .mass-date {
+      padding: 0 0 0.65rem;
+    }
+    .mass-date::before {
+      left: 18px;
+    }
+    .mass-date::after {
+      right: 18px;
+    }
+    .mass-date-month {
+      font-size: 13px;
+    }
+    .mass-date strong {
+      font-size: 52px;
+    }
+    .mass-date-day {
+      font-size: 13px;
+    }
+    .mass-information h3 {
+      font-size: 28px;
+    }
+    .next-mass-time {
+      font-size: 42px;
+    }
+    .mass-actions {
+      gap: 0.5rem 1rem;
+    }
+    .mass-save,
+    .mass-details {
+      font-size: 17px;
+    }
+    .welcome-edition {
+      padding-top: 0.75rem;
+    }
+    .welcome-kicker {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      gap: 0.5rem;
+    }
+    .welcome-kicker span {
+      width: 1.25rem;
+    }
+    .welcome-chapel {
+      font-size: 23px;
+    }
+    .welcome-intro {
+      font-size: 19px;
+    }
+    .welcome-actions {
+      gap: 0.5rem 1.25rem;
+    }
+    .welcome-primary,
+    .welcome-secondary {
+      font-size: 17px;
+    }
+    .bulletin-route {
+      padding: 1.25rem 1rem;
+      align-items: flex-start;
+      gap: 0.65rem;
+    }
+    .bulletin-route strong {
+      font-size: 22px;
+    }
+    .bulletin-route span span {
+      font-size: 17px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .welcome-primary,
+    .bulletin-route {
+      transition: none;
+    }
+  }
+</style>

@@ -144,7 +144,11 @@ const eventsCollection = defineCollection({
       description: z.string().trim().min(1),
       location: z.string().default("Our Lady of the Most Holy Rosary Chapel"),
       all_day: z.boolean().default(false),
-      replaces_liturgical_id: z.string().regex(/^[a-z0-9_]+$/).optional(),
+      is_mass: z.boolean().default(false),
+      replaces_liturgical_id: z
+        .string()
+        .regex(/^[a-z0-9_]+$/)
+        .optional(),
       time: z
         .union([z.literal(""), z.string().regex(/^(?:[01]\d|2[0-3]):[0-5]\d$/)])
         .default(""),

@@ -1,17 +1,17 @@
 ---
 banner:
-  title: "Welcome to Rosarium"
+  title: "Faith finds a home here."
   chapel: "Our Lady of the Most Holy Rosary Chapel"
   location: "Jubilation Enclave North · Biñan, Laguna"
-  content: "A place for our neighborhood to stay connected in faith. Find chapel news, Mass information, Scripture readings, prayers, and songs as we grow together under the loving care of Our Lady of the Most Holy Rosary."
+  content: "Our neighborhood, gathered in faith. Find a place for prayer, prepare for Sunday Mass, and stay close to the life of our chapel."
   image: "/images/our-lady.png"
   image_alt: "Our Lady of the Most Holy Rosary holding the Child Jesus and a rosary"
   button:
-    label: "Mass Information"
-    link: "/mass"
-  secondary_button:
-    label: "Explore Prayers"
+    label: "Come pray with us"
     link: "/prayers"
+  secondary_button:
+    label: "Get to know our chapel"
+    link: "/about"
 mass:
   title: "Gather for Mass"
   content: "Come together as a community to listen to God’s Word, celebrate the Eucharist, and offer our prayers and thanksgiving."

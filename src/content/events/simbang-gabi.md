@@ -4,6 +4,7 @@ description: "Our evening novena of Masses, December 15–23 at 7:30 PM."
 location: "Our Lady of the Most Holy Rosary Chapel"
 time: "19:30"
 category: "novena"
+is_mass: true
 date: "2026-12-15"
 end_date: "2026-12-23"
 repeat: "yearly"

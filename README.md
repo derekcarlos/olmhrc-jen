@@ -212,6 +212,12 @@ Use `repeat: "none"` for a dated entry, `weekly` with `weekday` for weekly sched
 
 Upcoming Events shows **today and the following six dates in Philippine Time**, independently of the displayed month. Past starts are excluded. Activities may include Masses, rehearsals, meetings, and other community gatherings.
 
+The homepage chapel card automatically selects the next scheduled Mass using these same calendar dates, times, repetitions, and exclusions. Add `is_mass: true` to any Mass event; `category: "mass"` also qualifies automatically. This lets special Masses retain categories such as `novena`, `christmas`, or `holy-week`. All-day markers are always excluded, even if marked as a Mass. No filename or code changes are needed for a new Mass.
+
+The chapel card looks ahead 14 days so it can still show next Sunday just after this Sunday's Mass, while Upcoming Events retains its seven-day window. The card updates on page load and every minute while open, using Philippine Time. Editing event files on the published static site still requires a rebuild and deployment.
+
+The card's **Save this Mass** action downloads one calendar event with the selected date, start time, and location. It is available only when the Mass has a confirmed start time. This is a single occurrence, not a subscription; later schedule changes do not automatically update an imported copy. No end time is guessed.
+
 October 7 uses `replaces_liturgical_id: "our_lady_of_the_rosary"` to replace the matching general marker without removing unrelated events. Keep actual Mass times in separate scheduled entries.
 
 **When Mass times change, update all three places:** the appropriate event file, the tiles/copy in `src/content/pages/mass.mdx`, and the homepage Mass notice in `src/content/homepage/-index.md`. The Mass page is not automatically populated from calendar data.

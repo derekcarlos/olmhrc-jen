@@ -4,6 +4,7 @@ description: "Celebrate Christmas Eve with our community on December 24 at 7:30 
 location: "Our Lady of the Most Holy Rosary Chapel"
 time: "19:30"
 category: "christmas"
+is_mass: true
 date: "2026-12-24"
 end_date: ""
 repeat: "yearly"

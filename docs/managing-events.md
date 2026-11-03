@@ -28,6 +28,18 @@ Use `category: "solemnity"` for a crown icon or `category: "memorial"` for an op
 
 For example, `category: "mass"` shows a church icon. The default is `general`. Sunday Mass uses `mass`, Simbang Gabi uses `novena`, and Christmas Eve Mass uses `christmas`. The full title, time and location remain available in event details and upcoming event cards. The desktop grid always shows six complete weeks for a consistent height.
 
+## Marking an event as a Mass
+
+Add `is_mass: true` to a scheduled Mass so the homepage chapel card can select it automatically. The filename can be anything. An entry with `category: "mass"` also qualifies without this field. For special Masses, use `is_mass: true` alongside the category whose calendar icon you want:
+
+```yaml
+is_mass: true
+all_day: false
+category: "holy-week"
+```
+
+Give the entry its actual date, time, recurrence (if any), and `draft: false`. The homepage selects the earliest remaining Mass in the next 14 days using the same Philippine Time, recurrence, and cancellation rules as Upcoming Events. Upcoming Events continues to show all scheduled activities for today and the following six dates. An all-day marker is never eligible for the homepage Mass card. Published event changes require rebuilding and deploying the static site; advancing from one scheduled Mass to the next happens automatically in the browser.
+
 ## A one-off event
 
 Create, for example, `src/content/events/choir-rehearsal.md`:
