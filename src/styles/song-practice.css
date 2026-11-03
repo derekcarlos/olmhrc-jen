@@ -1,0 +1,532 @@
+.rehearsal-page {
+  --practice-accent: var(--color-accent);
+  --practice-line: var(--color-border);
+  --practice-paper: #fffefb;
+  --practice-wash: var(--color-light);
+  --practice-ink: var(--color-text-dark);
+  max-width: 1224px;
+  padding-top: 1.25rem;
+  padding-bottom: 5rem;
+  color: var(--practice-ink);
+}
+.dark .rehearsal-page {
+  --practice-accent: var(--color-darkmode-accent);
+  --practice-line: var(--color-darkmode-border);
+  --practice-paper: #1c2933;
+  --practice-wash: var(--color-darkmode-light);
+  --practice-ink: var(--color-darkmode-text-dark);
+}
+.rehearsal-page [hidden] {
+  display: none !important;
+}
+.rehearsal-page a:focus-visible,
+.rehearsal-page button:focus-visible,
+.rehearsal-page summary:focus-visible,
+.practice-rail:focus-visible {
+  outline: 3px solid var(--practice-accent);
+  outline-offset: 4px;
+}
+.rehearsal-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-block: 0 2.5rem;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.rehearsal-breadcrumb a {
+  display: inline-flex;
+  gap: 0.75rem;
+  align-items: center;
+  padding-block: 0.5rem;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-color: var(--practice-line);
+}
+.rehearsal-breadcrumb svg {
+  width: 13px;
+}
+.rehearsal-heading {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--practice-line);
+  padding-top: 2rem;
+  margin-bottom: 2rem;
+}
+.rehearsal-kicker {
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--practice-accent);
+  margin-bottom: 1rem;
+}
+.rehearsal-heading h1 {
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  font-size: clamp(2.75rem, 5.5vw, 4.6rem);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  max-width: 23ch;
+  color: var(--practice-ink);
+  margin-bottom: 0.9rem;
+  text-wrap: balance;
+}
+.rehearsal-composer {
+  font-size: 20px;
+  line-height: 1.5;
+}
+.song-context {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  list-style: none;
+  padding: 0;
+}
+.song-context li {
+  font-size: 16px;
+  line-height: 1.5;
+  background: var(--practice-wash);
+  border: 1px solid var(--practice-line);
+  padding: 0.3rem 0.7rem;
+  border-radius: 3px;
+}
+.rehearsal-mark {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--practice-accent);
+  border-left: 1px solid var(--practice-line);
+  padding: 1rem 0 1rem 2rem;
+}
+.rehearsal-mark svg {
+  width: 32px;
+  height: 32px;
+}
+.rehearsal-mark span {
+  font-family: var(--font-secondary);
+  font-size: 24px;
+  line-height: 1.25;
+}
+.rehearsal-jumps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding-block: 0.25rem 1.5rem;
+}
+.rehearsal-jumps a {
+  font-size: 18px;
+  padding-block: 0.5rem;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  color: var(--practice-accent);
+}
+.rehearsal-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.85fr) minmax(310px, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+.lyric-sheet {
+  min-width: 0;
+  background: var(--practice-paper);
+  border: 1px solid var(--practice-line);
+  border-left: 4px solid var(--practice-accent);
+  border-radius: 0.5rem;
+  box-shadow: 0 12px 35px rgb(38 60 80 / 6%);
+  overflow: hidden;
+}
+.lyric-sheet-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.75rem;
+  border-bottom: 1px solid var(--practice-line);
+  background: var(--practice-wash);
+}
+.sheet-caption {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--practice-accent);
+  margin-bottom: 0.2rem;
+}
+.lyric-sheet-toolbar h2 {
+  font-family: var(--font-secondary);
+  font-size: 30px;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--practice-ink);
+  scroll-margin-top: 8rem;
+}
+.lyric-size-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.lyric-size-controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 44px;
+  min-height: 44px;
+  background: var(--practice-paper);
+  border: 1px solid var(--practice-line);
+  border-radius: 4px;
+  font-size: 20px;
+  color: var(--practice-ink);
+  cursor: pointer;
+}
+.lyric-size-controls button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.lyric-size-controls button:hover:not(:disabled) {
+  border-color: var(--practice-accent);
+}
+.lyric-size-controls output {
+  font-size: 14px;
+  min-width: 42px;
+  text-align: center;
+}
+.rehearsal-page .lyrics-copy {
+  font-size: var(--lyrics-size, 24px);
+  line-height: 1.65;
+  max-width: none;
+  padding: 1rem 2.25rem 2rem;
+  overflow-wrap: break-word;
+}
+.lyrics-copy > p {
+  margin-block: 1.15em;
+}
+.lyrics-copy .notice {
+  margin-block: 1.15em;
+  padding-block: 1rem;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.lyrics-copy .notice p {
+  margin-block: 0;
+}
+.sheet-selection-label {
+  border-top: 1px solid var(--practice-line);
+  padding: 1rem 1.75rem;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.song-steps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  border-top: 1px solid var(--practice-line);
+}
+.song-steps a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem 1.75rem;
+  min-width: 0;
+}
+.song-steps a:hover {
+  background: var(--practice-wash);
+}
+.song-steps span {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 14px;
+  color: var(--practice-accent);
+}
+.song-steps svg {
+  width: 11px;
+}
+.song-steps strong {
+  font-family: var(--font-secondary);
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 400;
+  overflow-wrap: break-word;
+}
+.next-song {
+  grid-column: 2;
+  border-left: 1px solid var(--practice-line);
+}
+.practice-rail {
+  position: static;
+  top: 120px;
+  overflow: visible;
+  min-width: 0;
+}
+.practice-panel {
+  background: var(--practice-wash);
+  border: 1px solid var(--practice-line);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+.practice-panel-masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  color: var(--practice-accent);
+}
+.practice-panel-masthead > span:first-child {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.practice-bars {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  height: 24px;
+}
+.practice-bars i {
+  display: block;
+  width: 3px;
+  height: 11px;
+  background: currentColor;
+  border-radius: 2px;
+}
+.practice-bars i:nth-child(2),
+.practice-bars i:nth-child(4) {
+  height: 19px;
+}
+.practice-bars i:nth-child(3) {
+  height: 27px;
+}
+.practice-panel section[aria-labelledby="practice-heading"] {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+}
+.practice-panel #practice-heading {
+  font-family: var(--font-secondary);
+  font-size: 30px;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--practice-ink);
+  scroll-margin-top: 8rem;
+}
+.practice-panel iframe {
+  aspect-ratio: 16/9;
+}
+.practice-panel p,
+.practice-panel label,
+.practice-panel a {
+  font-size: 18px;
+  line-height: 1.5;
+}
+.practice-panel h3 {
+  font-size: 22px;
+  color: var(--practice-ink);
+}
+.practice-panel select {
+  max-width: 100%;
+}
+.practice-details {
+  border-top: 1px solid var(--practice-line);
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+}
+.practice-details summary {
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 500;
+  cursor: pointer;
+  min-height: 36px;
+}
+.practice-details dl {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-top: 0.75rem;
+}
+.practice-details dt {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--practice-accent);
+  margin-top: 1rem;
+}
+.practice-details dd {
+  margin: 0.25rem 0 0;
+}
+.practice-setlist-frame {
+  margin-top: 1rem;
+  border: 1px solid var(--practice-line);
+  border-radius: 0.5rem;
+  background: var(--practice-paper);
+}
+.practice-setlist {
+  margin: 0;
+}
+.practice-setlist summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.practice-setlist summary::-webkit-details-marker {
+  display: none;
+}
+.practice-setlist summary::after {
+  content: "+";
+  font-size: 22px;
+  margin-inline-start: auto;
+}
+.practice-setlist[open] summary::after {
+  content: "−";
+}
+.practice-setlist summary svg {
+  width: 15px;
+  color: var(--practice-accent);
+}
+.practice-setlist summary span {
+  font-size: 14px;
+  font-weight: 400;
+}
+.practice-setlist-heading {
+  padding: 0 1.25rem 1.25rem;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.practice-setlist-heading time,
+.practice-setlist-heading a {
+  display: block;
+  margin-top: 0.5rem;
+}
+.practice-setlist-heading a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.practice-setlist ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.practice-setlist li a {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--practice-line);
+}
+.practice-setlist li a:hover,
+.practice-setlist li a[aria-current] {
+  background: var(--practice-wash);
+}
+.practice-setlist li a[aria-current] {
+  box-shadow: inset 3px 0 var(--practice-accent);
+}
+.setlist-number {
+  font-family: var(--font-secondary);
+  font-size: 25px;
+  color: var(--practice-accent);
+}
+.practice-setlist li small {
+  display: block;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--practice-accent);
+}
+.practice-setlist li strong {
+  display: block;
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 500;
+  margin-top: 0.3rem;
+}
+.song-pending {
+  padding: 1rem;
+  background: var(--practice-wash);
+  border: 1px solid var(--practice-line);
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+@media (min-width: 1024px) {
+  .practice-rail[data-sticky-fit="true"] {
+    position: sticky;
+  }
+}
+@media (max-width: 1023px) {
+  .rehearsal-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .practice-rail {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    grid-row: 1;
+  }
+  .practice-panel {
+    display: block;
+  }
+  .practice-panel iframe {
+    max-width: 640px;
+  }
+  .rehearsal-mark {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .rehearsal-page {
+    padding-top: 0.5rem;
+    padding-bottom: 3rem;
+  }
+  .rehearsal-breadcrumb {
+    font-size: 16px;
+    margin-bottom: 1rem;
+    gap: 0.25rem 1rem;
+  }
+  .rehearsal-heading {
+    padding-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .rehearsal-heading h1 {
+    font-size: 2.8rem;
+  }
+  .rehearsal-composer {
+    font-size: 18px;
+  }
+  .song-context li {
+    font-size: 14px;
+  }
+  .lyric-sheet-toolbar {
+    padding: 1rem;
+  }
+  .sheet-caption {
+    font-size: 12px;
+  }
+  .rehearsal-page .lyrics-copy {
+    padding: 0.5rem 1.15rem 1.25rem;
+  }
+  .practice-panel {
+    padding: 1.15rem;
+  }
+  .song-steps a {
+    padding: 1.25rem 1rem;
+  }
+  .song-steps strong {
+    font-size: 20px;
+  }
+  .sheet-selection-label {
+    padding: 1rem;
+  }
+}
