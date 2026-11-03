@@ -209,6 +209,29 @@
 .lyrics-copy > p {
   margin-block: 1.15em;
 }
+.lyrics-copy .lyric-chorus {
+  margin-block: 0.75em;
+  border: 1px solid var(--practice-line);
+  border-radius: 0.5rem;
+}
+.lyrics-copy .lyric-chorus summary {
+  padding: 0.65em 0.85em;
+  cursor: pointer;
+  font-weight: 600;
+}
+.lyrics-copy .lyric-chorus summary:focus-visible {
+  outline: 2px solid var(--practice-accent);
+  outline-offset: 3px;
+}
+.lyrics-copy .lyric-chorus[open] summary {
+  border-bottom: 1px solid var(--practice-line);
+}
+.lyrics-copy .lyric-chorus > p {
+  margin: 0;
+  padding: 0.75em 0.85em;
+  font-size: inherit;
+  line-height: inherit;
+}
 .lyrics-copy .notice {
   margin-block: 1.15em;
   padding-block: 1rem;
