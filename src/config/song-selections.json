@@ -4,7 +4,7 @@
     "title": "All Saints' Day - Sunday Mass",
     "date": "2026-11-01",
     "celebration": "Sunday Mass",
-    "status": "upcoming",
+    "status": "archived",
     "notes": "Placeholder selection. The final songs and musical settings will be confirmed before rehearsal.",
     "items": [
       {
@@ -79,8 +79,8 @@
     "title": "Ordinary Time - Sunday Mass",
     "date": "2026-11-08",
     "celebration": "Sunday Mass",
-    "status": "archived",
-    "notes": "Placeholder selection. The final songs and musical settings will be confirmed before rehearsal.",
+    "status": "upcoming",
+    "notes": "Please check the upcoming song line up this coming Sunday.",
     "items": [
       {
         "part": "processional",
@@ -94,7 +94,7 @@
       },
       {
         "part": "gloria",
-        "song": "papuri-sa-diyos-missa-magnificat",
+        "song": "papuri-sa-diyos-tinapay-ng-buhay",
         "used": true
       },
       {
