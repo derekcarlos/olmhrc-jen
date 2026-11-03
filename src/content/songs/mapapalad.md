@@ -10,27 +10,26 @@ seasons: ["Ordinary Time"]
 occasions: ["All Saints Day"]
 audio: ""
 audio_credit: ""
-youtube: "https://www.youtube.com/watch?v=Sw8_mRIcFCY"
+youtube: "https://www.youtube.com/watch?v=SC0Feg7QWHM"
 placeholder: false
 draft: false
 ---
 
-Salamat sa Biyaya, O Diyos Ama  
-Sa kalinga at pagmamahal  
-Sa iyong pagpapala kami ay tinulungan  
-At sa bawat hakbang kami ay gabayan  
+Mapapalad kayong mahihirap,  
+ang kaharian ng Diyos sa inyo.  
+Mapapalad kayong nagugutom,  
+sapagkat bubusugin kayo.  
+Mapapalad kayong nahahapis,  
+sapagkat aaliwin kayo.  
   
-Humayo nang mayroong galak  
-Ipamahagi ang kaligtasan  
-Na si Kristo Hesus ang tanging daan  
-Sa buhay na walang hanggan  
+Mapapalad, Panginoon, ang mga katulad Mo.  
   
-Salamat sa Biyaya, O Diyos Ama  
-Sa kalinga at pagmamahal  
-Sa iyong pagpapala kami ay tinulungan  
-At sa bawat hakbang kami ay gabayan  
+Mapapalad kayong maawain,  
+kaaawaan kayo ng Diyos.  
+Mapapalad kayong tumatangis,  
+sapagkat liligaya kayo  
+Mapapalad kayong inuusig,  
+maghahari ang Diyos sa inyo.  
   
-Salamat sa Biyaya, (at pagpapala)  
-Salamat O Diyos Ama  
-  
-Amen!  
+Mapapalad, Panginoon, ang mga katulad Mo.  
+Mapapalad, Panginoon, ang mga katulad Mo.  
