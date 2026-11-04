@@ -1,5 +1,6 @@
 ---
-import ContentPage from "@/layouts/ContentPage.astro";
+import Base from "@/layouts/Base.astro";
+import ChapelPanorama from "@/components/ChapelPanorama.astro";
 import { getListPage } from "@/lib/contentParser.astro";
 import { render } from "astro:content";
 
@@ -13,11 +14,39 @@ if (!buildDrafts && aboutIndex.data.draft) {
 }
 ---
 
-<ContentPage
+<Base
   title={title}
   meta_title={meta_title}
   description={description}
   image={image}
 >
-  <div class="content"><Content /></div>
-</ContentPage>
+  <section class="about-page">
+    <div class="container">
+      <div class="row justify-center">
+        <header class="md:col-10 lg:col-8 about-heading">
+          <p class="page-eyebrow">Faith · Prayer · Community</p>
+          <h1 class="page-title">{title}</h1>
+        </header>
+      </div>
+    </div>
+    {image && <ChapelPanorama image={image} />}
+    <div class="container about-story">
+      <div class="row justify-center">
+        <div class="md:col-10 lg:col-8 content"><Content /></div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .about-page {
+    padding-top: var(--page-top-gap);
+    padding-bottom: 4rem;
+  }
+  .about-heading {
+    padding-bottom: 1.5rem;
+  }
+  .about-story {
+    padding-top: 2.5rem;
+  }
+</style>

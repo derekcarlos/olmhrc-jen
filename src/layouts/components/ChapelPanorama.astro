@@ -1,0 +1,89 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+interface Props {
+  image: string;
+}
+const { image } = Astro.props;
+---
+
+<chapel-panorama class="chapel-panorama">
+  <ImageMod
+    src={image}
+    alt="The congregation gathered for Mass at Our Lady of the Most Holy Rosary Chapel."
+    width={2400}
+    height={1800}
+    format="webp"
+    loading="eager"
+    decoding="async"
+    class="panorama-photo"
+  />
+</chapel-panorama>
+
+<style>
+  .chapel-panorama {
+    display: block;
+    position: relative;
+    height: clamp(260px, 32vw, 440px);
+    width: 100%;
+    overflow: hidden;
+    background: var(--color-light);
+  }
+  .chapel-panorama :global(.panorama-photo) {
+    position: absolute;
+    inset: -48px 0 auto;
+    width: 100%;
+    height: calc(100% + 96px);
+    max-width: none;
+    object-fit: cover;
+    object-position: 50% 60%;
+    transform: translate3d(0, var(--panorama-offset, 0px), 0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .chapel-panorama :global(.panorama-photo) {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  class ChapelPanorama extends HTMLElement {
+    private controller?: AbortController;
+    private frame = 0;
+
+    connectedCallback() {
+      this.controller = new AbortController();
+      const { signal } = this.controller;
+      const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const update = () => {
+        this.frame = 0;
+        if (motion.matches) {
+          this.style.removeProperty("--panorama-offset");
+          return;
+        }
+        const bounds = this.getBoundingClientRect();
+        if (bounds.bottom < 0 || bounds.top > window.innerHeight) return;
+        const progress =
+          (window.innerHeight - bounds.top) /
+          (window.innerHeight + bounds.height);
+        const offset = Math.max(-36, Math.min(36, (progress - 0.5) * 72));
+        this.style.setProperty("--panorama-offset", `${offset.toFixed(2)}px`);
+      };
+      const schedule = () => {
+        if (!this.frame) this.frame = requestAnimationFrame(update);
+      };
+      window.addEventListener("scroll", schedule, { passive: true, signal });
+      window.addEventListener("resize", schedule, { passive: true, signal });
+      motion.addEventListener("change", schedule, { signal });
+      schedule();
+    }
+
+    disconnectedCallback() {
+      this.controller?.abort();
+      cancelAnimationFrame(this.frame);
+      this.frame = 0;
+    }
+  }
+  if (!customElements.get("chapel-panorama")) {
+    customElements.define("chapel-panorama", ChapelPanorama);
+  }
+</script>
