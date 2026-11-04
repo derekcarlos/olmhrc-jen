@@ -16,13 +16,13 @@ draft: false
 ---
 
 Banal ka, Poong Maykapal!   
-Banal ang iyong pangalan!   
-Banal ang iyong kaharian!   
+Banal ang 'Yong pangalan!   
+Banal ang 'Yong kaharian!   
 Langit, lupa’y nagpupugay   
-sa iyong kadakilaan!  
+sa Iyong kadakilaan!  
   
 Dinadakila ng lahat   
-ang naparito mong Anak   
-na siyang nagmulat sa bulag,  
+ang naparito Mong Anak   
+na s'yang nagmulat sa bulag,  
 sa pilay ay nagpalakad,   
 at nakiramay sa lahat!  

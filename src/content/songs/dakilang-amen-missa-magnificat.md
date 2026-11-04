@@ -16,5 +16,5 @@ draft: false
 ---
 
 Amen, Amen, Amen  
-Amen, Amen, Amen  
-Amen, Amen, Amen!
+Amen, Amen.  
+Amen, Amen!
