@@ -2,43 +2,9 @@
 title: "Mass"
 description: "Mass schedules at Our Lady of the Most Holy Rosary Chapel: Sundays at 3:30 PM, Simbang Gabi on December 15–23 at 7:30 PM, and Christmas Eve on December 24 at 7:30 PM."
 draft: false
+wide: true
 ---
 
-import MassSchedule from "@/components/MassSchedule.astro";
+import MassGathering from "@/components/MassGathering.astro";
 
-For the community of Jubilation Enclave North, please see the Mass schedules at our chapel.
-
-<div className="not-prose my-10 space-y-10">
-  <section aria-labelledby="regular-mass-heading">
-    <h2 id="regular-mass-heading" className="mb-6 text-h2">Sunday Mass</h2>
-    <MassSchedule
-      title="Our Lady of the Most Holy Rosary Chapel"
-      day="Every Sunday"
-      time="3:30 PM"
-      timeValue="15:30"
-    />
-    <p className="mt-6">During Simbang Gabi (December 15–23), Sunday Mass is at 7:30 PM only. There is no 3:30 PM Mass on Sundays within these dates.</p>
-  </section>
-
-  <section aria-labelledby="christmas-masses-heading">
-    <h2 id="christmas-masses-heading" className="mb-6 text-h2">Advent & Christmas Season</h2>
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-      <MassSchedule
-        title="Misa de Aguinaldo"
-        day="December 15–23"
-        time="7:30 PM"
-        timeValue="19:30"
-      />
-      <MassSchedule
-        title="Christmas Eve Mass"
-        day="December 24"
-        time="7:30 PM"
-        timeValue="19:30"
-      />
-    </div>
-  </section>
-</div>
-
-All times are Philippine Time (PHT).
-
-For schedule changes and special celebrations, please check [News and Announcements](/news).
+<MassGathering />

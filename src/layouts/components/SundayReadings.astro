@@ -79,6 +79,7 @@ const sectionLabels: Record<string, string> = {
   </div>
   <div data-readings-content>
     <header class="reading-header">
+      <p class="reading-banner-label">Liturhiya ng Salita</p>
       <p class="reading-date">
         <time datetime={selected}>{formatReadingDate(selected)}</time>
       </p>
@@ -87,67 +88,96 @@ const sectionLabels: Record<string, string> = {
     {
       record ? (
         <>
-          <nav class="reading-contents" aria-label="Mga bahagi ng pagbasa">
-            {record.sections.map((section) => (
-              <a href={`#reading-${section.type}`}>
-                {sectionLabels[section.type]}
+          <div class="reading-workspace">
+            <aside class="reading-guide">
+              <p class="page-eyebrow">Sa pagbasang ito</p>
+              <nav class="reading-contents" aria-label="Mga bahagi ng pagbasa">
+                {record.sections.map((section, index) => (
+                  <a href={`#reading-${section.type}`}>
+                    <span class="reading-index-number" aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span>{sectionLabels[section.type]}</span>
+                  </a>
+                ))}
+              </nav>
+              <p class="reading-guide-reflection">
+                Makinig.
+                <br />
+                Magnilay.
+                <br />
+                Isabuhay.
+              </p>
+              <a class="reading-source-jump" href="#reading-source">
+                Tungkol sa pinagmulan ↓
               </a>
-            ))}
-          </nav>
-          <article aria-label={`Mga pagbasa — ${formatReadingDate(selected)}`}>
-            {record.sections.map((section) => (
-              <section
-                class="reading-section"
-                aria-labelledby={`reading-${section.type}`}
+            </aside>
+            <div class="reading-body">
+              <article
+                aria-label={`Mga pagbasa — ${formatReadingDate(selected)}`}
               >
-                <h3 id={`reading-${section.type}`}>
-                  {sectionLabels[section.type]}
-                </h3>
-                <p class="reading-reference">{section.reference}</p>
-                <div class="reading-text">
-                  {section.blocks.map((block) =>
-                    block.type === "response" ? (
-                      <div class="content reading-response-wrapper">
-                        <blockquote class="reading-response">
+                {record.sections.map((section, index) => (
+                  <section
+                    class="reading-section"
+                    aria-labelledby={`reading-${section.type}`}
+                  >
+                    <p class="reading-section-label">
+                      <span aria-hidden="true">
+                        {String(index + 1).padStart(2, "0")} ·{" "}
+                      </span>
+                      Liturhiya ng Salita
+                    </p>
+                    <h3 id={`reading-${section.type}`}>
+                      {sectionLabels[section.type]}
+                    </h3>
+                    <p class="reading-reference">{section.reference}</p>
+                    <div class="reading-text">
+                      {section.blocks.map((block) =>
+                        block.type === "response" ? (
+                          <div class="content reading-response-wrapper">
+                            <blockquote class="reading-response">
+                              <p class="reading-block" set:text={block.text} />
+                            </blockquote>
+                          </div>
+                        ) : (
                           <p class="reading-block" set:text={block.text} />
-                        </blockquote>
-                      </div>
-                    ) : (
-                      <p class="reading-block" set:text={block.text} />
-                    ),
-                  )}
-                </div>
-              </section>
-            ))}
-          </article>
-          <footer class="reading-source">
-            <p>
-              Pinagmulan:{" "}
-              <a href={record.source_url}>
-                Awit at Papuri — {formatReadingDate(selected)}
-              </a>
-            </p>
-            <p>
-              Teksto mula sa <cite>Ang Pagpapahayag ng Salita ng Diyos</cite>{" "}
-              (Tagalog Lectionary), ayon sa pagkakakilanlan ng Awit at Papuri.
-              Karapatang-sipi © CBCP 2014.{" "}
-              <a href="https://www.awitatpapuri.com/faqs/">
-                Tungkol sa pinagmulan
-              </a>
-              .
-            </p>
-            <p>
-              Kopyang nakuha noong:{" "}
-              <time datetime={record.retrieved_at}>
-                {new Intl.DateTimeFormat("fil-PH", {
-                  dateStyle: "medium",
-                  timeStyle: "short",
-                  timeZone: "Asia/Manila",
-                }).format(new Date(record.retrieved_at))}{" "}
-                PHT
-              </time>
-            </p>
-          </footer>
+                        ),
+                      )}
+                    </div>
+                  </section>
+                ))}
+              </article>
+              <footer class="reading-source" id="reading-source">
+                <p>
+                  Pinagmulan:{" "}
+                  <a href={record.source_url}>
+                    Awit at Papuri — {formatReadingDate(selected)}
+                  </a>
+                </p>
+                <p>
+                  Teksto mula sa{" "}
+                  <cite>Ang Pagpapahayag ng Salita ng Diyos</cite> (Tagalog
+                  Lectionary), ayon sa pagkakakilanlan ng Awit at Papuri.
+                  Karapatang-sipi © CBCP 2014.{" "}
+                  <a href="https://www.awitatpapuri.com/faqs/">
+                    Tungkol sa pinagmulan
+                  </a>
+                  .
+                </p>
+                <p>
+                  Kopyang nakuha noong:{" "}
+                  <time datetime={record.retrieved_at}>
+                    {new Intl.DateTimeFormat("fil-PH", {
+                      dateStyle: "medium",
+                      timeStyle: "short",
+                      timeZone: "Asia/Manila",
+                    }).format(new Date(record.retrieved_at))}{" "}
+                    PHT
+                  </time>
+                </p>
+              </footer>
+            </div>
+          </div>
         </>
       ) : (
         <div class="reading-notice">

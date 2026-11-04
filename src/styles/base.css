@@ -1,5 +1,12 @@
 html {
+  --page-top-gap: 1.5rem;
   font-size: 16px;
+}
+
+@media (max-width: 600px) {
+  html {
+    --page-top-gap: 1rem;
+  }
 }
 
 body {

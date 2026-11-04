@@ -5,7 +5,7 @@
   --practice-wash: var(--color-light);
   --practice-ink: var(--color-text-dark);
   max-width: 1224px;
-  padding-top: 1.25rem;
+  padding-top: var(--page-top-gap);
   padding-bottom: 5rem;
   color: var(--practice-ink);
 }
@@ -56,24 +56,8 @@
   padding-top: 2rem;
   margin-bottom: 2rem;
 }
-.rehearsal-kicker {
-  font-size: 13px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--practice-accent);
-  margin-bottom: 1rem;
-}
 .rehearsal-heading h1 {
-  font-family: var(--font-secondary);
-  font-weight: 400;
-  font-size: clamp(2.75rem, 5.5vw, 4.6rem);
-  line-height: 1.06;
-  letter-spacing: -0.03em;
   max-width: 23ch;
-  color: var(--practice-ink);
-  margin-bottom: 0.9rem;
-  text-wrap: balance;
 }
 .rehearsal-composer {
   font-size: 20px;
@@ -510,7 +494,6 @@
 }
 @media (max-width: 600px) {
   .rehearsal-page {
-    padding-top: 0.5rem;
     padding-bottom: 3rem;
   }
   .rehearsal-breadcrumb {
@@ -521,9 +504,6 @@
   .rehearsal-heading {
     padding-top: 1.5rem;
     margin-bottom: 1rem;
-  }
-  .rehearsal-heading h1 {
-    font-size: 2.8rem;
   }
   .rehearsal-composer {
     font-size: 18px;

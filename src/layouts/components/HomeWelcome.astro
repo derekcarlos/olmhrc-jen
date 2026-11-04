@@ -32,10 +32,10 @@ const invitation = massInvitation(mass);
 <section class="welcome-stage" aria-labelledby="welcome-title">
   <div class="welcome-edition container">
     <div class="welcome-copy">
-      <p class="welcome-kicker">
+      <p class="welcome-kicker page-eyebrow">
         <span aria-hidden="true"></span>Faith · Prayer · Community
       </p>
-      <h1 id="welcome-title">{banner.title}</h1>
+      <h1 id="welcome-title" class="page-title">{banner.title}</h1>
       <p class="welcome-chapel">
         {
           chapelNameParts.map((part, index) => (
@@ -165,7 +165,7 @@ const invitation = massInvitation(mass);
     grid-template-areas: "copy bulletin";
     align-items: center;
     gap: clamp(1.5rem, 2.5vw, 2.5rem);
-    padding-block: 2.5rem 4rem;
+    padding-block: var(--page-top-gap) 4rem;
   }
   .welcome-copy {
     grid-area: copy;
@@ -175,12 +175,6 @@ const invitation = massInvitation(mass);
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    color: var(--home-accent);
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
   }
   .welcome-kicker span {
     width: 2rem;
@@ -188,14 +182,7 @@ const invitation = massInvitation(mass);
     background: currentColor;
   }
   h1 {
-    font-family: var(--font-secondary);
-    font-weight: 400;
-    font-size: clamp(3.1rem, 4.5vw, 4.8rem);
-    line-height: 1.02;
-    letter-spacing: -0.045em;
     max-width: 11ch;
-    text-wrap: balance;
-    margin: 0 0 1.5rem;
   }
   .welcome-chapel {
     font-family: var(--font-secondary);
@@ -556,14 +543,13 @@ const invitation = massInvitation(mass);
       grid-template-areas: "copy" "bulletin";
       min-height: 0;
       gap: 2rem;
-      padding-block: 1.5rem 3rem;
+      padding-block: var(--page-top-gap) 3rem;
     }
     .welcome-copy {
       max-width: 43rem;
     }
     h1 {
       max-width: 12ch;
-      font-size: clamp(3.25rem, 10vw, 5rem);
     }
   }
   @media (max-width: 520px) {
@@ -608,12 +594,7 @@ const invitation = massInvitation(mass);
     .mass-details {
       font-size: 17px;
     }
-    .welcome-edition {
-      padding-top: 0.75rem;
-    }
     .welcome-kicker {
-      font-size: 12px;
-      letter-spacing: 0.1em;
       gap: 0.5rem;
     }
     .welcome-kicker span {

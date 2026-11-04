@@ -1,3 +1,37 @@
+/* Shared page masthead: choir pages, chapel pages, and article titles. */
+.page-eyebrow {
+  color: var(--color-accent);
+  font-family: var(--font-primary);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 0.65rem;
+}
+.page-title {
+  color: var(--color-text-dark);
+  font-family: var(--font-secondary);
+  font-size: clamp(3rem, 6vw, 4.8rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+  margin: 0 0 0.75rem;
+}
+.dark .page-eyebrow {
+  color: var(--color-darkmode-accent);
+}
+.dark .page-title {
+  color: var(--color-darkmode-text-dark);
+}
+@media (max-width: 600px) {
+  .page-title {
+    font-size: 3.2rem;
+  }
+}
+
 /* section style */
 .section {
   @apply py-24 xl:py-28;
