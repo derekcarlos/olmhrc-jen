@@ -1,0 +1,146 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import type { RosaryMystery } from "@/types/rosary";
+interface Props {
+  item: RosaryMystery;
+}
+const { item } = Astro.props;
+const art = item.art;
+const assets = import.meta.glob<{ default: ImageMetadata }>(
+  "/public/images/rosary/**/*.{jpg,jpeg,png,webp,avif,gif}",
+);
+let artwork: ImageMetadata | undefined;
+if (art?.image?.trim()) {
+  const load = assets[`/public${art.image}`];
+  if (!load)
+    throw new Error(
+      `Rosary artwork not found: public${art.image} (${item.id})`,
+    );
+  artwork = (await load()).default;
+}
+const width = artwork ? Math.min(artwork.width, 1600) : 0;
+const widths = artwork
+  ? [...new Set([480, 800, 1200, width].filter((value) => value <= width))]
+  : [];
+---
+
+{
+  artwork && art && (
+    <figure class="mystery-art">
+      <Image
+        src={artwork}
+        width={width}
+        height={Math.round((width * artwork.height) / artwork.width)}
+        widths={widths}
+        sizes="(max-width: 900px) calc(100vw - 80px), 820px"
+        format="webp"
+        quality={85}
+        alt={art.alt!}
+        loading="lazy"
+        decoding="async"
+        class="mystery-art-image"
+      />
+      <figcaption>
+        {(art.title || art.artist) && (
+          <span>
+            {[art.title, art.artist].filter(Boolean).join(" — ")}
+            <span aria-hidden="true"> · </span>
+          </span>
+        )}
+        <a
+          href={art.source_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Artwork source (opens in a new tab)"
+        >
+          Artwork source <span aria-hidden="true">↗</span>
+        </a>
+        <span aria-hidden="true"> · </span>
+        {art.license_url ? (
+          <a
+            href={art.license_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${art.license} (opens in a new tab)`}
+          >
+            {art.license}
+          </a>
+        ) : (
+          <span>{art.license}</span>
+        )}
+      </figcaption>
+    </figure>
+  )
+}
+{
+  (item.meditation?.trim() || item.fruit?.trim()) && (
+    <section class="mystery-meditation" aria-label="Meditation">
+      {item.meditation?.trim() && (
+        <>
+          <h3>Meditation</h3>
+          <p>{item.meditation}</p>
+        </>
+      )}
+      {item.fruit?.trim() && (
+        <div class="mystery-fruit">
+          <h3>Fruit of the Mystery</h3>
+          <p>{item.fruit}</p>
+        </div>
+      )}
+    </section>
+  )
+}
+
+<style>
+  .mystery-art {
+    margin: 0;
+  }
+  .mystery-art :global(.mystery-art-image) {
+    display: block;
+    width: 100%;
+    height: clamp(220px, 50vh, 480px);
+    object-fit: contain;
+    background: var(--rosary-wash);
+    border-radius: 0.4rem;
+  }
+  figcaption {
+    font-family: var(--font-primary);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--rosary-muted);
+    margin-top: 0.65rem;
+    overflow-wrap: anywhere;
+  }
+  figcaption a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .mystery-meditation {
+    margin-top: 1.5rem;
+  }
+  .mystery-meditation h3 {
+    color: var(--rosary-gold);
+    font-family: var(--font-primary);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 0.75rem;
+  }
+  .mystery-meditation p {
+    font-family: var(--font-readings);
+    font-size: 24px;
+    line-height: 1.6;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+  }
+  .mystery-fruit {
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--rosary-gold);
+    background: var(--rosary-wash);
+    border-radius: 0 0.35rem 0.35rem 0;
+  }
+</style>

@@ -148,6 +148,10 @@ Prayer guides live in `src/content/prayers/`. Each needs a title, description, a
 
 The chapel's Tagalog novena runs **September 28–October 6**. Its text is in `novena-to-our-lady-of-the-most-holy-rosary.md`; the original reference is `public/documents/pagsisiyam-santo-rosaryo.pdf`. Preserve the chapel's wording and phrase divisions when editing it. The Holy Rosary guide is maintained separately in `how-to-pray-the-holy-rosary.md`.
 
+The Holy Rosary page includes a complete English prayer walkthrough. Maintain the prayer wording, line breaks (`\n`), and four mystery sets in `src/data/rosary.json`; the Markdown file holds the reference instructions. The guide suggests a set using the Philippine weekday, then presents the opening prayers, five decades with ten Hail Marys each, the optional Fatima prayer, and the closing prayers. Next/Previous and the section buttons change the current step; selecting a different mystery set starts at the opening prayers. Progress lasts for the current page visit. The full reference booklet remains available on the same page and is open when JavaScript is unavailable. The sequence is defined in `src/lib/rosary-walkthrough.mjs`. Verify changes with `node --test tests/rosary-walkthrough.test.mjs tests/rosary-client.integration.mjs`, then build and run `node tests/rosary.integration.mjs`.
+
+Each mystery has an entry in its set's `items` with optional `meditation`, `fruit`, and `art` fields. Meditations and spiritual fruits are populated for all 20 mysteries. Add artwork files under `public/images/rosary/` and their descriptions/credits in the JSON. Content appears at the introduction, in a revisit panel during the decade, and in the reference booklet. Empty content is hidden. See [Managing Rosary artwork and meditations](docs/managing-rosary.md) for field instructions and an example.
+
 Filipino readings use a rolling Awit at Papuri snapshot committed at `src/data/readings/snapshot.json`: next Sunday by default, or today plus six days when configured. Run `pnpm readings:sync` to download locally without committing, or `pnpm readings:publish` to download, validate, commit the snapshot if content changed, and push. GitHub Pages deploys the committed data and does not contact Awit at Papuri. A VM can schedule `scripts/publish-readings.sh`; test source access from that VM first. Reading text uses Gentium Plus; headings retain Gentium Book Plus. See [Managing Filipino readings](docs/managing-readings.md) for setup, scheduling, and recovery.
 
 ## Songs and choir selections
@@ -285,15 +289,15 @@ The build produces HTML, optimized assets, yearly calendar JSON, and a sitemap. 
 
 ## Routine maintenance
 
-| When                               | Review                                                                                              |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------- |
+| When                               | Review                                                                                                                      |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | Before each choir celebration      | Review date, songs, notes and practice links; set readiness to confirmed when agreed. Previous dates archive automatically. |
-| When chapel times change           | Update event files, the Mass page, and homepage Mass notice together.                               |
-| Before the novena/Christmas season | Confirm prayer and Mass times and seasonal exceptions with the chapel.                              |
-| When publishing news               | Confirm facts/dates, review images, and publish only intended articles.                             |
-| Periodically                       | Check YouTube availability, audio files, internal links, domain renewal, and deployment status.     |
-| When updating dependencies         | Review release notes, update the lockfile deliberately, and run complete validation.                |
-| When Church calendars change       | Review Romcal and the Philippines plugin together, including local supplements and known transfers. |
+| When chapel times change           | Update event files, the Mass page, and homepage Mass notice together.                                                       |
+| Before the novena/Christmas season | Confirm prayer and Mass times and seasonal exceptions with the chapel.                                                      |
+| When publishing news               | Confirm facts/dates, review images, and publish only intended articles.                                                     |
+| Periodically                       | Check YouTube availability, audio files, internal links, domain renewal, and deployment status.                             |
+| When updating dependencies         | Review release notes, update the lockfile deliberately, and run complete validation.                                        |
+| When Church calendars change       | Review Romcal and the Philippines plugin together, including local supplements and known transfers.                         |
 
 Keep `package.json` and `pnpm-lock.yaml` together in version control. Keep generated output, dependencies, local tools, and machine-specific caches ignored as configured in `.gitignore`. Versioned source content and assets provide the maintainable backup.
 
@@ -308,20 +312,20 @@ Comments and analytics are disabled. Contact, Blog, Authors, Categories, Tags, a
 
 ## Troubleshooting
 
-| Symptom                                 | What to check                                                                                                                    |
-| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| An edit is missing locally              | Save the correct source, inspect terminal validation errors, and reload. Restart after schema/dependency changes if needed.      |
-| Astro uses a different port             | Stop the older development process, restart `pnpm dev`, and check its printed URL.                                               |
-| An event/category is missing            | Check `draft`, dates, category spelling, and server errors. Restart to refresh a changed schema.                                 |
-| Future-year markers fail                | Check `/calendar-data/<year>.json` on the deployed site and ensure the full `dist/` was deployed. Retry after a network failure. |
-| A marker is absent from Upcoming Events | `all_day: true` is calendar-only. Scheduled entries must fall within the next-seven-day window.                                  |
-| A News article is missing               | Check `draft`, publication time, and whether a rebuild ran after that time.                                                      |
+| Symptom                                 | What to check                                                                                                                      |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| An edit is missing locally              | Save the correct source, inspect terminal validation errors, and reload. Restart after schema/dependency changes if needed.        |
+| Astro uses a different port             | Stop the older development process, restart `pnpm dev`, and check its printed URL.                                                 |
+| An event/category is missing            | Check `draft`, dates, category spelling, and server errors. Restart to refresh a changed schema.                                   |
+| Future-year markers fail                | Check `/calendar-data/<year>.json` on the deployed site and ensure the full `dist/` was deployed. Retry after a network failure.   |
+| A marker is absent from Upcoming Events | `all_day: true` is calendar-only. Scheduled entries must fall within the next-seven-day window.                                    |
+| A News article is missing               | Check `draft`, publication time, and whether a rebuild ran after that time.                                                        |
 | A choir selection fails the build       | Check unique IDs, published dates, draft/published status, readiness, valid Mass parts, and published song IDs matching filenames. |
-| YouTube will not play inline            | Check the URL and try Open on YouTube; video owners can disable embedding.                                                       |
-| An image/favicon remains old            | Check the path, reload, or use a new filename to avoid a cached asset.                                                           |
-| A font build fails                      | Astro's Google font provider may need network access to obtain fonts; inspect the error before retrying.                         |
-| Published metadata uses localhost       | Correct `site.base_url`, rebuild, and redeploy.                                                                                  |
-| Text is hard to read in one theme       | Check palette values and explicit colors, including inherited text in custom MDX components.                                     |
+| YouTube will not play inline            | Check the URL and try Open on YouTube; video owners can disable embedding.                                                         |
+| An image/favicon remains old            | Check the path, reload, or use a new filename to avoid a cached asset.                                                             |
+| A font build fails                      | Astro's Google font provider may need network access to obtain fonts; inspect the error before retrying.                           |
+| Published metadata uses localhost       | Correct `site.base_url`, rebuild, and redeploy.                                                                                    |
+| Text is hard to read in one theme       | Check palette values and explicit colors, including inherited text in custom MDX components.                                       |
 
 ## Project structure
 

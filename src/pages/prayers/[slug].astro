@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
 import ContentPage from "@/layouts/ContentPage.astro";
 import NovenaGuide from "@/components/NovenaGuide.astro";
+import RosaryGuide from "@/components/RosaryGuide.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 
 export async function getStaticPaths() {
@@ -18,10 +19,11 @@ interface Props {
 const { prayer } = Astro.props;
 const { Content } = await render(prayer);
 const isNovena = prayer.id === "novena-to-our-lady-of-the-most-holy-rosary";
+const isRosary = prayer.id === "how-to-pray-the-holy-rosary";
 ---
 
 <ContentPage
-  wide={isNovena}
+  wide={isNovena || isRosary}
   title={prayer.data.title}
   meta_title={prayer.data.meta_title ?? `${prayer.data.title} | Rosarium`}
   description={prayer.data.description}
@@ -34,6 +36,12 @@ const isNovena = prayer.id === "novena-to-our-lady-of-the-most-holy-rosary";
           <Content />
         </div>
       </NovenaGuide>
+    ) : isRosary ? (
+      <RosaryGuide>
+        <div class="content" lang={prayer.data.language}>
+          <Content />
+        </div>
+      </RosaryGuide>
     ) : (
       <div class="content" lang={prayer.data.language}>
         <Content />

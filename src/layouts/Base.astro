@@ -78,7 +78,10 @@ const pageUrl = new URL(Astro.url.pathname, config.site.base_url).href;
             cssVariable={cssVar}
             preload={
               key !== "readings" ||
-              /\/readings(?:\/|$)/.test(Astro.url.pathname)
+              /\/readings(?:\/|$)/.test(Astro.url.pathname) ||
+              /\/prayers\/how-to-pray-the-holy-rosary\/?$/.test(
+                Astro.url.pathname,
+              )
             }
           />
         );

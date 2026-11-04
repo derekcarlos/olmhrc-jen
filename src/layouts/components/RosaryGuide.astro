@@ -1,0 +1,817 @@
+---
+import catalog from "@/data/rosary.json";
+import RosaryMysteryContent from "@/components/RosaryMysteryContent.astro";
+import { validateRosaryMysteries } from "@/lib/rosary-mysteries.mjs";
+validateRosaryMysteries(catalog.mysteries);
+---
+
+<rosary-guide
+  class="rosary-guide"
+  data-rosary-catalog={JSON.stringify(catalog)}
+>
+  <section class="rosary-invitation" aria-labelledby="rosary-invitation-title">
+    <p class="invitation-eyebrow">
+      Pray with Mary · Contemplate the life of Jesus
+    </p>
+    <h2 id="rosary-invitation-title">
+      A little stillness.<br />A prayer at a time.
+    </h2>
+    <p>
+      From the first Sign of the Cross to the closing prayer, the words are
+      here. Move at your own pace.
+    </p>
+    <nav class="mystery-choices" aria-label="Choose the mysteries">
+      {
+        catalog.mysteries.map(({ id, title, days }, index) => (
+          <a href={`#${id}-mysteries`} data-mystery-set={id}>
+            <span class="mystery-choice-number" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <>
+              <strong>{title.replace(" Mysteries", "")}</strong>
+              <span>{days}</span>
+            </>
+          </a>
+        ))
+      }
+    </nav>
+    <p class="rosary-suggestion" data-rosary-suggestion></p>
+  </section>
+
+  <div class="rosary-workspace" data-rosary-walkthrough hidden>
+    <aside class="rosary-route" aria-label="Your place in the Rosary">
+      <p class="page-eyebrow">Your prayer journey</p>
+      <nav aria-label="Jump to a part of the Rosary">
+        <button type="button" data-rosary-phase="opening"
+          ><span aria-hidden="true">✝</span><span>Opening prayers</span></button
+        >
+        {
+          Array.from({ length: 5 }, (_, index) => (
+            <button type="button" data-rosary-phase={index}>
+              <>
+                <span class="route-number" aria-hidden="true">
+                  {index + 1}
+                </span>
+                <span>Decade {index + 1}</span>
+              </>
+            </button>
+          ))
+        }
+        <button type="button" data-rosary-phase="closing"
+          ><span aria-hidden="true">✝</span><span>Closing prayers</span></button
+        >
+      </nav>
+      <p class="route-note">
+        Instructions appear in red.<br />Pray the larger text.
+      </p>
+      <button class="restart-prayer" type="button" data-rosary-action="restart"
+        >Start again</button
+      >
+    </aside>
+
+    <article
+      class="walkthrough-panel"
+      data-rosary-panel
+      tabindex="-1"
+      aria-labelledby="rosary-prayer-title"
+    >
+      <header class="walkthrough-header">
+        <p class="page-eyebrow">In prayer together</p>
+        <p
+          class="walkthrough-status"
+          data-rosary-status
+          role="status"
+          aria-atomic="true"
+        >
+        </p>
+        <p class="walkthrough-position" data-rosary-position></p>
+      </header>
+      <h2 id="rosary-prayer-title" data-rosary-title></h2>
+      <div data-rosary-reading>
+        <div class="prayer-context">
+          <p data-rosary-context></p><span
+            class="prayer-count"
+            data-rosary-count
+            hidden></span>
+        </div>
+        <div class="prayer-beads" data-rosary-beads role="img" hidden></div>
+        <p class="walkthrough-rubric"><em data-rosary-rubric></em></p>
+        <p class="prayer-words" data-rosary-text></p>
+        <div class="mystery-introduction" data-rosary-introduction hidden></div>
+        <details class="mystery-reflection" data-rosary-reflection hidden>
+          <summary>View artwork &amp; meditation</summary>
+          <div
+            class="mystery-reflection-content"
+            data-rosary-reflection-content
+          >
+          </div>
+        </details>
+        <button
+          class="skip-prayer"
+          type="button"
+          data-rosary-action="skip"
+          data-rosary-skip
+          hidden>Skip this optional prayer →</button
+        >
+        <p class="prayer-up-next" data-rosary-up-next></p>
+        <footer
+          class="walkthrough-controls"
+          data-rosary-controls
+          aria-label="Prayer controls"
+        >
+          <div class="prayer-navigation">
+            <button
+              class="prayer-back"
+              type="button"
+              data-rosary-action="previous">← Previous</button
+            >
+            <div class="prayer-control-position">
+              <span data-rosary-control-count></span>
+              <span
+                class="prayer-control-beads"
+                data-rosary-control-beads
+                role="img"
+              >
+                {Array.from({ length: 5 }, () => <span aria-hidden="true" />)}
+              </span>
+              <span data-rosary-control-label></span>
+            </div>
+            <button
+              class="prayer-next"
+              type="button"
+              data-rosary-action="next"
+              data-rosary-next>Next prayer →</button
+            >
+          </div>
+        </footer>
+      </div>
+      <div class="rosary-complete" data-rosary-complete hidden>
+        <p>Remain for a moment in quiet prayer.</p>
+        <div class="completion-actions">
+          <button type="button" class="prayer-next" data-rosary-action="restart"
+            >Pray again</button
+          ><button type="button" data-rosary-action="previous"
+            >Return to the final prayer</button
+          >
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <details class="rosary-reference" data-rosary-reference open>
+    <summary
+      ><span class="page-eyebrow">Keep close at hand</span><span
+        >Full prayer booklet & guide</span
+      ><span aria-hidden="true">＋</span></summary
+    >
+    <div class="reference-body">
+      <div class="content"><slot /></div>
+      <section id="rosary-prayer-texts" aria-labelledby="prayer-texts-title">
+        <p class="page-eyebrow">The words we pray</p><h2
+          id="prayer-texts-title"
+        >
+          Prayers of the Rosary
+        </h2>
+        {
+          catalog.prayers.map((prayer) => (
+            <section
+              class="reference-prayer"
+              aria-labelledby={`rosary-${prayer.id}`}
+            >
+              <h3 id={`rosary-${prayer.id}`}>{prayer.title}</h3>
+              {prayer.id === "fatima" && (
+                <p class="reference-rubric">Optional, after each decade.</p>
+              )}
+              <p class="prayer-words">{prayer.text}</p>
+            </section>
+          ))
+        }
+      </section>
+      <section
+        class="reference-mysteries"
+        aria-labelledby="rosary-mysteries-title"
+      >
+        <p class="page-eyebrow">Contemplate the life of Jesus with Mary</p><h2
+          id="rosary-mysteries-title"
+        >
+          The four sets of mysteries
+        </h2>
+        {
+          catalog.mysteries.map((set) => (
+            <section aria-labelledby={`${set.id}-mysteries`}>
+              <>
+                <h3 id={`${set.id}-mysteries`}>{set.title}</h3>
+                <p>{set.days}</p>
+              </>
+              <ol>
+                {set.items.map((item) => (
+                  <li>
+                    <span data-rosary-mystery-title>{item.title}</span>
+                    <div data-rosary-mystery-content={item.id}>
+                      <RosaryMysteryContent item={item} />
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          ))
+        }
+      </section>
+      <p class="rosary-sources">
+        Traditional English prayer texts. Sequence and prayer references: <a
+          href="https://www.usccb.org/how-to-pray-the-rosary"
+          >USCCB Rosary guide</a
+        >, <a href="https://www.usccb.org/prayers/prayers-rosary"
+          >Prayers of the Rosary</a
+        >, and <a
+          href="https://www.vatican.va/special/rosary/documents/misteri_en.html"
+          >the Holy See’s mystery guide</a
+        >. The day-based suggestion follows the customary weekly pattern;
+        another set may be chosen for the season or community’s prayer.
+      </p>
+    </div>
+  </details>
+</rosary-guide>
+
+<script>
+  import { prepareRosaryGuide } from "@/lib/rosary-guide-client";
+  class RosaryGuide extends HTMLElement {
+    private cleanup?: () => void;
+    connectedCallback() {
+      this.cleanup = prepareRosaryGuide(this);
+    }
+    disconnectedCallback() {
+      this.cleanup?.();
+    }
+  }
+  if (!customElements.get("rosary-guide"))
+    customElements.define("rosary-guide", RosaryGuide);
+</script>
+
+<style>
+  .rosary-guide {
+    --rosary-ink: var(--color-text-dark);
+    --rosary-muted: var(--color-text);
+    --rosary-paper: #fffefb;
+    --rosary-wash: var(--color-light);
+    --rosary-line: var(--color-border);
+    --rosary-gold: var(--color-accent);
+    --rosary-rubric: #a3413b;
+    display: block;
+    color: var(--rosary-ink);
+  }
+  :global(.dark) .rosary-guide {
+    --rosary-ink: var(--color-darkmode-text-dark);
+    --rosary-muted: var(--color-darkmode-text);
+    --rosary-paper: #1c2933;
+    --rosary-wash: var(--color-darkmode-light);
+    --rosary-line: var(--color-darkmode-border);
+    --rosary-gold: var(--color-darkmode-accent);
+    --rosary-rubric: #eca69e;
+  }
+  .rosary-guide :global([hidden]) {
+    display: none !important;
+  }
+  .rosary-guide a:focus-visible,
+  .rosary-guide button:focus-visible,
+  .rosary-guide summary:focus-visible {
+    outline: 3px solid var(--rosary-gold);
+    outline-offset: 4px;
+  }
+  .rosary-invitation {
+    border-radius: 0.75rem;
+    background: #163d53;
+    color: #fff9ed;
+    border-top: 4px solid #d9bd86;
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .invitation-eyebrow {
+    color: #e7cf9b;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .rosary-invitation h2 {
+    color: inherit;
+    font-size: clamp(32px, 3.5vw, 46px);
+    line-height: 1.1;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+  .rosary-invitation > p:not(.invitation-eyebrow) {
+    color: #d3e1e7;
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 65ch;
+  }
+  .mystery-choices {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .mystery-choices a {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.25rem;
+    border: 1px solid #668494;
+    border-radius: 0.4rem;
+  }
+  .mystery-choices a:hover,
+  .mystery-choices a[aria-current] {
+    background: #f0ddb4;
+    color: #17374a;
+    border-color: #f0ddb4;
+  }
+  .mystery-choices a:focus-visible {
+    outline-color: #e7cf9b;
+  }
+  .mystery-choice-number {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+  .mystery-choices strong {
+    font-family: var(--font-secondary);
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+  .mystery-choices a > span:last-child {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 0.4rem;
+  }
+  .rosary-invitation .rosary-suggestion {
+    font-size: 15px;
+    margin-top: 1rem;
+    max-width: none;
+  }
+  .rosary-workspace {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    align-items: start;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .rosary-route {
+    position: sticky;
+    top: 7rem;
+    padding-top: 1rem;
+  }
+  .rosary-route nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .rosary-route nav button {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.75rem;
+    text-align: left;
+    font-size: 17px;
+    line-height: 1.5;
+    border-radius: 0.35rem;
+    cursor: pointer;
+    color: var(--rosary-ink);
+  }
+  .rosary-route nav button > span:first-child {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    color: var(--rosary-gold);
+  }
+  .route-number {
+    border: 1px solid var(--rosary-line);
+    border-radius: 50%;
+    font-size: 13px;
+  }
+  .rosary-route nav button[aria-current],
+  .rosary-route nav button:hover {
+    background: var(--rosary-wash);
+  }
+  .rosary-route nav button[aria-current] .route-number {
+    background: #163d53;
+    color: #fff9ed;
+    border-color: #163d53;
+  }
+  .route-note {
+    color: var(--rosary-rubric);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rosary-line);
+  }
+  .restart-prayer {
+    font-size: 15px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    padding-block: 0.75rem;
+    min-height: 44px;
+    cursor: pointer;
+    color: var(--rosary-muted);
+  }
+  .walkthrough-panel {
+    min-width: 0;
+    border: 1px solid var(--rosary-line);
+    border-radius: 0.75rem;
+    background: var(--rosary-paper);
+    padding: clamp(1.25rem, 3vw, 3rem);
+    scroll-margin-top: 7rem;
+  }
+  .walkthrough-panel:focus {
+    outline: none;
+  }
+  .walkthrough-header {
+    border-bottom: 1px solid var(--rosary-line);
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .walkthrough-status {
+    color: var(--rosary-muted);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .walkthrough-position {
+    color: var(--rosary-muted);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-top: 0.25rem;
+  }
+  .walkthrough-panel h2 {
+    font-weight: 400;
+    font-size: clamp(32px, 3vw, 42px);
+    line-height: 1.15;
+    color: var(--rosary-ink);
+    text-wrap: balance;
+  }
+  .prayer-context {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.75rem;
+    color: var(--rosary-muted);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .prayer-count {
+    color: var(--rosary-gold);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .prayer-beads {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .prayer-beads :global(span) {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--rosary-line);
+    border-radius: 50%;
+    font-size: 12px;
+    color: var(--rosary-muted);
+  }
+  .prayer-beads :global(.current-bead) {
+    color: #fff9ed;
+    background: #163d53;
+    border-color: #163d53;
+  }
+  .walkthrough-rubric {
+    color: var(--rosary-rubric);
+    font-size: 17px;
+    line-height: 1.6;
+    margin-top: 1.5rem;
+  }
+  .prayer-words {
+    font-family: var(--font-readings);
+    font-size: clamp(23px, 2.3vw, 27px);
+    line-height: 1.6;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    margin-top: 1.5rem;
+  }
+  .mystery-introduction {
+    margin-top: 2rem;
+  }
+  .mystery-reflection {
+    margin-top: 1.5rem;
+    border: 1px solid var(--rosary-line);
+    border-radius: 0.4rem;
+  }
+  .mystery-reflection > summary {
+    cursor: pointer;
+    color: var(--rosary-gold);
+    font-size: 17px;
+    line-height: 1.5;
+    padding: 0.85rem 1rem;
+  }
+  .mystery-reflection-content {
+    padding: 0 1rem 1.25rem;
+  }
+  .reference-mysteries li {
+    margin-block: 1rem;
+  }
+  .reference-mysteries [data-rosary-mystery-content]:not(:empty) {
+    margin-block: 1rem 2rem;
+  }
+  .skip-prayer {
+    color: var(--rosary-gold);
+    font-size: 16px;
+    min-height: 44px;
+    padding-block: 0.75rem;
+    margin-top: 1rem;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+  }
+  .walkthrough-controls {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 20;
+    border-top: 1px solid var(--rosary-line);
+    background: var(--rosary-paper);
+    box-shadow: 0 -8px 28px rgb(15 35 45 / 8%);
+    padding: 0.75rem max(1rem, env(safe-area-inset-right, 0px))
+      calc(0.75rem + env(safe-area-inset-bottom, 0px))
+      max(1rem, env(safe-area-inset-left, 0px));
+  }
+  .prayer-navigation {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 110px minmax(0, 1fr);
+    align-items: center;
+    gap: 1rem;
+    max-width: 1224px;
+    margin-inline: auto;
+  }
+  .prayer-navigation button,
+  .completion-actions button {
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+    font-size: 17px;
+  }
+  .prayer-back {
+    color: var(--rosary-muted);
+  }
+  .prayer-navigation button {
+    height: 52px;
+    line-height: 1.15;
+  }
+  .prayer-navigation .prayer-back {
+    width: 140px;
+    justify-self: start;
+  }
+  .prayer-navigation .prayer-next {
+    width: 200px;
+    justify-self: end;
+  }
+  .prayer-control-position {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .prayer-control-position > span:first-child {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--rosary-ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .prayer-control-position > span:last-child {
+    font-size: 12px;
+    color: var(--rosary-muted);
+  }
+  .prayer-control-beads {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 22px;
+  }
+  .prayer-control-beads::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    top: 50%;
+    background: var(--rosary-line);
+  }
+  .prayer-control-beads > span {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--rosary-gold);
+    border-radius: 50%;
+    background: var(--rosary-paper);
+  }
+  .prayer-control-beads > .current-decade {
+    background: var(--rosary-gold);
+  }
+  :global(body:has(rosary-guide[data-enhanced][data-rosary-complete="false"])) {
+    padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
+  }
+  :global(html:has(rosary-guide[data-enhanced][data-rosary-complete="false"])) {
+    scroll-padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
+  }
+  .prayer-back:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+  .prayer-next {
+    background: #163d53;
+    color: #fff9ed;
+    border-radius: 0.3rem;
+  }
+  .prayer-next:hover {
+    background: #214f68;
+  }
+  .prayer-up-next {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--rosary-muted);
+    text-align: right;
+    margin-top: 1.5rem;
+  }
+  .rosary-complete {
+    margin-top: 1.5rem;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+  .completion-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .rosary-reference {
+    border: 1px solid var(--rosary-line);
+    border-radius: 0.75rem;
+    margin-top: 2rem;
+    background: var(--rosary-paper);
+  }
+  .rosary-reference > summary {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 1.5rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-secondary);
+    font-size: 28px;
+    line-height: 1.25;
+  }
+  .rosary-reference > summary::-webkit-details-marker {
+    display: none;
+  }
+  .rosary-reference > summary .page-eyebrow {
+    grid-column: 1/-1;
+  }
+  .reference-body {
+    padding: 0 clamp(1.25rem, 3vw, 3rem) 2rem;
+    max-width: 72ch;
+    margin-inline: auto;
+  }
+  .reference-body h2,
+  .reference-body h3 {
+    font-weight: 400;
+    color: var(--rosary-ink);
+  }
+  .reference-body h2 {
+    font-size: 34px;
+    line-height: 1.2;
+  }
+  .reference-body h3 {
+    font-size: 28px;
+    line-height: 1.25;
+  }
+  .reference-body :global(.content) {
+    color: var(--rosary-ink);
+  }
+  .reference-prayer {
+    border-top: 1px solid var(--rosary-line);
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+  .reference-rubric {
+    color: var(--rosary-rubric);
+    margin-top: 0.5rem;
+    font-size: 17px;
+  }
+  #rosary-prayer-texts,
+  .reference-mysteries {
+    margin-top: 3rem;
+  }
+  .reference-mysteries section {
+    margin-top: 1.5rem;
+  }
+  .reference-mysteries ol {
+    list-style: decimal;
+    padding-left: 1.5rem;
+    margin-top: 1rem;
+    font-size: 19px;
+    line-height: 1.7;
+  }
+  .rosary-sources {
+    font-size: 16px;
+    line-height: 1.65;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rosary-line);
+    color: var(--rosary-muted);
+  }
+  .rosary-sources a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  @media (max-width: 900px) {
+    .mystery-choices {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .rosary-workspace {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+    .rosary-route {
+      position: static;
+      min-width: 0;
+      padding-top: 0;
+    }
+    .rosary-route nav {
+      flex-direction: row;
+      overflow-x: auto;
+      padding-bottom: 0.75rem;
+    }
+    .rosary-route nav button {
+      flex: 0 0 auto;
+      border: 1px solid var(--rosary-line);
+      font-size: 16px;
+      padding: 0.6rem;
+    }
+    .route-note {
+      border: 0;
+      padding: 0;
+      margin-top: 0.5rem;
+    }
+    .route-note br {
+      display: none;
+    }
+    .restart-prayer {
+      padding-top: 0.25rem;
+    }
+  }
+  @media (max-width: 600px) {
+    .prayer-control-beads {
+      gap: 3px;
+    }
+    .prayer-control-beads > span {
+      width: 6px;
+      height: 6px;
+    }
+    .prayer-navigation {
+      grid-template-columns: 112px minmax(0, 1fr) 112px;
+      gap: 0.5rem;
+    }
+    .prayer-navigation .prayer-back,
+    .prayer-navigation .prayer-next {
+      width: 112px;
+      padding: 0.3rem 0.4rem;
+      font-size: 14px;
+    }
+    .prayer-control-position > span:first-child {
+      font-size: 17px;
+    }
+  }
+  @media (max-width: 400px) {
+    .mystery-choices {
+      gap: 0.5rem;
+    }
+    .mystery-choices a {
+      padding: 0.75rem;
+    }
+    .mystery-choices strong {
+      font-size: 26px;
+    }
+  }
+  @media (max-height: 800px) {
+    .rosary-route {
+      position: static;
+    }
+  }
+</style>

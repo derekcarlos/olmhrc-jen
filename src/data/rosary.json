@@ -1,0 +1,379 @@
+{
+  "mysteries": [
+    {
+      "id": "joyful",
+      "title": "Joyful Mysteries",
+      "days": "Monday & Saturday",
+      "items": [
+        {
+          "id": "annunciation",
+          "title": "The Annunciation",
+          "meditation": "The angel Gabriel said to Mary: \"Hail, full of grace! The Lord is with you. You will conceive in your womb and bear a son, and you shall name him Jesus.\" Mary answered, \"Behold, I am the handmaid of the Lord. May it be done to me according to your word.\" (Lk 1:28, 31, 38)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Humility"
+        },
+        {
+          "id": "visitation",
+          "title": "The Visitation",
+          "meditation": "Elizabeth was filled with the Holy Spirit and cried out in a loud voice: \"Blessed are you among women, and blessed is the fruit of your womb. At the moment the sound of your greeting reached my ears, the infant in my womb leapt for joy.\" (Lk 1:41-44)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Love of neighbor"
+        },
+        {
+          "id": "nativity",
+          "title": "The Nativity",
+          "meditation": "While Mary and Joseph were in Bethlehem, the time came for Mary to give birth. She gave birth to her firstborn Son, wrapped him in swaddling clothes, and laid him in a manger, because there was no room for them in the inn. (Lk 2:6-7)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Poverty of spirit"
+        },
+        {
+          "id": "presentation-in-the-temple",
+          "title": "The Presentation in the Temple",
+          "meditation": "When the days of purification were completed, Mary and Joseph took Jesus to Jerusalem to present him to the Lord. Simeon blessed them and said to Mary: \"Behold, this child is destined for the fall and rise of many in Israel and to be a sign that will be contradicted; and you yourself a sword will pierce.\" (Lk 2:22, 34-35)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Purity of mind and body"
+        },
+        {
+          "id": "finding-of-jesus-in-the-temple",
+          "title": "The Finding of Jesus in the Temple",
+          "meditation": "After three days, Mary and Joseph found Jesus in the Temple, sitting among the teachers, listening to them and asking them questions. He returned with them to Nazareth and was obedient to them. (Lk 2:46, 51)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Obedience"
+        }
+      ]
+    },
+    {
+      "id": "luminous",
+      "title": "Luminous Mysteries",
+      "days": "Thursday",
+      "items": [
+        {
+          "id": "baptism-of-jesus-in-the-jordan",
+          "title": "The Baptism of Jesus in the Jordan",
+          "meditation": "Jesus, the sinless One who became sin for our sake, descended into the waters of the Jordan. The heavens opened, the Father's voice declared him to be the beloved Son, and the Holy Spirit descended upon him for the mission he was to fulfill. (Mt 3:13-17; 2 Cor 5:21)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Gratitude for the grace of Baptism"
+        },
+        {
+          "id": "wedding-at-cana",
+          "title": "The Wedding at Cana",
+          "meditation": "At the gentle prompting of Mary, Jesus changed water into wine. This was the first of his signs; he revealed his glory, and his disciples began to believe in him. (Jn 2:1-12)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Fidelity to Christ"
+        },
+        {
+          "id": "proclamation-of-the-kingdom",
+          "title": "The Proclamation of the Kingdom",
+          "meditation": "Jesus proclaimed the coming of God's Kingdom and called everyone to conversion. He forgave the sins of those who approached him with humble trust, a ministry of reconciliation that he entrusted to his Church. (Mk 1:15; 2:3-12; Lk 7:47-48; Jn 20:22-23)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Desire for holiness and conversion"
+        },
+        {
+          "id": "transfiguration",
+          "title": "The Transfiguration",
+          "meditation": "Jesus was transfigured before Peter, James, and John. The Father commanded the astonished Apostles to \"listen to him.\" This revelation prepared them to accompany Jesus through the Passion and toward the glory of the Resurrection. (Lk 9:28-36)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Spiritual courage"
+        },
+        {
+          "id": "institution-of-the-eucharist",
+          "title": "The Institution of the Eucharist",
+          "meditation": "At the Last Supper, Jesus offered his Body and Blood as food under the signs of bread and wine. In this mystery, he showed his love for humanity \"to the end\" and anticipated the sacrifice he would offer for our salvation. (Mt 26:26-28; Jn 13:1)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Love for our Eucharistic Lord"
+        }
+      ]
+    },
+    {
+      "id": "sorrowful",
+      "title": "Sorrowful Mysteries",
+      "days": "Tuesday & Friday",
+      "items": [
+        {
+          "id": "agony-in-the-garden",
+          "title": "The Agony in the Garden",
+          "meditation": "Kneeling, Jesus prayed: \"Father, if you are willing, take this cup away from me; still, not my will but yours be done.\" In his anguish, he prayed more earnestly, and his sweat became like drops of blood falling on the ground. (Lk 22:42, 44)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Conformity to God's will"
+        },
+        {
+          "id": "scourging-at-the-pillar",
+          "title": "The Scourging at the Pillar",
+          "meditation": "Pilate released Barabbas to them. After having Jesus scourged, he handed him over to be crucified. (Mt 27:26)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Mortification of the senses"
+        },
+        {
+          "id": "crowning-with-thorns",
+          "title": "The Crowning with Thorns",
+          "meditation": "The soldiers wove a crown of thorns and placed it on Jesus' head. They put a reed in his right hand, knelt before him in mockery, and said, \"Hail, King of the Jews!\" They spat upon him and struck him on the head with the reed. (Mt 27:29-30)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "The reign of Christ in our hearts"
+        },
+        {
+          "id": "carrying-of-the-cross",
+          "title": "The Carrying of the Cross",
+          "meditation": "When the soldiers had finished mocking Jesus, they led him away to crucify him. On the way, they took hold of Simon of Cyrene and laid the cross upon him to carry behind Jesus. (Mt 27:31; Lk 23:26)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Patient endurance of trials"
+        },
+        {
+          "id": "crucifixion",
+          "title": "The Crucifixion",
+          "meditation": "When they came to the place called the Skull, they crucified Jesus. He prayed, \"Father, forgive them, for they know not what they do.\" Darkness came over the whole land until the ninth hour. Jesus cried out in a loud voice, \"Father, into your hands I commend my spirit.\" (Lk 23:33-34, 44, 46)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Forgiveness of injuries"
+        }
+      ]
+    },
+    {
+      "id": "glorious",
+      "title": "Glorious Mysteries",
+      "days": "Wednesday & Sunday",
+      "items": [
+        {
+          "id": "resurrection",
+          "title": "The Resurrection",
+          "meditation": "On entering the tomb, the women saw a young man who said to them, \"Do not be amazed! You seek Jesus of Nazareth, the crucified. He has been raised; he is not here. Behold the place where they laid him.\" (Mk 16:4-6)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Faith"
+        },
+        {
+          "id": "ascension",
+          "title": "The Ascension",
+          "meditation": "After speaking to his disciples, the Lord Jesus was taken up into heaven and took his seat at the right hand of God. (Mk 16:19)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Christian hope"
+        },
+        {
+          "id": "descent-of-the-holy-spirit",
+          "title": "The Descent of the Holy Spirit",
+          "meditation": "Tongues as of fire appeared and came to rest on each of the disciples. They were all filled with the Holy Spirit and began to speak in other languages as the Spirit enabled them. (Acts 2:3-4)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "The gifts of the Holy Spirit"
+        },
+        {
+          "id": "assumption-of-mary",
+          "title": "The Assumption of Mary",
+          "meditation": "\"Arise, my beloved, my beautiful one, and come! You are all beautiful, my beloved, and there is no blemish in you.\" (Sg 2:10; 4:7)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "The grace of a happy death"
+        },
+        {
+          "id": "coronation-of-mary",
+          "title": "The Coronation of Mary",
+          "meditation": "A great sign appeared in the sky: a woman clothed with the sun, with the moon under her feet, and on her head a crown of twelve stars. (Rev 12:1)",
+          "art": {
+            "image": "",
+            "alt": "",
+            "title": "",
+            "artist": "",
+            "source_url": "",
+            "license": "",
+            "license_url": ""
+          },
+          "fruit": "Final perseverance"
+        }
+      ]
+    }
+  ],
+  "prayers": [
+    {
+      "id": "sign-of-cross",
+      "title": "Sign of the Cross",
+      "text": "In the name of the Father,\nand of the Son,\nand of the Holy Spirit.\nAmen."
+    },
+    {
+      "id": "apostles-creed",
+      "title": "Apostles’ Creed",
+      "text": "I believe in God, the Father almighty,\nCreator of heaven and earth;\nand in Jesus Christ, his only Son, our Lord;\nwho was conceived by the Holy Spirit,\nborn of the Virgin Mary,\nsuffered under Pontius Pilate,\nwas crucified, died, and was buried.\nHe descended into hell;\nthe third day he rose again from the dead;\nhe ascended into heaven,\nand sitteth at the right hand of God the Father almighty;\nfrom thence he shall come to judge the living and the dead.\n\nI believe in the Holy Spirit,\nthe holy catholic Church,\nthe communion of saints,\nthe forgiveness of sins,\nthe resurrection of the body,\nand life everlasting.\nAmen."
+    },
+    {
+      "id": "our-father",
+      "title": "Our Father",
+      "text": "Our Father, who art in heaven,\nhallowed be thy name;\nthy kingdom come;\nthy will be done\non earth as it is in heaven.\n\nGive us this day our daily bread;\nand forgive us our trespasses,\nas we forgive those who trespass against us;\nand lead us not into temptation,\nbut deliver us from evil.\nAmen."
+    },
+    {
+      "id": "hail-mary",
+      "title": "Hail Mary",
+      "text": "Hail Mary, full of grace,\nthe Lord is with thee.\nBlessed art thou among women,\nand blessed is the fruit of thy womb, Jesus.\n\nHoly Mary, Mother of God,\npray for us sinners,\nnow and at the hour of our death.\nAmen."
+    },
+    {
+      "id": "glory-be",
+      "title": "Glory Be",
+      "text": "Glory be to the Father,\nand to the Son,\nand to the Holy Spirit.\n\nAs it was in the beginning,\nis now, and ever shall be,\nworld without end.\nAmen."
+    },
+    {
+      "id": "fatima",
+      "title": "Fatima Prayer",
+      "text": "O my Jesus, forgive us our sins,\nsave us from the fires of hell;\nlead all souls to heaven,\nespecially those in most need of thy mercy.\nAmen."
+    },
+    {
+      "id": "hail-holy-queen",
+      "title": "Hail, Holy Queen",
+      "text": "Hail, holy Queen, Mother of mercy,\nour life, our sweetness, and our hope.\nTo thee do we cry, poor banished children of Eve.\nTo thee do we send up our sighs,\nmourning and weeping in this valley of tears.\n\nTurn then, most gracious advocate,\nthine eyes of mercy toward us,\nand after this our exile,\nshow unto us the blessed fruit of thy womb, Jesus.\nO clement, O loving, O sweet Virgin Mary."
+    },
+    {
+      "id": "pray-for-us",
+      "title": "Pray for Us",
+      "text": "℣. Pray for us, O holy Mother of God.\n℟. That we may be made worthy of the promises of Christ."
+    },
+    {
+      "id": "rosary-prayer",
+      "title": "Concluding Rosary Prayer",
+      "text": "O God, whose only-begotten Son,\nby his life, death, and resurrection,\nhas purchased for us the rewards of eternal life;\ngrant, we beseech thee,\nthat meditating upon these mysteries\nof the most holy Rosary of the Blessed Virgin Mary,\nwe may imitate what they contain\nand obtain what they promise,\nthrough the same Christ our Lord.\nAmen."
+    }
+  ]
+}
