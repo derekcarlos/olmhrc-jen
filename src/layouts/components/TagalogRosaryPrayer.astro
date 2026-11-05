@@ -1,0 +1,47 @@
+---
+import catalog from "@/data/rosary-tl.json";
+import type { RosaryPrayer } from "@/types/rosary";
+interface Props {
+  id: string;
+  heading?: boolean;
+  repetitions?: number;
+}
+const { id, heading = false, repetitions = 1 } = Astro.props;
+const prayer: RosaryPrayer | undefined = catalog.prayers.find(
+  (prayer) => prayer.id === id,
+);
+if (!prayer) throw new Error(`Unknown shared Tagalog Rosary prayer: ${id}`);
+const lines = prayer.text.split("\n").map((text) => ({
+  symbol: /^[℣℟]\./.test(text) ? text.slice(0, 2) : "",
+  text: /^[℣℟]\./.test(text) ? text.slice(2) : text,
+}));
+---
+
+{heading && <h3>{prayer.title}</h3>}
+{
+  prayer.instruction && (
+    <p>
+      <em>{prayer.instruction}</em>
+    </p>
+  )
+}
+{
+  Array.from({ length: repetitions }, () => (
+    <p data-shared-rosary-prayer={id}>
+      {lines.map((line, index) => (
+        <Fragment>
+          {index > 0 && <br />}
+          {line.symbol && <strong>{line.symbol}</strong>}
+          {line.text}
+        </Fragment>
+      ))}
+    </p>
+  ))
+}
+{
+  prayer.rubric && (
+    <p>
+      <em>{prayer.rubric}</em>
+    </p>
+  )
+}

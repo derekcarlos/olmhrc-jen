@@ -18,8 +18,10 @@ export function suggestedMysteries(now = new Date()) {
   return { weekday, id: weekly[weekday] || "joyful" };
 }
 
-/** @param {MysterySet} set @returns {RosaryStep[]} */
-export function rosaryWalkthrough(set) {
+/** @param {MysterySet} set @param {"en"|"tl"} [language] @returns {RosaryStep[]} */
+export function rosaryWalkthrough(set, language = "en") {
+  const tl = language === "tl";
+  const t = (en, tagalog) => (tl ? tagalog : en);
   if (set.items.length !== 5)
     throw new Error("A Rosary set needs five mysteries");
   /** @type {RosaryStep[]} */
@@ -37,73 +39,161 @@ export function rosaryWalkthrough(set) {
       optional: false,
       ...extra,
     });
-  add("sign-of-cross", "opening", "Make the Sign of the Cross.");
+  add(
+    "sign-of-cross",
+    "opening",
+    t("Make the Sign of the Cross.", "Mag-antanda ng krus."),
+  );
+  add(
+    "opening-verses",
+    "opening",
+    t(
+      "The leader says ℣ and the congregation responds ℟.",
+      "Bibigkasin ng namumuno ang ℣ at tutugon ang lahat sa ℟.",
+    ),
+  );
   add(
     "apostles-creed",
     "opening",
-    "Hold the crucifix and pray the Apostles’ Creed.",
+    t(
+      "Hold the crucifix and pray the Apostles’ Creed.",
+      "Hawakan ang krus at dasalin ang Sumasampalataya.",
+    ),
   );
-  add("our-father", "opening", "On the first large bead, pray the Our Father.");
+  add(
+    "our-father",
+    "opening",
+    t(
+      "On the first large bead, pray the Our Father.",
+      "Sa unang malaking butil, dasalin ang Ama Namin.",
+    ),
+  );
   for (let bead = 1; bead <= 3; bead++)
     add(
       "hail-mary",
       "opening",
-      `Pray on small bead ${bead} of the three opening beads.`,
+      t(
+        `Pray on small bead ${bead} of the three opening beads.`,
+        `Dasalin sa maliit na butil ${bead} ng tatlong pambungad na butil.`,
+      ),
       { bead },
     );
-  add("glory-be", "opening", "Pray the Glory Be before the first mystery.");
+  add(
+    "glory-be",
+    "opening",
+    t(
+      "Pray the Glory Be before the first mystery.",
+      "Dasalin ang Papuri sa Ama bago ang unang misteryo.",
+    ),
+  );
   const ordinals = ["first", "second", "third", "fourth", "fifth"];
+  const tagalogOrdinals = [
+    "unang",
+    "ikalawang",
+    "ikatlong",
+    "ikaapat na",
+    "ikalimang",
+  ];
   set.items.forEach((item, decade) => {
     const mystery = item.title;
     steps.push({
       kind: "mystery",
       phase: "decade",
       prayer: null,
-      instruction: "Announce the mystery, then pause for quiet reflection.",
+      instruction: t(
+        "Announce the mystery, then pause for quiet reflection.",
+        "Ipahayag ang misteryo, pagkatapos ay magnilay sandali.",
+      ),
       decade,
       bead: null,
       mystery,
       optional: false,
-      announcement: `The ${ordinals[decade]} ${set.title.replace(/ Mysteries$/, "")} Mystery: ${mystery}.`,
+      announcement: tl
+        ? `Ang ${tagalogOrdinals[decade]} misteryo: ${mystery}.`
+        : `The ${ordinals[decade]} ${set.title.replace(/ Mysteries$/, "")} Mystery: ${mystery}.`,
     });
     const context = { decade, mystery };
     add(
       "our-father",
       "decade",
-      "On the large bead, pray the Our Father.",
+      t(
+        "On the large bead, pray the Our Father.",
+        "Sa malaking butil, dasalin ang Ama Namin.",
+      ),
       context,
     );
     for (let bead = 1; bead <= 10; bead++)
       add(
         "hail-mary",
         "decade",
-        `Pray on small bead ${bead} of 10, keeping the mystery in mind.`,
+        t(
+          `Pray on small bead ${bead} of 10, keeping the mystery in mind.`,
+          `Dasalin sa maliit na butil ${bead} ng 10 habang pinagninilayan ang misteryo.`,
+        ),
         { ...context, bead },
       );
     add(
       "glory-be",
       "decade",
-      "At the end of the decade, pray the Glory Be.",
+      t(
+        "At the end of the decade, pray the Glory Be.",
+        "Sa pagtatapos ng sampung Aba Ginoong Maria, dasalin ang Papuri sa Ama.",
+      ),
       context,
     );
     add(
       "fatima",
       "decade",
-      "This prayer after the decade is optional. Pray it or continue to the next step.",
+      t(
+        "This prayer after the decade is optional. Pray it or continue to the next step.",
+        "Maaaring dasalin ang panalanging ito pagkatapos ng bawat misteryo, o magpatuloy sa susunod na hakbang.",
+      ),
       { ...context, optional: true },
     );
   });
   add(
     "hail-holy-queen",
     "closing",
-    "After five decades, pray the Hail, Holy Queen.",
+    t(
+      "After five decades, pray the Hail, Holy Queen.",
+      "Pagkatapos ng limang misteryo, dasalin ang Aba po Santa Mariang Hari.",
+    ),
   );
   add(
     "pray-for-us",
     "closing",
-    "When praying together, the leader says ℣ and the assembly responds ℟.",
+    t(
+      "When praying together, the leader says ℣ and the assembly responds ℟.",
+      "Bibigkasin ng namumuno ang ℣ at tutugon ang lahat sa ℟.",
+    ),
   );
-  add("rosary-prayer", "closing", "Let us pray.");
-  add("sign-of-cross", "closing", "Conclude with the Sign of the Cross.");
+  if (tl) {
+    for (const prayer of [
+      "litany-opening",
+      "litany-trinity",
+      "litany-mary",
+      "litany-lamb-of-god",
+    ])
+      add(
+        prayer,
+        "closing",
+        "Bibigkasin ng namumuno ang ℣ at tutugon ang lahat sa ℟.",
+      );
+  }
+  add("rosary-prayer", "closing", t("Let us pray.", "Manalangin tayo."));
+  if (tl)
+    add(
+      "closing-responses",
+      "closing",
+      "Bibigkasin ng namumuno ang ℣ at tutugon ang lahat sa ℟.",
+    );
+  add(
+    "sign-of-cross",
+    "closing",
+    t(
+      "Conclude with the Sign of the Cross.",
+      "Magtapos sa pamamagitan ng pag-aantanda ng krus.",
+    ),
+  );
   return steps;
 }

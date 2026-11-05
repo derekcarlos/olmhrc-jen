@@ -1,26 +1,68 @@
 ---
-import catalog from "@/data/rosary.json";
+import englishCatalog from "@/data/rosary.json";
+import tagalogCatalog from "@/data/rosary-tl.json";
+import type { RosaryCatalog } from "@/types/rosary";
 import RosaryMysteryContent from "@/components/RosaryMysteryContent.astro";
 import { validateRosaryMysteries } from "@/lib/rosary-mysteries.mjs";
+interface Props {
+  language?: "en" | "tl";
+}
+const { language = "en" } = Astro.props;
+const tl = language === "tl";
+const t = (en: string, tagalog: string) => (tl ? tagalog : en);
+const catalog: RosaryCatalog = tl ? tagalogCatalog : englishCatalog;
 validateRosaryMysteries(catalog.mysteries);
 ---
 
 <rosary-guide
   class="rosary-guide"
+  lang={language}
+  data-rosary-language={language}
   data-rosary-catalog={JSON.stringify(catalog)}
 >
   <section class="rosary-invitation" aria-labelledby="rosary-invitation-title">
     <p class="invitation-eyebrow">
-      Pray with Mary · Contemplate the life of Jesus
+      {
+        t(
+          "Pray with Mary · Contemplate the life of Jesus",
+          "Manalangin kasama si Maria · Pagnilayan ang buhay ni Hesus",
+        )
+      }
     </p>
     <h2 id="rosary-invitation-title">
-      A little stillness.<br />A prayer at a time.
+      {t("A little stillness.", "Sandali ng katahimikan.")}<br />{
+        t("A prayer at a time.", "Isang panalangin sa bawat hakbang.")
+      }
     </h2>
     <p>
-      From the first Sign of the Cross to the closing prayer, the words are
-      here. Move at your own pace.
+      {
+        t(
+          "From the first Sign of the Cross to the closing prayer, the words are here. Move at your own pace.",
+          "Mula sa pag-aantanda ng krus hanggang sa pangwakas na panalangin, narito ang mga salitang darasalin. Manalangin sa sarili mong bilis.",
+        )
+      }
     </p>
-    <nav class="mystery-choices" aria-label="Choose the mysteries">
+    <nav
+      class="rosary-languages"
+      aria-label={t("Prayer language", "Wika ng panalangin")}
+    >
+      <a
+        href="/prayers/how-to-pray-the-holy-rosary"
+        lang="en"
+        hreflang="en"
+        aria-current={!tl ? "page" : undefined}>English</a
+      >
+      <a
+        href="/prayers/ang-banal-na-rosaryo"
+        lang="tl"
+        hreflang="tl"
+        aria-current={tl ? "page" : undefined}>Tagalog</a
+      >
+    </nav>
+    <nav
+      class="mystery-choices"
+      aria-label={t("Choose the mysteries", "Piliin ang mga misteryo")}
+    >
       {
         catalog.mysteries.map(({ id, title, days }, index) => (
           <a href={`#${id}-mysteries`} data-mystery-set={id}>
@@ -28,7 +70,11 @@ validateRosaryMysteries(catalog.mysteries);
               {String(index + 1).padStart(2, "0")}
             </span>
             <>
-              <strong>{title.replace(" Mysteries", "")}</strong>
+              <strong>
+                {title
+                  .replace(" Mysteries", "")
+                  .replace("Mga Misteryo ng ", "")}
+              </strong>
               <span>{days}</span>
             </>
           </a>
@@ -39,11 +85,26 @@ validateRosaryMysteries(catalog.mysteries);
   </section>
 
   <div class="rosary-workspace" data-rosary-walkthrough hidden>
-    <aside class="rosary-route" aria-label="Your place in the Rosary">
-      <p class="page-eyebrow">Your prayer journey</p>
-      <nav aria-label="Jump to a part of the Rosary">
+    <aside
+      class="rosary-route"
+      aria-label={t(
+        "Your place in the Rosary",
+        "Ang iyong kinaroroonan sa Rosaryo",
+      )}
+    >
+      <p class="page-eyebrow">
+        {t("Your prayer journey", "Gabay sa panalangin")}
+      </p>
+      <nav
+        aria-label={t(
+          "Jump to a part of the Rosary",
+          "Pumili ng bahagi ng Rosaryo",
+        )}
+      >
         <button type="button" data-rosary-phase="opening"
-          ><span aria-hidden="true">✝</span><span>Opening prayers</span></button
+          ><span aria-hidden="true">✝</span><span
+            >{t("Opening prayers", "Mga pambungad na panalangin")}</span
+          ></button
         >
         {
           Array.from({ length: 5 }, (_, index) => (
@@ -52,20 +113,25 @@ validateRosaryMysteries(catalog.mysteries);
                 <span class="route-number" aria-hidden="true">
                   {index + 1}
                 </span>
-                <span>Decade {index + 1}</span>
+                <span>
+                  {t("Decade", "Misteryo")} {index + 1}
+                </span>
               </>
             </button>
           ))
         }
         <button type="button" data-rosary-phase="closing"
-          ><span aria-hidden="true">✝</span><span>Closing prayers</span></button
+          ><span aria-hidden="true">✝</span><span
+            >{t("Closing prayers", "Mga pangwakas na panalangin")}</span
+          ></button
         >
       </nav>
       <p class="route-note">
-        Instructions appear in red.<br />Pray the larger text.
+        {t("Instructions appear in red.", "Ang mga tagubilin ay nasa pula.")}<br
+        />{t("Pray the larger text.", "Dasalin ang malaking teksto.")}
       </p>
       <button class="restart-prayer" type="button" data-rosary-action="restart"
-        >Start again</button
+        >{t("Start again", "Magsimula muli")}</button
       >
     </aside>
 
@@ -76,7 +142,9 @@ validateRosaryMysteries(catalog.mysteries);
       aria-labelledby="rosary-prayer-title"
     >
       <header class="walkthrough-header">
-        <p class="page-eyebrow">In prayer together</p>
+        <p class="page-eyebrow">
+          {t("In prayer together", "Sama-sama sa panalangin")}
+        </p>
         <p
           class="walkthrough-status"
           data-rosary-status
@@ -97,9 +165,22 @@ validateRosaryMysteries(catalog.mysteries);
         <div class="prayer-beads" data-rosary-beads role="img" hidden></div>
         <p class="walkthrough-rubric"><em data-rosary-rubric></em></p>
         <p class="prayer-words" data-rosary-text></p>
+        <p
+          class="walkthrough-rubric prayer-note"
+          data-rosary-prayer-note
+          hidden
+        >
+        </p>
         <div class="mystery-introduction" data-rosary-introduction hidden></div>
         <details class="mystery-reflection" data-rosary-reflection hidden>
-          <summary>View artwork &amp; meditation</summary>
+          <summary
+            >{
+              t(
+                "View artwork & meditation",
+                "Tingnan ang larawan at pagninilay",
+              )
+            }</summary
+          >
           <div
             class="mystery-reflection-content"
             data-rosary-reflection-content
@@ -111,19 +192,23 @@ validateRosaryMysteries(catalog.mysteries);
           type="button"
           data-rosary-action="skip"
           data-rosary-skip
-          hidden>Skip this optional prayer →</button
+          hidden
+          >{
+            t("Skip this optional prayer →", "Laktawan ang panalanging ito →")
+          }</button
         >
         <p class="prayer-up-next" data-rosary-up-next></p>
         <footer
           class="walkthrough-controls"
           data-rosary-controls
-          aria-label="Prayer controls"
+          aria-label={t("Prayer controls", "Mga kontrol sa panalangin")}
         >
           <div class="prayer-navigation">
             <button
               class="prayer-back"
               type="button"
-              data-rosary-action="previous">← Previous</button
+              data-rosary-action="previous"
+              >{t("← Previous", "← Bumalik")}</button
             >
             <div class="prayer-control-position">
               <span data-rosary-control-count></span>
@@ -140,18 +225,27 @@ validateRosaryMysteries(catalog.mysteries);
               class="prayer-next"
               type="button"
               data-rosary-action="next"
-              data-rosary-next>Next prayer →</button
+              data-rosary-next>{t("Next prayer →", "Susunod →")}</button
             >
           </div>
         </footer>
       </div>
       <div class="rosary-complete" data-rosary-complete hidden>
-        <p>Remain for a moment in quiet prayer.</p>
+        <p>
+          {
+            t(
+              "Remain for a moment in quiet prayer.",
+              "Manatili sandali sa tahimik na panalangin.",
+            )
+          }
+        </p>
         <div class="completion-actions">
           <button type="button" class="prayer-next" data-rosary-action="restart"
-            >Pray again</button
+            >{t("Pray again", "Manalangin muli")}</button
           ><button type="button" data-rosary-action="previous"
-            >Return to the final prayer</button
+            >{
+              t("Return to the final prayer", "Balikan ang huling panalangin")
+            }</button
           >
         </div>
       </div>
@@ -160,17 +254,21 @@ validateRosaryMysteries(catalog.mysteries);
 
   <details class="rosary-reference" data-rosary-reference open>
     <summary
-      ><span class="page-eyebrow">Keep close at hand</span><span
-        >Full prayer booklet & guide</span
+      ><span class="page-eyebrow"
+        >{t("Keep close at hand", "Mga panalangin at gabay")}</span
+      ><span
+        >{
+          t("Full prayer booklet & guide", "Buong teksto at gabay sa Rosaryo")
+        }</span
       ><span aria-hidden="true">＋</span></summary
     >
     <div class="reference-body">
       <div class="content"><slot /></div>
       <section id="rosary-prayer-texts" aria-labelledby="prayer-texts-title">
-        <p class="page-eyebrow">The words we pray</p><h2
-          id="prayer-texts-title"
-        >
-          Prayers of the Rosary
+        <p class="page-eyebrow">
+          {t("The words we pray", "Ang mga salitang darasalin")}
+        </p><h2 id="prayer-texts-title">
+          {t("Prayers of the Rosary", "Mga Panalangin ng Rosaryo")}
         </h2>
         {
           catalog.prayers.map((prayer) => (
@@ -179,10 +277,25 @@ validateRosaryMysteries(catalog.mysteries);
               aria-labelledby={`rosary-${prayer.id}`}
             >
               <h3 id={`rosary-${prayer.id}`}>{prayer.title}</h3>
+              {prayer.instruction && (
+                <p class="reference-rubric">
+                  <em>{prayer.instruction}</em>
+                </p>
+              )}
               {prayer.id === "fatima" && (
-                <p class="reference-rubric">Optional, after each decade.</p>
+                <p class="reference-rubric">
+                  {t(
+                    "Optional, after each decade.",
+                    "Maaaring dasalin pagkatapos ng bawat misteryo.",
+                  )}
+                </p>
               )}
               <p class="prayer-words">{prayer.text}</p>
+              {prayer.rubric && (
+                <p class="reference-rubric">
+                  <em>{prayer.rubric}</em>
+                </p>
+              )}
             </section>
           ))
         }
@@ -191,10 +304,20 @@ validateRosaryMysteries(catalog.mysteries);
         class="reference-mysteries"
         aria-labelledby="rosary-mysteries-title"
       >
-        <p class="page-eyebrow">Contemplate the life of Jesus with Mary</p><h2
-          id="rosary-mysteries-title"
-        >
-          The four sets of mysteries
+        <p class="page-eyebrow">
+          {
+            t(
+              "Contemplate the life of Jesus with Mary",
+              "Pagnilayan ang buhay ni Hesus kasama si Maria",
+            )
+          }
+        </p><h2 id="rosary-mysteries-title">
+          {
+            t(
+              "The four sets of mysteries",
+              "Ang Apat na Pangkat ng mga Misteryo",
+            )
+          }
         </h2>
         {
           catalog.mysteries.map((set) => (
@@ -217,18 +340,33 @@ validateRosaryMysteries(catalog.mysteries);
           ))
         }
       </section>
-      <p class="rosary-sources">
-        Traditional English prayer texts. Sequence and prayer references: <a
-          href="https://www.usccb.org/how-to-pray-the-rosary"
-          >USCCB Rosary guide</a
-        >, <a href="https://www.usccb.org/prayers/prayers-rosary"
-          >Prayers of the Rosary</a
-        >, and <a
-          href="https://www.vatican.va/special/rosary/documents/misteri_en.html"
-          >the Holy See’s mystery guide</a
-        >. The day-based suggestion follows the customary weekly pattern;
-        another set may be chosen for the season or community’s prayer.
-      </p>
+      {
+        tl ? (
+          <p class="rosary-sources">
+            Mga panalangin at misteryo mula sa aklat na ginagamit ng ating
+            pamayanan. Ang mungkahing misteryo ay ayon sa karaniwang araw ng
+            pagdarasal; maaaring pumili ng ibang pangkat ayon sa panahon o
+            pagdarasal ng pamayanan.
+          </p>
+        ) : (
+          <p class="rosary-sources">
+            Traditional English prayer texts. Sequence and prayer references:{" "}
+            <a href="https://www.usccb.org/how-to-pray-the-rosary">
+              USCCB Rosary guide
+            </a>
+            ,{" "}
+            <a href="https://www.usccb.org/prayers/prayers-rosary">
+              Prayers of the Rosary
+            </a>
+            , and{" "}
+            <a href="https://www.vatican.va/special/rosary/documents/misteri_en.html">
+              the Holy See’s mystery guide
+            </a>
+            . The day-based suggestion follows the customary weekly pattern;
+            another set may be chosen for the season or community’s prayer.
+          </p>
+        )
+      }
     </div>
   </details>
 </rosary-guide>
@@ -311,6 +449,25 @@ validateRosaryMysteries(catalog.mysteries);
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 0.75rem;
     margin-top: 2rem;
+  }
+  .rosary-languages {
+    display: inline-flex;
+    gap: 0.4rem;
+    margin-top: 1.5rem;
+    padding: 0.25rem;
+    border: 1px solid #668494;
+    border-radius: 0.4rem;
+    font-size: 16px;
+  }
+  .rosary-languages a {
+    padding: 0.5rem 1rem;
+    border-radius: 0.2rem;
+    min-height: 44px;
+  }
+  .rosary-languages a[aria-current],
+  .rosary-languages a:hover {
+    background: #f0ddb4;
+    color: #17374a;
   }
   .mystery-choices a {
     display: flex;
@@ -501,6 +658,9 @@ validateRosaryMysteries(catalog.mysteries);
     white-space: pre-line;
     overflow-wrap: break-word;
     margin-top: 1.5rem;
+  }
+  .prayer-note {
+    font-style: italic;
   }
   .mystery-introduction {
     margin-top: 2rem;

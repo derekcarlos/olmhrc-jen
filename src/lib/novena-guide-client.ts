@@ -23,7 +23,7 @@ export function prepareNovenaGuide(root: HTMLElement) {
     });
   const days = [...root.querySelectorAll<HTMLElement>(".novena-day-reading")];
   const selectDay = (hash: string) => {
-    if (!/^#araw-[1-9]$/.test(hash)) return;
+    if (!/^#araw-[1-9]\d*$/.test(hash)) return;
     const selected = days.find((day) => `#${day.id}` === hash);
     if (!selected) return;
     days.forEach((day) => {
@@ -42,11 +42,10 @@ export function prepareNovenaGuide(root: HTMLElement) {
     }
   };
   root.dataset.filtered = "true";
-  selectDay(
-    /^#araw-[1-9]$/.test(window.location.hash)
-      ? window.location.hash
-      : "#araw-1",
-  );
+  const initialDay = days.some((day) => `#${day.id}` === window.location.hash)
+    ? window.location.hash
+    : "#araw-1";
+  selectDay(initialDay);
   const followHistory = () => selectDay(window.location.hash || "#araw-1");
   window.addEventListener("hashchange", followHistory, { signal });
   window.addEventListener("popstate", followHistory, { signal });

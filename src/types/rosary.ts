@@ -24,6 +24,8 @@ export interface RosaryPrayer {
   id: string;
   title: string;
   text: string;
+  rubric?: string;
+  instruction?: string;
 }
 export interface RosaryCatalog {
   mysteries: RosaryMysterySet[];

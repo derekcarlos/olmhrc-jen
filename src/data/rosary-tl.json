@@ -1,0 +1,191 @@
+{
+  "mysteries": [
+    {
+      "id": "joyful",
+      "title": "Mga Misteryo ng Tuwa",
+      "days": "Lunes at Sabado",
+      "items": [
+        {
+          "id": "annunciation",
+          "title": "Ang Pagpapahayag ng Balita sa Mahal na Birheng Maria"
+        },
+        {
+          "id": "visitation",
+          "title": "Ang Pagdalaw ng Mahal na Birhen kay Elisabet"
+        },
+        {
+          "id": "nativity",
+          "title": "Ang Pagsilang ng ating Panginoong Hesukristo"
+        },
+        {
+          "id": "presentation-in-the-temple",
+          "title": "Ang Paghahandog ng Sanggol na si Hesus sa Templo"
+        },
+        {
+          "id": "finding-of-jesus-in-the-temple",
+          "title": "Ang Pagkatagpo ng Batang si Hesus sa Templo"
+        }
+      ]
+    },
+    {
+      "id": "luminous",
+      "title": "Mga Misteryo ng Liwanag",
+      "days": "Huwebes",
+      "items": [
+        {
+          "id": "baptism-of-jesus-in-the-jordan",
+          "title": "Ang Pagbibinyag kay Hesus sa Jordan"
+        },
+        {
+          "id": "wedding-at-cana",
+          "title": "Ang Sariling Pagbubunyag ni Hesus sa Kasalan sa Cana"
+        },
+        {
+          "id": "proclamation-of-the-kingdom",
+          "title": "Ang Pagpapahayag ni Hesus Tungkol sa Paghahari ng Diyos"
+        },
+        {
+          "id": "transfiguration",
+          "title": "Ang Pagbabagong-anyo ni Hesus sa Bundok ng Tabor"
+        },
+        {
+          "id": "institution-of-the-eucharist",
+          "title": "Ang Pagtatatag ni Hesus ng Eukaristiya"
+        }
+      ]
+    },
+    {
+      "id": "sorrowful",
+      "title": "Mga Misteryo ng Hapis",
+      "days": "Martes at Biyernes",
+      "items": [
+        {
+          "id": "agony-in-the-garden",
+          "title": "Ang Pagdurusa sa Halamanan ng Getsamani"
+        },
+        {
+          "id": "scourging-at-the-pillar",
+          "title": "Ang Paghahampas sa ating Panginoon sa Haliging Bato"
+        },
+        {
+          "id": "crowning-with-thorns",
+          "title": "Ang Pagpuputong ng Koronang Tinik"
+        },
+        {
+          "id": "carrying-of-the-cross",
+          "title": "Ang Pagpapasan ng Krus Patungong Kalbaryo"
+        },
+        {
+          "id": "crucifixion",
+          "title": "Ang Pagpapako sa Krus at Kamatayan ng Panginoon"
+        }
+      ]
+    },
+    {
+      "id": "glorious",
+      "title": "Mga Misteryo ng Luwalhati",
+      "days": "Miyerkules at Linggo",
+      "items": [
+        {
+          "id": "resurrection",
+          "title": "Ang Pagkabuhay na Mag-uli ng ating Panginoon"
+        },
+        {
+          "id": "ascension",
+          "title": "Ang Pag-akyat sa Langit ng Panginoon"
+        },
+        {
+          "id": "descent-of-the-holy-spirit",
+          "title": "Ang Pagpanaog ng Espiritu Santo sa mga Apostoles at sa Birheng Maria"
+        },
+        {
+          "id": "assumption-of-mary",
+          "title": "Ang Pag-aakyat sa Langit ng Mahal na Birhen, Kaluluwa pati Katawan"
+        },
+        {
+          "id": "coronation-of-mary",
+          "title": "Ang Kaluwalhatian ng Lahat ng mga Banal, Kasama si Maria bilang Reyna"
+        }
+      ]
+    }
+  ],
+  "prayers": [
+    {
+      "id": "sign-of-cross",
+      "title": "Ang Tanda ng Krus",
+      "text": "Sa ngalan ng Ama,\nat ng Anak,\nat ng Espiritu Santo.\nAmen."
+    },
+    {
+      "id": "opening-verses",
+      "title": "Ang Paraang Dominikano ng Pagdarasal ng Rosaryo",
+      "text": "℣. Aba Ginoong Maria, napupuno ka ng grasya ang Panginoong Diyos ay sumasaiyo.\n℟. Bukod kang pinagpala sa babaeng lahat, at ipinagpala naman ang iyong anak na si Hesus.\n\n℣. Buksan mo Panginoon ko, aking mga labi.\n℟. At purihin ka ng aking bibig.\n\n℣. Pagsakitan Mo, Diyos ko, ang pag-aampon at saklolo mo sa akin.\n℟. At iadya mo ako sa mga kaaway.\n\n℣. Papuri sa Ama at sa Anak at sa Espiritu Santo.\n℟. Kapara noong una, ngayon at magpakailanman, magpasawalang hanggan. Amen!"
+    },
+    {
+      "id": "apostles-creed",
+      "title": "Sumasampalataya",
+      "text": "Sumasampalataya ako sa Diyos Amang Makapangyarihan sa lahat,\nna may gawa ng langit at lupa.\nSumasampalataya naman ako kay Hesukristo, iisang Anak ng Diyos,\nPanginoon nating lahat.\nNagkatawang-tao siya lalang ng Espiritu Santo,\nipinanganak ni Santa Mariang Birhen.\nPinagpakasakit ni Poncio Pilato;\nipinako sa krus, namatay, inilibing.\nNanaog sa kinaroroonan ng mga yumao;\nnang may ikatlong araw nabuhay na mag-uli.\nUmakyat sa langit,\nnaluklok sa kanan ng Diyos Amang Makapangyarihan sa lahat;\ndoon magmumulang paririto’t huhukom\nsa nangabubuhay at nangamatay na tao.\nSumasampalataya naman ako sa Diyos Espiritu Santo,\nsa Banal na Simbahang Katolika, sa kasamahan ng mga Banal;\nsa kapatawaran ng mga kasalanan,\nsa pagkabuhay na mag-uli ng nangamatay na tao,\nat sa buhay na walang hanggan. Amen."
+    },
+    {
+      "id": "our-father",
+      "title": "Ama Namin",
+      "text": "℣. Ama Namin, sumasalangit Ka, sambahin ang ngalan Mo.\nMapasa-amin ang kaharian Mo,\nsundin ang loob Mo dito sa lupa para nang sa langit.\n\n℟. Bigyan Mo kami ngayon ng aming kakanin sa araw-araw;\nat patawarin Mo kami sa aming mga sala\npara nang pagpapatawad namin sa mga nagkakasala sa amin;\nat huwag Mo kaming ipahintulot sa tukso,\nat iadya Mo kami sa lahat ng masama. Amen."
+    },
+    {
+      "id": "glory-be",
+      "title": "Luwalhati sa Ama",
+      "text": "℣. Luwalhati sa Ama at sa Anak at sa Espiritu Santo.\n\n℟. Kapara noong una, ngayon at magpakailanman,\nmagpasawalang hanggan. Amen!"
+    },
+    {
+      "id": "hail-mary",
+      "title": "Aba Ginoong Maria",
+      "text": "℣. Aba Ginoong Maria, napupuno ka ng grasya,\nang Panginoong Diyos ay sumasaiyo.\nBukod kang pinagpala sa babaeng lahat\nat ipinagpala naman ang iyong anak na si Hesus.\n\n℟. Santa Maria, Ina ng Diyos, ipanalangin mo kaming makasalanan\nngayon at kung kami’y mamamatay. Amen!"
+    },
+    {
+      "id": "fatima",
+      "title": "O Hesus Ko",
+      "text": "O Hesus ko patawarin mo kami sa aming mga sala.\nIligtas mo kami sa apoy ng impyerno.\nDalhin mo ang lahat ng kaluluwa sa langit,\nlalung-lalo na ang higit na nangangailangan ng iyong awa.\n\nKatamis-tamisang puso ni Hesus, iligtas mo po kami.\nPagkalooban Mo po ng kapayapaan ang buong daigdig,\nlalung-lalo na ang Pilipinas,\nat pagbalik-loobin Mo po ang mga makasalanan\nat ituro mo po sa kanila ang daan na patungo sa Iyo.\nO aming Ina, kami’y lukuban ng Iyong mapagpalang puso\nna ubod ng linis."
+    },
+    {
+      "id": "hail-holy-queen",
+      "title": "Aba po Santa Mariang Hari",
+      "text": "Aba po Santa Mariang Hari, Ina ng Awa,\nikaw ang kabuhayan at katamisan,\naba, pinananaligan ka namin.\nIkaw nga po ang tinatawag namin,\npinapanaw na taong anak ni Eba.\nIkaw rin ang pinagbubuntung-hininga namin,\nng aming pagtangis dini sa lupang bayang kahapis-hapis.\nAy aba, pintakasi ka namin,\nilingon mo sa amin ang mga mata mong maawain,\nat saka kung matapos yaring pagpanaw sa amin,\nay ipakita mo sa amin ang iyong anak na si Hesus.\nSanta Maria, Ina ng Diyos,\nmaawain, maalam at matamis na Birhen."
+    },
+    {
+      "id": "pray-for-us",
+      "title": "Ipanalangin Mo Kami",
+      "text": "℣. Ipanalangin mo kami, O Santang Ina ng Diyos.\n℟. Nang kami'y maging karapatdapat sa mga pangako ni Kristo. Siya Nawa."
+    },
+    {
+      "id": "litany-opening",
+      "title": "Litaniya ng Mahal na Birhen — Pambungad",
+      "text": "℣. Panginoon, maawa ka sa amin.\n℟. Panginoon, maawa ka sa amin.\n\n℣. Kristo, maawa ka sa amin.\n℟. Kristo, maawa ka sa amin.\n\n℣. Panginoon, maawa ka sa amin.\n℟. Panginoon, maawa ka sa amin.\n\n℣. Kristo, pakinggan mo kami.\n℟. Kristo, pakapakinggan mo kami."
+    },
+    {
+      "id": "litany-trinity",
+      "title": "Litaniya — Banal na Trinidad",
+      "text": "℣. Diyos Ama sa Langit,\n\n℣. Diyos Anak na tumubos sa sanlibutan,\n\n℣. Diyos Espiritu Santo,\n\n℣. Banal na Trinidad, iisang Diyos,",
+      "instruction": "Ang isasagot sa namumuno sa mga sumusunod ay: Maawa ka sa amin."
+    },
+    {
+      "id": "litany-mary",
+      "title": "Litaniya — Mahal na Birhen",
+      "text": "℣. Santa Maria\n℣. Santang Ina ng Diyos\n℣. Santang Birhen ng mga birhen\n℣. Ina ni Kristo\n℣. Inang puspos ng biyaya ng Diyos\n℣. Inang kalinis-linisan\n℣. Inang walang kamalay-malay sa kasalanan\n℣. Inang kasakdal-sakdal\n℣. Inang walang bahid\n℣. Inang pinaglihing walang kasalanan\n℣. Inang kaibig-ibig\n℣. Inang kahanga-hanga\n℣. Ina ng Laging Saklolo\n℣. Ina ng mabuting kahatulan\n℣. Ina ng Maylikha\n℣. Ina ng Mananakop\n℣. Ina ng Banal na Iglesya\n℣. Birheng kapaham-pahaman\n℣. Birheng dapat igalang\n℣. Birheng lalong dakila\n℣. Birheng makapangyarihan\n℣. Birheng maawain\n℣. Birheng matibay na loob sa magaling\n℣. Salamin ng katuwiran\n℣. Luklukan ng karunungan\n℣. Simula ng tuwa namin\n℣. Sisidlan ng kabanalan\n℣. Sisidlan ng bunyi at bantog\n℣. Sisidlang bukod ng mahal na loob na makusaing sumunod sa Panginoong Diyos\n℣. Rosang bulaklak na di mapuspos ng bait ng tao ang halaga\n℣. Tore ni David\n℣. Toreng garing\n℣. Bahay na ginto\n℣. Kaban ng tipan\n℣. Pinto ng Langit\n℣. Talang maliwanag\n℣. Mapagpagaling sa mga maysakit\n℣. Tanggulan ng mga kasalanan\n℣. Mapag-aliw sa mga nagdadalamhati\n℣. Mapag-ampon sa mga Kristiyano\n℣. Reyna ng mga Anghel\n℣. Reyna ng mga Patriarka\n℣. Reyna ng mga Propeta\n℣. Reyna ng mga Apostol\n℣. Reyna ng mga Martir\n℣. Reyna ng mga Kumpesor\n℣. Reyna ng mga Birhen\n℣. Reyna ng lahat ng mga Santo\n℣. Reynang ipinaglihi na di nagmana ng salang orihinal\n℣. Reynang iniakyat sa langit\n℣. Reyna ng kasantu-santuhang Rosaryo\n℣. Reyna ng kapayapaan",
+      "instruction": "Ang isasagot sa namumuno sa mga sumusunod ay: Ipanalangin mo kami."
+    },
+    {
+      "id": "litany-lamb-of-god",
+      "title": "Litaniya — Kordero ng Diyos",
+      "text": "℣. Kordero ng Diyos,\nikaw ang nakawawala ng kasalanan ng sanlibutan,\n℟. Pakinggan mo po kami.\n\n℣. Kordero ng Diyos,\nikaw ang nakawawala ng kasalanan ng sandaigdigan,\n℟. Pakapakinggan mo kami.\n\n℣. Kordero ng Diyos,\nikaw ang nakawawala ng kasalanan ng santinakpang langit,\n℟. Kaawaan mo kami."
+    },
+    {
+      "id": "rosary-prayer",
+      "title": "Pangwakas na Panalangin",
+      "text": "Manalangin tayo.\nDiyos at Panginoon namin,\nna ang bugtong na Anak Mo ay siyang ipinapagkamit namin\nng kagalinga’t kabuhayang walang hanggang\nsa pamamagitan ng kanyang pagkakatawang-tao,\npagkamatay, at pagkabuhay na mag-uli,\nipagkaloob Mo, hinihiling namin sa Iyo,\nna sa pagninilaynilay namin\nnitong mga misteryo ng Santo Rosaryo ni Santa Mariang Birhen\nay hindi lamang matularan namin\nang mga magagaling na hamimbawang nalalarawan doon,\nkundi naman makamtan namin\nang mga kagalingang ipinangako sa amin;\nalang-alang kay Hesukristong Panginoon namin;\nna kapisan Mo at ng Espiritu Santo\nnabubuhay at naghahari magpasawalang hanggan. Amen."
+    },
+    {
+      "id": "closing-responses",
+      "title": "Mga Pangwakas na Tugon",
+      "text": "℣. Sumaatin nawa ang banal na pagtulog.\n℟. Amen.\n\n℣. Sumalangit nawa ang mga kaluluwa ng mga yumao sa awa ng Diyos.\n℟. Amen.\n\n℣. Pagpalain nawa tayo ng makapangyarihang Diyos: Ama, Anak at\nEspiritu Santo, lumukob nawa sa atin at manatili sa atin magpakailanman.\n℟. Amen."
+    }
+  ]
+}

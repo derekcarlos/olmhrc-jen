@@ -8,7 +8,7 @@ The Rosary brings prayer and reflection together as we contemplate the life of J
 
 ## Begin
 
-1. Make the Sign of the Cross and recite the Apostles’ Creed while holding the crucifix.
+1. Make the Sign of the Cross, pray the opening verses and responses, then recite the Apostles’ Creed while holding the crucifix.
 2. On the first large bead, pray an Our Father.
 3. Pray a Hail Mary on each of the three small beads, then the Glory Be.
 

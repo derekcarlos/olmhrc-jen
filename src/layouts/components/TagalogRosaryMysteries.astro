@@ -1,0 +1,18 @@
+---
+import catalog from "@/data/rosary-tl.json";
+---
+
+{
+  catalog.mysteries.map((set) => (
+    <Fragment>
+      <h3>
+        {set.title} ({set.days})
+      </h3>
+      <ol>
+        {set.items.map((item) => (
+          <li>{item.title}</li>
+        ))}
+      </ol>
+    </Fragment>
+  ))
+}

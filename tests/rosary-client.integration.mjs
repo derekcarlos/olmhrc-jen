@@ -3,9 +3,14 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { JSDOM } from "jsdom";
 import { prepareRosaryGuide } from "../src/lib/rosary-guide-client.ts";
+import { rosaryWalkthrough } from "../src/lib/rosary-walkthrough.mjs";
 const catalog = JSON.parse(readFileSync("src/data/rosary.json", "utf8"));
+const tagalogCatalog = JSON.parse(
+  readFileSync("src/data/rosary-tl.json", "utf8"),
+);
 
-function fixture(hash, run, referenceContent = "") {
+function fixture(hash, run, referenceContent = "", language = "en") {
+  const guideCatalog = language === "tl" ? tagalogCatalog : catalog;
   const dom = new JSDOM(
     `<rosary-guide>
     ${catalog.mysteries.map((set) => `<a data-mystery-set="${set.id}" href="#${set.id}-mysteries">${set.title}</a>`).join("")}
@@ -13,7 +18,7 @@ function fixture(hash, run, referenceContent = "") {
     ${["opening", 0, 1, 2, 3, 4, "closing"].map((phase) => `<button data-rosary-phase="${phase}">${phase}</button>`).join("")}
     <div data-rosary-panel tabindex="-1"><p data-rosary-status></p><span data-rosary-position></span>
     <div data-rosary-reading><p data-rosary-context></p><h2 data-rosary-title></h2><span data-rosary-count></span>
-    <p data-rosary-rubric></p><p data-rosary-text></p><div data-rosary-beads></div>
+    <p data-rosary-rubric></p><p data-rosary-text></p><p data-rosary-prayer-note hidden></p><div data-rosary-beads></div>
     <div data-rosary-introduction hidden></div>
     <details data-rosary-reflection hidden><summary>View artwork & meditation</summary><div data-rosary-reflection-content></div></details>
     <footer data-rosary-controls><button data-rosary-action="previous">Back</button><div><span data-rosary-control-count></span><span data-rosary-control-beads>${Array.from({ length: 5 }, () => '<span aria-hidden="true"></span>').join("")}</span><span data-rosary-control-label></span></div><button data-rosary-action="next" data-rosary-next>Next</button></footer>
@@ -23,7 +28,8 @@ function fixture(hash, run, referenceContent = "") {
     { url: `https://holyrosarychapel.com/prayers/rosary${hash}` },
   );
   const root = dom.window.document.querySelector("rosary-guide");
-  root.dataset.rosaryCatalog = JSON.stringify(catalog);
+  root.dataset.rosaryCatalog = JSON.stringify(guideCatalog);
+  root.dataset.rosaryLanguage = language;
   root.querySelector("[data-rosary-panel]").scrollIntoView = () => {};
   const previous = globalThis.window;
   globalThis.window = dom.window;
@@ -40,6 +46,67 @@ function fixture(hash, run, referenceContent = "") {
 const click = (root, action) =>
   root.querySelector(`[data-rosary-action="${action}"]`).click();
 
+test("all four Tagalog sets show localized prayers, instructions, bead controls, and closing responses", () => {
+  for (const set of tagalogCatalog.mysteries) {
+    fixture(
+      `#${set.id}-mysteries`,
+      (root) => {
+        assert.match(
+          root.querySelector("[data-rosary-suggestion]").textContent,
+          /Miyerkules/,
+        );
+        for (const step of rosaryWalkthrough(set, "tl")) {
+          const expected = step.prayer
+            ? tagalogCatalog.prayers.find((prayer) => prayer.id === step.prayer)
+                .text
+            : step.announcement;
+          assert.equal(
+            root.querySelector("[data-rosary-text]").textContent,
+            expected,
+          );
+          assert.equal(
+            root.querySelector("[data-rosary-rubric]").textContent,
+            (step.prayer &&
+              tagalogCatalog.prayers.find((prayer) => prayer.id === step.prayer)
+                ?.instruction) ||
+              step.instruction,
+          );
+          assert.doesNotMatch(
+            root.querySelector("[data-rosary-status]").textContent,
+            /Decade|Opening prayers|Closing prayers/,
+          );
+          if (step.bead) {
+            assert.equal(
+              root.querySelector("[data-rosary-control-label]").textContent,
+              "Aba Ginoong Maria",
+            );
+            assert.match(
+              root
+                .querySelector("[data-rosary-beads]")
+                .getAttribute("aria-label"),
+              /Aba Ginoong Maria/,
+            );
+          }
+          click(root, "next");
+        }
+        assert.equal(
+          root.querySelector("[data-rosary-title]").textContent,
+          "Natapos ang pagdarasal ng Rosaryo.",
+        );
+        click(root, "previous");
+        assert.equal(
+          root.querySelector("[data-rosary-title]").textContent,
+          "Ang Tanda ng Krus",
+        );
+        click(root, "restart");
+        assert.equal(root.dataset.rosaryStep, "0");
+      },
+      "",
+      "tl",
+    );
+  }
+});
+
 test("persistent prayer controls keep their node and show the current step or bead", () =>
   fixture("#joyful-mysteries", (root) => {
     const controls = root.querySelector("[data-rosary-controls]");
@@ -54,7 +121,27 @@ test("persistent prayer controls keep their node and show the current step or be
       root.querySelector("[data-rosary-control-beads]").hidden,
       false,
     );
-    for (let i = 0; i < 3; i++) click(root, "next");
+    click(root, "next");
+    assert.equal(
+      root.querySelector("[data-rosary-title]").textContent,
+      "The Dominican Way of Praying the Rosary",
+    );
+    assert.equal(
+      root.querySelector("[data-rosary-text]").textContent,
+      catalog.prayers.find((prayer) => prayer.id === "opening-verses").text,
+    );
+    assert.equal(root.querySelector("[data-rosary-prayer-note]").hidden, false);
+    assert.match(
+      root.querySelector("[data-rosary-prayer-note]").textContent,
+      /In Lent.*Praise to You, Lord Jesus Christ, King of endless glory/,
+    );
+    click(root, "next");
+    assert.equal(
+      root.querySelector("[data-rosary-title]").textContent,
+      "Apostles’ Creed",
+    );
+    assert.equal(root.querySelector("[data-rosary-prayer-note]").hidden, true);
+    for (let i = 0; i < 2; i++) click(root, "next");
     assert.equal(count(), "1/3");
     assert.equal(label(), "Hail Mary");
     root.querySelector('[data-rosary-phase="0"]').click();
@@ -192,7 +279,7 @@ test("opens with the full opening prayer and the Philippine-day mystery suggesti
 test("walks every prayer through all ten Hail Marys in each decade and the closing", () =>
   fixture("", (root) => {
     const observed = [];
-    for (let step = 0; step < 81; step++) {
+    for (let step = 0; step < 82; step++) {
       observed.push(root.querySelector("[data-rosary-title]").textContent);
       assert.ok(root.querySelector("[data-rosary-text]").textContent.trim());
       click(root, "next");

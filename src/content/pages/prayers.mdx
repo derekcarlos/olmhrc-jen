@@ -1,6 +1,6 @@
 ---
 title: "Prayers"
-description: "Pray the Holy Rosary and join the September 28–October 6 novena to Our Lady of the Most Holy Rosary with our chapel community."
+description: "Pray the Holy Rosary, celebrate Flores de Maria throughout May, and join our chapel community in the September 28–October 6 novena."
 draft: false
 ---
 
@@ -9,6 +9,14 @@ import PrayerTile from "@/components/PrayerTile.astro";
 Find prayers and devotions for personal prayer, family prayer, and the life of **Our Lady of the Most Holy Rosary Chapel**.
 
 <div className="not-prose my-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+  <PrayerTile
+    title="Flores de Maria"
+    href="/prayers/flores-de-maria"
+    description="Honor the Blessed Virgin Mary with daily prayers, reflections, and an offering of flowers throughout May."
+    note="May 1–31"
+    label="Open the prayers"
+    kind="novena"
+  />
   <PrayerTile
     title="Novena to Our Lady of the Most Holy Rosary"
     href="/prayers/novena-to-our-lady-of-the-most-holy-rosary"
@@ -23,6 +31,14 @@ Find prayers and devotions for personal prayer, family prayer, and the life of *
     description="Follow the prayers step by step and find the four sets of mysteries for reflection."
     note="A guide for personal and family prayer"
     label="Read the guide"
+    kind="guide"
+  />
+  <PrayerTile
+    title="Ang Banal na Rosaryo"
+    href="/prayers/ang-banal-na-rosaryo"
+    description="Sundan ang bawat hakbang ng Santo Rosaryo sa Tagalog, kasama ang mga panalangin, litaniya, at misteryo."
+    note="Gabay sa Tagalog para sa pamilya at pamayanan"
+    label="Buksan ang gabay"
     kind="guide"
   />
 </div>

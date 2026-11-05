@@ -336,6 +336,12 @@
       "text": "In the name of the Father,\nand of the Son,\nand of the Holy Spirit.\nAmen."
     },
     {
+      "id": "opening-verses",
+      "title": "The Dominican Way of Praying the Rosary",
+      "text": "℣. Hail, Mary, full of grace, the Lord is with Thee;\n℟. Blessed art Thou among women, and blessed is the fruit of Thy womb, Jesus.\n\n℣. O Lord, open my lips;\n℟. And my mouth will proclaim Your praise.\n\n℣. O God, come to my assistance.\n℟. O Lord, make haste to help me.\n\n℣. Glory to the Father, and to the Son, and to the Holy Spirit.\n℟. As it was in the beginning, is now, and will be forever. Amen. Alleluia.",
+      "rubric": "(In Lent, replace “Alleluia” with “Praise to You, Lord Jesus Christ, King of endless glory.”)"
+    },
+    {
       "id": "apostles-creed",
       "title": "Apostles’ Creed",
       "text": "I believe in God, the Father almighty,\nCreator of heaven and earth;\nand in Jesus Christ, his only Son, our Lord;\nwho was conceived by the Holy Spirit,\nborn of the Virgin Mary,\nsuffered under Pontius Pilate,\nwas crucified, died, and was buried.\nHe descended into hell;\nthe third day he rose again from the dead;\nhe ascended into heaven,\nand sitteth at the right hand of God the Father almighty;\nfrom thence he shall come to judge the living and the dead.\n\nI believe in the Holy Spirit,\nthe holy catholic Church,\nthe communion of saints,\nthe forgiveness of sins,\nthe resurrection of the body,\nand life everlasting.\nAmen."

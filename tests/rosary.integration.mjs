@@ -4,17 +4,22 @@ import { JSDOM } from "jsdom";
 import { prepareRosaryGuide } from "../src/lib/rosary-guide-client.ts";
 import { rosaryWalkthrough } from "../src/lib/rosary-walkthrough.mjs";
 
+const language = process.argv.includes("--tagalog") ? "tl" : "en";
+const slug = language === "tl" ? "ang-banal-na-rosaryo" : "how-to-pray-the-holy-rosary";
 const html = process.argv.includes("--live")
   ? await (
-      await fetch("http://localhost:4321/prayers/how-to-pray-the-holy-rosary")
+      await fetch(`http://localhost:4321/prayers/${slug}`)
     ).text()
-  : readFileSync("dist/prayers/how-to-pray-the-holy-rosary/index.html", "utf8");
+  : readFileSync(`dist/prayers/${slug}/index.html`, "utf8");
 const dom = new JSDOM(html, {
-  url: "http://localhost:4321/prayers/how-to-pray-the-holy-rosary",
+  url: `http://localhost:4321/prayers/${slug}`,
 });
 const document = dom.window.document;
 const root = document.querySelector("rosary-guide");
 assert.ok(root);
+assert.equal(root.dataset.rosaryLanguage, language);
+assert.equal(root.getAttribute("lang"), language);
+assert.equal(root.querySelectorAll(".rosary-languages a").length, 2);
 assert.equal(document.querySelectorAll("h1").length, 1);
 const catalog = JSON.parse(root.dataset.rosaryCatalog);
 const reference = root.querySelector("[data-rosary-reference]");
@@ -72,7 +77,7 @@ try {
   for (const set of catalog.mysteries) {
     root.querySelector(`[data-mystery-set="${set.id}"]`).click();
     root.querySelector('[data-rosary-action="restart"]').click();
-    const sequence = rosaryWalkthrough(set);
+    const sequence = rosaryWalkthrough(set, language);
     for (const step of sequence) {
       const expected = step.prayer
         ? catalog.prayers.find((prayer) => prayer.id === step.prayer).text
@@ -121,5 +126,5 @@ try {
   globalThis.window = previous;
 }
 console.log(
-  "PASS: four complete Rosary walkthroughs, 81 steps each, full prayer texts and source line breaks, same-page reference booklet and no-JS fallback.",
+  `PASS (${language}): four complete Rosary walkthroughs, full prayer texts and source line breaks, same-page reference booklet, language links and no-JS fallback.`,
 );
