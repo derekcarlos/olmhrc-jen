@@ -8,7 +8,7 @@ mass_parts: ["communion"]
 marian: false
 seasons: ["Ordinary Time"]
 occasions: []
-audio: ""
+audio: "/audio/tinapay-ng-buhay-instrumental.mp3"
 audio_credit: ""
 youtube: "https://www.youtube.com/watch?v=9aqkW1W6Aw0"
 placeholder: false
