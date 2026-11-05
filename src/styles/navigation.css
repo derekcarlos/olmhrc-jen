@@ -1,5 +1,33 @@
 .header {
   @apply bg-body dark:bg-darkmode-body py-6;
+  border-bottom: 1px solid var(--color-border);
+}
+.dark .header {
+  border-bottom-color: var(--color-darkmode-border);
+}
+.header a:focus-visible,
+.header input:focus-visible + label {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 0.2rem;
+}
+.dark .header a:focus-visible,
+.dark .header input:focus-visible + label {
+  outline-color: var(--color-darkmode-accent);
+}
+.header .nav-link.active {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 2px;
+}
+.header .nav-dropdown-link.active {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+.dark .header .nav-link.active,
+.dark .header .nav-dropdown-link.active {
+  color: var(--color-darkmode-accent);
 }
 
 /* navbar items */

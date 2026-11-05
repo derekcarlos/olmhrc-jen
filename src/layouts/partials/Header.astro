@@ -4,6 +4,7 @@ import ThemeSwitcher from "@/components/ThemeSwitcher.astro";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
 import { IoSearch } from "react-icons/io5";
+import { navigationCurrent } from "@/lib/navigation.mjs";
 
 export interface ChildNavigationLink {
   name: string;
@@ -23,13 +24,19 @@ const { pathname } = Astro.url;
 ---
 
 <header class={`header z-30 ${settings.sticky_header && "sticky top-0"}`}>
-  <nav class="navbar container">
+  <nav class="navbar container" aria-label="Main navigation">
     <!-- logo -->
     <div class="order-0">
       <Logo />
     </div>
     <!-- navbar toggler -->
-    <input id="nav-toggle" type="checkbox" class="hidden" />
+    <input
+      id="nav-toggle"
+      type="checkbox"
+      class="sr-only lg:hidden"
+      aria-label="Toggle main navigation"
+      aria-controls="nav-menu"
+    />
     <label
       for="nav-toggle"
       class="order-3 cursor-pointer flex items-center lg:hidden text-text-dark dark:text-white lg:order-1"
@@ -58,15 +65,16 @@ const { pathname } = Astro.url;
                 <input
                   type="checkbox"
                   id={`submenu-${menu.name}`}
-                  class="peer hidden lg:hidden"
+                  class="peer sr-only"
+                  aria-label={`Toggle ${menu.name} menu`}
+                  aria-controls={`submenu-${menu.name}-links`}
                 />
                 <label
                   for={`submenu-${menu.name}`}
                   class={`nav-link inline-flex items-center ${
-                    menu.children?.map(({ url }) => url).includes(pathname) ||
-                    menu.children
-                      ?.map(({ url }) => `${url}/`)
-                      .includes(pathname)
+                    menu.children?.some(({ url }) =>
+                      navigationCurrent(pathname, url),
+                    )
                       ? "active"
                       : ""
                   }`}
@@ -76,17 +84,20 @@ const { pathname } = Astro.url;
                     <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                   </svg>
                 </label>
-                <ul class="nav-dropdown-list hidden peer-checked:block lg:invisible lg:absolute lg:block lg:opacity-0 lg:peer-checked:visible lg:peer-checked:opacity-100 lg:group-hover:visible lg:group-hover:opacity-100">
+                <ul
+                  id={`submenu-${menu.name}-links`}
+                  class="nav-dropdown-list hidden peer-checked:block lg:invisible lg:absolute lg:block lg:opacity-0 lg:peer-checked:visible lg:peer-checked:opacity-100 lg:group-hover:visible lg:group-hover:opacity-100"
+                >
                   {menu.children?.map((child) => (
                     <li class="nav-dropdown-item">
                       <a
                         href={child.url}
                         aria-label={child.name}
-                        class={`nav-dropdown-link block ${
-                          (pathname === `${child.url}/` ||
-                            pathname === child.url) &&
-                          "active"
-                        }`}
+                        aria-current={navigationCurrent(pathname, child.url)}
+                        class:list={[
+                          "nav-dropdown-link block",
+                          { active: !!navigationCurrent(pathname, child.url) },
+                        ]}
                       >
                         {child.name}
                       </a>
@@ -98,10 +109,11 @@ const { pathname } = Astro.url;
               <li class="nav-item">
                 <a
                   href={menu.url}
-                  class={`nav-link block ${
-                    (pathname === `${menu.url}/` || pathname === menu.url) &&
-                    "active"
-                  }`}
+                  aria-current={navigationCurrent(pathname, menu.url)}
+                  class:list={[
+                    "nav-link block",
+                    { active: !!navigationCurrent(pathname, menu.url) },
+                  ]}
                 >
                   {menu.name}
                 </a>

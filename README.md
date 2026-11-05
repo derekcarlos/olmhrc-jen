@@ -90,7 +90,7 @@ Edit source files, then rebuild to publish. `dist/`, `.astro/`, and `.json/` are
 
 ## Pages, navigation, and appearance
 
-The header contains **Home, About, Mass, Calendar, Pray, News**. Pray contains Readings, Prayers, and Songs. Edit the `main` and `footer` arrays in `menu.json` to change links. A navigation change alone does not create or remove a page.
+The header contains **Home, About, Mass, Calendar, Pray, News**. Pray contains Readings, Prayers, and Songs. Edit the `main` array in `menu.json` to update both the header and the footer's grouped links. The footer reuses those destinations under “Chapel life” and “Pray with us”; its welcome text and Mass/prayer invitations are in `src/layouts/partials/Footer.astro`. Both menus highlight nested pages as part of their parent section. A navigation change alone does not create or remove a page.
 
 The shared [ContentPage layout](src/layouts/ContentPage.astro) controls ordinary page width, title, and top image. Calendar uses its `wide` and `compact_header` frontmatter options. In `calendar.mdx`, edit the paragraph below the import to change the visible introduction; `description` at the top is metadata.
 

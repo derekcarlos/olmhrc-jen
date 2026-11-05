@@ -182,7 +182,7 @@ const pageUrl = new URL(Astro.url.pathname, config.site.base_url).href;
     <meta name="twitter:image:alt" content={shareImage.alt} />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
-  <body class="flex flex-col min-h-screen">
+  <body id="top" class="flex flex-col min-h-screen">
     {/* google tag manager noscript */}
     {
       config.google_tag_manager.enable && (
