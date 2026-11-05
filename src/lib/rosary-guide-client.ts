@@ -233,7 +233,9 @@ export function prepareRosaryGuide(root: HTMLElement, now = new Date()) {
   field("walkthrough").hidden = false;
   field<HTMLDetailsElement>("reference").open = false;
   root.dataset.enhanced = "true";
-  render();
+  // The panel is initially hidden; scroll only after enhancement reveals it.
+  if (window.location.hash === "#prayer-guide") showReading();
+  else render();
 
   root.addEventListener(
     "click",
@@ -298,6 +300,10 @@ export function prepareRosaryGuide(root: HTMLElement, now = new Date()) {
     { signal },
   );
   const followHistory = () => {
+    if (window.location.hash === "#prayer-guide") {
+      showReading();
+      return;
+    }
     const set =
       catalog.mysteries.find(
         (set) => `#${set.id}-mysteries` === window.location.hash,

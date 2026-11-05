@@ -30,7 +30,9 @@ function fixture(hash, run, referenceContent = "", language = "en") {
   const root = dom.window.document.querySelector("rosary-guide");
   root.dataset.rosaryCatalog = JSON.stringify(guideCatalog);
   root.dataset.rosaryLanguage = language;
-  root.querySelector("[data-rosary-panel]").scrollIntoView = () => {};
+  root.querySelector("[data-rosary-panel]").scrollIntoView = () => {
+    root.dataset.scrollTarget = "prayer-panel";
+  };
   const previous = globalThis.window;
   globalThis.window = dom.window;
   let cleanup;
@@ -45,6 +47,31 @@ function fixture(hash, run, referenceContent = "", language = "en") {
 }
 const click = (root, action) =>
   root.querySelector(`[data-rosary-action="${action}"]`).click();
+
+test("the prayer-guide anchor opens and focuses the same panel as Next in both languages", () => {
+  for (const language of ["en", "tl"])
+    fixture(
+      "#prayer-guide",
+      (root, window) => {
+        const data = language === "tl" ? tagalogCatalog : catalog;
+        assert.equal(root.dataset.scrollTarget, "prayer-panel");
+        assert.equal(
+          window.document.activeElement,
+          root.querySelector("[data-rosary-panel]"),
+        );
+        assert.equal(
+          root.querySelector("[data-rosary-title]").textContent,
+          data.prayers.find((prayer) => prayer.id === "sign-of-cross").title,
+        );
+        assert.equal(
+          root.querySelector('[aria-current="true"]').dataset.mysterySet,
+          "glorious",
+        );
+      },
+      "",
+      language,
+    );
+});
 
 test("all four Tagalog sets show localized prayers, instructions, bead controls, and closing responses", () => {
   for (const set of tagalogCatalog.mysteries) {

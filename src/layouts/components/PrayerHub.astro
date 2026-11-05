@@ -1,0 +1,510 @@
+---
+import {
+  LuArrowUpRight,
+  LuBookOpen,
+  LuCalendarDays,
+  LuFlower2,
+} from "react-icons/lu";
+import { prayerHubState } from "@/lib/prayer-hub.mjs";
+const today = prayerHubState();
+const devotions = [
+  {
+    title: "Flores de Maria",
+    date: "May 1–31",
+    number: "A month with Mary",
+    description:
+      "Bring a daily offering of prayer, reflection, and flowers to the Blessed Virgin Mary.",
+    href: "/prayers/flores-de-maria",
+    action: "Open the prayers",
+    Icon: LuFlower2,
+  },
+  {
+    title: "Rosary Novena",
+    date: "September 28–October 6",
+    number: "Nine days as one community",
+    description:
+      "Join our chapel in nine days of prayer in honor of Our Lady of the Most Holy Rosary.",
+    href: "/prayers/novena-to-our-lady-of-the-most-holy-rosary",
+    action: "Open the novena",
+    Icon: LuCalendarDays,
+  },
+];
+---
+
+<prayer-hub class="prayer-hub not-prose">
+  <section class="prayer-invitation" aria-labelledby="prayer-invitation-title">
+    <div class="invitation-copy">
+      <p class="invitation-kicker">The Holy Rosary · Ang Banal na Rosaryo</p>
+      <h2 id="prayer-invitation-title">Make a little room<br />for prayer.</h2>
+      <p class="invitation-description">
+        You don’t have to remember every prayer. Follow the Rosary, one bead at
+        a time, on your own or with the people you love.
+      </p>
+      <nav
+        class="prayer-language-links"
+        aria-label="Choose a language for the Rosary"
+      >
+        <a
+          class="begin-prayer"
+          href={today.tagalogHref}
+          lang="tl"
+          data-prayer-hub-tagalog
+          >Manalangin sa Tagalog <LuArrowUpRight
+            size={20}
+            aria-hidden="true"
+          /></a
+        >
+        <a
+          class="english-prayer"
+          href={today.englishHref}
+          data-prayer-hub-english
+          >Pray in English <LuArrowUpRight size={20} aria-hidden="true" /></a
+        >
+      </nav>
+      <p class="guide-assurance">
+        <LuBookOpen size={18} aria-hidden="true" /><span
+          >All the words are here. Go at your own pace.</span
+        >
+      </p>
+    </div>
+
+    <aside class="today-prayer" aria-labelledby="today-prayer-title">
+      <header class="today-dateline">
+        <span class="today-label">For today</span>
+        <span
+          ><span data-prayer-hub-weekday>{today.weekday}</span> · <time
+            datetime={today.date}
+            data-prayer-hub-date>{today.dateLabel}</time
+          ></span
+        >
+      </header>
+      <h3 id="today-prayer-title" data-prayer-hub-title>{today.title}</h3>
+      <p class="today-tagalog" lang="tl" data-prayer-hub-tagalog-title>
+        {today.tagalogTitle}
+      </p>
+      <ol class="mystery-preview" aria-label="The five mysteries for today">
+        {
+          today.mysteries.map((mystery, index) => (
+            <li>
+              <span class="mystery-bead" aria-hidden="true">
+                {index + 1}
+              </span>
+              <span data-prayer-hub-mystery>{mystery}</span>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="today-note">
+        A starting point for your prayer.<br />You can choose another set in the
+        guide.
+      </p>
+    </aside>
+  </section>
+
+  <section
+    class="community-devotions"
+    aria-labelledby="community-devotions-title"
+  >
+    <header class="devotions-heading">
+      <div>
+        <p class="page-eyebrow">In the life of our chapel</p><h2
+          id="community-devotions-title"
+        >
+          Prayer that brings us together.
+        </h2>
+      </div>
+      <p>
+        Return to these devotions with your family<br class="desktop-break" /> and
+        our chapel community.
+      </p>
+    </header>
+    <div class="devotion-cards">
+      {
+        devotions.map(
+          ({ title, date, number, description, href, action, Icon }) => (
+            <a class="devotion-card" href={href}>
+              <div class="devotion-card-top">
+                <>
+                  <span class="devotion-icon">
+                    <Icon size={30} aria-hidden="true" />
+                  </span>
+                  <span class="devotion-date">{date}</span>
+                </>
+              </div>
+              <p class="devotion-kicker">{number}</p>
+              <h3>{title}</h3>
+              <p class="devotion-description">{description}</p>
+              <span class="devotion-action">
+                {action}
+                <LuArrowUpRight size={22} aria-hidden="true" />
+              </span>
+            </a>
+          ),
+        )
+      }
+    </div>
+  </section>
+</prayer-hub>
+
+<script>
+  import { preparePrayerHub } from "@/lib/prayer-hub.mjs";
+  class PrayerHub extends HTMLElement {
+    private cleanup?: () => void;
+    connectedCallback() {
+      this.cleanup = preparePrayerHub(this);
+    }
+    disconnectedCallback() {
+      this.cleanup?.();
+    }
+  }
+  if (!customElements.get("prayer-hub"))
+    customElements.define("prayer-hub", PrayerHub);
+</script>
+
+<style>
+  .prayer-hub {
+    --hub-ink: var(--color-text-dark);
+    --hub-text: var(--color-text);
+    --hub-paper: #fffefb;
+    --hub-line: var(--color-border);
+    --hub-wash: var(--color-light);
+    --hub-gold: var(--color-accent);
+    display: block;
+    color: var(--hub-text);
+  }
+  :global(.dark) .prayer-hub {
+    --hub-ink: var(--color-darkmode-text-dark);
+    --hub-text: var(--color-darkmode-text);
+    --hub-paper: #1c2933;
+    --hub-line: var(--color-darkmode-border);
+    --hub-wash: var(--color-darkmode-light);
+    --hub-gold: var(--color-darkmode-accent);
+  }
+  .prayer-hub a {
+    text-decoration: none;
+  }
+  .prayer-hub a:focus-visible {
+    outline: 3px solid var(--hub-gold);
+    outline-offset: 5px;
+  }
+  .prayer-invitation {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+    gap: clamp(2rem, 4vw, 4.5rem);
+    padding: clamp(1.25rem, 4vw, 3rem);
+    border-radius: 0.85rem;
+    border-top: 4px solid #d9bd86;
+    background: #163d53;
+    color: #fff9ed;
+  }
+  .invitation-kicker {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #e7cf9b;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 1.25rem;
+  }
+  .invitation-copy h2 {
+    color: #fff9ed;
+    font-family: var(--font-secondary);
+    font-size: clamp(42px, 4.8vw, 68px);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    margin: 0 0 1.5rem;
+    text-wrap: balance;
+  }
+  .invitation-description {
+    color: #d3e1e7;
+    font-size: clamp(20px, 2vw, 23px);
+    line-height: 1.6;
+    max-width: 38ch;
+    margin: 0;
+  }
+  .prayer-language-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .prayer-language-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 54px;
+    padding: 0.85rem 1.1rem;
+    border-radius: 0.35rem;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.3;
+    border: 1px solid #718d9b;
+  }
+  .prayer-language-links .begin-prayer {
+    background: #f0ddb4;
+    color: #17374a;
+    border-color: #f0ddb4;
+  }
+  .prayer-language-links .begin-prayer:hover {
+    background: #f7e9cc;
+  }
+  .prayer-language-links .english-prayer {
+    color: #fff9ed;
+  }
+  .prayer-language-links .english-prayer:hover {
+    background: #214e65;
+  }
+  .prayer-language-links a:focus-visible {
+    outline-color: #e7cf9b;
+  }
+  .guide-assurance {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #c2d2da;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 1.25rem 0 0;
+  }
+  .guide-assurance :global(svg) {
+    flex-shrink: 0;
+    color: #e7cf9b;
+  }
+  .today-prayer {
+    background: var(--hub-paper);
+    color: var(--hub-ink);
+    border: 1px solid var(--hub-line);
+    border-radius: 0.6rem;
+    padding: clamp(1.25rem, 2.5vw, 2rem);
+    box-shadow: 0 12px 35px rgb(0 0 0 / 9%);
+  }
+  .today-dateline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--hub-line);
+    margin-bottom: 1.25rem;
+    color: var(--hub-text);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .today-label {
+    color: var(--hub-gold);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 600;
+  }
+  .today-prayer h3 {
+    color: var(--hub-ink);
+    font-family: var(--font-secondary);
+    font-size: clamp(30px, 3vw, 38px);
+    line-height: 1.15;
+    font-weight: 400;
+    margin: 0;
+  }
+  .today-tagalog {
+    color: var(--hub-gold);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0.4rem 0 1.25rem;
+  }
+  .mystery-preview {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.9rem;
+  }
+  .mystery-preview li {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 0.8rem;
+    align-items: start;
+    font-family: var(--font-secondary);
+    font-size: 23px;
+    line-height: 1.3;
+  }
+  .mystery-bead {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    color: var(--hub-gold);
+    border: 1px solid var(--hub-line);
+    border-radius: 50%;
+    font-family: var(--font-primary);
+    font-size: 12px;
+    margin-top: 0.15rem;
+  }
+  .today-note {
+    border-top: 1px solid var(--hub-line);
+    padding-top: 1rem;
+    margin: 1.5rem 0 0;
+    color: var(--hub-text);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .community-devotions {
+    margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  }
+  .devotions-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .devotions-heading h2 {
+    color: var(--hub-ink);
+    font-family: var(--font-secondary);
+    font-size: clamp(30px, 3.5vw, 42px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .devotions-heading > p {
+    color: var(--hub-text);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .devotion-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .devotion-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--hub-paper);
+    border: 1px solid var(--hub-line);
+    border-radius: 0.65rem;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    color: var(--hub-ink);
+    transition:
+      border-color 160ms,
+      transform 160ms;
+  }
+  .devotion-card:hover {
+    border-color: var(--hub-gold);
+    transform: translateY(-3px);
+  }
+  .devotion-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+  .devotion-icon {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    background: var(--hub-wash);
+    border: 1px solid var(--hub-line);
+    color: var(--hub-gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .devotion-date {
+    color: var(--hub-gold);
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: right;
+  }
+  .devotion-kicker {
+    color: var(--hub-text);
+    font-size: 13px;
+    line-height: 1.6;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.5rem;
+  }
+  .devotion-card h3 {
+    color: var(--hub-ink);
+    font-family: var(--font-secondary);
+    font-size: 36px;
+    line-height: 1.2;
+    font-weight: 400;
+    margin: 0 0 1rem;
+  }
+  .devotion-description {
+    color: var(--hub-text);
+    font-size: var(--reading-size);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 44ch;
+    flex-grow: 1;
+  }
+  .devotion-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.25rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--hub-line);
+    color: var(--hub-ink);
+    font-size: 17px;
+    font-weight: 500;
+  }
+  @media (max-width: 1000px) {
+    .devotions-heading {
+      flex-direction: column;
+      align-items: start;
+      gap: 0.75rem;
+    }
+    .desktop-break {
+      display: none;
+    }
+  }
+  @media (max-width: 900px) {
+    .prayer-invitation {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .invitation-description {
+      max-width: 52ch;
+    }
+    .invitation-copy h2 br {
+      display: none;
+    }
+  }
+  @media (max-width: 600px) {
+    .devotion-cards {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .prayer-language-links {
+      flex-direction: column;
+    }
+    .invitation-copy h2 {
+      font-size: 44px;
+    }
+    .invitation-copy h2 br {
+      display: block;
+    }
+    .today-prayer {
+      padding: 1.25rem;
+    }
+    .mystery-preview li {
+      font-size: 22px;
+    }
+    .devotion-card h3 {
+      font-size: 32px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .devotion-card {
+      transition: none;
+    }
+    .devotion-card:hover {
+      transform: none;
+    }
+  }
+</style>
