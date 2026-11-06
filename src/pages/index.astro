@@ -105,11 +105,17 @@ const resourceIcons = [FaBookOpen, FaPrayingHands, FaMusic];
     </section>
 
     <section class="community-section" aria-labelledby="community-title">
+      <img
+        class="community-photo"
+        src="/images/chapel-front.jpeg"
+        alt="Neighbors gathered for Mass beneath the folded roof of Our Lady of the Most Holy Rosary Chapel"
+        width="2731"
+        height="2048"
+        loading="lazy"
+        decoding="async"
+      />
       <div class="container community-inner">
-        <div class="community-emblem" aria-hidden="true">
-          R<span>Rosarium</span>
-        </div>
-        <div>
+        <div class="community-copy">
           <p class="eyebrow">Rooted in faith, close to home</p>
           <h2 id="community-title">{community.title}</h2>
           <p>{community.content}</p><p>{community.detail}</p>
@@ -261,46 +267,69 @@ const resourceIcons = [FaBookOpen, FaPrayingHands, FaMusic];
     margin-top: auto;
   }
   .community-section {
-    background: var(--color-light);
-    padding-block: 4.5rem;
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: 23rem;
+    overflow: clip;
+    background: #213448;
+    color: #fffdf8;
+  }
+  .community-photo {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 64%;
+  }
+  .community-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      90deg,
+      rgb(33 52 72 / 94%) 0%,
+      rgb(33 52 72 / 86%) 48%,
+      transparent 82%
+    );
   }
   .community-inner {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    align-items: center;
-    gap: 4rem;
-    max-width: 1050px;
+    padding-block: 3rem;
   }
-  .community-emblem {
-    width: 220px;
-    height: 220px;
-    margin: auto;
-    border: 1px solid var(--home-accent);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: Georgia, serif;
-    font-size: 6rem;
-    line-height: 1.1;
-    color: var(--home-accent);
+  .community-copy {
+    max-width: 34rem;
   }
-  .community-emblem span {
-    font-family: var(--font-primary);
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    margin-top: 0.8rem;
+  .community-copy .eyebrow {
+    color: #e8d4ae;
+    margin-bottom: 0.75rem;
   }
-  .community-inner p:not(.eyebrow) {
-    margin-bottom: 1rem;
+  .community-copy h2,
+  .community-copy .text-link {
+    color: #fffdf8;
+  }
+  .community-copy h2 {
+    font-size: clamp(1.85rem, 3vw, 2.4rem);
+    margin-bottom: 0.9rem;
+  }
+  .community-copy p:not(.eyebrow) {
+    margin-bottom: 0.6rem;
+    font-size: 18px;
+    line-height: 1.55;
+    color: #eef1f3;
+  }
+  .community-copy .text-link {
+    margin-top: 0.4rem;
+    padding-block: 0.4rem;
+    border-bottom: 1px solid #e8d4ae;
   }
   :global(.dark) .rosarium-home {
     --home-accent: var(--color-darkmode-accent);
   }
   :global(.dark) .gather-section,
-  :global(.dark) .community-section,
   :global(.dark) .resource-icon {
     background: var(--color-darkmode-light);
   }
@@ -326,8 +355,7 @@ const resourceIcons = [FaBookOpen, FaPrayingHands, FaMusic];
   }
   @media (max-width: 640px) {
     .chapel-life,
-    .resource-grid,
-    .community-inner {
+    .resource-grid {
       grid-template-columns: 1fr;
     }
     .chapel-life {
@@ -346,13 +374,21 @@ const resourceIcons = [FaBookOpen, FaPrayingHands, FaMusic];
     .prayer-section {
       padding-block: 3.5rem;
     }
-    .community-inner {
-      gap: 2.5rem;
+    .community-section {
+      display: block;
+      min-height: 0;
     }
-    .community-emblem {
-      width: 160px;
-      height: 160px;
-      font-size: 4.5rem;
+    .community-photo {
+      position: static;
+      display: block;
+      height: 14rem;
+      object-position: 50% 62%;
+    }
+    .community-section::before {
+      display: none;
+    }
+    .community-inner {
+      padding-block: 2rem 2.5rem;
     }
   }
 </style>
