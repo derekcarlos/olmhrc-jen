@@ -4,13 +4,20 @@ import tagalogCatalog from "@/data/rosary-tl.json";
 import type { RosaryCatalog } from "@/types/rosary";
 import RosaryMysteryContent from "@/components/RosaryMysteryContent.astro";
 import { validateRosaryMysteries } from "@/lib/rosary-mysteries.mjs";
+import { blockRosaryCatalog, blockRosaryPhases } from "@/lib/block-rosary.mjs";
 interface Props {
   language?: "en" | "tl";
+  variant?: "rosary" | "block";
 }
-const { language = "en" } = Astro.props;
+const { language = "en", variant = "rosary" } = Astro.props;
+const block = variant === "block";
 const tl = language === "tl";
 const t = (en: string, tagalog: string) => (tl ? tagalog : en);
-const catalog: RosaryCatalog = tl ? tagalogCatalog : englishCatalog;
+const catalog: RosaryCatalog = block
+  ? blockRosaryCatalog(englishCatalog)
+  : tl
+    ? tagalogCatalog
+    : englishCatalog;
 validateRosaryMysteries(catalog.mysteries);
 ---
 
@@ -18,47 +25,72 @@ validateRosaryMysteries(catalog.mysteries);
   class="rosary-guide"
   lang={language}
   data-rosary-language={language}
+  data-rosary-variant={variant}
   data-rosary-catalog={JSON.stringify(catalog)}
 >
   <section class="rosary-invitation" aria-labelledby="rosary-invitation-title">
     <p class="invitation-eyebrow">
       {
-        t(
-          "Pray with Mary · Contemplate the life of Jesus",
-          "Manalangin kasama si Maria · Pagnilayan ang buhay ni Hesus",
-        )
+        block
+          ? "A home at a time · A community in prayer"
+          : t(
+              "Pray with Mary · Contemplate the life of Jesus",
+              "Manalangin kasama si Maria · Pagnilayan ang buhay ni Hesus",
+            )
       }
     </p>
     <h2 id="rosary-invitation-title">
-      {t("A little stillness.", "Sandali ng katahimikan.")}<br />{
-        t("A prayer at a time.", "Isang panalangin sa bawat hakbang.")
+      {
+        block
+          ? "Welcome Mary."
+          : t("A little stillness.", "Sandali ng katahimikan.")
+      }<br />{
+        block
+          ? "Pray as one family."
+          : t("A prayer at a time.", "Isang panalangin sa bawat hakbang.")
       }
     </h2>
     <p>
       {
-        t(
-          "From the first Sign of the Cross to the closing prayer, the words are here. Move at your own pace.",
-          "Mula sa pag-aantanda ng krus hanggang sa pangwakas na panalangin, narito ang mga salitang darasalin. Manalangin sa sarili mong bilis.",
-        )
+        block
+          ? "Gather your household and neighbors. From the welcoming prayers to the Rosary and prayers for the family, follow together at your own pace."
+          : t(
+              "From the first Sign of the Cross to the closing prayer, the words are here. Move at your own pace.",
+              "Mula sa pag-aantanda ng krus hanggang sa pangwakas na panalangin, narito ang mga salitang darasalin. Manalangin sa sarili mong bilis.",
+            )
       }
     </p>
-    <nav
-      class="rosary-languages"
-      aria-label={t("Prayer language", "Wika ng panalangin")}
-    >
-      <a
-        href="/prayers/how-to-pray-the-holy-rosary"
-        lang="en"
-        hreflang="en"
-        aria-current={!tl ? "page" : undefined}>English</a
-      >
-      <a
-        href="/prayers/ang-banal-na-rosaryo"
-        lang="tl"
-        hreflang="tl"
-        aria-current={tl ? "page" : undefined}>Tagalog</a
-      >
-    </nav>
+    {
+      block ? (
+        <p class="block-rosary-note">
+          The leader reads <strong>℣.</strong> and everyone responds{" "}
+          <strong>℟.</strong> Acceptance and farewell are for the arrival and
+          departure of the image; skip them on other evenings.
+        </p>
+      ) : (
+        <nav
+          class="rosary-languages"
+          aria-label={t("Prayer language", "Wika ng panalangin")}
+        >
+          <a
+            href="/prayers/how-to-pray-the-holy-rosary"
+            lang="en"
+            hreflang="en"
+            aria-current={!tl ? "page" : undefined}
+          >
+            English
+          </a>
+          <a
+            href="/prayers/ang-banal-na-rosaryo"
+            lang="tl"
+            hreflang="tl"
+            aria-current={tl ? "page" : undefined}
+          >
+            Tagalog
+          </a>
+        </nav>
+      )
+    }
     <nav
       class="mystery-choices"
       aria-label={t("Choose the mysteries", "Piliin ang mga misteryo")}
@@ -101,9 +133,23 @@ validateRosaryMysteries(catalog.mysteries);
           "Pumili ng bahagi ng Rosaryo",
         )}
       >
+        {
+          block && (
+            <button type="button" data-rosary-phase="welcome">
+              <>
+                <span aria-hidden="true">⌂</span>
+                <span>Welcome to Mary</span>
+              </>
+            </button>
+          )
+        }
         <button type="button" data-rosary-phase="opening"
           ><span aria-hidden="true">✝</span><span
-            >{t("Opening prayers", "Mga pambungad na panalangin")}</span
+            >{
+              block
+                ? "The Holy Rosary"
+                : t("Opening prayers", "Mga pambungad na panalangin")
+            }</span
           ></button
         >
         {
@@ -122,9 +168,26 @@ validateRosaryMysteries(catalog.mysteries);
         }
         <button type="button" data-rosary-phase="closing"
           ><span aria-hidden="true">✝</span><span
-            >{t("Closing prayers", "Mga pangwakas na panalangin")}</span
+            >{
+              block
+                ? "Rosary collect"
+                : t("Closing prayers", "Mga pangwakas na panalangin")
+            }</span
           ></button
         >
+        {
+          block &&
+            Object.entries(blockRosaryPhases)
+              .filter(([id]) => ["litany", "family", "farewell"].includes(id))
+              .map(([id, title]) => (
+                <button type="button" data-rosary-phase={id}>
+                  <>
+                    <span aria-hidden="true">✝</span>
+                    <span>{title}</span>
+                  </>
+                </button>
+              ))
+        }
       </nav>
       <p class="route-note">
         {t("Instructions appear in red.", "Ang mga tagubilin ay nasa pula.")}<br
@@ -283,7 +346,7 @@ validateRosaryMysteries(catalog.mysteries);
                   <em>{prayer.instruction}</em>
                 </p>
               )}
-              {prayer.id === "fatima" && (
+              {!block && prayer.id === "fatima" && (
                 <p class="reference-rubric">
                   {t(
                     "Optional, after each decade.",
@@ -291,7 +354,15 @@ validateRosaryMysteries(catalog.mysteries);
                   )}
                 </p>
               )}
-              <p class="prayer-words">{prayer.text}</p>
+              <p class="prayer-words">
+                {block
+                  ? prayer.text
+                      .split(/([℣℟]\.)/g)
+                      .map((part) =>
+                        /^[℣℟]\.$/.test(part) ? <strong>{part}</strong> : part,
+                      )
+                  : prayer.text}
+              </p>
               {prayer.rubric && (
                 <p class="reference-rubric">
                   <em>{prayer.rubric}</em>
@@ -342,7 +413,17 @@ validateRosaryMysteries(catalog.mysteries);
         }
       </section>
       {
-        tl ? (
+        block ? (
+          <p class="rosary-sources">
+            The suggested mysteries follow the customary weekly pattern. You may
+            choose another set for the season or your community’s prayer. The
+            standard prayers and mystery meditations are shared with our{" "}
+            <a href="/prayers/how-to-pray-the-holy-rosary#prayer-guide">
+              English Rosary Guide
+            </a>
+            .
+          </p>
+        ) : tl ? (
           <p class="rosary-sources">
             Mga panalangin at misteryo mula sa aklat na ginagamit ng ating
             pamayanan. Ang mungkahing misteryo ay ayon sa karaniwang araw ng
@@ -423,6 +504,11 @@ validateRosaryMysteries(catalog.mysteries);
     color: #fff9ed;
     border-top: 4px solid #d9bd86;
     padding: clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .block-rosary-note {
+    max-width: 65ch;
+    color: #f0ddb4;
+    margin-top: 1.5rem;
   }
   .invitation-eyebrow {
     color: #e7cf9b;
@@ -900,6 +986,13 @@ validateRosaryMysteries(catalog.mysteries);
   .rosary-sources a {
     text-decoration: underline;
     text-underline-offset: 4px;
+  }
+  @media (min-width: 901px) {
+    .rosary-guide[data-rosary-variant="block"] .rosary-route {
+      max-height: calc(100svh - 13rem);
+      overflow-y: auto;
+      scrollbar-gutter: stable;
+    }
   }
   @media (max-width: 900px) {
     .mystery-choices {

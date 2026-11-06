@@ -61,3 +61,18 @@ node tests/rosary.integration.mjs
 ```
 
 Changes to the published site require the usual commit, push, and successful deployment.
+
+## Block Rosary
+
+The English Block Rosary is at `/prayers/block-rosary`, linked from the Prayers hub. It uses the same guide component, mystery meditations, artwork, and standard English prayers as the English Rosary. Changes to `src/data/rosary.json` appear in both guides.
+
+Edit `src/data/block-rosary.json` for the Block Rosary's additional prayers, hymns, Litany, and rubrics. Its `opening-verses` entry intentionally keeps the Block Rosary's own opening versicles. The standard Our Father, Hail Mary, and Glory Be are taken from the shared file, with leader and response symbols added at the paragraph division. Keep a blank line between those two parts in the shared prayer text.
+
+Edit `src/content/prayers/block-rosary.md` for the page title, description, and reference instructions. The sequence is in `src/lib/block-rosary.mjs`; do not change prayer IDs when editing the text. Acceptance and farewell are marked for the arrival/departure of the image and can be skipped on ordinary evenings. The Miraculous Medal invocation is optional after each Fatima Prayer.
+
+To check the Block Rosary after building:
+
+```sh
+node --test tests/block-rosary.test.mjs
+node tests/block-rosary.integration.mjs
+```

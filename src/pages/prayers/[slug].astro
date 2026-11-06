@@ -23,10 +23,11 @@ const isNovena = prayer.id === "novena-to-our-lady-of-the-most-holy-rosary";
 const isRosary = prayer.id === "how-to-pray-the-holy-rosary";
 const isTagalogRosary = prayer.id === "ang-banal-na-rosaryo";
 const isFlores = prayer.id === "flores-de-maria";
+const isBlockRosary = prayer.id === "block-rosary";
 ---
 
 <ContentPage
-  wide={isNovena || isRosary || isTagalogRosary || isFlores}
+  wide={isNovena || isRosary || isTagalogRosary || isFlores || isBlockRosary}
   title={prayer.data.title}
   meta_title={prayer.data.meta_title ?? `${prayer.data.title} | Rosarium`}
   description={prayer.data.description}
@@ -42,8 +43,11 @@ const isFlores = prayer.id === "flores-de-maria";
       <NovenaGuide>
         <Content />
       </NovenaGuide>
-    ) : isRosary || isTagalogRosary ? (
-      <RosaryGuide language={isTagalogRosary ? "tl" : "en"}>
+    ) : isRosary || isTagalogRosary || isBlockRosary ? (
+      <RosaryGuide
+        language={isTagalogRosary ? "tl" : "en"}
+        variant={isBlockRosary ? "block" : "rosary"}
+      >
         <div class="content" lang={prayer.data.language}>
           <Content />
         </div>

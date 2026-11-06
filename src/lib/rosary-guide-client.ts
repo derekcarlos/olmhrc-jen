@@ -2,6 +2,7 @@ import {
   rosaryWalkthrough,
   suggestedMysteries,
 } from "./rosary-walkthrough.mjs";
+import { blockRosaryWalkthrough, blockRosaryPhases } from "./block-rosary.mjs";
 
 import type {
   RosaryCatalog as Catalog,
@@ -19,6 +20,15 @@ export function prepareRosaryGuide(root: HTMLElement, now = new Date()) {
     return () => {};
   const language = root.dataset.rosaryLanguage === "tl" ? "tl" : "en";
   const tl = language === "tl";
+  const block = root.dataset.rosaryVariant === "block";
+  const walkthrough = (set: MysterySet) =>
+    block ? blockRosaryWalkthrough(set) : rosaryWalkthrough(set, language);
+  const phaseTitle = (phase: string) =>
+    block
+      ? blockRosaryPhases[phase as keyof typeof blockRosaryPhases] || phase
+      : phase === "opening"
+        ? t("Opening prayers", "Mga pambungad na panalangin")
+        : t("Closing prayers", "Mga pangwakas na panalangin");
   const t = (en: string, tagalog: string) => (tl ? tagalog : en);
   const controller = new window.AbortController();
   const { signal } = controller;
@@ -36,7 +46,7 @@ export function prepareRosaryGuide(root: HTMLElement, now = new Date()) {
     catalog.mysteries.find(
       (set) => `#${set.id}-mysteries` === window.location.hash,
     ) || suggested;
-  let steps = rosaryWalkthrough(selected, language);
+  let steps = walkthrough(selected);
   let position = 0;
   let complete = false;
 
@@ -74,11 +84,13 @@ export function prepareRosaryGuide(root: HTMLElement, now = new Date()) {
     reflection.open = false;
     if (complete) {
       field("title").textContent = t(
-        "The Rosary is complete.",
+        block
+          ? "Your Block Rosary prayer is complete."
+          : "The Rosary is complete.",
         "Natapos ang pagdarasal ng Rosaryo.",
       );
       field("status").textContent =
-        `${selected.title} · ${t("Closing prayers complete", "Natapos ang mga pangwakas na panalangin")}`;
+        `${selected.title} · ${block ? "Family prayer complete" : t("Closing prayers complete", "Natapos ang mga pangwakas na panalangin")}`;
       field("position").textContent = "";
       return;
     }
@@ -88,9 +100,7 @@ export function prepareRosaryGuide(root: HTMLElement, now = new Date()) {
             `Decade ${step.decade! + 1} of 5`,
             `Misteryo ${step.decade! + 1} sa 5`,
           )
-        : step.phase === "opening"
-          ? t("Opening prayers", "Mga pambungad na panalangin")
-          : t("Closing prayers", "Mga pangwakas na panalangin");
+        : phaseTitle(step.phase);
     const title = titleFor(step);
     field("status").textContent = `${selected.title} · ${phase} · ${title}`;
     field("position").textContent = t(
@@ -104,10 +114,20 @@ export function prepareRosaryGuide(root: HTMLElement, now = new Date()) {
     field("rubric").textContent =
       catalog.prayers.find((prayer) => prayer.id === step.prayer)
         ?.instruction || step.instruction;
-    field("text").textContent =
+    const words =
       step.kind === "mystery"
         ? step.announcement!
         : catalog.prayers.find((prayer) => prayer.id === step.prayer)!.text;
+    field("text").replaceChildren(
+      ...(block
+        ? words.split(/([℣℟]\.)/g).map((part) => {
+            if (!/^[℣℟]\.$/.test(part)) return document.createTextNode(part);
+            const marker = document.createElement("strong");
+            marker.textContent = part;
+            return marker;
+          })
+        : [document.createTextNode(words)]),
+    );
     const prayerNote =
       step.kind === "mystery"
         ? ""
@@ -169,9 +189,11 @@ export function prepareRosaryGuide(root: HTMLElement, now = new Date()) {
       ? t("Hail Mary", "Aba Ginoong Maria")
       : step.phase === "decade"
         ? `${t("Decade", "Misteryo")} ${step.decade! + 1}`
-        : step.phase === "opening"
-          ? t("Opening", "Pambungad")
-          : t("Closing", "Pangwakas");
+        : block
+          ? phaseTitle(step.phase)
+          : step.phase === "opening"
+            ? t("Opening", "Pambungad")
+            : t("Closing", "Pangwakas");
     const beads = field("beads");
     beads.hidden = !step.bead;
     beads.replaceChildren();
@@ -218,7 +240,7 @@ export function prepareRosaryGuide(root: HTMLElement, now = new Date()) {
   }
   function choose(set: MysterySet) {
     selected = set;
-    steps = rosaryWalkthrough(selected, language);
+    steps = walkthrough(selected);
     moveTo(0);
   }
   const showReading = () => {
@@ -270,9 +292,9 @@ export function prepareRosaryGuide(root: HTMLElement, now = new Date()) {
       if (phase) {
         const value = phase.dataset.rosaryPhase;
         const index = steps.findIndex((step) =>
-          value === "opening" || value === "closing"
-            ? step.phase === value
-            : step.kind === "mystery" && String(step.decade) === value,
+          /^\d$/.test(value || "")
+            ? step.kind === "mystery" && String(step.decade) === value
+            : step.phase === value,
         );
         if (index >= 0) {
           moveTo(index);

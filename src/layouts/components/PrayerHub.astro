@@ -4,10 +4,21 @@ import {
   LuBookOpen,
   LuCalendarDays,
   LuFlower2,
+  LuHouse,
 } from "react-icons/lu";
 import { prayerHubState } from "@/lib/prayer-hub.mjs";
 const today = prayerHubState();
 const devotions = [
+  {
+    title: "Block Rosary",
+    date: "From home to home",
+    number: "A family gathered in prayer",
+    description:
+      "Welcome Mary into your home and pray together, with the English Rosary, the Litany, and prayers for your family.",
+    href: "/prayers/block-rosary#prayer-guide",
+    action: "Begin the Block Rosary",
+    Icon: LuHouse,
+  },
   {
     title: "Flores de Maria",
     date: "May 1–31",
@@ -376,7 +387,7 @@ const devotions = [
   }
   .devotion-cards {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
     gap: 1.5rem;
   }
   .devotion-card {
