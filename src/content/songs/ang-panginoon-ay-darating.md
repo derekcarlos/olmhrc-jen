@@ -8,8 +8,8 @@ mass_parts: ["processional"]
 marian: false
 seasons: ["Advent"]
 occasions: [""]
-audio: ""
-audio_credit: ""
+audio: "/audio/ang-panginoon-ay-darating.mp3"
+audio_credit: "Piano Instrumental by Josh Bustillo"
 youtube: "https://www.youtube.com/watch?v=7OGkwMmkU0M"
 placeholder: false
 draft: false
