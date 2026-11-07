@@ -25,7 +25,7 @@ export function blockRosaryCatalog(english) {
     if (extras.has(prayer.id)) return extras.get(prayer.id);
     if (["our-father", "hail-mary", "glory-be"].includes(prayer.id)) {
       const [leader, ...response] = prayer.text.split(/\n\s*\n/);
-      return { ...prayer, text: `℣. ${leader}\n℟. ${response.join("\n\n")}` };
+      return { ...prayer, text: `℣. ${leader}\n\n℟. ${response.join("\n\n")}` };
     }
     return prayer;
   });

@@ -16,7 +16,7 @@ test("Block Rosary uses editable shared English prayers and all twenty meditatio
   assert.equal(catalog.mysteries, edited.mysteries);
   assert.equal(
     catalog.prayers.find((p) => p.id === "hail-mary").text,
-    "℣. Edited first half.\n℟. Edited response.",
+    "℣. Edited first half.\n\n℟. Edited response.",
   );
   assert.equal(
     catalog.prayers.find((p) => p.id === "apostles-creed").text,
@@ -26,6 +26,19 @@ test("Block Rosary uses editable shared English prayers and all twenty meditatio
     new Set(catalog.prayers.map((p) => p.id)).size,
     catalog.prayers.length,
   );
+});
+
+test("shared leader and response prayers preserve a blank line between their two parts", () => {
+  const catalog = blockRosaryCatalog(english);
+  for (const id of ["hail-mary", "our-father", "glory-be"]) {
+    const original = english.prayers.find((prayer) => prayer.id === id).text;
+    const [leader, ...response] = original.split(/\n\s*\n/);
+    assert.equal(
+      catalog.prayers.find((prayer) => prayer.id === id).text,
+      `℣. ${leader}\n\n℟. ${response.join("\n\n")}`,
+      id,
+    );
+  }
 });
 
 test("all mystery sets preserve the booklet order, full Rosary, litany, and host-only prayers", () => {
