@@ -4,6 +4,10 @@ Rosarium uses a small committed readings snapshot at `src/data/readings/snapshot
 
 Reading text uses Gentium Plus and headings use Gentium Book Plus. The rest of the site keeps Figtree. Imported text remains attributed to its source; confirm applicable reuse terms when maintaining the site.
 
+The page opens as a guided reading: one section at a time, with fixed **Bumalik / Susunod** controls and shortcuts to each section. **Basahin nang buo** shows the entire text; **Gabay sa pagbasa** returns to the current step. The final step invites a moment of reflection and offers restart/full-text options. Weekdays without a Second Reading naturally have one fewer step. The original text, Psalm response formatting, and attribution are preserved. Without JavaScript, and when printing, all sections remain available.
+
+The interface is in `src/layouts/components/SundayReadings.astro`, its behavior in `src/lib/reading-walkthrough-client.ts`, and styling in `src/styles/readings.css`. Text remains in the snapshot; editing the interface does not require re-downloading readings.
+
 ## Download and preview only
 
 ```sh

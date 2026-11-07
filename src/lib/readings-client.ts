@@ -1,4 +1,5 @@
 import { sundayDate, targetDates } from "./readings.mjs";
+import { prepareReadingWalkthrough } from "./reading-walkthrough-client.ts";
 
 export function prepareReadings() {
   document.querySelectorAll<HTMLElement>("[data-readings]").forEach((root) => {
@@ -10,6 +11,7 @@ export function prepareReadings() {
     const selected = root.dataset.selected!;
     const isEntry = root.dataset.entry === "true";
     const base = root.dataset.base || "";
+    const stopWalkthrough = prepareReadingWalkthrough(root);
     function refreshDate() {
       const today = new Date();
       const active = targetDates(mode, today);
@@ -34,6 +36,7 @@ export function prepareReadings() {
       root.querySelector<HTMLElement>("[data-readings-content]")!.hidden =
         expired;
       notice.hidden = !expired;
+      root.dataset.readingsActive = String(!expired);
       if (expired)
         root.querySelector<HTMLElement>(
           "[data-readings-stale-text]",
@@ -51,6 +54,7 @@ export function prepareReadings() {
       "astro:before-swap",
       () => {
         window.clearInterval(timer);
+        stopWalkthrough();
         document.removeEventListener("visibilitychange", onVisibility);
       },
       { once: true },

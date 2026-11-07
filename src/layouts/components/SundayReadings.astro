@@ -93,7 +93,10 @@ const sectionLabels: Record<string, string> = {
               <p class="page-eyebrow">Sa pagbasang ito</p>
               <nav class="reading-contents" aria-label="Mga bahagi ng pagbasa">
                 {record.sections.map((section, index) => (
-                  <a href={`#reading-${section.type}`}>
+                  <a
+                    href={`#reading-${section.type}`}
+                    data-reading-section-link={section.type}
+                  >
                     <span class="reading-index-number" aria-hidden="true">
                       {String(index + 1).padStart(2, "0")}
                     </span>
@@ -114,11 +117,21 @@ const sectionLabels: Record<string, string> = {
             </aside>
             <div class="reading-body">
               <article
+                id="reading-guide"
+                data-reading-panel
+                tabindex="-1"
                 aria-label={`Mga pagbasa — ${formatReadingDate(selected)}`}
               >
+                <div class="reading-guide-toolbar" data-reading-toolbar hidden>
+                  <p data-reading-status role="status" aria-atomic="true" />
+                  <button type="button" data-reading-action="toggle">
+                    Basahin nang buo
+                  </button>
+                </div>
                 {record.sections.map((section, index) => (
                   <section
                     class="reading-section"
+                    data-reading-section={section.type}
                     aria-labelledby={`reading-${section.type}`}
                   >
                     <p class="reading-section-label">
@@ -146,7 +159,47 @@ const sectionLabels: Record<string, string> = {
                     </div>
                   </section>
                 ))}
+                <div class="reading-complete" data-reading-complete hidden>
+                  <p class="page-eyebrow">Makinig. Magnilay. Isabuhay.</p>
+                  <h3>Dalhin ang Salita sa araw-araw.</h3>
+                  <p>
+                    Manatili sandali sa katahimikan. Anong salita ang nais mong
+                    isabuhay ngayon?
+                  </p>
+                  <div class="reading-completion-actions">
+                    <button type="button" data-reading-action="restart">
+                      Basahin muli
+                    </button>
+                    <button type="button" data-reading-action="all">
+                      Basahin nang buo
+                    </button>
+                  </div>
+                </div>
               </article>
+              <footer
+                class="reading-controls"
+                data-reading-controls
+                hidden
+                aria-label="Mga kontrol sa pagbasa"
+              >
+                <div class="reading-control-inner">
+                  <button
+                    type="button"
+                    class="reading-previous"
+                    data-reading-action="previous"
+                  >
+                    ← Bumalik
+                  </button>
+                  <p data-reading-progress />
+                  <button
+                    type="button"
+                    class="reading-next"
+                    data-reading-action="next"
+                  >
+                    Susunod →
+                  </button>
+                </div>
+              </footer>
               <footer class="reading-source" id="reading-source">
                 <p>
                   Pinagmulan:{" "}
