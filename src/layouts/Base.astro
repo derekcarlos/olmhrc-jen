@@ -13,7 +13,7 @@ import {
 import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 import Announcement from "./helpers/Announcement";
-import SearchModal from "./helpers/SearchModal";
+import SiteSearch from "@/components/SiteSearch.astro";
 
 // font families - extract font names for Font component (filter out type keys)
 const fontEntries = Object.entries(theme.fonts.font_family).filter(
@@ -191,7 +191,7 @@ const pageUrl = new URL(Astro.url.pathname, config.site.base_url).href;
     }
     <Announcement client:only="react" />
     <Header />
-    <SearchModal client:only="react" />
+    {config.settings.search && <SiteSearch />}
     <main class="grow" id="main-content">
       <slot />
     </main>

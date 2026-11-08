@@ -12,7 +12,7 @@
     "logo_text": "Rosarium"
   },
   "settings": {
-    "search": false,
+    "search": true,
     "sticky_header": true,
     "theme_switcher": true,
     "default_theme": "system",

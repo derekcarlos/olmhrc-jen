@@ -2,6 +2,8 @@
 
 Rosarium is the community website of **Our Lady of the Most Holy Rosary Chapel**, Jubilation Enclave North, Biñan, Laguna. It provides chapel information, Mass schedules, a liturgical and community calendar, readings, prayers, news, and choir practice resources.
 
+Universal search is available from the header or **Ctrl/Command+K**. Search song titles, lyrics, composers, prayers, readings, news, and chapel pages at `/search`. See [Managing search](docs/managing-search.md) for indexing, maintenance, and verification.
+
 **Intended production domain:** `https://holyrosarychapel.com`  
 **Local development:** `http://localhost:4321`
 

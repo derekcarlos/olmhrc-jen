@@ -1,0 +1,59 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<site-search-dialog>
+  <dialog
+    id="site-search-dialog"
+    class="site-search-dialog"
+    aria-labelledby="site-search-title"
+  >
+    <div class="site-search-dialog-heading">
+      <p class="page-eyebrow">Find your way · Rosarium</p>
+      <button type="button" data-site-search-close aria-label="Close search"
+        >×</button
+      >
+    </div>
+    <h2 id="site-search-title">What are you looking for?</h2>
+    <p class="site-search-help">
+      A song title, a line from the lyrics, a prayer, or chapel information.
+    </p>
+    <form
+      action={`${base}/search`}
+      method="get"
+      role="search"
+      aria-label="Search Rosarium"
+    >
+      <label for="site-search-query" class="sr-only">Search Rosarium</label>
+      <input
+        id="site-search-query"
+        name="q"
+        type="search"
+        placeholder="Try Santo, Magnificat, or a line you remember…"
+        maxlength="160"
+        autocomplete="off"
+      />
+      <button type="submit" class="site-search-submit">Search Rosarium →</button
+      >
+    </form>
+    <div class="site-search-dialog-footer">
+      <span>Search the whole site.</span><a href={`${base}/search`}
+        >Open search page →</a>
+    </div>
+  </dialog>
+</site-search-dialog>
+
+<script>
+  import { prepareSearchDialog } from "@/lib/site-search-dialog";
+  class SiteSearchDialog extends HTMLElement {
+    private cleanup?: () => void;
+    connectedCallback() {
+      this.cleanup = prepareSearchDialog(this);
+    }
+    disconnectedCallback() {
+      this.cleanup?.();
+    }
+  }
+  if (!customElements.get("site-search-dialog"))
+    customElements.define("site-search-dialog", SiteSearchDialog);
+</script>

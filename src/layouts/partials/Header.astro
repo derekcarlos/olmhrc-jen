@@ -21,6 +21,7 @@ export interface NavigationLink {
 const { main }: { main: NavigationLink[] } = menu;
 const { navigation_button, settings } = config;
 const { pathname } = Astro.url;
+const searchUrl = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/search`;
 ---
 
 <header class={`header z-30 ${settings.sticky_header && "sticky top-0"}`}>
@@ -142,13 +143,20 @@ const { pathname } = Astro.url;
     <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
       {
         settings.search && (
-          <button
-            class="border-border text-text-dark hover:text-primary dark:border-darkmode-border mr-5 inline-block border-r pr-5 text-xl dark:text-white dark:hover:text-darkmode-primary"
-            aria-label="search"
-            data-search-trigger
+          <a
+            class="site-search-trigger"
+            href={searchUrl}
+            aria-label="Search Rosarium"
+            aria-haspopup="dialog"
+            aria-controls="site-search-dialog"
+            title="Search Rosarium (Ctrl/⌘ K)"
+            data-site-search-open
           >
-            <IoSearch />
-          </button>
+            <>
+              <IoSearch size={21} aria-hidden="true" />
+              <span>Search</span>
+            </>
+          </a>
         )
       }
       <ThemeSwitcher className="mr-5" />

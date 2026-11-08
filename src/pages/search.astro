@@ -1,0 +1,141 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getSiteSearchIndex } from "@/lib/search-index";
+import { searchTypes } from "@/lib/site-search.mjs";
+const documents = await getSiteSearchIndex();
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<Base
+  title="Search Rosarium"
+  description="Find songs by title, lyrics, or composer. Search prayers, readings, news, and chapel information."
+  noindex
+>
+  <site-search-page
+    class="site-search-page container"
+    data-site-search-page
+    data-search-base={base}
+    data-search-index={`${base}/search-data/index.json`}
+  >
+    <header class="site-search-page-heading">
+      <p class="page-eyebrow">Every song. Every prayer. One place.</p>
+      <h1 class="page-title">Search Rosarium</h1>
+      <p>Remember a line, but not the title? Start with the words you know.</p>
+    </header>
+    <form
+      class="site-search-page-form"
+      action={`${base}/search`}
+      method="get"
+      role="search"
+      aria-label="Search the whole site"
+      data-search-form
+    >
+      <label for="search-page-query" class="sr-only"
+        >Song title, lyrics, prayer, or chapel information</label
+      >
+      <input
+        id="search-page-query"
+        name="q"
+        type="search"
+        placeholder="Search songs, lyrics, prayers, and more…"
+        maxlength="160"
+        autocomplete="off"
+        data-search-input
+      />
+      <button class="site-search-submit" type="submit">Search →</button>
+    </form>
+    <nav
+      class="site-search-types"
+      aria-label="Filter search results"
+      data-search-filters
+    >
+      <button type="button" data-search-type="all" aria-pressed="true"
+        >Everything <span data-search-count="all"></span></button
+      >
+      {
+        Object.entries(searchTypes).map(([type, label]) => (
+          <button type="button" data-search-type={type} aria-pressed="false">
+            {label} <span data-search-count={type} />
+          </button>
+        ))
+      }
+    </nav>
+    <div class="site-search-summary">
+      <p data-search-status role="status" aria-live="polite" aria-atomic="true">
+        Search by title, composer, or words from the lyrics.
+      </p><button type="button" data-search-clear hidden>Clear search</button>
+    </div>
+    <div class="site-search-empty" data-search-empty>
+      <p class="page-eyebrow">A place to begin</p><h2 data-search-empty-title>
+        Find the song before the first note.
+      </h2>
+      <p data-search-empty-text>
+        Song titles come first. You can also search the lyrics, composer, Mass
+        part, or season—or switch to prayers and readings.
+      </p>
+      <nav
+        class="site-search-suggestions"
+        data-search-suggestions
+        aria-label="Suggested searches"
+      >
+        {
+          ["Magnificat", "Sanctus", "Advent", "Rosary"].map((term) => (
+            <a href={`${base}/search?q=${encodeURIComponent(term)}`}>
+              {term} ↗
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+    <div class="site-search-error" data-search-error hidden>
+      <p>
+        Search couldn’t load. Please check your connection and try again.
+      </p><button type="button" data-search-retry>Try again</button>
+    </div>
+    <ol
+      class="site-search-results"
+      data-search-results
+      aria-label="Search results"
+    >
+    </ol>
+    <nav
+      class="site-search-pagination"
+      data-search-pagination
+      aria-label="Search result pages"
+      hidden
+    >
+      <a data-search-previous>← Previous</a><span data-search-page-label
+      ></span><a data-search-next>Next →</a>
+    </nav>
+    <noscript
+      ><p class="site-search-help">
+        Enable JavaScript to search. You can also browse these pages or use your
+        browser’s Find command:
+      </p><ul>
+        {
+          documents.map((document) => (
+            <li>
+              <a href={`${base}${document.url}`}>{document.title}</a> ·{" "}
+              {searchTypes[document.type]}
+            </li>
+          ))
+        }
+      </ul></noscript
+    >
+  </site-search-page>
+</Base>
+
+<script>
+  import { prepareSearchPage } from "@/lib/site-search-client";
+  class SiteSearchPage extends HTMLElement {
+    private cleanup?: () => void;
+    connectedCallback() {
+      this.cleanup = prepareSearchPage(this);
+    }
+    disconnectedCallback() {
+      this.cleanup?.();
+    }
+  }
+  if (!customElements.get("site-search-page"))
+    customElements.define("site-search-page", SiteSearchPage);
+</script>
