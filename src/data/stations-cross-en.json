@@ -1,0 +1,132 @@
+{
+  "edition": "New Version",
+  "source_url": "https://www.god-answers-prayers.com/seasonal_novena_prayer/new_way_of_the_cross/index.html",
+  "content_note": "Prayer text: The New Way of the Cross, God Answers Prayers. Songs are omitted. Each station concludes with the Our Father, Hail Mary, and Glory Be. An asterisk (*) marks a pause for breath when praying aloud together.",
+  "prayers": [
+    {
+      "id": "stations-opening",
+      "title": "Opening Prayer",
+      "text": "℣. Lord Jesus Christ, as we gather here to meditate on your Paschal Mystery, grant us all the grace to detest sin as you did, and to spend our life for our neighbor as you taught us through your example. Thus shall we be able to share not only in your sufferings but also in your resurrection. You who live and reign forever and ever.\n\n℟. Amen!",
+      "rubric": "The leader says ℣ and everyone responds ℟."
+    },
+    {
+      "id": "stations-adoration",
+      "title": "We Adore You, O Christ",
+      "text": "℣. We adore you, O Christ, and we praise you.\n\n℟. Because by your holy cross you have redeemed the world.",
+      "rubric": "The leader says ℣ and everyone responds ℟. Read the passage, then pause for reflection before the prayer."
+    },
+    {
+      "id": "stations-closing",
+      "title": "Final Prayer",
+      "text": "℣. All-powerful and ever-living God, your only Son died for our sins and rose triumphantly from the dead. In your goodness, raise up your faithful people to be one with him in the eternal life of heaven, where he lives and reigns with you and the Holy Spirit, one God, forever and ever.\n\n℟. Amen!",
+      "rubric": "The leader says ℣ and everyone responds ℟."
+    },
+    {
+      "id": "stations-blessing",
+      "title": "Concluding Blessing",
+      "text": "℣. And may the blessing of Almighty God: Father, Son and the Holy Spirit, descend upon us and with us remain always.\n\n℟. Amen!",
+      "rubric": "The leader says ℣ and everyone responds ℟."
+    }
+  ],
+  "stations": [
+    {
+      "id": "last-supper",
+      "title": "The Last Supper",
+      "reference": "1 Cor 11:23-26",
+      "meditation": "Lord Jesus, you loved us to the utmost. * You loved us to the end. * You remain in the Eucharist to be for us * the food and drink that give eternal life. * You remain with us * to be the continuous sign * of God's saving presence in all circumstances of life.\n\nForgive us, Lord, * for the times we have failed to appreciate * your gift of self to us * and your loving presence in the Eucharist.",
+      "scripture_text": "The Lord Jesus on the night in which he was betrayed took bread, and after he had given thanks, broke it and said, \"This is my body, which is for you. Do this in remembrance of me.\" In the same way, after the supper, he took the cup saying, \"This cup is the new covenant in my blood. Do this, whenever you drink it, in remembrance of me.\" Every time, then, you eat this bread and drink this cup, you proclaim the death of the Lord until he comes!",
+      "rubric": "Pause for silent reflection."
+    },
+    {
+      "id": "gethsemane",
+      "title": "The Agony in Gethsemani",
+      "reference": "Lk 22:39-42, 44-45",
+      "meditation": "It was a long, terrible night, Lord. * And not one of your disciples found the strength * to keep you company in your agony. * Your only strength was your determination * to do the Father's will at all costs.\n\nAnd your solitary agony continues, * even to this day, * in the loneliness of those who have no friends, * no home, no hope, no future * … Our society is filled with them, * but we pretend not to know, * and slumber noisily while they die * victims of neglect.",
+      "scripture_text": "Jesus went out and made his way, as was his custom, to the Mount of Olives. His disciples accompanied him. On reaching the place he said to them, \"Pray that you may not be put to the test.\" He withdrew from them about a stone's throw, then went down on his knees and prayed in these words: \"Father, if it is your will, take this cup from me; yet not my will but yours be done.\" In his anguish he prayed with even greater intensity, and his sweat became like drops of blood falling to the ground. Then he rose from prayer and came to his disciples, only to find them asleep, exhausted with grief."
+    },
+    {
+      "id": "sanhedrin",
+      "title": "Jesus Before the Sanhedrin",
+      "reference": "Mk 14:60-64; 15:1",
+      "meditation": "Lord Jesus, * you are the judge of all human beings, * yet you accepted to be judged by biased judges. * You are the all-holy, * the only innocent on earth, * yet you endured the condemnation of obstinate sinners …\n\nAnd the unfair trial goes on, * duplicated in all the unjust sentences * through which innocent people are condemned and rascals are acquitted. * You are still the victim of these injustices * perpetuated against the weak, the defenseless, * the voiceless of our society, * in whom you continue to live and suffer.",
+      "scripture_text": "The high priest stood up before the court and interrogated Jesus: \"Are you the Messiah, the Son of the Blessed One?\" Then Jesus answered: \"I am. And you will see the Son of Man seated at the right hand of the Almighty and coming with the clouds of heaven.\" At that the high priest tore his robes and said: \"What further need do we have of witnesses? You have heard the blasphemy. What is your verdict?\" They all concurred in the verdict \"guilty,\" with its sentence of death. As soon as it was daybreak the chief priests, with the elders and scribes, bound Jesus, led him away, and handed him over to Pilate."
+    },
+    {
+      "id": "scourging-crowning",
+      "title": "The Scourging and Crowning with Thorns",
+      "reference": "Mt 27:22-29, passim",
+      "meditation": "Instigated by your enemies, * the mob wanted you dead, dear Jesus, * and Pilate didn't think it was worthwhile * to uphold justice and protect your innocence. * So the mad mob had its way. * The Roman soldiers had their way * as they reduced your body to a bleeding wound * and crowned your head with thorns and mockery.\n\nAnd you didn't open your mouth in protest. * You endured it all, * meek, like a lamb to be slaughtered; * silent, like the millions of exploited simple people, * oppressed by the ruthless, * while many of us turn a blind eye * to such blatant injustices …",
+      "scripture_text": "Pilate asked the crowd: \"What am I to do with Jesus, the so-called Messiah?\" They all shouted, \"Crucify him!\" He said, \"Why, what crime has he committed?\" But they shouted louder, \"Crucify him!\"\n\nAfter having Jesus scourged, Pilate delivered him to be crucified. Then the soldiers, weaving a crown out of thorns, fixed it on his head, and stuck a reed in his right hand. Then they began to mock him by dropping to their knees before him, saying, \"Hail, king of the Jews!\""
+    },
+    {
+      "id": "receives-cross",
+      "title": "Jesus Receives the Cross",
+      "reference": "Mt 27:31",
+      "meditation": "Dear Lord, * the cross was the punishment for criminals and insurgents. * Who could believe that it was placed on the shoulders of the Son of God, * the source of all holiness and goodness?\n\nAnd yet, you accepted it in all humility * because you knew that such was the condition * to save us from eternal damnation.\n\nThe cross you accepted to carry was our cross * — the cross of our sins, * the cross of our weaknesses, our discouragements, * our failures, our wickedness …\n\nTo this very day, * innocent men, women and children are made to bear * the cross of other people's faults, greed, pride, lust …\n\nGrant us the grace, dear Lord, * never to burden others with our moral defects, * and bravely to carry with you * the cross of our daily duty.",
+      "scripture_text": "When they had finished mocking Jesus, they stripped him of the cloak, dressed him in his own clothes, and led him off to crucify him."
+    },
+    {
+      "id": "falls-under-cross",
+      "title": "Jesus Falls Under the Weight of the Cross",
+      "reference": "",
+      "meditation": "The distance from the Praetorium to Calvary was not long * — just a few hundred meters. * But it took you long, Lord, to walk that stretch, * staggering painfully * and groping in vain for help … * Your strength had long deserted you. * The road was uneven. * The crowd was merciless. * The cross was becoming heavier * and heavier, till it weighed you down … * down to the dust! * Like you, Lord, * so many of us stagger and fall * along the hard way of the cross * that life becomes when trials and failures * overwhelm us and crush us to the ground.\n\nWhen we stumble and fall, * Lord, be our support! * And when our brothers and sisters seem unable to carry the burden of their trials, * Lord, give us a compassionate heart, * that we may not add insult to injury.",
+      "scripture_text": "As he staggered along the road to Calvary, Jesus felt crushed by the cross he was carrying on his shoulders. Much more, perhaps, he felt overwhelmed by the savage jeering of the mob that kept insulting him as if he were a criminal … Exhausted by the sleepless night and the tortures he had already endured, Jesus fell to the ground under the weight of the cross and the moral tortures he had suffered."
+    },
+    {
+      "id": "simon-of-cyrene",
+      "title": "Simon of Cyrene Carries the Cross of Jesus",
+      "reference": "Mk 15:21",
+      "meditation": "Simon just happened to pass there * on his way home from the fields. * He was forced to make a detour * — a detour that changed the course of his life. * Forced to carry your cross, Lord Jesus, * he himself became a victim of oppression and injustice. * He experienced a share of your pain, Lord, * and thus discovered what life can be * if one wants to help others.\n\nSend us more Simons of Cyrene, Lord. * Send us people who have the courage * to shoulder the crosses of others in brotherly solidarity and patience. * Make us like Simon, Lord. * Grant us the strength and generosity to carry one another's burden, * for our society is crowded with poor Christs * crushed by crosses of all shapes and weights.",
+      "scripture_text": "A man named Simon of Cyrene, the father of Alexander and Rufus, was coming in from the fields. The soldiers pressed him into service to carry the cross of Jesus."
+    },
+    {
+      "id": "women-of-jerusalem",
+      "title": "Jesus Meets the Pious Women of Jerusalem",
+      "reference": "Lk 23:27-31",
+      "meditation": "Lord Jesus, * those women of Jerusalem were surely sincere in their sorrow for you. * They were brave enough to follow you along the road to Calvary. * But you directed their attention to the cause of your suffering * — SIN, and the punishment which unrepentance would bring down on all.\n\nWe wish we were as sincere as they were * in lamenting the unfair treatment to which you were subjected. * And we wish likewise that we were equally sensitive * to the suffering of our neighbor * — especially the squatters, the jobless, the homeless, * and all the other victims of human injustice and exploitation. * For it is all these forms of sin * which bring down God's well-deserved punishments on our society.",
+      "scripture_text": "A great crowd of people followed Jesus, including some women who beat their breasts and lamented over him. Jesus turned to them and said: \"Daughters of Jerusalem, do not weep for me. Weep for yourselves and for your children. The days are coming when they will say, 'Happy are the sterile, the wombs that never bore and the breasts that never nursed.' Then they will begin saying to the mountains, 'Fall on us!' and to the hills, 'Cover us!' If they do these things in the green wood, what will happen in the dry?\""
+    },
+    {
+      "id": "nailed-to-cross",
+      "title": "Jesus Is Nailed to the Cross",
+      "reference": "Lk 23:33-35",
+      "meditation": "Lord, * those hands of yours which caressed the children, * blessed the sick and chased demons away * are now nailed mercilessly to the wood of the cross. * Your feet which had taken you from village to village * in an effort to bring the Good News of the Kingdom to all, * are now immobilized forever … * Your enemies dare you to come down from the cross. * But you don't. * Not because of the nails, * but because of your love for us sinners. * It was love which brought you there. * It is love that keeps you there.\n\nLord Jesus, * grant us the grace to do our duties * out of love and with love, * even when all this resembles the pain of the crucifixion.",
+      "scripture_text": "When they came to the place called \"the Skull,\" they crucified Jesus there together with the two criminals. Jesus said, \"Father, forgive them; they do not know what they are doing.\" The people stood there watching and the leaders kept jeering at him, saying, \"He saved others. Let him save himself if he is the Messiah of God, the chosen one!\""
+    },
+    {
+      "id": "repentant-thief",
+      "title": "The Repentant Thief",
+      "reference": "Lk 23:39-43",
+      "meditation": "Lord Jesus, * there was so much sincerity * in the public confession of the repentant thief … * so much faith and trust * in the words he addressed to you. * The man really believed in your mercy. * He believed in your kingdom. * And you did not disappoint him.\n\nWe often meet people who have done wrong * and would like to begin a new life. * Lord, grant that we may always be as well disposed to them * as you were to the repentant thief. * In this way, we, too, * will end the course of our life * sharing the faith and trust of the good thief, * and hearing your promise of eternal life.",
+      "scripture_text": "One of the criminals hanging in crucifixion blasphemed Jesus: \"Aren't you the Messiah? Then save yourself and us!\" But the other one rebuked him: \"Have you no fear of God, seeing that you are under the same sentence? We deserve it, after all. We are only paying the price for what we've done, but this man has done nothing wrong.\" He then said, \"Jesus, remember me when you enter upon your reign.\" And Jesus replied, \"I assure you: this day you will be with me in paradise.\""
+    },
+    {
+      "id": "mary-and-john",
+      "title": "Mary and John at the Foot of the Cross",
+      "reference": "Jn 19:25-27",
+      "meditation": "\"Suffering, like a sword, will pierce your heart,\" * had prophesied old Simeon. * On Calvary, Mary experienced the fulfillment of that prophecy in its fullness. * And once again she said in her heart, * \"Let it be done to me as you said.\"\n\nNo one on earth loved you as your Mother did, Lord; * nor did you love any other person on earth as you loved her. * And she was there, * witness and sharer of your redeeming suffering. * By entrusting her to John, you provided for the remaining days of your Mother. * By entrusting John to her, you provided for all mankind, * for you gave us all * your very own mother as our mother.\n\nMay we be as loving children to her as you were.",
+      "scripture_text": "Near the cross of Jesus there stood his mother, his mother's sister, Mary the wife of Clopas, and Mary Magdalene. Seeing his mother there with the disciple whom he loved, Jesus said to his mother, \"Woman, there is your son.\" In turn he said to the disciple, \"There is your mother.\" From that hour onward, the disciple took Mary into his care."
+    },
+    {
+      "id": "dies-on-cross",
+      "title": "Jesus Dies on the Cross",
+      "reference": "Lk 23:44, 46; Jn 19:28-30",
+      "meditation": "We were all condemned to die because of our sins, * and you took upon yourself * the death penalty that you alone did not deserve.\n\nYou had only one life, dear Lord, * like all of us, * and you gave it up of your own free will, * that we might live forever. * It was our sins, it was your love for us that killed you, * dearest Jesus.\n\nBefore you breathed your last * you said you were thirsty — * thirsty for love. * Today we offer you * the solace of our repentant love, Lord. * We want to love you * also for the days when we failed to do so. * We want to love you for all those who refuse to love. * And may we, at the end of our stormy life, * die confidently pronouncing your last words, * \"Father, into your hands I commend my spirit!\"",
+      "scripture_text": "It was now around midday, and darkness came over the whole land until mid-afternoon with an eclipse of the sun. Jesus said: \"I am thirsty.\" They stuck a sponge soaked in wine on some hyssop and raised it to his lips. When Jesus took the wine he said: \"Now it is finished.\" He uttered a loud cry and said, \"Father, into your hands I commend my spirit.\" After he said this, he died."
+    },
+    {
+      "id": "laid-in-tomb",
+      "title": "Jesus Is Laid in the Tomb",
+      "reference": "Mt 27:57-60",
+      "meditation": "Lord Jesus, * the dark night of death has engulfed you. * The only bright lights * are the tender love of your Mother, * the faithfulness of John * and the friendship of Joseph of Arimathea and a few others. * You are laid in the tomb * like a precious treasure placed in a chest; * like a seed hidden in the soil.\n\nYour burial gives meaning and hope to our burials. * Thanks to you, * they have become the tranquil sleep in the lap of mother earth, * trustfully awaiting the joyful awakening * when the dawn of our resurrection * will break the fetters of death forever.",
+      "scripture_text": "When evening fell, a wealthy man — Joseph of Arimathea — arrived. He was another of Jesus' disciples, and had gone to request the body of Jesus. Thereupon Pilate issued an order for its release. Taking the body, Joseph wrapped it in fresh linen, and laid it in his own tomb which had been hewn from a formation of rock. Then he rolled a huge stone across the entrance of the tomb and went away."
+    },
+    {
+      "id": "resurrection",
+      "title": "Jesus Rises from Death",
+      "reference": "Mt 28:1-2, 5-7",
+      "meditation": "Jesus, * your holy body could not undergo the corruption of the sepulcher. * The tomb could not hold you longer than it was needed * to prove that your death was real. * Now the shattered seals, * the entrance stone rolled back, * the testimony of the angel * prove that our resurrection is real. * It also proves in advance * that we too shall rise.\n\nYour resurrection, Lord, * is the pattern of our resurrection even now. * It is a challenge to all of us to rise * from the death of sin to the life of grace.\n\nJesus, you are the Lord of the living. * Thank you, Lord, * for dying for us. * Thank you for rising for us.",
+      "scripture_text": "After the sabbath, as the first day of the week was dawning, Mary Magdalene came with the other Mary to inspect the tomb. Suddenly there was a mighty earthquake, as the angel of the Lord descended from heaven. He came to the stone, rolled it back, and sat on it. Then the angel spoke, addressing the women: \"Do not be frightened. I know you are looking for Jesus the crucified. He is not here. He has been raised, exactly as he promised. Go quickly and tell his disciples, 'He has been raised from the dead.'\""
+    }
+  ]
+}

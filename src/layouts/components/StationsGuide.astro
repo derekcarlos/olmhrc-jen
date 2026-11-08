@@ -1,0 +1,806 @@
+---
+import english from "@/data/stations-cross-en.json";
+import tagalog from "@/data/stations-cross-tl.json";
+import englishRosary from "@/data/rosary.json";
+import tagalogRosary from "@/data/rosary-tl.json";
+import type { StationsDevotion } from "@/types/stations";
+import { stationsPrayerCatalog } from "@/lib/stations-cross.mjs";
+interface Props {
+  language?: "en" | "tl";
+}
+const { language = "en" } = Astro.props;
+const tl = language === "tl";
+const t = (en: string, tagalog: string) => (tl ? tagalog : en);
+const devotion: StationsDevotion = tl ? tagalog : english;
+const rosary = tl ? tagalogRosary : englishRosary;
+const prayers = stationsPrayerCatalog(devotion, rosary);
+const adoration = prayers.find((prayer) => prayer.id === "stations-adoration")!;
+---
+
+<stations-guide
+  class="stations-guide"
+  lang={language}
+  data-stations-catalog={JSON.stringify({ devotion, prayers })}
+>
+  <section
+    class="stations-invitation"
+    aria-labelledby="stations-invitation-title"
+  >
+    <p class="invitation-eyebrow">
+      {
+        t(
+          "English · Stations of the Cross · New Version",
+          "Tagalog · Ang Bagong Daan ng Krus",
+        )
+      }
+    </p>
+    <h2 id="stations-invitation-title">
+      {t("Walk with Jesus.", "Lumakad kasama ni Hesus.")}<br />{
+        t("One station at a time.", "Isang istasyon sa bawat hakbang.")
+      }
+    </h2>
+    <p>
+      {
+        t(
+          "From the table of the Last Supper to the morning of the Resurrection, make room for prayer. All the words are here; move at your own pace.",
+          "Mula sa Huling Hapunan hanggang sa umaga ng Muling Pagkabuhay, maglaan ng panahon sa panalangin. Narito ang lahat ng salitang darasalin; manalangin sa sarili mong bilis.",
+        )
+      }
+    </p>
+    <nav
+      class="stations-languages"
+      aria-label={t("Prayer language", "Wika ng panalangin")}
+    >
+      <a
+        href="/prayers/stations-of-the-cross#prayer-guide"
+        lang="en"
+        hreflang="en"
+        aria-current={!tl ? "page" : undefined}>English</a
+      >
+      <a
+        href="/prayers/ang-bagong-daan-ng-krus#prayer-guide"
+        lang="tl"
+        hreflang="tl"
+        aria-current={tl ? "page" : undefined}>Tagalog</a
+      >
+    </nav>
+    <div class="journey-assurance">
+      <span>{t("14 stations", "14 na istasyon")}</span><span
+        >{t("Full prayers included", "Kumpleto ang mga panalangin")}</span
+      ><span
+        >{t("Pray alone or together", "Mag-isa o kasama ang pamayanan")}</span
+      >
+    </div>
+    <p class="edition-note">
+      {
+        t(
+          "An asterisk (*) marks a pause for breath when praying aloud together.",
+          "Bibigkasin ng gabay ang ℣ at tutugon ang lahat sa ℟. Ang mga tagubilin ay nasa pula.",
+        )
+      }
+    </p>
+  </section>
+
+  <div class="stations-workspace" data-stations-workspace hidden>
+    <aside
+      class="stations-route"
+      aria-label={t(
+        "Your place in the Way of the Cross",
+        "Ang iyong kinaroroonan sa Daan ng Krus",
+      )}
+    >
+      <p class="page-eyebrow">
+        {t("Your prayer journey", "Gabay sa panalangin")}
+      </p>
+      <nav aria-label={t("Jump to a station", "Pumunta sa isang istasyon")}>
+        <button type="button" data-stations-jump="opening"
+          ><span aria-hidden="true">✝</span><span
+            >{t("Opening prayers", "Mga pambungad na panalangin")}</span
+          ></button
+        >
+        {
+          devotion.stations.map((station, index) => (
+            <button type="button" data-stations-jump={station.id}>
+              <>
+                <span class="route-number" aria-hidden="true">
+                  {index + 1}
+                </span>
+                <span>{station.title}</span>
+              </>
+            </button>
+          ))
+        }
+        <button type="button" data-stations-jump="closing"
+          ><span aria-hidden="true">✝</span><span
+            >{t("Closing prayers", "Mga pangwakas na panalangin")}</span
+          ></button
+        >
+      </nav>
+      <p class="route-note">
+        {t("Instructions appear in red.", "Ang mga tagubilin ay nasa pula.")}<br
+        />{t("Pray the larger text.", "Dasalin ang malaking teksto.")}
+      </p>
+      <button
+        class="restart-prayer"
+        type="button"
+        data-stations-action="restart"
+        >{t("Start again", "Magsimula muli")}</button
+      >
+    </aside>
+
+    <article
+      id="prayer-guide"
+      class="stations-panel"
+      data-stations-panel
+      tabindex="-1"
+      aria-labelledby="stations-prayer-title"
+    >
+      <header class="stations-header">
+        <p class="page-eyebrow">
+          {t("In prayer together", "Sama-sama sa panalangin")}
+        </p>
+        <p
+          class="sr-only"
+          data-stations-status
+          role="status"
+          aria-atomic="true"
+        >
+        </p>
+        <p class="journey-position" data-stations-position></p>
+      </header>
+      <h2 id="stations-prayer-title" data-stations-title></h2>
+      <div data-stations-reading>
+        <p class="prayer-context" data-stations-context></p>
+        <p class="prayer-rubric"><em data-stations-rubric></em></p>
+        <p class="prayer-words" data-stations-words></p>
+        <div data-stations-reflection hidden></div>
+        <p class="prayer-up-next" data-stations-up-next></p>
+      </div>
+      <div class="stations-complete" data-stations-complete hidden>
+        <p>
+          {
+            t(
+              "Remain for a moment in quiet prayer. Carry Christ’s love into the next person you meet.",
+              "Manatili sandali sa tahimik na panalangin. Dalhin ang pag-ibig ni Kristo sa susunod na taong iyong makakasalamuha.",
+            )
+          }
+        </p>
+        <div class="completion-actions">
+          <button type="button" data-stations-action="restart"
+            >{t("Pray again", "Manalangin muli")}</button
+          ><a href="/prayers"
+            >{t("Back to Prayers →", "Bumalik sa mga Panalangin →")}</a
+          >
+        </div>
+      </div>
+    </article>
+    <footer
+      class="stations-controls"
+      data-stations-controls
+      aria-label={t("Prayer controls", "Mga kontrol sa panalangin")}
+    >
+      <div class="prayer-navigation">
+        <button
+          class="prayer-previous"
+          type="button"
+          data-stations-action="previous"
+          data-stations-previous>{t("← Previous", "← Bumalik")}</button
+        >
+        <p data-stations-progress></p>
+        <button
+          class="prayer-next"
+          type="button"
+          data-stations-action="next"
+          data-stations-next>{t("Next prayer →", "Susunod →")}</button
+        >
+      </div>
+    </footer>
+  </div>
+
+  <details class="stations-reference" data-stations-reference open>
+    <summary
+      ><span class="page-eyebrow"
+        >{t("Keep close at hand", "Mga panalangin at gabay")}</span
+      ><span
+        >{
+          t(
+            "Full prayer booklet & guide",
+            "Buong teksto at gabay sa panalangin",
+          )
+        }</span
+      ><span aria-hidden="true">＋</span></summary
+    >
+    <div class="reference-body">
+      <div class="content"><slot /></div>
+      <h2>{t("Opening prayers", "Mga pambungad na panalangin")}</h2>
+      {
+        prayers
+          .filter((prayer) =>
+            ["sign-of-cross", "stations-opening"].includes(prayer.id),
+          )
+          .map((prayer) => (
+            <section class="reference-prayer">
+              <h3>{prayer.title}</h3>
+              {prayer.rubric && (
+                <p class="prayer-rubric">
+                  <em>{prayer.rubric}</em>
+                </p>
+              )}
+              <p class="prayer-words">{prayer.text}</p>
+            </section>
+          ))
+      }
+      <h2>{t("The fourteen stations", "Ang labing-apat na istasyon")}</h2>
+      {
+        devotion.stations.map((station, index) => (
+          <section
+            class="reference-station"
+            aria-labelledby={`station-${station.id}`}
+          >
+            <>
+              <p class="page-eyebrow">
+                {t(`Station ${index + 1} of 14`, `Istasyon ${index + 1} sa 14`)}
+              </p>
+              <h3 id={`station-${station.id}`}>{station.title}</h3>
+            </>
+            <p class="prayer-words">{adoration.text}</p>
+            <div data-station-reflection={station.id}>
+              <div class="scripture-reflection">
+                <>
+                  <p class="page-eyebrow">
+                    {station.reference
+                      ? t("Reading", "Pagbasa")
+                      : t("Reflection", "Pagninilay")}
+                  </p>
+                  {station.reference && (
+                    <p class="scripture-reference">{station.reference}</p>
+                  )}
+                  <p class="prayer-words">{station.scripture_text}</p>
+                  {station.reading_response && (
+                    <p class="prayer-words reading-response">
+                      {prayers
+                        .find(
+                          (prayer) => prayer.id === station.reading_response,
+                        )!
+                        .text.split(/([℣℟]\.)/g)
+                        .map((part) =>
+                          /^[℣℟]\.$/.test(part) ? (
+                            <strong>{part}</strong>
+                          ) : (
+                            part
+                          ),
+                        )}
+                    </p>
+                  )}
+                </>
+              </div>
+              {station.rubric && (
+                <p class="prayer-rubric">
+                  <em>{station.rubric}</em>
+                </p>
+              )}
+              <div class="station-meditation">
+                <>
+                  <p class="page-eyebrow">
+                    {t("Prayer", "Panalangin (Lahat)")}
+                  </p>
+                  <p class="prayer-words">{station.meditation}</p>
+                </>
+              </div>
+            </div>
+            <p class="prayer-rubric">
+              <em>
+                {t(
+                  "Continue with one Our Father, one Hail Mary, and one Glory Be. Full texts follow below.",
+                  "Isunod ang Ama Namin, Aba Ginoong Maria, at Luwalhati sa Ama. Nasa ibaba ang buong teksto ng mga panalangin.",
+                )}
+              </em>
+            </p>
+          </section>
+        ))
+      }
+      <h2>
+        {t("The prayers we share", "Mga panalanging ating pinagsasaluhan")}
+      </h2>
+      {
+        prayers
+          .filter(
+            (prayer) =>
+              ![
+                "stations-opening",
+                "stations-adoration",
+                "sign-of-cross",
+              ].includes(prayer.id),
+          )
+          .map((prayer) => (
+            <section class="reference-prayer">
+              <h3>{prayer.title}</h3>
+              {prayer.rubric && (
+                <p class="prayer-rubric">
+                  <em>{prayer.rubric}</em>
+                </p>
+              )}
+              <p class="prayer-words">
+                {prayer.text
+                  .split(/([℣℟]\.)/g)
+                  .map((part) =>
+                    /^[℣℟]\.$/.test(part) ? <strong>{part}</strong> : part,
+                  )}
+              </p>
+            </section>
+          ))
+      }
+      <p class="content-note">
+        {devotion.content_note}
+        {
+          devotion.source_url && (
+            <a href={devotion.source_url}>
+              {t("Read the source article →", "Basahin ang pinagmulan →")}
+            </a>
+          )
+        }
+      </p>
+    </div>
+  </details>
+</stations-guide>
+
+<script>
+  import { prepareStationsGuide } from "@/lib/stations-guide-client";
+  class StationsGuide extends HTMLElement {
+    private cleanup?: () => void;
+    connectedCallback() {
+      this.cleanup = prepareStationsGuide(this);
+    }
+    disconnectedCallback() {
+      this.cleanup?.();
+    }
+  }
+  if (!customElements.get("stations-guide"))
+    customElements.define("stations-guide", StationsGuide);
+</script>
+
+<style>
+  .stations-guide {
+    --journey-ink: var(--color-text-dark);
+    --journey-muted: var(--color-text);
+    --journey-paper: #fffefb;
+    --journey-line: var(--color-border);
+    --journey-wash: var(--color-light);
+    --journey-gold: var(--color-accent);
+    --journey-rubric: #a3413b;
+    display: block;
+    color: var(--journey-ink);
+  }
+  :global(.dark) .stations-guide {
+    --journey-ink: var(--color-darkmode-text-dark);
+    --journey-muted: var(--color-darkmode-text);
+    --journey-paper: #1c2933;
+    --journey-line: var(--color-darkmode-border);
+    --journey-wash: var(--color-darkmode-light);
+    --journey-gold: var(--color-darkmode-accent);
+    --journey-rubric: #eca69e;
+  }
+  .stations-guide :global([hidden]) {
+    display: none !important;
+  }
+  .stations-guide a:focus-visible,
+  .stations-guide button:focus-visible,
+  .stations-guide summary:focus-visible {
+    outline: 3px solid var(--journey-gold);
+    outline-offset: 4px;
+  }
+  .stations-invitation {
+    border-radius: 0.75rem;
+    border-top: 4px solid #d9bd86;
+    background: #163d53;
+    color: #fff9ed;
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .invitation-eyebrow {
+    color: #e7cf9b;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .stations-invitation h2 {
+    color: inherit;
+    font-size: clamp(32px, 3.5vw, 46px);
+    line-height: 1.1;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+  .stations-invitation > p:not(.invitation-eyebrow) {
+    max-width: 65ch;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #d3e1e7;
+  }
+  .journey-assurance {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin-top: 1.5rem;
+    font-size: 15px;
+    color: #f0ddb4;
+  }
+  .stations-languages {
+    display: inline-flex;
+    gap: 0.4rem;
+    padding: 0.25rem;
+    margin-top: 1.5rem;
+    border: 1px solid #668494;
+    border-radius: 0.4rem;
+    font-size: 16px;
+  }
+  .stations-languages a {
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+    border-radius: 0.2rem;
+  }
+  .stations-languages a:hover,
+  .stations-languages a[aria-current] {
+    background: #f0ddb4;
+    color: #17374a;
+  }
+  .reading-response {
+    margin-top: 1.5rem;
+  }
+  .stations-invitation .edition-note {
+    font-size: 14px;
+    margin-top: 1rem;
+  }
+  .stations-workspace {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    align-items: start;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .stations-route {
+    position: sticky;
+    top: 7rem;
+    max-height: calc(100svh - 13rem);
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    padding: 0.5rem 0.5rem 0.5rem 0;
+  }
+  .stations-route nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .stations-route nav button {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.75rem;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.4;
+    border-radius: 0.35rem;
+    cursor: pointer;
+  }
+  .stations-route nav button > span:first-child {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    color: var(--journey-gold);
+  }
+  .route-number {
+    border: 1px solid var(--journey-line);
+    border-radius: 50%;
+    font-size: 13px;
+  }
+  .stations-route nav button:hover,
+  .stations-route nav button[aria-current] {
+    background: var(--journey-wash);
+  }
+  .stations-route nav button[aria-current] .route-number {
+    background: #163d53;
+    color: #fff9ed;
+    border-color: #163d53;
+  }
+  .route-note {
+    color: var(--journey-rubric);
+    font-size: 15px;
+    line-height: 1.5;
+    margin-top: 1.5rem;
+  }
+  .restart-prayer {
+    font-size: 15px;
+    padding-block: 0.75rem;
+    text-decoration: underline;
+    cursor: pointer;
+    color: var(--journey-muted);
+  }
+  .stations-panel {
+    min-width: 0;
+    padding: clamp(1.25rem, 3vw, 3rem);
+    border: 1px solid var(--journey-line);
+    border-radius: 0.75rem;
+    background: var(--journey-paper);
+    box-shadow: 0 12px 40px rgb(20 40 50 / 4%);
+    scroll-margin-top: 7rem;
+  }
+  .stations-panel:focus {
+    outline: none;
+  }
+  .stations-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--journey-line);
+    margin-bottom: 1.5rem;
+  }
+  .stations-header .page-eyebrow {
+    margin-bottom: 0;
+  }
+  .journey-position {
+    color: var(--journey-muted);
+    font-size: 14px;
+  }
+  .stations-panel h2 {
+    font-family: var(--font-secondary);
+    font-size: clamp(30px, 3.5vw, 42px);
+    line-height: 1.15;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: var(--journey-ink);
+  }
+  .prayer-context {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--journey-muted);
+    margin-bottom: 1rem;
+  }
+  .prayer-rubric {
+    font-family: var(--font-primary);
+    color: var(--journey-rubric);
+    font-size: 17px;
+    line-height: 1.5;
+    margin-block: 1.25rem;
+  }
+  .prayer-words {
+    font-family: var(--font-readings);
+    font-size: clamp(23px, 2.3vw, 27px);
+    line-height: 1.6;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+  }
+  .scripture-reflection {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--journey-line);
+  }
+  .scripture-reference {
+    color: var(--journey-muted);
+    font-size: 17px;
+    margin-bottom: 0.75rem;
+  }
+  .station-meditation {
+    margin-top: 2rem;
+  }
+  .prayer-up-next {
+    margin-top: 2rem;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: right;
+    color: var(--journey-muted);
+  }
+  .stations-controls {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 20;
+    border-top: 1px solid var(--journey-line);
+    background: var(--journey-paper);
+    box-shadow: 0 -8px 28px rgb(15 35 45 / 8%);
+    padding: 0.75rem max(1rem, env(safe-area-inset-right, 0px))
+      calc(0.75rem + env(safe-area-inset-bottom, 0px))
+      max(1rem, env(safe-area-inset-left, 0px));
+  }
+  .prayer-navigation {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr);
+    align-items: center;
+    gap: 1rem;
+    max-width: 1224px;
+    margin-inline: auto;
+  }
+  .prayer-navigation button {
+    height: 52px;
+    min-height: 44px;
+    width: 100%;
+    padding: 0.65rem 1rem;
+    font-size: 17px;
+    line-height: 1.15;
+    cursor: pointer;
+    border-radius: 0.3rem;
+  }
+  .prayer-previous {
+    max-width: 140px;
+    justify-self: start;
+    color: var(--journey-muted);
+  }
+  .prayer-previous:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+  .prayer-next {
+    max-width: 200px;
+    justify-self: end;
+    background: #163d53;
+    color: #fff9ed;
+  }
+  .prayer-next:hover {
+    background: #214f68;
+  }
+  .prayer-navigation p {
+    font-size: 15px;
+    text-align: center;
+    color: var(--journey-muted);
+    line-height: 1.3;
+  }
+  .stations-complete {
+    font-size: 22px;
+    line-height: 1.6;
+  }
+  .completion-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    font-size: 17px;
+  }
+  .completion-actions button {
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+    border: 1px solid var(--journey-gold);
+    border-radius: 0.3rem;
+    color: var(--journey-gold);
+    cursor: pointer;
+  }
+  .completion-actions a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .stations-reference {
+    border: 1px solid var(--journey-line);
+    border-radius: 0.75rem;
+    background: var(--journey-paper);
+    margin-top: 2rem;
+  }
+  .stations-reference > summary {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 1.5rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-secondary);
+    font-size: 28px;
+    line-height: 1.25;
+  }
+  .stations-reference > summary::-webkit-details-marker {
+    display: none;
+  }
+  .stations-reference > summary .page-eyebrow {
+    grid-column: 1/-1;
+  }
+  .reference-body {
+    padding: 0 clamp(1.25rem, 3vw, 3rem) 2rem;
+    max-width: 74ch;
+    margin-inline: auto;
+  }
+  .reference-body h2 {
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: 400;
+    margin-top: 3rem;
+    color: var(--journey-ink);
+  }
+  .reference-body h3 {
+    font-size: 28px;
+    line-height: 1.25;
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+    color: var(--journey-ink);
+  }
+  .reference-station,
+  .reference-prayer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--journey-line);
+    scroll-margin-top: 8rem;
+  }
+  .reference-station h3 {
+    scroll-margin-top: 8rem;
+  }
+  .content-note {
+    font-size: 16px;
+    color: var(--journey-muted);
+    line-height: 1.6;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--journey-line);
+  }
+  .content-note a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  :global(
+    body:has(stations-guide[data-enhanced][data-stations-complete="false"])
+  ) {
+    padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
+  }
+  :global(
+    html:has(stations-guide[data-enhanced][data-stations-complete="false"])
+  ) {
+    scroll-padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
+  }
+  @media (max-width: 900px) {
+    .stations-workspace {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+    .stations-route {
+      position: static;
+      max-height: none;
+      overflow: visible;
+      padding: 0;
+      min-width: 0;
+    }
+    .stations-route nav {
+      flex-direction: row;
+      overflow-x: auto;
+      padding: 0.25rem 0.25rem 0.75rem;
+    }
+    .stations-route nav button {
+      flex: 0 0 auto;
+      border: 1px solid var(--journey-line);
+    }
+    .stations-route nav button > span:last-child {
+      max-width: 21ch;
+    }
+    .route-note,
+    .restart-prayer {
+      display: none;
+    }
+  }
+  @media (max-width: 480px) {
+    .prayer-navigation {
+      grid-template-columns: minmax(0, 1fr) 80px minmax(0, 1fr);
+      gap: 0.5rem;
+    }
+    .prayer-navigation button {
+      font-size: 15px;
+      padding-inline: 0.5rem;
+    }
+    .prayer-navigation p {
+      font-size: 13px;
+    }
+  }
+  @media print {
+    .stations-workspace {
+      display: none !important;
+    }
+    .stations-reference {
+      border: 0;
+    }
+    .stations-reference > summary {
+      display: none;
+    }
+    .stations-reference::details-content {
+      display: block !important;
+      content-visibility: visible;
+    }
+  }
+</style>

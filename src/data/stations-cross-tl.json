@@ -1,0 +1,149 @@
+{
+  "edition": "Ang Bagong Daan ng Krus",
+  "source_url": "",
+  "content_note": "Mga pagbasa at panalangin ayon sa gabay na ginagamit ng pamayanan. Sa dulo ng bawat istasyon ay dinarasal ang Ama Namin, Aba Ginoong Maria, at Luwalhati sa Ama.",
+  "prayers": [
+    {
+      "id": "stations-opening",
+      "title": "Pambungad na Panalangin",
+      "text": "Panginoong Hesukristo, habang kami’y nagtitipon dito ngayon upang pagnilayan ang iyong Misteryong Pampaskuwa, pagkalooban mo kaming lahat ng biyaya na kasuklaman ang kasalanan tulad ng iyong ginawa, at gugulin ang aming buhay para sa aming kapwa ayon sa iyong halimbawa. Sa gayon, kami ay maaaring makibahagi hindi lamang sa iyong paghihirap, kundi maging sa iyo ring Muling Pagkabuhay. Ikaw na nabubuhay at naghahari magpakailanman. Amen!",
+      "rubric": "Sabay-sabay na dasalin ng lahat."
+    },
+    {
+      "id": "stations-adoration",
+      "title": "Sinasamba Ka Namin",
+      "text": "℣. Sinasamba ka namin at pinasasalamatan, Panginoong Hesukristo.\n\n℟. Sapagkat sa pamamagitan ng iyong Mahal na Krus at Muling Pagkabuhay, iniligtas mo ang sandaigdigan.",
+      "rubric": "Bibigkasin ng gabay ang ℣ at tutugon ang lahat sa ℟. Basahin ang pagbasa, pagkatapos ay dasalin ang panalangin."
+    },
+    {
+      "id": "stations-reading-response",
+      "title": "Tugon sa Pagbasa",
+      "text": "℣. Ang Salita ng Diyos.\n\n℟. Salamat sa Diyos."
+    },
+    {
+      "id": "stations-closing",
+      "title": "Pangwakas na Panalangin",
+      "text": "Makapangyarihan at walang hanggang Diyos, namatay at matagumpay na muling nabuhay ang Iyong Bugtong na Anak para iligtas kami sa aming mga kasalanan. Sa Iyong kabutihan, muli mong buhayin ang Iyong mga tapat na nananampalataya upang makiisa sa kanya sa buhay na walang hanggang sa langit, kung saan nabubuhay siya at naghahari kasama Mo at ng Espiritu Santo magpasawalang hanggan. Amen.",
+      "rubric": "Sabay-sabay na dasalin ng lahat."
+    },
+    {
+      "id": "stations-blessing",
+      "title": "Pangwakas na Pagpapala",
+      "text": "Sumaatin at manatili nawa ang pagpapala ng Makapangyarihang Diyos: Ama, Anak at Espiritu Santo magpasawalang hanggan. Amen",
+      "rubric": "Pagkatapos, mag-antanda ng krus."
+    }
+  ],
+  "stations": [
+    {
+      "id": "last-supper",
+      "title": "Ang Huling Hapunan",
+      "reference": "1 Cor 11: 23-26",
+      "scripture_text": "Ang Panginoong Hesus, noong gabing siya’y ipagkanulo ay dumampot ng tinapay, nagpasalamat, at pinagpira-piraso ito, at sinabi, “Ito ang aking katawan na inihahandog para sa inyo.” Gayon din naman, matapos maghapunan ay hinawakan niya ang kalis at sinabi, “Ang kalis na ito ang bagong tipan na pinagtitibay ng aking dugo. Tuwing iinumin ninyo ito, gawin ninyo bilang pag-aalaala sa akin.”\n\nSapagkat tuwing kakain kayo ng tinapay na ito at iinom sa kalis na ito ay ipinahahayag ninyo ang kamatayan ng Panginoon, hanggang sa muling pagparito niya.",
+      "meditation": "Panginoong Hesus, minahal mo kami nang lubus-lubusan. Minahal mo kami hanggang sa katapusan. Ikaw ay nananatili sa Eukaristiya upang maging pagkain at inuming nagbibigay buhay na walang hanggan. Nananatili ka sa aming piling upang maging patuloy na palatandaan ng nagliligtas na pananatili ng Diyos sa lahat ng sandali ng aming buhay.\n\nPatawarin mo kami, Panginoon sa lahat ng sandali na kami ay hindi nagpapahalaga sa iyong paghahandog sa amin ng iyong sarili at sa iyong mapagmahal na pananahan sa Banal na Eukaristiya.",
+      "reading_response": "stations-reading-response"
+    },
+    {
+      "id": "gethsemane",
+      "title": "Ang Pagdurusa ni Hesus sa Halamanan",
+      "reference": "Lu 22: 39-45",
+      "scripture_text": "Gaya ng kanyang kinaugalian, umalis si Hesus at nagtungo sa Bundok ng mga Olibo; at sumama ang mga alagad. Pagdating doo’ys sinabi niya sa kanila, “Manalangin kayo, nang hindi kayo madaig ng tukso.” Lumayo siya sa kanila nang may isang pukol ng bato, saka lumuhod at nanalangin. “Ama,” wika niya, “kung maaari’y ilayo mo sa akin ang kalis na ito. Gayunma’y hindi ang kalooban ko ang masunod, kundi ang kalooban mo.” Tigib ng hapis, siya’y nanalangin nang lalong taimtim; tumulo sa lupa ang kanyang pawis na animo’y malalaking patak ng dugo. Tumindig siya pagkapanalangin at lumapit sa kanyang mga alagad. Naratnan niyang natutulog ang mga ito dahil sa tindi ng dalamhati.",
+      "meditation": "Mahaba at kakila-kilabot ang gabing iyon, Panginoon. Ni isa sa iyong mga alagad ay nagkaroon ng lakas na samahana ka sa iyong pagdurusa. Ang tanging lakas mo ay ang iyong matibay na hangaring tuparin ang kalooban ng Ama, maging anuman ang halaga.\n\nPatuloy kang mag-isang nagdurusa, maging hanggang sa kasalukuyan, sa kalungkutan ng mga walang kaibigan, ng mga walang tahanan, ng mga walang kinabukasan. Puno ang aming lipunan ng katulad nila, ngunit patuloy kaming nagkukunwaring walang malay at natutulog habang sila ay namamatay na biktima ng kapabayaan.",
+      "reading_response": "stations-reading-response"
+    },
+    {
+      "id": "sanhedrin",
+      "title": "Si Hesus sa Harapan ng Sanedrin",
+      "reference": "Mc 14: 60-64. 15: 1",
+      "scripture_text": "Tumindig ang pinakapunong saserdote sa harap ng kapulungan, at tinanong si Hesus, “Ikaw ba ang Mesisyas, ang Anak ng Kataas-taasan? “Ako nga,” sagot ni Hesus. “At makikita ninyo ang Anak ng Tao, na nakaupo sa kanan ng Makapangayarihan sa lahat. At makikita ninyong siya’y dumarating, nasa alapaap ng langit.” Winasak ng pinakapunong saserdote ang sariling kasuutan, at sinabi, “Hindi na natin kailangan ang mga saksi! Kayo na ang nakarinig ng kanyang kalapastanganan sa Dios! Ano ang pasya ninyo?” Ang hatol nilang lahat at kamatayan.\n\nKinaumagahan, nagpulong agad ang mga punong saserdote, ang matatanda ng bayan, ang mga eskriba, at ang iba pang bumubuo ng Sanedrin. Ipinagapos nila si Hesus, at dinala kay Pilato.",
+      "meditation": "Panginoong Hesukristo, ikaw ang hukom ng sangkatauhan, ngunit tinanggap mong litisin ng mga hukom na di makatarungan. Ikaw ang pinakabanal, tanging walang sala sa daigdig, ngunit tiniis mo ang pagpaparatang ng mga sutil na makasalanan.\n\nPatuloy pa rin ang walang katarungang paglilitis na inuulit sa bawat di-makatarungnang paghatol kung saan pinarurusahan ang mga walang sala at pinalalaya ang may sala. Ikaw pa rin ang biktima ng ganitong kawalan-katarungan laban sa mga mahihina, mga walang lakas na ipagtanggol ang sarili at ang mga walang tinig sa lipunan. Sa kanila, patuloy kang nabubuhay at nagdurusa.",
+      "reading_response": "stations-reading-response"
+    },
+    {
+      "id": "scourging-crowning",
+      "title": "Ang Paghampas at Pagpuputong ng Koronang Tinik",
+      "reference": "Mt 27:22-30, passim",
+      "scripture_text": "Sinabi sa kanila ni Pilato, “Kung gayon, ano ang gagawin ko kay Hesus na tinatawag na Kristo?” Suamgot ang lahat, “Ipako sa krus!” “Bakit, anong masama ang ginawa niya?” tanong ni Pilato. Ngunit lalo pa nilang isinigaw, “Ipako sa krus!”\n\nAt ipinahagupit si Hesus at ibinigay sa kanila upang ipako sa krus. Si Hesus ay dinala ng mga kawal ng gobernador sa pretoryo, at nagkatipon ang buong batalyon sa paligid niya. Naglikaw sila ng halamang matinik at ipinutong sa kanya, saka pinaghawak ng isang tambo sa kanyang kanang kamay. At palibak siyang niluhud-luhuran at binati: “Mabuhay ang Hari ng mga Judio!”",
+      "meditation": "Natangay sa sulsol ng iyong mga kaaway ang malaking pulutong kaya’t ninais nilang ikaw’y ipapatay, mahal na Hesus. At hindi rin naisip ni Pilato na mahalagang panindigan ang katarungan at ipagtanggol ang iyong pagiging walang sala. Kaya’t nagtagumpay ang mga hibang. Gayundin naman ang mga kawal na Romano, habang binatbat nila ng sugat ang iyong katawan at pinutungan ang iyong ulo ng koronang tinik at pag-aalipusta.\n\nNgunit hindi ka man lamang dumaing. Tiniis mong lahat iyon, tulad ng isang maamong tupang kakatayin; walang imik tulad ng milyun-milyong mga simpleng taong pinagsasamantalahan, inaapi ng mga halang ang kalooban, habang marami sa amin ang nagbubulag-bulagan sa harap ng walang pakundangang paglapastangan sa katarungan.",
+      "reading_response": "stations-reading-response"
+    },
+    {
+      "id": "receives-cross",
+      "title": "Tinanggap ni Hesus ang Kanyang Krus",
+      "reference": "Mt 27:31",
+      "scripture_text": "At matapos kutyain, kanilang inalisan siya ng balabal, sinuutan ng sariling damit, at inilabas upang ipako sa krus.",
+      "meditation": "Minamahal kong Panginoon, ang krus ay siyang parusa para sa mga kriminal at mga manghihimagsik. Sino ang maniniwala na ipinatong ito sa balikat ng Anak ng Diyos, ang puno ng lahat ng kabanalan at kabutihan?\n\nSa kabila ng lahat, tinanggap mo ito nang buong kababaang-loob sapagkat alam mo na ito lamang ang paraan upang kami ay mailigtas sa walang hanggang kaparusahan.\n\nKrus namin ang krus na tinanggap mong pasanin — ang krus ng aming mga kasalanan, ang krus ng aming mga kahinaan, ng aming mga pagkasira ng loob, ng aming mga pagkabigo at ng aming kasamaan.\n\nHanggang sa mga araw na ito, pasan ng mga walang-malay na kalalakihan, kakababaihan, at kabataan ang krus ng mga pagkakamali, kasakiman, pagmamataas, kahalayan.\n\nIpagkaloob mo sa amin, mahal na Panginoon, ang biyayang di kailanman magbigay ng mga pasanin sa aming kapwa dahil sa aming mga pagkukulang. Magiting nawa namin pasanin kasama mo ang krus ng aming mga pang-araw-araw na tungkulin.",
+      "reading_response": "stations-reading-response"
+    },
+    {
+      "id": "falls-under-cross",
+      "title": "Si Hesus ay Nadapa sa Bigat ng Krus",
+      "reference": "",
+      "scripture_text": "Habang sumusuray ang hakbang ni Hesus patungo sa Kalbaryo halos madurog si Hesus sa bigat ng Krus na kanyang pasan-pasan. Higit pa marahil, napuspos si Hesus sa panunuya at panlilibak ng mga tao na para bagang siya ay isang kriminal. Halos igupo ng pagod dahil sa kawalan ng tulog sa magdamag at pagpapahirap na kanyang dinanas, si Hesus ay nalugmok sa bigat ng Krus at pag-aalipusta na kanyang dinanas.",
+      "meditation": "Di malayo ang Kalbaryo mula sa pretoryo, iilang daang metro lamang. Ngunit, natagalan ka, Panginoon, na tahakin ang daang iyon, hirap na hirap at bigung-bigong umaasang may tutulong. Matagal nang naglaho ang iyong lakas. Lubak-lubak ang daan. Malupit ang mga tao. Pabigat nang pabigat ang krus hanggang di mo na ito makayanan, at ikaw’y nalugmok na sa lupa!\n\nTulad mo, Panginoon, napakarami sa amin ang nadarapa at napapasubasob dito sa mahirap na daan ng krus ng buhay dahil sa mga pagsubok at kabiguang dumadagok sa amin.\n\nKapag kami ay nadarapa at nalulugmok, Panginoon, tulungan mo kami!\n\nAt kapag hindi na kayang pasanin ng aming mga kapatidang maraming pagsubok na dumarating, Panginoon, pagkalooban mo kami ng pusong mahabagin upang kami’y di na makabigat pa sa kanilang pasanin."
+    },
+    {
+      "id": "simon-of-cyrene",
+      "title": "Tinulungan ni Simon si Hesus sa Pagpasan ng Krus",
+      "reference": "Mc 15:21",
+      "scripture_text": "Nakasalubong nila ang isang lalaking galing sa bukid, si Simon na taga-Cirene, ama nina Alejandro at Rufo. Pilit nilang ipinapasan sa kanya ang krus ni Hesus.",
+      "meditation": "Napadaan lamang si Simon habang pauwi na siya mula sa bukid. Napilitan siyang mag-iba ng landas isang paglihis na nagbago ng takbo ng kanyang buhay. Napilitang pasanin ang iyong krus, siya man ay biktima ng pang-aapi at kawalan ng katarungan. Naranasan niya ang iyong sakit, Panginoon, kung kaya’t natuklasan niya ang ibig sabihin ng buhay, kapag nagnanais na tumulong sa kapwa.\n\nMagsugo ka pa ng maraming tulad ni Simon ng Cirene, Panginoon. Padalhan mo kami ng mga taong may lakas ng loob upang pasanin ang krus ng iba nang may pakikiisa at pagtitiyaga tulad ng magkakapatid. Gawin mo kaming tulad ni Simon, Panginoon. Bigyan mo kami ng lakas at kagandahang-loob na magdamayan, sapagkat ang aming lipunan ay puno ng nagdurusang Kristo na hindi na makaagapay sa bigat ng kanilang pasang krus na may iba’t ibang hugis at bigat.",
+      "reading_response": "stations-reading-response"
+    },
+    {
+      "id": "women-of-jerusalem",
+      "title": "Nasalubong ni Hesus ang Kababaihan ng Jerusalem",
+      "reference": "Lu 23: 27-31",
+      "scripture_text": "Sinusundan si Hesus ng maraming tao, kabilang ang mga babain nananaghoy at nananambitan dahil sa kanya. Nilingon sila ni Hesus at sinasabi sa kanila, “Mga kakabaihan ng Jerusalem, hiwag ninyo akong tangisan. Ang tangisan ninyo’y ang inyong sarili at ang inyong mga anak. Tandaan ninyo: darating ang mga araw na sasabihin nila, ‘Mapapalad ang mga baog, ang mga sinapupunang hindi nagdalantao, at ang mga dibdib na hindi nagpasuso.’ Sa mga araw na iyo’y sasabihin ng mga tao sa mga bundok, ‘Gumuho kayo sa amin!’ at sa mga burol, ‘Tabunan ninyo kami!’ Sapagkat kung ganito ang ginagawa sa kahoy na sariwa, ano naman kaya ang gagawin sa tuyo?",
+      "meditation": "Panginoong Hesus, tunay ang pagdadalamhati ng mga babae ng Jerusalem para sa iyo. Buong tapang silang sumunod sa iyo sa daan patungong Kalbaryo. Subalit tinawag mo ang kanilang pansin sa dahilan ng kanilang pagdurusa — ang KASALANAN at ang kaparusahan na dulot sa lahat ng hindi pagsisisi. Sana’y naging tapat din kaming tulad nila sa pagdadalamanhati sa hindi makatarungang pagpapahirap sa iyo. At sana’y kaawaan din ang aming puso sa mga pagdurusa ng aming kapwa — lalo na ng mga iskwater, walang hanapbuhay, walang tahanan, at ng lahat ng mga biktima ng kawalan ng katarungan at pagsasamantala. Ang lahat ng uri ng mga kasalanng ito ang nagdadala ng mga karapat-dapat na pagpaparusa ng Diyos sa ating lipunan.",
+      "reading_response": "stations-reading-response"
+    },
+    {
+      "id": "nailed-to-cross",
+      "title": "Si Hesus ay Ipinako sa Krus",
+      "reference": "Lu 23: 33-35",
+      "scripture_text": "Nang dumating sila sa dakong tinatawag na Bungo, ipinako nila sa krus si Hesus. Ipinako rin ang dalawang salarin, isa sa gawing kanan at isa sa gawing kaliwa. sinabi ni Hsus, “Ama, patawarin mo sila, sapagkat hindi nila nalalaman ang kanilang ginagawa.” At nagsapalaran sila upang malaman kung alin sa kanyang kasuutan ang mapupunta sa isa’t isa. Ang mga tao’y nakatayo roon at nanonood; nililibak naman siya ng mga pinuno ng bayan. Anila, “Iniligtas niya ang iba; iligtas naman niya ngayon ang kanyang sarili, kung siya nga ang Mesiyas, ang hinirang ng Diyos!”",
+      "meditation": "Panginoon, ang mga kamay mong dati’y humahaplos sa mga bata, nagbabasbas sa mga maysakit, at nagpapalayas sa mga demonyo, ngayo’y nakapako na sa krus. Ang iyong mga paa na nagdala sa iyo sa maraming bayan upang ihatid ang Magandang Balita ng Kaharian sa lahat, ngayo’y di na maaaring makagalaw pa magpakailanman. Hinahamon ka ng iyong mga kaaway na bumaba sa krus. Subalit di mo pinansin ang kanilang panunukso. Hindi dahil sa ikaw ay nakapako, kundi dahil sa pag-ibig mo sa mga makasalanan. Pag-ibig ang naghatid sa iyo roon. Pag-ibig ang pumipigil sa iyo roon. Panginoong Hesus, pagkalooban mo kami ng biyaya na makatupad sa maing tungkulin nang buong pagmamahal, kahit na ang mga ito ay magdulot pa sa amin ng pait tulad ng pagkapako sa krus.",
+      "reading_response": "stations-reading-response"
+    },
+    {
+      "id": "repentant-thief",
+      "title": "Ang Nagtitikang Magnanakaw",
+      "reference": "Lu 23: 39-43",
+      "scripture_text": "Tinuya siya ng isa sa mga salaring nakabitin, at ang sabi, “Hindi ba ikaw na gMesiyas? Iligtas mo ang iyong sarili, pati na kami!” Ngunit pinagsabihan siya ng kanyang kasama, “Hindi ka ba natatakot sa Diyos? Ikaw ma’y pinarusahang tulad niya! Matuwid lamang na tayo’y parusahan nang ganito dahil sa ating mga ginawa; ngunit ang taong ito’y walang ginawang masama.” At sinabi niya, “Hesus, alalahanin mo ako kapag naghahari ka na.” Sumagot si Hesus, “Sinasabi ko sa iyo: ngayon di’y isasama kita sa Paraiso.”",
+      "meditation": "Panginoong Hesus, puspos ng katapatan sa pagsisisi ang nagtitikang makasalanan sa harap ng marami, punung-puno ng panananampalataya at pagtitiwala ang kanyang mga sinabi sa iyo. Naniniwala siya sa iyong Kaharian, at hindi mo siya binigo.\n\nMadalas na kami ay makatagpo ng mga taong nagkamali at nagnanais na magbagong-buhay, Panginoon. Ipahintulot mong kami ay maging bukas sa kanila, katulad mo sa nagtitikang magnanakaw. Sa ganitong paraan, kami rin ay papanaw sa mundong ito nang may pananampalataya at pagtitiwala tulad ng mabuting magnananakaw, at nakikinig sa pngako ng buhay na walang hanggan.",
+      "reading_response": "stations-reading-response"
+    },
+    {
+      "id": "mary-and-john",
+      "title": "Sina Maria at Juan sa Paanan ng Krus",
+      "reference": "Jn 19: 25-27",
+      "scripture_text": "Nakatayo sa tabi ng krus ni Hesus ang kanyang ina at ang kapatid na babae nitong si Maria, na asawa ni Cleopas. Naroon din si Maria Magdalena. Nang makita ni Hesus ang kanyang ina, at ang minamahal niyang alagad sa tabi nito, kanyang sinabi, “Ginang, narito ang iyong anak!” At sinabi sa alagad, “Narito ang iyong ina!” Mula noon, siya’y pinatira ng alagad na ito sa kanyang buhay.",
+      "meditation": "“Tulad ng isang sibat, ang paghihirap ay tatarak sa iyong puso.” Ito ang hila ng matandang Simeon. Sa Kalbaryo, naranasan ni Maria ang katuparan ng huland ito. At muli niyang binigkas sa kanyang puso: “Maganap nawa sa aking ang iyong salita.”\n\nWalang sinuman sa balat ng lupa ang umibig sa iyo nang higit pa sa iyong Ina, Panginoon. Gayundin naman, wala kang inibig sa balat ng lupa nang higit pa sa kanya. Naroroon siya, saksi at kabahagi ng iyong pagdurusang naghatid ng kaligtasan. Sa paghahabilin mo sa kanya kay Juan, binigyan mo ng katiwasayan ang mga nalalabi pa niyang araw dito sa lupa; sa paghahabilin mo naman kay Juan sa kanya, binigyan mo kami ng katiwasayan habang-buhay, sapagkat ibinigay mosa amin ang lahat, ang iyong ina at amin ding Ina.\n\nMaging mapagmahal nawa kami sa kanya tulad mo.",
+      "reading_response": "stations-reading-response"
+    },
+    {
+      "id": "dies-on-cross",
+      "title": "Si Hesus ay Namatay sa Krus",
+      "reference": "Jn 19: 28-30; Lu 23: 44-46",
+      "scripture_text": "Nang mag-iikalabindalawa ng tanghali, nagdilim sa buong lupain at nawalan ng liwanag ang araw hanggang sa ikatlo ng hapon. Sinabi ni Hesus, “Nauuhaw ako!” May isang mangkok doon na puno ng maasim na alak. Itinubog nila rito ang isang espongha, ikinabit sa sanga ng isopo at idiniit sa kanyang bibig Nang masipsip ni Hesus ang alak ay kanyang sinabi, “Naganap na!” Sumigaw nang malakas si Hesus, “Ama, sa mga kamay mo’y ipinagtatagubilin ko ang aking espiritu!” At pagkasabi nito, nalagot ang kanyang hininga.",
+      "meditation": "Kaming lahat ay hinatulang mamatay dahil sa aming mga kasalanan, at inako mo ang parusang ito, ikaw na hindi karapat-dapat na tumanggap nito\n\nIisa lamang ang iyong buhay, Panginoon, tulad naming lahat, ngunit malaya mo itong inialay upang kami’y magkaroon ng buhay na walang hanggan. Pinatay ka ng mga kasalanan namin, dahil sa labis mong pagmamahal sa amin, pinakamamahal na Hesus.\n\nBago ka nalagutan ng hininga, sinabi mong ikaw’y nauuhaw — uhaw sa pagibig. Tanggapin mo ngayon ang aming nagtitikang pag-ibig sa iyo, Panginoon. Nais ka namin mahalin alang-alang sa mga ayaw magmahal sa iyo. Nawa, sa katapusan ng aming pagkikibaka sa buhay, kami ay mamatay na nagtitiwala habang inuulit namin ang iyong winika, “Ama, inihahabilin ko sa iyo ang aking kaluluwa!”",
+      "reading_response": "stations-reading-response"
+    },
+    {
+      "id": "laid-in-tomb",
+      "title": "Si Hesus ay Inilibing",
+      "reference": "Mt 27: 57-60",
+      "scripture_text": "Bago magtakipsilim, dumating ang isang mayamang taga-Arimatea, na ang ngala’y Hose. Siya’y alagad din ni Hesus. Lumapit siya kay Pilato at hiningi ang bangkay ni Hesus. Iniutos naman ni Pilato na ibigay ito sa kanya. Kaya’t kinuha ni Jose ang bangkay at binalot ng bagong kayong lino. Inilagay niyo ito sa sariling libingan na di pa nalalaunang ipinauka niya sa bato. Pagkatapos, iginulong niya sa pintuan nito ang isang malaking bato, saka umalis.",
+      "meditation": "Panginoong Hesus, binalot ka ng kadiliman ng kamatayan. Ang tangi mong maliwanag na tanglaw ay ang malambing na pagmamahal ng iyong Ina, ang katapatan ni Juan, ang pakikipagkaibigan ni Jose ng Arimatea, at ng ilan pa. Inihimlay ka sa libingan tulad ng isang napagkahalagang kayamanang itinago sa baul, tulad ng isang butil na ibinaon sa lupa.\n\nBinigyan ng kahulugan at pag-asa ng iyong libing ang aming libing. Salamat sa iyo, naging isang mapayapang pamamahinga ito sa kandungan ng inang lupa, na naghihintay ng isang masayang paggising sa pagdating ng bukang-liwayway na muling pagkabuhay na wawasak sa mga tanikala ng kamatayan magpakailanman.",
+      "reading_response": "stations-reading-response"
+    },
+    {
+      "id": "resurrection",
+      "title": "Ang Muling Pagkabuhay ni Hesus",
+      "reference": "Mt 28: 1-6",
+      "scripture_text": "Makaraan ang Araw ng Pamamahinga, pagbubukang-liwayway ng unang araw ng sanlinggo, pumunta sa libingan ni Hesus si Maria Magdalena at ang isa pang Maria. Biglang lumindol nang malakas Bumaba mula sa langit ang isang anghel ng Panginoon, iginulong ang batong nakatakip sa libingan, at naupo sa ibabaw niyon. Ang kanyang mukha ay nakasisilaw na parang kidlat at kasimputi ng busilak ang kanyang damit. Nanginig sa takot ang mga bantay at nabulagtang animo’y patay nang makita ang anghel.\n\nNgunit sinabi nito sa mga babae, “Huwag kayong matakot; alam kong hinahanap ninyo si Hesus na ipinako sa krus. Wala na siya rito, sapagkat siya’y muling nabuhay tulad ng kanyang sinabi. Halikayo, tingnan ninyo ang pinaglagyan sa kanya.”",
+      "meditation": "Hesus, hindi maaring mabulok ang iyong banal nabangkay sa libingan. Hindi ka maaaring pigilan ang higit pa sa kinakailangan sa loob ng iyong libingan. Ngayon, pinatutunayan ng naigulong na malaking bato na nagpinid sa iyong libingan at ng pagpapatunay ng anghel na ang iyong muling pagkabuhay ay totoo. Pinagtitibay rin nila ang katotohanang kami man sa darating na panhon ay babangong muli sa kamatayan.\n\nAng iyong muling pagkabuhay, Panginoon, ang ang huwaran ng aming muling pagkabuhay, maging ngayon pa man. Isang hamon ito para sa aming lahat na bumangon mula sa kamatayang dulot ng kasalanan para sa pinagpalang buhay.",
+      "reading_response": "stations-reading-response"
+    }
+  ]
+}

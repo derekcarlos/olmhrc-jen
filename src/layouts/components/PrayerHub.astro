@@ -5,10 +5,33 @@ import {
   LuCalendarDays,
   LuFlower2,
   LuHouse,
+  LuCross,
 } from "react-icons/lu";
 import { prayerHubState } from "@/lib/prayer-hub.mjs";
 const today = prayerHubState();
 const devotions = [
+  {
+    title: "Stations of the Cross",
+    date: "Lent & throughout the year",
+    number: "Walk with Jesus",
+    description:
+      "Pray the New Way of the Cross in English or Tagalog, with fourteen stations and the complete prayers at every step.",
+    href: "/prayers/stations-of-the-cross#prayer-guide",
+    action: "Begin the Way of the Cross",
+    Icon: LuCross,
+    languages: [
+      {
+        label: "Pray in English",
+        language: "en",
+        href: "/prayers/stations-of-the-cross#prayer-guide",
+      },
+      {
+        label: "Manalangin sa Tagalog",
+        language: "tl",
+        href: "/prayers/ang-bagong-daan-ng-krus#prayer-guide",
+      },
+    ],
+  },
   {
     title: "Block Rosary",
     date: "From home to home",
@@ -132,25 +155,51 @@ const devotions = [
     <div class="devotion-cards">
       {
         devotions.map(
-          ({ title, date, number, description, href, action, Icon }) => (
-            <a class="devotion-card" href={href}>
-              <div class="devotion-card-top">
-                <>
-                  <span class="devotion-icon">
-                    <Icon size={30} aria-hidden="true" />
+          ({
+            title,
+            date,
+            number,
+            description,
+            href,
+            action,
+            Icon,
+            languages,
+          }) => {
+            const Card = languages ? "article" : "a";
+            return (
+              <Card class="devotion-card" href={languages ? undefined : href}>
+                <div class="devotion-card-top">
+                  <>
+                    <span class="devotion-icon">
+                      <Icon size={30} aria-hidden="true" />
+                    </span>
+                    <span class="devotion-date">{date}</span>
+                  </>
+                </div>
+                <p class="devotion-kicker">{number}</p>
+                <h3>{title}</h3>
+                <p class="devotion-description">{description}</p>
+                {languages ? (
+                  <nav
+                    class="devotion-action devotion-language-links"
+                    aria-label="Choose a language for the Stations of the Cross"
+                  >
+                    {languages.map((link) => (
+                      <a href={link.href} lang={link.language}>
+                        {link.label}
+                        <LuArrowUpRight size={18} aria-hidden="true" />
+                      </a>
+                    ))}
+                  </nav>
+                ) : (
+                  <span class="devotion-action">
+                    {action}
+                    <LuArrowUpRight size={22} aria-hidden="true" />
                   </span>
-                  <span class="devotion-date">{date}</span>
-                </>
-              </div>
-              <p class="devotion-kicker">{number}</p>
-              <h3>{title}</h3>
-              <p class="devotion-description">{description}</p>
-              <span class="devotion-action">
-                {action}
-                <LuArrowUpRight size={22} aria-hidden="true" />
-              </span>
-            </a>
-          ),
+                )}
+              </Card>
+            );
+          },
         )
       }
     </div>
@@ -387,7 +436,7 @@ const devotions = [
   }
   .devotion-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5rem;
   }
   .devotion-card {
@@ -465,6 +514,18 @@ const devotions = [
     color: var(--hub-ink);
     font-size: 17px;
     font-weight: 500;
+  }
+  .devotion-language-links {
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+  }
+  .devotion-language-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
   @media (max-width: 1000px) {
     .devotions-heading {

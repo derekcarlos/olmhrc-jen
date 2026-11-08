@@ -5,6 +5,7 @@ import ContentPage from "@/layouts/ContentPage.astro";
 import NovenaGuide from "@/components/NovenaGuide.astro";
 import RosaryGuide from "@/components/RosaryGuide.astro";
 import FloresGuide from "@/components/FloresGuide.astro";
+import StationsGuide from "@/components/StationsGuide.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 
 export async function getStaticPaths() {
@@ -24,18 +25,30 @@ const isRosary = prayer.id === "how-to-pray-the-holy-rosary";
 const isTagalogRosary = prayer.id === "ang-banal-na-rosaryo";
 const isFlores = prayer.id === "flores-de-maria";
 const isBlockRosary = prayer.id === "block-rosary";
+const isTagalogStations = prayer.id === "ang-bagong-daan-ng-krus";
+const isStations = prayer.id === "stations-of-the-cross" || isTagalogStations;
+const isTagalog = isTagalogRosary || isTagalogStations;
 ---
 
 <ContentPage
-  wide={isNovena || isRosary || isTagalogRosary || isFlores || isBlockRosary}
+  wide={isNovena ||
+    isRosary ||
+    isTagalogRosary ||
+    isFlores ||
+    isBlockRosary ||
+    isStations}
   title={prayer.data.title}
   meta_title={prayer.data.meta_title ?? `${prayer.data.title} | Rosarium`}
   description={prayer.data.description}
   image={prayer.data.image}
-  eyebrow={isTagalogRosary ? "Sandali ng panalangin" : undefined}
+  eyebrow={isTagalog ? "Sandali ng panalangin" : undefined}
 >
   {
-    isFlores ? (
+    isStations ? (
+      <StationsGuide language={isTagalogStations ? "tl" : "en"}>
+        <Content />
+      </StationsGuide>
+    ) : isFlores ? (
       <FloresGuide>
         <Content />
       </FloresGuide>
@@ -59,7 +72,7 @@ const isBlockRosary = prayer.id === "block-rosary";
     )
   }
   <a href="/prayers" class="btn btn-outline-primary mt-10"
-    >{isTagalogRosary ? "← Bumalik sa mga Panalangin" : "← Back to Prayers"}</a
+    >{isTagalog ? "← Bumalik sa mga Panalangin" : "← Back to Prayers"}</a
   >
 </ContentPage>
 

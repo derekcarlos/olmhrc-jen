@@ -12,8 +12,10 @@ const root = doc.querySelector("prayer-hub");
 assert(root);
 assert.equal(doc.querySelectorAll("h1").length, 1);
 assert.deepEqual(
-  [...root.querySelectorAll(".devotion-card h3")].map(node => node.textContent),
-  ["Block Rosary", "Flores de Maria", "Rosary Novena"],
+  [...root.querySelectorAll(".devotion-card h3")].map(
+    (node) => node.textContent,
+  ),
+  ["Stations of the Cross", "Block Rosary", "Flores de Maria", "Rosary Novena"],
 );
 assert.equal(root.querySelectorAll("[data-prayer-hub-mystery]").length, 5);
 for (const link of root.querySelectorAll(".prayer-language-links a")) {

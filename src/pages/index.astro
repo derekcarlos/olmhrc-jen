@@ -5,19 +5,11 @@ import Base from "@/layouts/Base.astro";
 import { getListPage } from "@/lib/contentParser.astro";
 import { getNewsPosts } from "@/lib/news";
 import dateFormat from "@/lib/utils/dateFormat";
-import {
-  FaBookOpen,
-  FaPrayingHands,
-  FaMusic,
-  FaCross,
-  FaRegBell,
-  FaArrowRight,
-} from "react-icons/fa";
+import { FaCross, FaRegBell, FaArrowRight } from "react-icons/fa";
 
 const homepage = await getListPage("homepage", "-index");
-const { banner, mass, news, prayer, community } = homepage.data;
+const { banner, mass, news } = homepage.data;
 const latestNews = (await getNewsPosts())[0];
-const resourceIcons = [FaBookOpen, FaPrayingHands, FaMusic];
 ---
 
 <Base>
@@ -75,56 +67,6 @@ const resourceIcons = [FaBookOpen, FaPrayingHands, FaMusic];
     </section>
 
     <HomeMinistries />
-
-    <section class="prayer-section container" aria-labelledby="prayer-title">
-      <div class="section-heading">
-        <p class="eyebrow">A moment with God</p>
-        <h2 id="prayer-title">{prayer.title}</h2>
-        <p>{prayer.content}</p>
-      </div>
-      <div class="resource-grid">
-        {
-          prayer.resources.map((resource, index) => {
-            const Icon = resourceIcons[index % resourceIcons.length];
-            return (
-              <article class="resource-card">
-                <span class="resource-icon">
-                  <Icon aria-hidden="true" />
-                </span>
-                <h3>{resource.title}</h3>
-                <p>{resource.content}</p>
-                <a class="text-link" href={resource.link}>
-                  {resource.label}
-                  <FaArrowRight aria-hidden="true" />
-                </a>
-              </article>
-            );
-          })
-        }
-      </div>
-    </section>
-
-    <section class="community-section" aria-labelledby="community-title">
-      <img
-        class="community-photo"
-        src="/images/chapel-front.jpeg"
-        alt="Neighbors gathered for Mass beneath the folded roof of Our Lady of the Most Holy Rosary Chapel"
-        width="2731"
-        height="2048"
-        loading="lazy"
-        decoding="async"
-      />
-      <div class="container community-inner">
-        <div class="community-copy">
-          <p class="eyebrow">Rooted in faith, close to home</p>
-          <h2 id="community-title">{community.title}</h2>
-          <p>{community.content}</p><p>{community.detail}</p>
-          <a class="text-link" href={community.button.link}
-            >{community.button.label}<FaArrowRight aria-hidden="true" /></a
-          >
-        </div>
-      </div>
-    </section>
   </div>
 </Base>
 <style>
@@ -214,129 +156,15 @@ const resourceIcons = [FaBookOpen, FaPrayingHands, FaMusic];
     font-size: 18px;
     margin-bottom: 0.5rem;
   }
-  .prayer-section {
-    padding-block: 5.5rem;
-  }
-  .section-heading {
-    max-width: 43rem;
-    margin: 0 auto 2.75rem;
-    text-align: center;
-  }
-  .section-heading > p:not(.eyebrow) {
-    font-size: 18px;
-    line-height: 28px;
-  }
-  @media (min-width: 768px) {
-    .section-heading > p:not(.eyebrow) {
-      font-size: 20px;
-    }
-  }
-  .resource-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-  .resource-card {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    border: 1px solid var(--color-border);
-    border-radius: 0.7rem;
-    padding: 2.25rem;
-  }
-  .resource-icon {
-    display: inline-flex;
-    padding: 1rem;
-    color: var(--home-accent);
-    background: var(--color-light);
-    border-radius: 50%;
-    font-size: 1.4rem;
-    margin-bottom: 1.5rem;
-  }
-  .resource-card p {
-    margin-bottom: 1.5rem;
-    font-size: 18px;
-    line-height: 28px;
-  }
-  @media (min-width: 768px) {
-    .resource-card p {
-      font-size: 20px;
-    }
-  }
-  .resource-card .text-link {
-    margin-top: auto;
-  }
-  .community-section {
-    position: relative;
-    isolation: isolate;
-    display: flex;
-    align-items: center;
-    min-height: 23rem;
-    overflow: clip;
-    background: #213448;
-    color: #fffdf8;
-  }
-  .community-photo {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 64%;
-  }
-  .community-section::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: linear-gradient(
-      90deg,
-      rgb(33 52 72 / 94%) 0%,
-      rgb(33 52 72 / 86%) 48%,
-      transparent 82%
-    );
-  }
-  .community-inner {
-    padding-block: 3rem;
-  }
-  .community-copy {
-    max-width: 34rem;
-  }
-  .community-copy .eyebrow {
-    color: #e8d4ae;
-    margin-bottom: 0.75rem;
-  }
-  .community-copy h2,
-  .community-copy .text-link {
-    color: #fffdf8;
-  }
-  .community-copy h2 {
-    font-size: clamp(1.85rem, 3vw, 2.4rem);
-    margin-bottom: 0.9rem;
-  }
-  .community-copy p:not(.eyebrow) {
-    margin-bottom: 0.6rem;
-    font-size: 18px;
-    line-height: 1.55;
-    color: #eef1f3;
-  }
-  .community-copy .text-link {
-    margin-top: 0.4rem;
-    padding-block: 0.4rem;
-    border-bottom: 1px solid #e8d4ae;
-  }
   :global(.dark) .rosarium-home {
     --home-accent: var(--color-darkmode-accent);
   }
-  :global(.dark) .gather-section,
-  :global(.dark) .resource-icon {
+  :global(.dark) .gather-section {
     background: var(--color-darkmode-light);
   }
   :global(.dark) .gather-section,
   :global(.dark) .life-panel + .life-panel,
-  :global(.dark) .news-empty,
-  :global(.dark) .resource-card {
+  :global(.dark) .news-empty {
     border-color: var(--color-darkmode-border);
   }
   :global(.dark) .text-link {
@@ -349,13 +177,9 @@ const resourceIcons = [FaBookOpen, FaPrayingHands, FaMusic];
     .life-panel + .life-panel {
       padding-left: 2rem;
     }
-    .resource-card {
-      padding: 1.5rem;
-    }
   }
   @media (max-width: 640px) {
-    .chapel-life,
-    .resource-grid {
+    .chapel-life {
       grid-template-columns: 1fr;
     }
     .chapel-life {
@@ -370,25 +194,6 @@ const resourceIcons = [FaBookOpen, FaPrayingHands, FaMusic];
     .life-panel + .life-panel {
       border-top: 1px solid var(--color-border);
       padding-top: 2.5rem;
-    }
-    .prayer-section {
-      padding-block: 3.5rem;
-    }
-    .community-section {
-      display: block;
-      min-height: 0;
-    }
-    .community-photo {
-      position: static;
-      display: block;
-      height: 14rem;
-      object-position: 50% 62%;
-    }
-    .community-section::before {
-      display: none;
-    }
-    .community-inner {
-      padding-block: 2rem 2.5rem;
     }
   }
 </style>
