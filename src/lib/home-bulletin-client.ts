@@ -24,7 +24,11 @@ export function prepareHomeBulletin(
       const mass = nextHomeMass(schedules, current);
       const info = massInvitation(mass);
       field("title").textContent = mass?.title || "Gather for Mass";
-      field("number").textContent = info.number;
+      const number = field("number");
+      number.textContent =
+        number.dataset.homeMassNumberFormat === "numeric"
+          ? info.number.replace(/^0(?=\d)/, "")
+          : info.number;
       field("month").textContent = info.month;
       field("day").textContent = info.weekday;
       field("year").textContent = info.year;

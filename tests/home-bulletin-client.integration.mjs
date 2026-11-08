@@ -101,6 +101,22 @@ test("Simbang Gabi updates every visible invitation field and exports the evenin
     },
   ));
 
+test("the Mass page uses an unpadded day without changing the homepage calendar tile", () =>
+  fixture([sunday], (window, document) => {
+    const day = document.querySelector("[data-home-mass-number]");
+    day.dataset.homeMassNumberFormat = "numeric";
+    prepareHomeBulletin(document, () => new Date("2026-11-08T06:00:00Z"));
+    assert.equal(day.textContent, "8");
+    assert.equal(
+      document.querySelector("[data-home-mass-month]").textContent,
+      "Nov",
+    );
+    assert.equal(
+      document.querySelector("[data-home-mass-year]").textContent,
+      "2026",
+    );
+  }));
+
 test("missing or unconfirmed Masses never offer a fabricated calendar download", () => {
   for (const schedules of [[], [{ ...sunday, time: "" }]])
     fixture(schedules, (window, document) => {

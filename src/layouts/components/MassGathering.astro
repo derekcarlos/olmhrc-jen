@@ -35,7 +35,8 @@ const invitation = massInvitation(mass);
     >
       <div class="panel-top">
         <p class="eyebrow">Your next invitation</p><span aria-hidden="true"
-          >✝</span>
+          >✝</span
+        >
       </div>
       <h3 id="next-celebration-title" data-home-mass-title>
         {mass?.title || "Gather for Mass"}
@@ -50,10 +51,10 @@ const invitation = massInvitation(mass);
           aria-hidden="true">·</span
         >
         <span
-          ><span data-home-mass-month>{invitation.month}</span>
-          <span data-home-mass-number>{invitation.number}</span>, <span
-            data-home-mass-year>{invitation.year}</span
-          ></span
+          ><span data-home-mass-month>{invitation.month}</span>{" "}
+          <span data-home-mass-number data-home-mass-number-format="numeric"
+            >{invitation.number.replace(/^0(?=\d)/, "")}</span
+          >{", "}<span data-home-mass-year>{invitation.year}</span></span
         >
       </time>
       <time
