@@ -78,7 +78,7 @@
   {
     "id": "ot-sunday",
     "title": "Ordinary Time - Sunday Mass",
-    "date": "2026-11-08",
+    "date": "2026-11-15",
     "celebration": "Sunday Mass",
     "status": "published",
     "readiness": "confirmed",
@@ -238,7 +238,7 @@
     "items": [
       {
         "part": "processional",
-        "song": "ang-panginoon-ay-darating",
+        "song": "sa-iyoy-nananawagan",
         "used": true
       },
       {
