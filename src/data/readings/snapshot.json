@@ -3,29 +3,57 @@
   "source": "awit-at-papuri",
   "mode": "next-sunday",
   "dates": [
-    "2026-11-08"
+    "2026-11-15"
   ],
-  "last_attempt": "2026-11-02T10:23:39.484Z",
+  "last_attempt": "2026-11-09T02:46:44.588Z",
   "records": [
     {
-      "date": "2026-11-08",
-      "celebration": "Ika-32 Linggo sa Karaniwang Panahon (A)",
+      "date": "2026-11-15",
+      "celebration": "Ika-33 Linggo sa Karaniwang Panahon (A)",
       "language": "fil",
-      "source_url": "https://www.awitatpapuri.com/2026/11/08/linggo-nobyembre-8-2026/",
-      "retrieved_at": "2026-11-02T10:23:40.938Z",
+      "source_url": "https://www.awitatpapuri.com/2026/11/15/linggo-nobyembre-15-2026/",
+      "retrieved_at": "2026-11-09T02:46:45.414Z",
       "sections": [
         {
           "type": "first",
           "heading": "UNANG PAGBASA",
-          "reference": "Karunungan 6, 12-16",
+          "reference": "Kawikaan 31, 10-13. 19-20. 30-31",
           "blocks": [
             {
               "type": "paragraph",
-              "text": "Pagbasa mula sa aklat ng Karunungan"
+              "text": "Pagbasa mula sa aklat ng Mga Kawikaan"
             },
             {
-              "type": "stanza",
-              "text": "Ang Karunungan ay maningning at di kumukupas,\nmadaling natatagpuan ng naghahanap sa kanya,\nat nakikita agad ng mga nagpapahalaga sa kanya.\nMadali siyang nagpapakilala sa mga naghahangad sa kanya.\nHanapin mo siyang maaga at agad mo siyang matatagpuan,\nMakikita mo siyang nag-aabang sa iyong tarangkahan.\nIsipin mo lamang siya’y magkakaroon ka ng ganap na pagkaunawa;\nhanapin mo siya’t matatahimik ang iyong kalooban.\nPagkat hinahanap niya ang mga karapat-dapat sa kanya.\nat makikita ka niya saan ka man naroon.\nSiya’y maamo at sasamahan ka niya sa bawat iniisip mo."
+              "type": "paragraph",
+              "text": "Mahirap makakita ng mabuting asawa, higit sa mamahaling alahas ang kanyang halaga."
+            },
+            {
+              "type": "paragraph",
+              "text": "Lubos ang tiwala ng kanyang asawa, at saganang pakinabang ang makakamit niya."
+            },
+            {
+              "type": "paragraph",
+              "text": "Pinaglilingkuran niya ang kanyang asawa habang sila’y nabubuhay, pawang kabutihan ang ginagawa at di kasamaan."
+            },
+            {
+              "type": "paragraph",
+              "text": "Wala siyang tigil sa paggawa, hindi na halos nagpapahinga, humahabi ng kanyang lino at saka ng lana."
+            },
+            {
+              "type": "paragraph",
+              "text": "Siya’y gumagawa ng mga sinulid, at humahabi ng sariling damit."
+            },
+            {
+              "type": "paragraph",
+              "text": "Matulungin siya sa mahirap at sa nangangailangan ay bukas ang palad."
+            },
+            {
+              "type": "paragraph",
+              "text": "Magdaraya ang pang-akit at kumukupas ang ganda ngunit ang babaing may takot sa Panginoon ay pupurihin ng balana."
+            },
+            {
+              "type": "paragraph",
+              "text": "Ibunton sa kanya ang lahat ng parangal, karapat-dapat siya sa papuri ng bayan."
             },
             {
               "type": "paragraph",
@@ -36,50 +64,42 @@
         {
           "type": "psalm",
           "heading": "SALMONG TUGUNAN",
-          "reference": "Salmo 62, 2. 3-4. 5-6. 7-8",
+          "reference": "Salmo 127, 1-2. 3. 4-5",
           "blocks": [
             {
               "type": "response",
-              "text": "Aking kinasasabikan,\nPanginoon, ikaw lamang."
+              "text": "Mapalad ang sumusunod\nna taong may takot sa D’yos."
             },
             {
               "type": "stanza",
-              "text": "O Diyos, ikaw ang aking Diyos na lagi kong hinahanap;\nang uhaw kong kaluluwa’y tanging ikaw yaong hangad;\nPara akong tuyong lupa na tubig ang siyang lunas."
+              "text": "Mapalad ang bawat tao na sa Diyos ay may takot,\nang maalab na adhika’y sumunod sa kanyang utos.\nHindi siya magkukulang sa anumang kailangan,\nang buhay ay maligaya’t uunlad ang kanyang buhay."
             },
             {
               "type": "response",
-              "text": "Aking kinasasabikan,\nPanginoon, ikaw lamang."
+              "text": "Mapalad ang sumusunod\nna taong may takot sa D’yos."
             },
             {
               "type": "stanza",
-              "text": "Bayaan mong sa santwaryo, sa lugar na dakong banal,\nikaw roo’y mamasdan ko, sa likas mong karangalan.\nAng wagas na pag-ibig mo’y mahigit pa kaysa buhay.\nKaya ako’y magpupuri’t ikaw ang pag-uukulan."
+              "text": "Sa tahanan, ang asawa’y parang ubas na mabunga.\nBagong tanim na olibo sa may dulang ang anak n’ya."
             },
             {
               "type": "response",
-              "text": "Aking kinasasabikan,\nPanginoon, ikaw lamang."
+              "text": "Mapalad ang sumusunod\nna taong may takot sa D’yos."
             },
             {
               "type": "stanza",
-              "text": "Habang ako’y nabubuhay, ako’y magpapasalamat,\nat ako ay dadalangin na kamay ko’y nakataas.\nItong aking kaluluwa’y kakaing may kasiyahan,\nmagagalak na umawit ng papuring iaalay."
+              "text": "Ang sinuman kung ang Diyos buong pusong susundin,\nbuhay niya ay uunlad at laging pagpapalain.\nMula sa Sion, pagpapala nawa ng Diyos ay tanggapin,\nat makita habang buhay, pag-unlad ng Jerusalem."
             },
             {
               "type": "response",
-              "text": "Aking kinasasabikan,\nPanginoon, ikaw lamang."
-            },
-            {
-              "type": "stanza",
-              "text": "Laman ka ng gunita ko samantalang nahihimlay,\nmagdamag na ang palaging iniisip ko ay ikaw;\npagkat ikaw sa tuwina ang katulong na malapit,\nsa lilim ng iyong pakpak galak akong umaawit."
-            },
-            {
-              "type": "response",
-              "text": "Aking kinasasabikan,\nPanginoon, ikaw lamang."
+              "text": "Mapalad ang sumusunod\nna taong may takot sa D’yos."
             }
           ]
         },
         {
           "type": "second",
           "heading": "IKALAWANG PAGBASA",
-          "reference": "1 Tesalonica 4, 13-18",
+          "reference": "1 Tesalonica 5, 1-6",
           "blocks": [
             {
               "type": "paragraph",
@@ -87,27 +107,7 @@
             },
             {
               "type": "paragraph",
-              "text": "Mga kapatid, ibig naming malaman ninyo ang katotohanan tungkol sa mga namatay na, nang hindi kayo magdalamhati, tulad ng mga taong walang pag-asa. Naniniwala tayong si Hesus ay namatay at muling nabuhay. Kaya naman, naniniwala tayong bubuhayin din ng Diyos ang lahat ng namatay na nananalig kay Hesus — upang isama sa kanya."
-            },
-            {
-              "type": "paragraph",
-              "text": "Ito ang aral ng Panginoon na sinasabi namin sa inyo: pagparito ng Panginoon, tayong mga buhay ay hindi mauuna sa mga namatay na. Sa araw na yaon, kasabay ng malakas na utos, ng tinig ng arkanghel, at ng tunog ng trumpeta ng Diyos, bababa ang Panginoon mula sa langit. Bubuhayin muna ang mga namatay na nananalig kay Kristo. Pagkatapos, tayong mga buhay pa ay titipunin niya sa ulap at isasama sa mga binuhay upang salubungin sa papawirin ang Panginoon. Sa gayo’y makakapiling niya tayo magpakailanman. Kaya nga, mag-aliwan kayo sa pamamagitan ng mga aral na ito."
-            },
-            {
-              "type": "paragraph",
-              "text": "Ang Salita ng Diyos."
-            },
-            {
-              "type": "stanza",
-              "text": "o kaya: Maikling Pagbasa\n1 Tesalonica 4, 13-14"
-            },
-            {
-              "type": "paragraph",
-              "text": "Pagbasa mula sa unang sulat ni Apostol San Pablo sa mga taga-Tesalonica"
-            },
-            {
-              "type": "paragraph",
-              "text": "Mga kapatid, ibig naming malaman ninyo ang katotohanan tungkol sa mga namatay na, nang hindi kayo magdalamhati, tulad ng mga taong walang pag-asa. Naniniwala tayong si Hesus ay namatay at muling nabuhay. Kaya naman, naniniwala tayong bubuhayin din ng Diyos ang lahat ng namatay na nananalig kay Hesus — upang isama sa kanya."
+              "text": "Mga kapatid, hindi na kailangang isulat ko pa sa inyo kung kailan magaganap ang mga bagay na ito, sapagkat alam na ninyong ang pagdating ng Araw ng Panginoon ay tulad sa pagdating ng magnanakaw. Kapag sinasabi ng mga tao, “Tiwasay at panatag ang lahat,” biglang darating ang kapahamakan. Hindi sila makaiiwas sapagkat ang pagdating nito’y tulad ng pagsumpong ng pagdaramdam ng babaing manganganak. Ngunit hindi kayo nabubuhay sa kadiliman, mga kapatid, kaya’t hindi kayo mabibigla sa Araw na yaon na darating na parang magnanakaw. Kayong lahat ay kabilang sa panig ng kaliwanagan — sa panig ng araw — hindi sa panig ng kadiliman o ng gabi. Kaya nga, kailangang tayo’y manatiling gising, laging handa, at malinaw ang isip — di tulad ng iba."
             },
             {
               "type": "paragraph",
@@ -118,18 +118,18 @@
         {
           "type": "acclamation",
           "heading": "ALELUYA",
-          "reference": "Mateo 24, 42a. 44",
+          "reference": "Juan 15, 4a. 5b",
           "blocks": [
             {
               "type": "stanza",
-              "text": "Aleluya! Aleluya!\nTayo ay laging magtanod\nsapagkat di natin talos\nang pagbabalik ni Hesus.\nAleluya! Aleluya!"
+              "text": "Aleluya! Aleluya!\nSa Poon ay manatili\nsiya’y sa atin lalagi\nmamungang maluwalhati.\nAleluya! Aleluya!"
             }
           ]
         },
         {
           "type": "gospel",
           "heading": "MABUTING BALITA",
-          "reference": "Mateo 25, 1-13",
+          "reference": "Mateo 25, 14-30",
           "blocks": [
             {
               "type": "paragraph",
@@ -137,15 +137,11 @@
             },
             {
               "type": "paragraph",
-              "text": "Noong panahong iyon, sinabi ni Hesus sa kanyang mga alagad ang talinghagang ito: “Dito maitutulad ang pagpasok sa kaharian ng Diyos: may sampung dalagang lumabas upang sumalubong sa lalaking ikakasal. Bawat isa’y may dalang ilawan. Ang lima sa kanila’y hangal at ang lima’y matalino. Ang mga hangal ay nagdala ng kanilang mga ilawan ngunit hindi nagbaon ng langis. Subalit ang matatalino’y nagdala ng langis bukod pa sa nasa kanilang ilawan. Nabalam ng dating ang lalaking ikakasal, kaya’t inantok silang lahat at nakatulog."
+              "text": "Noong panahong iyon, sinabi ni Hesus sa kanyang mga alagad ang talinghagang ito: “Ang paghahari ng Diyos ay maitutulad dito: May isang taong maglalakbay, kaya tinawag niya ang kanyang mga alipin at ipinagkatiwala sa kanila ang kanyang ari-arian. Binigyan niya ng salapi ang bawat isa ayon sa kanya-kanyang kakayahan: binigyan niya ang isa ng limanlibong piso, ang isa nama’y dalawanlibong piso, at ang isa pa’y sanlibong piso. Pagkatapos, siya’y umalis. Humayo agad ang tumanggap ng limanlibong piso at ipinangalakal iyon. At nagtubo siya ng limanlibong piso. Gayun din naman, ang tumanggap ng dalawanlibong piso ay nagtubo ng dalawanlibong piso. Ngunit ang tumanggap ng sanlibong piso ay humukay sa lupa at itinago ang salapi ng kanyang panginoon."
             },
             {
               "type": "paragraph",
-              "text": "Ngunit nang hatinggabi na’y may sumigaw: ‘Narito na ang lalaking ikakasal! Salubungin ninyo!’ Agad nagbangon ang sampung dalaga at inayos ang kanilang ilawan. Sinabi ng mga hangal sa matatalino, ‘Bigyan naman ninyo kami ng kaunting langis. Aandap-andap na ang aming mga ilawan, e!’ ‘Baka hindi magkasiya ito sa ating lahat,’ tugon ng matatalino. ‘Mabuti pa’y pumunta muna kayo sa nagtitinda at bumili ng para sa inyo.’ Kaya’t lumakad ang limang hangal na dalaga. Samantalang bumibili sila, dumating ang lalaking ikakasal. Ang limang nakahanda ay kasama niyang pumasok sa kasalan, at ipininid ang pinto."
-            },
-            {
-              "type": "paragraph",
-              "text": "Pagkatapos, dumating naman ang limang hangal na dalaga. ‘Panginoon, papasukin po ninyo kami!’ sigaw nila. Ngunit tumugon siya, ‘Sinasabi ko sa inyo: hindi ko kayo nakikilala.’ Kaya magbantay kayo, sapagkat hindi ninyo alam ang araw ni ang oras.”"
+              "text": "“Pagkaraan ng mahabang panahon, bumalik ang panginoon ng mga aliping iyon at pinapagsulit sila. Lumapit ang tumanggap ng limang libo. Wika niya, ‘Panginoon, heto po ang limanlibo na bigay ninyo sa akin. Heto pa po ang limanlibo na tinubo ko.’ Sinabi sa kanya ng panginoon, ‘Magaling! Tapat at mabuting alipin! Yamang naging tapat ka sa kaunting halaga, pamamahalain kita sa malaking halaga. Makihati ka sa aking kagalakan!’ Lumapit din ang tumanggap ng dalawanlibong piso, at ang sabi, ‘Panginoon, heto po ang ibinigay ninyong dalawanlibong piso. Heto naman po ang dalawanlibong pisong tinubo ko.’ Sinabi ng kanyang panginoon, ‘Magaling! Tapat at mabuting alipin! Naging tapat ka sa kaunting halaga, kaya pamamahalain kita sa malaking halaga. Makihati ka sa aking kagalakan.’ At lumapit naman ang tumanggap ng sanlibong piso. ‘Alam ko pong kayo’y mahigpit,’ aniya. ‘Gumagapas kayo sa hindi ninyo tinamnan, at nag-aani sa hindi ninyo hinasikan. Natakot po ako, kaya’t ibinaon ko sa lupa ang inyong salapi. Heto na po ang sanlibong piso ninyo.’ ‘Masama at tamad na alipin!’ Tugon ng kanyang panginoon. ‘Alam mo palang gumagapas ako sa hindi ko tinamnan at nag-aani sa hindi ko hinasikan! Bakit hindi mo iyan inilagak sa bangko, di sana’y may nakuha akong tubo ngayon? Kunin ninyo sa kanya ang sanlibong piso at ibigay sa may sampunlibong piso. Sapagkat ang mayroon ay bibigyan pa, at mananagana; ngunit ang wala, kahit ang kakaunting nasa kanya ay kukunin pa. Itapon ninyo sa kadiliman sa labas ang aliping walang kabuluhan. Doo’y tatangis siya at magngangalit ang kanyang ipin.’”"
             },
             {
               "type": "paragraph",
