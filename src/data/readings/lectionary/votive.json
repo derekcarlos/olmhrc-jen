@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "source": "awit-at-papuri",
+  "language": "fil",
+  "collection": "votive",
+  "entries": {
+    "misa-para-sa-pangangalaga-sa-sangnilikha": {
+      "key": "misa-para-sa-pangangalaga-sa-sangnilikha",
+      "name": "Misa para sa Pangangalaga sa Sangnilikha",
+      "occurs": "2026-09-06",
+      "masses": [
+        {
+          "label": "",
+          "celebration": "Mga Pagbasa mula sa — Misa para sa Pangangalaga sa Sangnilikha",
+          "source_url": "https://www.awitatpapuri.com/2026/09/06/linggo-setyembre-6-2026-1/",
+          "source_date": "2026-09-06",
+          "sections": [
+            {
+              "type": "first",
+              "heading": "UNANG PAGBASA",
+              "reference": "Karunungan 13, 1-9",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "text": "Pagbasa mula sa aklat ng Karunungan"
+                },
+                {
+                  "type": "stanza",
+                  "text": "Napakahangal ang mga taong hindi nakakikilala sa Diyos.\nNakikita nila ang mabubuting bagay sa daigdig,\nngunit hindi nila makita ang Diyos na buhay."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Pinag-aaralan nila ang kanyang mga nilalang,\nngunit hindi nila nakilala siya, na lumalang sa mga ito."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Sa halip, ang apoy, ang mabilis na hangin, ang unos,\nang mga bituing naglalayag sa karurukan,\nang rumaragasang tubig at ang mga tala sa kalangitan,\nang kinikilala nilang mga diyos na namamahala sa daigdig."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Kung kinilala nilang diyos ang mga ito dahil sa kanilang angking kariktan,\ndapat ay nalaman nilang higit na dakila ang lumalang sa lahat ng iyan, ang Panginoong Maykapal."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Siya ang pinagmulan ng lahat ng kagandahan, ang lumikha sa lahat ng mga ito."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Kung namangha sila sa kapangyarihan ng mga ito,\ndapat nilang malaman na higit ang kapangyarihan ng lumikha sa mga ito.\nSapagkat sa pagmalas natin sa kalawakan at kagandahan ng sangnilikha,\nmakikilala natin ang Lumikha."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Baka naman hindi sila dapat sisihin nang lubos.\nMaaaring nagsikap silang makilala ang Diyos,\nngunit naligaw lamang sa kanilang paghahanap.\nSa pag-aaral ng mga bagay na nasa paligid nila,\nlubha silang naakit sa kagandahang kanilang nakita."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Hanggang sa naniwala silang diyos nga ang mga ito.\nNgunit wala silang tunay na maidadahilan sa kanilang pagkaligaw.\nKung nakayanan nilang pag-aralan ang sansinukob,\nbakit di nila nakilala ang Panginoong maylikha sa lahat?"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Ang Salita ng Diyos."
+                }
+              ]
+            },
+            {
+              "type": "psalm",
+              "heading": "SALMONG TUGUNAN",
+              "reference": "Salmo 18, 2-3. 4-5",
+              "blocks": [
+                {
+                  "type": "response",
+                  "text": "Ang mga tugon sa salmo ay sinunod sa Leksyonaryo.\nTingnan ang gabay mula sa CBCP para sa iba pang salin ng tugon."
+                },
+                {
+                  "type": "response",
+                  "text": "Ang langit ay nagdiriwang\nsa Panginoong marangal."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Ang langit ay naghahayag na ang Diyos ay dakila!\nMalinaw na nagsasaad kung ano ang kanyang gawa!\nBawat araw, bawat gabi, ang ulat ay walang patlang,\npatuloy na nag-uulat sa sunod na gabi’t araw."
+                },
+                {
+                  "type": "response",
+                  "text": "Ang langit ay nagdiriwang\nsa Panginoong marangal."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Walang tinig o salitang ginagamit kung sabagay,\nat wala ring naririnig na kahit na anong ingay;\ngayun pa man, sa daigdig ay laganap yaong tinig,\nang balita’y umaabot sa duluhan ng daigdig."
+                },
+                {
+                  "type": "response",
+                  "text": "Ang langit ay nagdiriwang\nsa Panginoong marangal."
+                }
+              ]
+            },
+            {
+              "type": "psalm",
+              "heading": "SALMONG TUGUNAN",
+              "alternative": true,
+              "label": "o kaya",
+              "reference": "Salmo 103, 1-2a. 5-6. 10 at 12. 24 at 35k",
+              "blocks": [
+                {
+                  "type": "response",
+                  "text": "Ang Poon ay natutuwa\nsa kanyang mga nilikha."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Pinupuri ka, Poong Diyos, nitong aking kaluluwa,\nO Panginoong aking Diyos, kay dakila mong talaga!\nAng taglay mong kasuuta’y dakila ri’t marangal pa.\nNababatbat ka, Poong Diyos, ng liwanag na kay ganda."
+                },
+                {
+                  "type": "response",
+                  "text": "Ang Poon ay natutuwa\nsa kanyang mga nilikha."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Ikaw na rin ang nagtayo ng saligan nitong lupa,\nmatatag na ginawa mo’t hindi ito mauuga.\nAng ibabaw ng saliga’y ginawa mong karagatan,\nat tubig din ang bumalot sa lahat ng kabundukan."
+                },
+                {
+                  "type": "response",
+                  "text": "Ang Poon ay natutuwa\nsa kanyang mga nilikha."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Lumilikha ka ng ilog na patungong kapatagan,\nsa gilid ng mga burol, umaagos na marahan.\nSa naroong kakahuya’y umaawit ng masaya,\nmga ibo’y nagpupugad sa malabay nilang sanga."
+                },
+                {
+                  "type": "response",
+                  "text": "Ang Poon ay natutuwa\nsa kanyang mga nilikha."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Sa daigdig, ikaw Poon, kay rami ng iyong likha\npagkat ikaw ay marunong kaya ito ay nagawa.\nSa dami ng nilikha mo’y nakalatan itong lupa.\nPurihin ang Panginoon, purihin mo, kaluluwa!"
+                },
+                {
+                  "type": "response",
+                  "text": "Ang Poon ay natutuwa\nsa kanyang mga nilikha."
+                }
+              ]
+            },
+            {
+              "type": "second",
+              "heading": "IKALAWANG PAGBASA",
+              "reference": "Colosas 1, 15-20",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "text": "Pagbasa mula sulat ni Apostol San Pablo sa mga taga-Colosas"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Si Kristo ang larawan ng Diyos na di-nakikita, at siyang may kapangyarihan sa lahat ng nilikha. Sapagkat ang lahat ng nasa langit at nasa lupa, nakikita man o hindi, pati ang mga naghahari at namamahala, mga namumuno at may kapangyarihang espirituwal ay pawang nilikha ng Diyos sa pamamagitan niya at para sa kanya. Siya’y una sa lahat, at sa kanya nasasalalay ang kaayusan ng lahat ng bagay. Siya ang ulo ng Simbahan na kanyang katawan. Siya ang Una, ang panganay na Anak — ang unang nabuhay na muli upang siya ang maging pinakadakila sa lahat ng bagay. Ipinasiya ng Diyos na ang kanyang kalikasan ay manatili rin sa Anak, at inibig niyang ang sandaigdigan ay makipagsundo sa kanya sa pamamagitan ng Anak. Sa pamamagitan ng pagkamatay nito sa krus, nagkasundo nga ang Diyos at ang lahat ng nilikha sa langit at sa lupa."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Ang Salita ng Diyos."
+                }
+              ]
+            },
+            {
+              "type": "acclamation",
+              "heading": "ALELUYA",
+              "reference": "Salmo 103, 24",
+              "blocks": [
+                {
+                  "type": "stanza",
+                  "text": "Aleluya! Aleluya!\nKay rami ng Iyong mga gawa, O Panginoon!\nNilikha Mo silang lahat sa karunungan.\nAleluya! Aleluya!"
+                }
+              ]
+            },
+            {
+              "type": "acclamation",
+              "heading": "ALELUYA",
+              "alternative": true,
+              "label": "o kaya",
+              "reference": "1 Mga Cronica 29, 11d. 12b",
+              "blocks": [
+                {
+                  "type": "stanza",
+                  "text": "Aleluya! Aleluya!\nlyo, O Panginoon, ang kaharian;\nIkaw ang naghahari sa lahat.\nAleluya! Aleluya!"
+                }
+              ]
+            },
+            {
+              "type": "gospel",
+              "heading": "MABUTING BALITA",
+              "reference": "Mateo 6, 24-34",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "text": "Ang Mabuting Balita ng Panginoon ayon kay San Mateo"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Noong panahong iyon, sinabi ni Hesus sa kanyang mga alagad: “Walang makapaglilingkod nang sabay sa dalawang panginoon sapagkat kapopootan niya ang isa at iibigin ang ikalawa, paglilingkuran nang tapat ang isa at hahamakin ang ikalawa. Hindi kayo makapaglilingkod nang sabay sa Diyos at sa kayamanan."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "“Kaya’t sinasabi ko sa inyo: huwag kayong mabagabag tungkol sa pagkain at inumin na kailangan ninyo upang mabuhay, o tungkol sa damit na kailangan ng inyong katawan. Hindi ba’t ang buhay ay higit na mahalaga kaysa pagkain, at ang katawan kaysa pananamit? Masdan ninyo ang mga ibon: hindi sila naghahasik ni nag-aani o kaya’y nagtitipon sa banga. Gayunman, pinakakain sila ng inyong Amang nasa langit. Hindi ba’t higit kayong mahalaga kaysa mga ibon? Sino sa inyo ang makapagpapahaba ng kanyang buhay nang kahit isang oras sa pamamagitan ng kanyang pagkabalisa?"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "“At bakit kayo nababagabag tungkol sa pananamit? Isipin ninyo kung paano sumisibol ang mga bulaklak sa parang; hindi sila nagpapagal ni humahabi man. Ngunit ito ang sasabihin ko sa inyo: maging si Solomon ay hindi nakapagsuot ng kasingganda ng isa sa mga bulaklak na ito, bagamat napakariringal ang mga damit niya. Kung ang mga damo sa kabukiran, na buhay ngayon at kinabukasa’y iginagatong sa kalan, ay dinaramtan ng Diyos, kayo pa kaya? Kay liit ng pananalig ninyo sa kanya! Kaya’t huwag kayong mabalisa tungkol sa inyong kakanin, iinumin, o daramtin. Sapagkat ang mga bagay na ito ang kinahuhumalingan ng mga taong wala pang pananalig sa Diyos. Alam ng inyong Amang nasa langit na kailangan ninyo ang lahat ng ito. Ngunit pagsumakitan ninyo nang higit sa lahat ang pagharian kayo ng Diyos at mamuhay nang ayon sa kanyang kalooban, at ipagkakaloob niya ang lahat ng kailangan ninyo. Kaya, huwag ninyong ikababahala ang para sa araw ng bukas; saka na ninyo harapin kapag ito’y dumating. Sapat na sa bawat araw ang kanyang mga suliranin.”"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Ang Mabuting Balita ng Panginoon."
+                }
+              ]
+            },
+            {
+              "type": "gospel",
+              "heading": "MABUTING BALITA",
+              "alternative": true,
+              "label": "o kaya",
+              "reference": "Mateo 8, 23-27",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "text": "Ang Mabuting Balita ng Panginoon ayon kay San Mateo"
+                },
+                {
+                  "type": "stanza",
+                  "text": "Noong panahong iyon,\nsumakay si Hesus sa bangka,\nkasama ang kanyang mga alagad.\nBumugso sa lawa ang isang malakas na unos\nat halos matabunan ng mga alon ang bangka.\nNgunit natutulog noon si Hesus.\nKaya’t nilapitan siya ng mga alagad at ginising.\n“Panginoon, tulungan ninyo kami!” sabi nila.\n“Lulubog tayo!”\nAt sinabi niya sa kanila,\n“Ano’t kayo’y natatakot?\nNapakaliit naman ng pananalig ninyo!”\nBumangon siya,\nsinaway ang hangin at ang dagat,\nat tumahimik ang mga ito.\nNamangha silang lahat at ang sabi,\n“Anong tao ito? Kahit ang hangin at ang dagat\nay tumatalima sa kanya!”"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Ang Mabuting Balita ng Panginoon."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

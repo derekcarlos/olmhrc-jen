@@ -1,5 +1,5 @@
 import { sundayDate, targetDates } from "./readings.mjs";
-import { prepareReadingWalkthrough } from "./reading-walkthrough-client.ts";
+import { prepareReadingMasses } from "./reading-masses-client.ts";
 
 export function prepareReadings() {
   document.querySelectorAll<HTMLElement>("[data-readings]").forEach((root) => {
@@ -7,15 +7,26 @@ export function prepareReadings() {
     root.dataset.ready = "true";
     const dates: string[] = JSON.parse(root.dataset.dates || "[]");
     const available: string[] = JSON.parse(root.dataset.available || "[]");
+    const calendarDates: string[] = JSON.parse(
+      root.dataset.calendarDates || "[]",
+    );
     const mode = root.dataset.mode || "next-sunday";
     const selected = root.dataset.selected!;
     const isEntry = root.dataset.entry === "true";
     const base = root.dataset.base || "";
-    const stopWalkthrough = prepareReadingWalkthrough(root);
+    const stopWalkthrough = prepareReadingMasses(root);
     function refreshDate() {
+      if (root.dataset.fixed === "true") {
+        root.dataset.readingsActive = "true";
+        return;
+      }
       const today = new Date();
-      const active = targetDates(mode, today);
-      const target = isEntry ? sundayDate(today) : selected;
+      const active = targetDates(mode, today, calendarDates);
+      const target = isEntry
+        ? mode === "next-celebration"
+          ? active[0]
+          : sundayDate(today)
+        : selected;
       root
         .querySelectorAll<HTMLElement>("[data-reading-day]")
         .forEach((link) => {
@@ -24,8 +35,8 @@ export function prepareReadings() {
       if (
         isEntry &&
         target !== selected &&
-        dates.includes(target) &&
-        available.includes(target)
+        ((mode === "next-celebration" && calendarDates.includes(target)) ||
+          (dates.includes(target) && available.includes(target)))
       ) {
         window.location.replace(`${base}/readings/${target}`);
         return;
@@ -40,8 +51,9 @@ export function prepareReadings() {
       if (expired)
         root.querySelector<HTMLElement>(
           "[data-readings-stale-text]",
-        )!.textContent =
-          `Hindi pa available ang mga pagbasa para sa ${target}. Mag-a-update ang pahinang ito pagkatapos ng susunod na matagumpay na pag-sync.`;
+        )!.textContent = target
+          ? `Hindi pa available ang mga pagbasa para sa ${target}. Mag-a-update ang pahinang ito pagkatapos ng susunod na matagumpay na pag-sync.`
+          : "Kailangang i-update ang kalendaryo ng mga pagbasa. Mangyaring bumalik muli.";
     }
     refreshDate();
     // Recheck after midnight, on returning to this tab, or after client navigation.

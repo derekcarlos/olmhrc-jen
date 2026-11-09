@@ -1,0 +1,209 @@
+---
+import { formatReadingDate } from "@/lib/readings.mjs";
+import type { ReadingRecord, ReadingMass } from "@/lib/readings.mjs";
+interface Props {
+  record: ReadingRecord;
+  mass: ReadingMass;
+  prefix?: string;
+}
+const { record, mass, prefix = "" } = Astro.props;
+const counts = new Map<string, number>();
+const keys = mass.sections.map((s) => {
+  const n = (counts.get(s.type) || 0) + 1;
+  counts.set(s.type, n);
+  return `${prefix}${s.id || (n === 1 ? s.type : `${s.type}-${n}`)}`;
+});
+const labels: Record<string, string> = {
+  procession: "Mabuting Balita sa Prusisyon",
+  first: "Unang Pagbasa",
+  second: "Ikalawang Pagbasa",
+  third: "Ikatlong Pagbasa",
+  fourth: "Ikaapat na Pagbasa",
+  fifth: "Ikalimang Pagbasa",
+  sixth: "Ikaanim na Pagbasa",
+  seventh: "Ikapitong Pagbasa",
+  epistle: "Sulat",
+  psalm: "Salmong Tugunan",
+  sequence: "Sekwensiya",
+  gospel: "Mabuting Balita",
+};
+const title = (section: (typeof mass.sections)[number]) =>
+  section.type === "acclamation"
+    ? section.heading === "ALELUYA"
+      ? "Aleluya"
+      : "Bago ang Mabuting Balita"
+    : labels[section.type] || section.heading;
+const sourceId = `${prefix}reading-source`;
+---
+
+<div class="reading-workspace">
+  <aside class="reading-guide">
+    <p class="page-eyebrow">Sa pagbasang ito</p>
+    <nav class="reading-contents" aria-label="Mga bahagi ng pagbasa">
+      {
+        mass.sections.map((section, index) => (
+          <a
+            href={`#reading-${keys[index]}`}
+            data-reading-section-link={keys[index]}
+          >
+            <>
+              <span class="reading-index-number" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span>
+                {title(section)}
+                {counts.get(section.type)! > 1 && (
+                  <small class="reading-short-reference">
+                    {section.reference}
+                  </small>
+                )}
+              </span>
+            </>
+          </a>
+        ))
+      }
+    </nav>
+    <p class="reading-guide-reflection">
+      Makinig.<br />Magnilay.<br />Isabuhay.
+    </p>
+    <a class="reading-source-jump" href={`#${sourceId}`}
+      >Tungkol sa pinagmulan ↓</a
+    >
+  </aside>
+  <div class="reading-body">
+    <article
+      id={`${prefix}reading-guide`}
+      data-reading-panel
+      tabindex="-1"
+      aria-label={`Mga pagbasa — ${record.celebration}`}
+    >
+      <div class="reading-guide-toolbar" data-reading-toolbar hidden>
+        <p data-reading-status role="status" aria-atomic="true"></p><button
+          type="button"
+          data-reading-action="toggle">Basahin nang buo</button
+        >
+      </div>
+      {
+        mass.sections.map((section, index) => (
+          <section
+            class="reading-section"
+            data-reading-section={keys[index]}
+            aria-labelledby={`reading-${keys[index]}`}
+          >
+            <p class="reading-section-label">
+              <span aria-hidden="true">
+                {String(index + 1).padStart(2, "0")} ·{" "}
+              </span>
+              Liturhiya ng Salita
+            </p>
+            <h3 id={`reading-${keys[index]}`}>{title(section)}</h3>
+            {(section.alternatives?.length || 0) > 0 && (
+              <label
+                class="reading-version-picker"
+                data-reading-version-picker
+                hidden
+              >
+                Bersiyon ng pagbasa
+                <select data-reading-version>
+                  <option value="0">Pangunahing Pagbasa</option>
+                  {(section.alternatives || []).map((alternative, n) => (
+                    <option value={n + 1}>
+                      {alternative.label || `Ibang Bersiyon ${n + 1}`} ·{" "}
+                      {alternative.reference}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            )}
+            {[section, ...(section.alternatives || [])].map((option, n) => (
+              <div data-reading-option={String(n)}>
+                {n > 0 && (
+                  <p class="reading-option-label" data-reading-option-label>
+                    {option.label || "Ibang Bersiyon"}
+                  </p>
+                )}
+                {option.reference && (
+                  <p class="reading-reference">{option.reference}</p>
+                )}
+                <div class="reading-text">
+                  {option.blocks.map((block) =>
+                    block.type === "response" ? (
+                      <div class="content reading-response-wrapper">
+                        <blockquote class="reading-response">
+                          <p class="reading-block" set:text={block.text} />
+                        </blockquote>
+                      </div>
+                    ) : (
+                      <p class="reading-block" set:text={block.text} />
+                    ),
+                  )}
+                </div>
+              </div>
+            ))}
+          </section>
+        ))
+      }
+      <div class="reading-complete" data-reading-complete hidden>
+        <p class="page-eyebrow">Makinig. Magnilay. Isabuhay.</p><h3>
+          Dalhin ang Salita sa araw-araw.
+        </h3><p>
+          Manatili sandali sa katahimikan. Anong salita ang nais mong isabuhay
+          ngayon?
+        </p><div class="reading-completion-actions">
+          <button type="button" data-reading-action="restart"
+            >Basahin muli</button
+          ><button type="button" data-reading-action="all"
+            >Basahin nang buo</button
+          >
+        </div>
+      </div>
+    </article>
+    <footer
+      class="reading-controls"
+      data-reading-controls
+      hidden
+      aria-label="Mga kontrol sa pagbasa"
+    >
+      <div class="reading-control-inner">
+        <button
+          type="button"
+          class="reading-previous"
+          data-reading-action="previous">← Bumalik</button
+        ><p data-reading-progress></p><button
+          type="button"
+          class="reading-next"
+          data-reading-action="next">Susunod →</button
+        >
+      </div>
+    </footer>
+    <footer class="reading-source" id={sourceId}>
+      <p>
+        Pinagmulan: <a href={mass.source_url}
+          >Awit at Papuri — {formatReadingDate(mass.source_date)}</a
+        >
+      </p>
+      <p>
+        Teksto mula sa <cite>Ang Pagpapahayag ng Salita ng Diyos</cite> (Tagalog Lectionary),
+        ayon sa pagkakakilanlan ng Awit at Papuri. Karapatang-sipi © CBCP 2014. <a
+          href="https://www.awitatpapuri.com/faqs/">Tungkol sa pinagmulan</a
+        >.
+      </p>
+      <p>
+        {
+          record.origin === "lectionary"
+            ? "Kopyang inihanda noong:"
+            : "Kopyang nakuha noong:"
+        }
+        <time datetime={record.retrieved_at}
+          >{
+            new Intl.DateTimeFormat("fil-PH", {
+              dateStyle: "medium",
+              timeStyle: "short",
+              timeZone: "Asia/Manila",
+            }).format(new Date(record.retrieved_at))
+          } PHT</time
+        >
+      </p>
+    </footer>
+  </div>
+</div>

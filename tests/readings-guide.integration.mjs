@@ -24,69 +24,75 @@ for (const path of paths) {
   });
   const doc = dom.window.document;
   const root = doc.querySelector("[data-readings]");
-  const sections = [...root.querySelectorAll("[data-reading-section]")];
-  if (!sections.length) {
-    dom.window.close();
-    continue;
-  }
   const record = snapshot.records.find(
     (record) => record.date === root.dataset.selected,
   );
   assert.ok(record);
+  const reader =
+    root.querySelector(
+      `[data-reading-mass="${record.selected_mass || "main"}"]`,
+    ) || root;
+  const sections = [...reader.querySelectorAll("[data-reading-section]")];
+  if (!sections.length) {
+    dom.window.close();
+    continue;
+  }
   assert.equal(sections.length, record.sections.length);
   assert.equal(
     sections.filter((section) => !section.hidden).length,
     sections.length,
     "all text is available before JavaScript runs",
   );
-  assert.equal(root.querySelector("[data-reading-controls]").hidden, true);
+  assert.equal(reader.querySelector("[data-reading-controls]").hidden, true);
   for (const [index, section] of record.sections.entries()) {
     assert.deepEqual(
       [...sections[index].querySelectorAll(".reading-block")].map(
         (block) => block.textContent,
       ),
-      section.blocks.map((block) => block.text),
+      [section, ...(section.alternatives || [])].flatMap((option) =>
+        option.blocks.map((block) => block.text),
+      ),
     );
   }
   const original = sections.map((section) => section.outerHTML);
   const ids = [...doc.querySelectorAll("[id]")].map((node) => node.id);
   assert.equal(new Set(ids).size, ids.length);
-  const panel = root.querySelector("[data-reading-panel]");
+  const panel = reader.querySelector("[data-reading-panel]");
   panel.scrollIntoView = () => {};
-  const cleanup = prepareReadingWalkthrough(root);
+  const cleanup = prepareReadingWalkthrough(reader);
   try {
-    const controls = root.querySelector("[data-reading-controls]");
+    const controls = reader.querySelector("[data-reading-controls]");
     for (const [index, section] of sections.entries()) {
       assert.equal(section.hidden, false);
       assert.equal(sections.filter((section) => !section.hidden).length, 1);
       assert.equal(
-        root.querySelector("[data-reading-controls]"),
+        reader.querySelector("[data-reading-controls]"),
         controls,
         "controls retain their node at each step",
       );
       assert.equal(controls.hidden, false);
       assert.equal(
-        root.querySelector("[data-reading-progress]").textContent,
+        reader.querySelector("[data-reading-progress]").textContent,
         `Bahagi ${index + 1} sa ${sections.length}`,
       );
-      root.querySelector('[data-reading-action="next"]').click();
+      reader.querySelector('[data-reading-action="next"]').click();
     }
-    assert.equal(root.querySelector("[data-reading-complete]").hidden, false);
+    assert.equal(reader.querySelector("[data-reading-complete]").hidden, false);
     assert.equal(controls.hidden, true);
-    root.querySelector('[data-reading-action="all"]').click();
+    reader.querySelector('[data-reading-action="all"]').click();
     assert.equal(
       sections.filter((section) => !section.hidden).length,
       sections.length,
     );
-    assert.ok(root.querySelector(`a[href="${record.source_url}"]`));
-    root.querySelector('[data-reading-section-link="psalm"]').click();
+    assert.ok(reader.querySelector(`a[href="${record.source_url}"]`));
+    reader.querySelector('[data-reading-section-link="psalm"]').click();
     assert.equal(doc.activeElement, panel);
     assert.equal(
-      root.querySelector('[data-reading-section="psalm"]').hidden,
+      reader.querySelector('[data-reading-section="psalm"]').hidden,
       false,
     );
     assert.equal(sections.filter((section) => !section.hidden).length, 1);
-    root.querySelector('[data-reading-action="toggle"]').click();
+    reader.querySelector('[data-reading-action="toggle"]').click();
     assert.equal(
       sections.filter((section) => !section.hidden).length,
       sections.length,

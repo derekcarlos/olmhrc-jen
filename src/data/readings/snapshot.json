@@ -5,14 +5,19 @@
   "dates": [
     "2026-11-15"
   ],
-  "last_attempt": "2026-11-09T02:46:44.588Z",
   "records": [
     {
       "date": "2026-11-15",
-      "celebration": "Ika-33 Linggo sa Karaniwang Panahon (A)",
+      "celebration": "Thirty-third Sunday in Ordinary Time",
       "language": "fil",
       "source_url": "https://www.awitatpapuri.com/2026/11/15/linggo-nobyembre-15-2026/",
-      "retrieved_at": "2026-11-09T02:46:45.414Z",
+      "source_date": "2026-11-15",
+      "retrieved_at": "2026-11-09T09:11:04.372Z",
+      "origin": "lectionary",
+      "lectionary_key": "year-a/ordinary_time_33_sunday",
+      "liturgical_id": "ordinary_time_33_sunday",
+      "mass_label": "Thirty-third Sunday in Ordinary Time (Green)",
+      "selection_rule": "first-daytime-mass-main-readings",
       "sections": [
         {
           "type": "first",
@@ -152,5 +157,6 @@
       ]
     }
   ],
-  "errors": []
+  "errors": [],
+  "last_attempt": "2026-11-09T09:11:04.372Z"
 }

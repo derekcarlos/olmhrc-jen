@@ -15,6 +15,11 @@ assert.ok(
 assert.ok(page.querySelector("[lang=fil]"));
 assert.ok(page.querySelector(".reading-window"));
 assert.ok(page.querySelector("[data-readings-stale]"));
+assert.equal(
+  page.querySelector(".reading-celebrations"),
+  null,
+  "the Sunday reader has no celebration dropdown",
+);
 assert.equal(page.querySelectorAll("h1").length, 1);
 const fontCss = page
   .querySelectorAll("style")
@@ -56,29 +61,37 @@ for (const record of snapshot.records) {
   const dated = parse(
     readFileSync(`dist/readings/${record.date}/index.html`, "utf8"),
   );
+  const reader = record.selected_mass
+    ? dated.querySelector(`[data-reading-mass="${record.selected_mass}"]`)
+    : dated;
+  assert.ok(reader, "the selected Mass is present");
+  const options = record.sections.flatMap((section) => [
+    section,
+    ...(section.alternatives || []),
+  ]);
   assert.equal(
-    dated.querySelectorAll(".reading-section").length,
+    reader.querySelectorAll(".reading-section").length,
     record.sections.length,
   );
   assert.equal(
-    dated.querySelectorAll(".reading-text").length,
-    record.sections.length,
+    reader.querySelectorAll(".reading-text").length,
+    options.length,
   );
   assert.ok(dated.querySelector(`a[href="${record.source_url}"]`));
   assert.equal(dated.querySelectorAll("iframe, audio").length, 0);
-  const responses = record.sections.flatMap((section) =>
+  const responses = options.flatMap((section) =>
     section.blocks.filter((block) => block.type === "response"),
   );
   assert.equal(
-    dated.querySelectorAll("blockquote.reading-response").length,
+    reader.querySelectorAll("blockquote.reading-response").length,
     responses.length,
     "psalm responses use the existing blockquote presentation",
   );
-  for (const section of record.sections) {
-    const text = dated.querySelector(`#reading-${section.type}`)?.parentNode
-      .textContent;
-    for (const block of section.blocks)
-      assert.ok(text.includes(block.text), "all source text is preserved");
+  for (const [index, section] of record.sections.entries()) {
+    const text = reader.querySelectorAll(".reading-section")[index].textContent;
+    for (const option of [section, ...(section.alternatives || [])])
+      for (const block of option.blocks)
+        assert.ok(text.includes(block.text), "all source text is preserved");
   }
 }
 console.log(

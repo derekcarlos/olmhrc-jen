@@ -11,7 +11,7 @@ export async function refreshReadings(
   const errors = [];
   let evaluated = false;
   // Sequential requests keep the small daily import gentle on the provider.
-  for (const date of targetDates(mode, now)) {
+  for (const date of targetDates(mode, now, previous?.calendar_dates)) {
     const result = await retrieve(date);
     if (result.record) {
       incoming.push(result.record);

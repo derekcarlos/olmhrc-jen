@@ -1,0 +1,72 @@
+---
+interface Props {
+  calendar: { date: string; name: string; category: string }[];
+  selected: string;
+}
+const { calendar, selected } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const years = [...new Set(calendar.map((d) => d.date.slice(0, 4)))];
+const aliases = (name: string) =>
+  /Mother of God/i.test(name)
+    ? "Theotokos Santa Maria Ina ng Diyos"
+    : /Immaculate Conception/i.test(name)
+      ? "Kalinis-linisang Paglilihi"
+      : "";
+---
+
+<details class="reading-celebrations" data-reading-browser>
+  <summary
+    ><span class="page-eyebrow">Sa buong taon</span><strong
+      >Pumili ng pagdiriwang</strong
+    ><span aria-hidden="true">⌄</span></summary
+  >
+  <div class="reading-celebration-browser">
+    <p>
+      Mga Linggo, Dakilang Kapistahan, Miyerkules ng Abo, at Mahal na Araw.
+      Piliin ang petsa upang basahin ang mga teksto.
+    </p>
+    <label class="reading-calendar-search" data-reading-calendar-search hidden
+      >Hanapin ang pagdiriwang<input
+        type="search"
+        placeholder="Hal. Immaculate, Easter, 2027…"
+        data-reading-calendar-filter
+      /></label
+    >
+    <p data-reading-calendar-empty hidden>Walang tugma sa hinahanap.</p>
+    <div class="reading-celebration-list">
+      {
+        years.map((year) => (
+          <section data-reading-calendar-year>
+            <h2>{year}</h2>
+            {calendar
+              .filter((d) => d.date.startsWith(year))
+              .map((day) => (
+                <a
+                  href={`${base}/readings/${day.date}`}
+                  data-reading-calendar-entry={`${day.date} ${day.name} ${day.category} ${aliases(day.name)}`}
+                  aria-current={day.date === selected ? "date" : undefined}
+                >
+                  <time datetime={day.date}>
+                    {new Intl.DateTimeFormat("fil-PH", {
+                      month: "short",
+                      day: "numeric",
+                      timeZone: "UTC",
+                    }).format(new Date(`${day.date}T12:00:00Z`))}
+                  </time>
+                  <span>
+                    <strong>{day.name}</strong>
+                    <small>{day.category}</small>
+                  </span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              ))}
+          </section>
+        ))
+      }
+    </div>
+    <p class="reading-browser-note">
+      Ang mga petsang ito ay mga pagdiriwang sa Simbahan; tingnan ang Mass page
+      para sa iskedyul ng ating kapilya.
+    </p>
+  </div>
+</details>

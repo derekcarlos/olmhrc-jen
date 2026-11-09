@@ -24,6 +24,9 @@ export function prepareReadingWalkthrough(root: HTMLElement) {
 
   function render(scroll = false) {
     root.dataset.readingsView = view;
+    const outer = root.closest<HTMLElement>("[data-readings]");
+    if (outer && outer !== root && !root.hidden)
+      outer.dataset.readingsView = view;
     sections.forEach((section, index) => {
       section.hidden =
         view === "complete" || (view === "step" && index !== position);

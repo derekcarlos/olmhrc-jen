@@ -8,8 +8,13 @@
   "type": "module",
   "scripts": {
     "readings:sync": "node scripts/sync-readings.mjs --refresh",
+    "readings:sync:lectionary": "bash scripts/update-sunday-readings.sh",
+    "readings:update:sunday": "bash scripts/update-sunday-readings.sh",
+    "readings:update": "bash scripts/update-sunday-readings.sh",
     "readings:validate": "node scripts/validate-readings.mjs",
     "readings:publish": "bash scripts/publish-readings.sh",
+    "lectionary:build": "node scripts/build-lectionary.mjs",
+    "lectionary:fetch": "node scripts/build-lectionary.mjs --fetch",
     "dev": "concurrently \"node scripts/themeGenerator.js --watch\" \"node scripts/jsonGenerator.js && astro dev\"",
     "build": "node scripts/themeGenerator.js && node scripts/jsonGenerator.js && astro build && node scripts/llmsGenerator.js",
     "preview": "astro preview",

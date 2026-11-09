@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "source": "awit-at-papuri",
+  "source_api": "https://www.awitatpapuri.com/wp-json/wp/v2/posts",
+  "collections": [
+    "year-a",
+    "year-b",
+    "year-c",
+    "weekday-1",
+    "weekday-2",
+    "seasonal",
+    "saints",
+    "votive"
+  ],
+  "coverage": {
+    "year-a": {
+      "entries": 55,
+      "expected": 55,
+      "missing": [
+        {
+          "key": "ordinary_time_10_sunday",
+          "name": "Tenth Sunday in Ordinary Time"
+        },
+        {
+          "key": "ordinary_time_2_sunday",
+          "name": "Second Sunday in Ordinary Time"
+        }
+      ]
+    },
+    "year-b": {
+      "entries": 55,
+      "expected": 56,
+      "missing": [
+        {
+          "key": "ordinary_time_7_sunday",
+          "name": "Seventh Sunday in Ordinary Time"
+        },
+        {
+          "key": "ordinary_time_8_sunday",
+          "name": "Eighth Sunday in Ordinary Time"
+        }
+      ]
+    },
+    "year-c": {
+      "entries": 56,
+      "expected": 54,
+      "missing": []
+    },
+    "weekday-1": {
+      "entries": 204,
+      "expected": 204,
+      "missing": []
+    },
+    "weekday-2": {
+      "entries": 204,
+      "expected": 204,
+      "missing": []
+    },
+    "seasonal": {
+      "entries": 125,
+      "expected": 123,
+      "missing": []
+    },
+    "saints": {
+      "entries": 55,
+      "expected": 35,
+      "missing": []
+    },
+    "votive": {
+      "entries": 1,
+      "expected": 0,
+      "missing": []
+    }
+  },
+  "report": {
+    "skipped": [
+      {
+        "date": "2016-07-26",
+        "url": "https://www.awitatpapuri.com/2016/07/25/mga-pagbasa-martes-hulyo-26-2016/",
+        "problems": [
+          "missing first"
+        ]
+      },
+      {
+        "date": "2021-10-02",
+        "url": "https://www.awitatpapuri.com/2021/10/02/sabado-oktubre-2-2021/",
+        "problems": [
+          "gospel: no reference",
+          "gospel: body missing"
+        ]
+      }
+    ],
+    "warnings": [
+      {
+        "date": "2015-09-12",
+        "url": "https://www.awitatpapuri.com/2015/09/12/mga-pagbasa-sabado-setyembre-12-2015/",
+        "problems": [
+          "first: closing formula missing"
+        ]
+      },
+      {
+        "date": "2016-04-11",
+        "url": "https://www.awitatpapuri.com/2016/04/11/mga-pagbasa-lunes-abril-11-2016/",
+        "problems": [
+          "first: closing formula missing"
+        ]
+      },
+      {
+        "date": "2019-08-26",
+        "url": "https://www.awitatpapuri.com/2019/08/26/mga-pagbasa-lunes-agosto-26-2019/",
+        "problems": [
+          "first: closing formula missing"
+        ]
+      },
+      {
+        "date": "2024-10-20",
+        "url": "https://www.awitatpapuri.com/2024/10/20/linggo-oktubre-20-2024/",
+        "problems": [
+          "second: closing formula missing"
+        ]
+      },
+      {
+        "date": "2025-02-16",
+        "url": "https://www.awitatpapuri.com/2025/02/16/linggo-pebrero-16-2025/",
+        "problems": [
+          "second: closing formula missing"
+        ]
+      },
+      {
+        "date": "2025-05-25",
+        "url": "https://www.awitatpapuri.com/2025/05/25/linggo-mayo-25-2025/",
+        "problems": [
+          "first: closing formula missing"
+        ]
+      },
+      {
+        "date": "2025-09-13",
+        "url": "https://www.awitatpapuri.com/2025/09/13/sabado-setyembre-13-2025/",
+        "problems": [
+          "first: closing formula missing"
+        ]
+      },
+      {
+        "date": "2026-12-16",
+        "url": "https://www.awitatpapuri.com/2026/12/16/miyerkules-disyembre-16-2026/",
+        "problems": [
+          "first: closing formula missing"
+        ]
+      },
+      {
+        "date": "2026-12-25",
+        "url": "https://www.awitatpapuri.com/2026/12/25/biyernes-disyembre-25-2026-3/",
+        "problems": [
+          "gospel: closing formula missing"
+        ]
+      }
+    ],
+    "cycle_mismatch": [],
+    "weekday_readings": [
+      {
+        "date": "2019-09-28",
+        "url": "https://www.awitatpapuri.com/2019/09/28/mga-pagbasa-sabado-setyembre-28-2019/",
+        "weekday": "ordinary_time_25_saturday"
+      },
+      {
+        "date": "2020-01-09",
+        "url": "https://www.awitatpapuri.com/2020/01/09/mga-pagbasa-huwebes-enero-9-2020/",
+        "weekday": "thursday_after_epiphany"
+      },
+      {
+        "date": "2021-01-26",
+        "url": "https://www.awitatpapuri.com/2021/01/26/martes-enero-26-2021/",
+        "weekday": "ordinary_time_3_tuesday"
+      },
+      {
+        "date": "2021-04-29",
+        "url": "https://www.awitatpapuri.com/2021/04/29/huwebes-abril-29-2021/",
+        "weekday": "easter_time_4_thursday"
+      },
+      {
+        "date": "2025-11-24",
+        "url": "https://www.awitatpapuri.com/2025/11/24/lunes-nobyembre-24-2025/",
+        "weekday": "ordinary_time_34_monday"
+      },
+      {
+        "date": "2026-01-21",
+        "url": "https://www.awitatpapuri.com/2026/01/21/miyerkules-enero-21-2026/",
+        "weekday": "ordinary_time_2_wednesday"
+      },
+      {
+        "date": "2026-10-05",
+        "url": "https://www.awitatpapuri.com/2026/10/05/lunes-oktubre-5-2026/",
+        "weekday": "ordinary_time_27_monday"
+      }
+    ]
+  }
+}

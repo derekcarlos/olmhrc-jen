@@ -136,7 +136,7 @@ export async function getSiteSearchIndex() {
     [
       "/readings",
       "Mga Pagbasa · Filipino Readings",
-      "Sunday readings, Salmong Tugunan, Aleluya, and Mabuting Balita.",
+      "Filipino readings for the coming Sunday Mass.",
     ],
     [
       "/news",
@@ -150,7 +150,11 @@ export async function getSiteSearchIndex() {
       data: { title, description },
     });
   const snapshot = getReadingSnapshot();
-  const active = targetDates(snapshot.mode, new Date());
+  const active = targetDates(
+    snapshot.mode,
+    new Date(),
+    snapshot.calendar_dates,
+  );
   for (const record of snapshot.records.filter((record) =>
     active.includes(record.date),
   ))

@@ -4,6 +4,7 @@ import {
   readingsConfig,
 } from "../src/lib/readings-store.mjs";
 import { refreshReadings } from "../src/lib/readings-sync.mjs";
+import { lectionaryReading } from "../src/lib/readings-lectionary.mjs";
 
 if (process.argv.some((arg) => ["--published", "--disabled"].includes(arg)))
   throw new Error(
@@ -12,8 +13,20 @@ if (process.argv.some((arg) => ["--published", "--disabled"].includes(arg)))
 const mode =
   process.argv.find((arg) => arg.startsWith("--mode="))?.split("=")[1] ||
   readingsConfig.mode;
+if (mode === "next-celebration" || readingsConfig.mode === "next-celebration")
+  throw new Error(
+    "Use pnpm readings:update for the celebration reader. The legacy downloader cannot preserve multiple Masses, repeated readings, or alternatives; the snapshot was not changed.",
+  );
+// --from-lectionary fills the snapshot from src/data/readings/lectionary/
+// instead of downloading from Awit at Papuri.
+const fromLectionary = process.argv.includes("--from-lectionary");
 const previous = readSnapshot();
-const snapshot = await refreshReadings(previous, mode);
+const snapshot = await refreshReadings(
+  previous,
+  mode,
+  new Date(),
+  fromLectionary ? lectionaryReading : undefined,
+);
 const failures = snapshot.errors.filter((error) => error.kind === "error");
 if (failures.length)
   throw new Error(
@@ -25,7 +38,7 @@ if (!snapshot.records.length)
   );
 const changed = writeSnapshot(snapshot);
 console.log(
-  `Readings: ${snapshot.records.length}/${snapshot.dates.length} available; mode ${mode}; dates ${snapshot.dates.join(", ")}.`,
+  `Readings${fromLectionary ? " (from lectionary)" : ""}: ${snapshot.records.length}/${snapshot.dates.length} available; mode ${mode}; dates ${snapshot.dates.join(", ")}.`,
 );
 console.log(
   changed
