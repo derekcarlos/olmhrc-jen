@@ -234,7 +234,7 @@
     "celebration": "First Sunday of Advent",
     "status": "published",
     "readiness": "preliminary",
-    "notes": "This is to be used as the line for the entire Advent and Christmas Season.",
+    "notes": "This is to be used as the lineup for the First Sunday of Advent.",
     "items": [
       {
         "part": "processional",
@@ -299,6 +299,234 @@
       {
         "part": "recessional",
         "song": "balang-araw",
+        "used": true
+      }
+    ]
+  },
+  {
+    "id": "second-sunday-of-advent-2026",
+    "title": "Second Sunday of Advent",
+    "date": "2026-12-06",
+    "celebration": "Second Sunday of Advent",
+    "status": "published",
+    "readiness": "preliminary",
+    "notes": "This is to be used as the lineup for the Second Sunday of Advent.",
+    "items": [
+      {
+        "part": "processional",
+        "song": "sambayanan-ng-maykapal",
+        "used": true
+      },
+      {
+        "part": "penitential-rite",
+        "song": "panginoon-kaawaan-mo-kami-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "gloria",
+        "song": "papuri-sa-diyos-tinapay-ng-buhay",
+        "used": false
+      },
+      {
+        "part": "gospel-acclamation",
+        "song": "gospel-acclamation-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "offertory",
+        "song": "tanggapin-mo-ama-ang-aming-alay-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "sanctus",
+        "song": "santo-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "memorial-acclamation",
+        "song": "si-kristo-ay-gunitain-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "great-amen",
+        "song": "dakilang-amen-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "pater-noster",
+        "song": "ama-namin-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "doxology",
+        "song": null,
+        "used": false
+      },
+      {
+        "part": "agnus-dei",
+        "song": "kordero-ng-diyos-2015-papal-visit",
+        "used": true
+      },
+      {
+        "part": "communion",
+        "song": "anima-christi-bukas-palad",
+        "used": true
+      },
+      {
+        "part": "recessional",
+        "song": "balang-araw",
+        "used": true
+      }
+    ]
+  },
+  {
+    "id": "third-sunday-of-advent-2026",
+    "title": "Third Sunday of Advent",
+    "date": "2026-12-13",
+    "celebration": "Third Sunday of Advent",
+    "status": "published",
+    "readiness": "preliminary",
+    "notes": "This is to be used as the lineup for the Third Sunday of Advent.",
+    "items": [
+      {
+        "part": "processional",
+        "song": "magalak-nang-palagian",
+        "used": true
+      },
+      {
+        "part": "penitential-rite",
+        "song": "panginoon-kaawaan-mo-kami-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "gloria",
+        "song": "papuri-sa-diyos-tinapay-ng-buhay",
+        "used": false
+      },
+      {
+        "part": "gospel-acclamation",
+        "song": "gospel-acclamation-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "offertory",
+        "song": "tanggapin-mo-ama-ang-aming-alay-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "sanctus",
+        "song": "santo-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "memorial-acclamation",
+        "song": "si-kristo-ay-gunitain-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "great-amen",
+        "song": "dakilang-amen-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "pater-noster",
+        "song": "ama-namin-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "doxology",
+        "song": null,
+        "used": false
+      },
+      {
+        "part": "agnus-dei",
+        "song": "kordero-ng-diyos-2015-papal-visit",
+        "used": true
+      },
+      {
+        "part": "communion",
+        "song": "anima-christi-bukas-palad",
+        "used": true
+      },
+      {
+        "part": "recessional",
+        "song": "balang-araw",
+        "used": true
+      }
+    ]
+  },
+  {
+    "id": "fourth-sunday-of-advent-2026",
+    "title": "Fourth Sunday of Advent",
+    "date": "2026-12-13",
+    "celebration": "Fourth Sunday of Advent",
+    "status": "published",
+    "readiness": "preliminary",
+    "notes": "This is to be used as the lineup for the Fourth Sunday of Advent including Misa de Aguinaldo.",
+    "items": [
+      {
+        "part": "processional",
+        "song": "pumanaog-nawa-ang-hamog",
+        "used": true
+      },
+      {
+        "part": "penitential-rite",
+        "song": "panginoon-kaawaan-mo-kami-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "gloria",
+        "song": "papuri-sa-diyos-tinapay-ng-buhay",
+        "used": false
+      },
+      {
+        "part": "gospel-acclamation",
+        "song": "gospel-acclamation-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "offertory",
+        "song": "tanggapin-mo-ama-ang-aming-alay-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "sanctus",
+        "song": "santo-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "memorial-acclamation",
+        "song": "si-kristo-ay-gunitain-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "great-amen",
+        "song": "dakilang-amen-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "pater-noster",
+        "song": "ama-namin-missa-magnificat",
+        "used": true
+      },
+      {
+        "part": "doxology",
+        "song": null,
+        "used": false
+      },
+      {
+        "part": "agnus-dei",
+        "song": "kordero-ng-diyos-2015-papal-visit",
+        "used": true
+      },
+      {
+        "part": "communion",
+        "song": "anima-christi-bukas-palad",
+        "used": true
+      },
+      {
+        "part": "recessional",
+        "song": "sapagkat-si-kristoy-darating",
         "used": true
       }
     ]
