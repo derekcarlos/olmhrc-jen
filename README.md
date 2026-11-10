@@ -162,6 +162,8 @@ Filipino readings show next Sunday's prescribed readings in the step-by-step gui
 
 ## Songs and choir selections
 
+The Magnificat and Misa Pasyon Gospel Acclamation pages display dated verses from the local lectionary. The **Update Gospel Acclamation verses** workflow prepares **35 days** and all A/B/C Lenten practice texts on **the 1st of each month at 04:27 Philippine time**, then opens or updates a pull request for your approval. The extra days cover 31-day months and leave time for review. It does not push directly to `main`, auto-merge, or deploy; your merge triggers Pages. Enable **Allow GitHub Actions to create and approve pull requests** in repository Actions settings. You can also run the workflow manually for 30/35/60/90 days, or use `bash scripts/update-gospel-acclamations.sh` locally. Dates switch in Philippine time, including the chapel's confirmed evening Simbang Gabi rule; Lent uses Misa Pasyon. The Sunday readings snapshot is separate. See [Managing Gospel Acclamations](docs/managing-gospel-acclamations.md).
+
 Create song entries in `src/content/songs/` using stable lowercase filenames such as `song-title-setting.md`. Use `.mdx` for components such as callouts. The filename is the song ID used by selections and URLs.
 
 Each entry contains its title, description, composer/arranger, language, Mass-part tags, Marian flag, season/occasion labels, lyrics, and optional `audio`/`youtube` links. Completed entries use `placeholder: false` and `draft: false`. Empty placeholder songs have been removed.

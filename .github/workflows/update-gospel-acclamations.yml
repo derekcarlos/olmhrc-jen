@@ -1,0 +1,87 @@
+name: Update Gospel Acclamation verses
+
+on:
+  schedule:
+    # First day of each month, with coverage extending beyond the next run.
+    - cron: "27 4 1 * *"
+      timezone: Asia/Manila
+  workflow_dispatch:
+    inputs:
+      days:
+        description: Number of days to prepare
+        type: choice
+        default: "35"
+        options:
+          - "30"
+          - "35"
+          - "60"
+          - "90"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gospel-acclamation-updates
+  cancel-in-progress: false
+
+jobs:
+  update:
+    name: Prepare verses for owner review
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      ASTRO_TELEMETRY_DISABLED: "1"
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.23.4"
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Prepare daily verses and Lenten practice cycles
+        env:
+          PREPARE_DAYS: ${{ inputs.days || '35' }}
+        run: bash scripts/update-gospel-acclamations.sh --days="$PREPARE_DAYS"
+      - name: Verify verse selection and page output
+        run: |
+          node --test tests/gospel-acclamations.test.mjs tests/gospel-acclamation-client.test.mjs tests/lenten-acclamations.test.mjs
+          pnpm check
+          pnpm build
+          node tests/gospel-acclamation.integration.mjs
+      - name: Open or update the review pull request
+        # Pinned release v8.0.0. Commits only the generated verse data to a bot branch.
+        uses: peter-evans/create-pull-request@98357b18bf14b5342f975ff684046ec3b2a07725
+        with:
+          token: ${{ github.token }}
+          add-paths: src/data/gospel-acclamations.json
+          base: main
+          branch: automation/gospel-acclamations
+          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          commit-message: Refresh Gospel Acclamation verses
+          title: Refresh daily Gospel Acclamation verses and Lenten practice
+          reviewers: derekcarlos
+          body: |
+            Prepares dated Gospel Acclamation verses from the existing local lectionary, together with all Year A/B/C Lenten practice texts.
+
+            Scheduled monthly on the 1st at 04:27 Philippine time, with 35 days of verses to allow for 31-day months and a short review window. Please merge before the previously published range expires.
+
+            Includes the chapel's confirmed Simbang Gabi rule: December 15–23 evening Masses use the following day's readings, except Sunday evenings retain Sunday's readings.
+
+            Only `src/data/gospel-acclamations.json` is included. Song lyrics, the Sunday readings snapshot, and workflows are unchanged.
+
+            Verse tests, Astro check/build, and the song-page integration checks run before this request is created or updated. Review the prepared dates, any missing verses in the workflow log, and the Lenten texts before merging.
+
+            Owner review and manual merge are required. This workflow does not approve, merge, bypass branch protection, or deploy. Your merge to `main` triggers the existing Pages deployment.
