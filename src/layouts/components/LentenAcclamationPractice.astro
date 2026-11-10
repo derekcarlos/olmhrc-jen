@@ -1,0 +1,52 @@
+---
+import calendar from "@/data/gospel-acclamations.json";
+import { lentenPracticeDefault } from "@/lib/lenten-acclamations-client.mjs";
+const practice = calendar.lenten_practice;
+const selected = lentenPracticeDefault(practice);
+const records = practice.cycles[selected.cycle as "a" | "b" | "c"];
+---
+
+<section class="lenten-practice" data-lenten-practice aria-label="Mga taludtod para sa Kuwaresma" lang="fil">
+  <script is:inline type="application/json" data-lent-data set:html={JSON.stringify(practice).replace(/</g, "\\u003c")} />
+  <p class="lenten-practice-period" data-lent-period>{selected.year ? `Kuwaresma ${selected.year} · Year ${selected.cycle.toUpperCase()}` : `Year ${selected.cycle.toUpperCase()} · Pagsasanay`}</p>
+  <div class="lenten-practice-cycles not-prose" role="group" aria-label="Taon ng mga pagbasa">
+    { ["a", "b", "c"].map(cycle => <button type="button" data-lent-cycle={cycle} aria-pressed={cycle === selected.cycle} hidden>Year {cycle.toUpperCase()}</button>) }
+  </div>
+  { records.map(record => (
+    <details class="lyric-chorus" data-lent-celebration={record.key}>
+      <summary>{record.title}</summary>
+      <div class="lenten-practice-text not-prose">
+        <p class="lenten-practice-verse" data-lent-verse>{record.verse}</p>
+        <p class="lenten-practice-reference" data-lent-reference hidden={!record.reference}>{record.reference}</p>
+        <a class="lenten-practice-source" data-lent-source href={record.source_url} target="_blank" rel="noopener noreferrer">Awit at Papuri ↗</a>
+      </div>
+    </details>
+  )) }
+</section>
+
+<script>
+  import { prepareLentenPractice } from "@/lib/lenten-acclamations-client.mjs";
+  function preparePractices() {
+    document.querySelectorAll<HTMLElement>("[data-lenten-practice]").forEach(root => {
+      if (root.dataset.ready) return;
+      root.dataset.ready = "true";
+      prepareLentenPractice(root);
+    });
+  }
+  preparePractices();
+  document.addEventListener("astro:page-load", preparePractices);
+</script>
+
+<style>
+  .lenten-practice { margin-top: 1rem; }
+  .lenten-practice [hidden] { display: none !important; }
+  .lenten-practice .lenten-practice-period { margin: 0 0 0.75rem; font-family: var(--font-primary); font-size: 18px; line-height: 1.5; color: var(--practice-accent); }
+  .lenten-practice-cycles { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+  .lenten-practice-cycles button { border: 1px solid var(--practice-line); border-radius: 0.4rem; padding: 0.55rem 1rem; min-height: 44px; font-family: var(--font-primary); font-size: 17px; color: var(--practice-ink); background: var(--practice-paper); cursor: pointer; }
+  .lenten-practice-cycles button[aria-pressed="true"] { background: #163d53; color: #fff9ed; border-color: #163d53; }
+  .lenten-practice-cycles button:focus-visible { outline: 2px solid var(--practice-accent); outline-offset: 3px; }
+  .lenten-practice-text { padding: 0.75em 0.85em; }
+  .lenten-practice .lenten-practice-verse { white-space: pre-line; margin: 0; font-size: inherit; line-height: inherit; }
+  .lenten-practice .lenten-practice-reference, .lenten-practice-source { font-family: var(--font-primary); font-size: 17px; line-height: 1.5; margin: 0.75rem 0 0; }
+  .lenten-practice-source { display: inline-block; color: var(--practice-accent); text-decoration: underline; text-underline-offset: 3px; }
+</style>

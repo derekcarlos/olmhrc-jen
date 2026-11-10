@@ -1,0 +1,88 @@
+---
+import calendar from "@/data/gospel-acclamations.json";
+import { acclamationView } from "@/lib/gospel-acclamation-client.mjs";
+interface Props { setting: "alleluia" | "lent"; }
+const { setting } = Astro.props;
+const state = acclamationView(calendar, setting);
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const dailyCalendar = {
+  schema_version: calendar.schema_version,
+  timezone: calendar.timezone,
+  from: calendar.from,
+  through: calendar.through,
+  records: calendar.records,
+};
+---
+
+<section class="daily-acclamation not-prose" data-gospel-acclamation data-setting={setting} data-base={base} aria-label="Taludtod bago ang Mabuting Balita" lang="fil">
+  <script is:inline type="application/json" data-acclamation-data set:html={JSON.stringify(dailyCalendar).replace(/</g, "\\u003c")} />
+  <p class="daily-acclamation-label">Taludtod bago ang Mabuting Balita</p>
+  <time class="daily-acclamation-date" data-acclamation-date datetime={state.date}>{state.date_label}</time>
+  <p class="daily-acclamation-celebration" data-acclamation-celebration>{state.celebration}</p>
+  <p class="daily-acclamation-context" data-acclamation-context>{state.context}</p>
+  <p class="daily-acclamation-message" data-acclamation-message hidden={!state.message}>{state.message}</p>
+  <div data-acclamation-body hidden={!state.verse}>
+    <p class="daily-acclamation-verse" data-acclamation-verse>{state.verse}</p>
+    <p class="daily-acclamation-reference" data-acclamation-reference hidden={!state.reference}>{state.reference}</p>
+    <a class="daily-acclamation-source" data-acclamation-source href={state.source_url || undefined} hidden={!state.source_url} target="_blank" rel="noopener noreferrer">Awit at Papuri ↗</a>
+  </div>
+  <a class="daily-acclamation-other" data-acclamation-other href={state.other_song ? `${base}${state.other_song}` : undefined} hidden={!state.other_song}>{state.other_label}</a>
+  <noscript><p class="daily-acclamation-context">Taludtod para sa petsang nakasaad sa itaas. Paganahin ang JavaScript upang awtomatikong sumunod sa araw sa Pilipinas.</p></noscript>
+</section>
+
+<script>
+  import { prepareGospelAcclamation } from "@/lib/gospel-acclamation-client.mjs";
+  function prepareDailyVerses() {
+    document.querySelectorAll<HTMLElement>("[data-gospel-acclamation]").forEach(root => {
+      if (root.dataset.ready) return;
+      root.dataset.ready = "true";
+      prepareGospelAcclamation(root);
+    });
+  }
+  prepareDailyVerses();
+  document.addEventListener("astro:page-load", prepareDailyVerses);
+</script>
+
+<style>
+  .daily-acclamation {
+    --acclamation-muted: var(--color-text);
+    margin-block: 1.25em;
+    padding: 1.25rem 1.5rem;
+    border-block: 1px solid var(--practice-line, var(--color-border));
+    border-left: 3px solid var(--practice-accent, var(--color-accent));
+    background: var(--practice-paper, var(--color-body));
+    color: var(--practice-ink, var(--color-text-dark));
+  }
+  :global(.dark) .daily-acclamation { --acclamation-muted: var(--color-darkmode-text); }
+  .daily-acclamation [hidden] { display: none !important; }
+  .daily-acclamation p { margin: 0; }
+  .daily-acclamation .daily-acclamation-label {
+    font-family: var(--font-primary);
+    color: var(--practice-accent, var(--color-accent));
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .daily-acclamation-date { font-family: var(--font-secondary); font-size: 1.25em; line-height: 1.3; }
+  .daily-acclamation .daily-acclamation-celebration,
+  .daily-acclamation .daily-acclamation-context,
+  .daily-acclamation .daily-acclamation-reference,
+  .daily-acclamation-source,
+  .daily-acclamation-other,
+  .daily-acclamation .daily-acclamation-message {
+    font-family: var(--font-primary);
+    font-size: 17px;
+    line-height: 1.5;
+    margin-top: 0.5rem;
+  }
+  .daily-acclamation .daily-acclamation-context,
+  .daily-acclamation .daily-acclamation-reference,
+  .daily-acclamation-source { color: var(--acclamation-muted); }
+  .daily-acclamation .daily-acclamation-verse { white-space: pre-line; font-size: inherit; line-height: inherit; margin-block: 1.25rem 0.75rem; }
+  .daily-acclamation-source, .daily-acclamation-other { display: inline-block; text-decoration: underline; text-underline-offset: 3px; }
+  .daily-acclamation a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+  @media (max-width: 480px) { .daily-acclamation { padding-inline: 1rem; } }
+</style>

@@ -1,0 +1,10 @@
+{
+  "simbang_gabi": {
+    "start": "12-15",
+    "end": "12-23",
+    "time": "7:30 PM",
+    "anticipate_next_day": true,
+    "keep_sunday_readings": true
+  },
+  "overrides": {}
+}
