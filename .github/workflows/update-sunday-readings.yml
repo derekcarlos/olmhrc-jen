@@ -45,7 +45,7 @@ jobs:
       - name: Validate Sunday snapshot
         run: |
           pnpm readings:validate
-          node --test tests/next-sunday-snapshot.test.mjs
+          node --test tests/next-sunday-snapshot.test.mjs tests/upcoming-readings.test.mjs
       - name: Commit snapshot and request deployment
         env:
           GH_TOKEN: ${{ github.token }}

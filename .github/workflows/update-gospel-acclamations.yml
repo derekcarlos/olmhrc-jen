@@ -57,7 +57,7 @@ jobs:
         run: bash scripts/update-gospel-acclamations.sh --days="$PREPARE_DAYS"
       - name: Verify verse selection and page output
         run: |
-          node --test tests/gospel-acclamations.test.mjs tests/gospel-acclamation-client.test.mjs tests/lenten-acclamations.test.mjs
+          node --test tests/gospel-acclamations.test.mjs tests/gospel-acclamation-client.test.mjs tests/lenten-acclamations.test.mjs tests/upcoming-readings.test.mjs
           pnpm check
           pnpm build
           node tests/gospel-acclamation.integration.mjs

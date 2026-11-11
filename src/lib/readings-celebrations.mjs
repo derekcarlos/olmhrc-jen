@@ -1,6 +1,6 @@
 import { readFileSync, statSync } from "node:fs";
 import { resolve } from "node:path";
-import { romcalYear, dayChoices, lectionaryKey } from "./lectionary-keys.mjs";
+import { romcalYear, dayChoices, lectionaryKey, underlyingWeekday } from "./lectionary-keys.mjs";
 import { manilaToday } from "./calendar.mjs";
 import {
   validRecord,
@@ -82,6 +82,28 @@ export async function celebrationCalendar(years = calendarYears()) {
   return result.sort((a, b) => a.date.localeCompare(b.date));
 }
 
+function readingBlocks(source) {
+  const blocks = structuredClone(source.blocks);
+  if (source.type !== "gospel") return blocks;
+  const closing = "Ang Mabuting Balita ng Panginoon.";
+  const compact = (text) => text.replace(/\s+/g, " ").trim();
+  for (const [index, block] of blocks.entries()) {
+    // A malformed source paragraph can swallow the remaining Passion and its
+    // short form into the kneeling rubric. Remove that nested copy only when
+    // the following blocks contain the exact same complete Gospel ending.
+    if (!/o kaya:\s*Maikling Pagbasa/i.test(block.text)) continue;
+    const lineEnd = block.text.indexOf("\n");
+    const end = block.text.indexOf(closing);
+    if (lineEnd < 0 || end < lineEnd) continue;
+    const embeddedEnding = block.text.slice(lineEnd + 1, end + closing.length);
+    const remaining = blocks.slice(index + 1).map((b) => b.text).join(" ");
+    if (compact(embeddedEnding) === compact(remaining)) {
+      block.text = block.text.slice(0, lineEnd).trim();
+    }
+  }
+  return blocks;
+}
+
 export function normalizeMassSections(raw) {
   const main = [];
   const firstAt = raw.findIndex((s) => s.type === "first" && !s.alternative);
@@ -97,7 +119,7 @@ export function normalizeMassSections(raw) {
         label: source.label || "Maikling Pagbasa",
         heading: source.heading,
         reference: source.reference || "",
-        blocks: structuredClone(source.blocks),
+        blocks: readingBlocks(source),
       });
       continue;
     }
@@ -112,7 +134,7 @@ export function normalizeMassSections(raw) {
       type,
       heading: type === "sequence" ? "SEKWENSIYA" : source.heading,
       reference: source.reference || "",
-      blocks: structuredClone(source.blocks),
+      blocks: readingBlocks(source),
     });
   }
   const counts = new Map();
@@ -137,21 +159,29 @@ function displayLabel(label) {
   return label.replace(/\s*\([^)]*\)\s*$/, "");
 }
 /** @returns {Promise<import('./readings.mjs').ReadingRecord>} */
-export async function celebrationReading(date, now = new Date()) {
+export async function celebrationReading(date, now = new Date(), { allowWeekday = false, locations: customLocations = undefined } = {}) {
   const day = (await dayChoices(date)).find((d) => !d.isOptional);
-  if (!day || !included(date, day))
+  if (!day || (!allowWeekday && !included(date, day)))
     throw new Error(`No selected celebration for ${date}`);
   const location = lectionaryKey(day);
-  const locations =
+  const locations = customLocations || (
     day.id === "holy_thursday"
       ? [
           { collection: "seasonal", key: "holy_thursday" },
           { collection: "seasonal", key: "thursday_of_the_lords_supper" },
         ]
-      : [location];
+      : [location]);
   const masses = [];
   for (const loc of locations) {
-    const entry = entryAt(loc.collection, loc.key);
+    let entry = entryAt(loc.collection, loc.key);
+    if (!entry && allowWeekday && day.rank === "MEMORIAL") {
+      const weekday = underlyingWeekday(day);
+      if (weekday) {
+        const fallback = lectionaryKey(weekday);
+        entry = entryAt(fallback.collection, fallback.key);
+        if (entry) Object.assign(loc, fallback);
+      }
+    }
     if (!entry?.masses?.length)
       throw new ReadingUnavailableError(
         `Missing readings: ${loc.collection}/${loc.key}`,

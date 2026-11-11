@@ -1,6 +1,6 @@
 # Daily offline update for next Sunday's readings
 
-**Current workflow:** the site shows next Sunday's prescribed readings without a celebration picker. Run `pnpm readings:update` to refresh the saved snapshot from the local lectionary.
+**Sunday-only reference:** the current site uses [Upcoming readings](upcoming-readings.md), including celebration tiles and anticipated evening Mass choices. `pnpm readings:update` now calls the upcoming-celebrations updater. The standalone Sunday-only command below remains available for custom-output previews or Sunday-only configurations.
 
 This is a separate job from the Awit at Papuri downloader/publisher. It reads the existing local lectionary, resolves the upcoming Sunday with the Philippine Romcal calendar, and atomically updates `src/data/readings/snapshot.json`. It always uses `next-sunday`, matching the site's current configuration. Sunday remains selected throughout Sunday in `Asia/Manila`, advancing after midnight on Monday.
 

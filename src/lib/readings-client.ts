@@ -1,5 +1,6 @@
 import { sundayDate, targetDates } from "./readings.mjs";
 import { prepareReadingMasses } from "./reading-masses-client.ts";
+import { readingChoice } from "./reading-selection.mjs";
 
 export function prepareReadings() {
   document.querySelectorAll<HTMLElement>("[data-readings]").forEach((root) => {
@@ -15,6 +16,52 @@ export function prepareReadings() {
     const isEntry = root.dataset.entry === "true";
     const base = root.dataset.base || "";
     const stopWalkthrough = prepareReadingMasses(root);
+    if (mode === "upcoming-celebrations") {
+      const track = root.querySelector<HTMLElement>(".reading-tile-track");
+      const tile = track?.querySelector<HTMLElement>('[aria-current="date"]');
+      if (track && tile && track.scrollWidth > track.clientWidth) {
+        track.scrollLeft = Math.max(0, tile.offsetLeft - track.offsetLeft - (track.clientWidth - tile.clientWidth) / 2);
+      }
+      const calendar = JSON.parse(root.dataset.readingCalendar || "[]");
+      const url = new URL(window.location.href);
+      if (url.searchParams.get("auto") === "1") {
+        url.searchParams.delete("auto");
+        window.history.replaceState({ ...window.history.state, readingsAuto: true }, "", url);
+      }
+      const automatic = () => (isEntry || window.history.state?.readingsAuto) && root.dataset.readingPinned !== "true";
+      const controller = new window.AbortController();
+      const { signal } = controller;
+      function refreshUpcoming() {
+        root.dataset.readingsActive = "true";
+        if (!automatic()) return;
+        const choice = readingChoice(calendar);
+        const target = root.querySelector<HTMLElement>(`[data-reading-mass="${choice?.mass || root.dataset.selectedMass}"]`);
+        if (!choice) {
+          root.querySelector<HTMLElement>("[data-readings-content]")!.hidden = true;
+          root.querySelector<HTMLElement>("[data-readings-stale]")!.hidden = false;
+          return;
+        }
+        const activeMass = root.querySelector<HTMLElement>("[data-reading-mass]:not([hidden])")?.dataset.readingMass;
+        if (!target && choice.date === selected && !isEntry) return;
+        if (choice.date !== selected || !target || activeMass !== target.dataset.readingMass) {
+          const next = new URL(`${base}/readings/${choice.date}`, window.location.href);
+          if (choice.mass) next.searchParams.set("mass", choice.mass);
+          next.searchParams.set("auto", "1");
+          window.location.replace(next.href);
+        }
+      }
+      root.addEventListener("click", event => {
+        const target = event.target as HTMLElement;
+        if (target.closest("[data-reading-action], [data-reading-section-link], [data-reading-mass-choice]")) root.dataset.readingPinned = "true";
+      }, { signal });
+      root.addEventListener("change", () => { root.dataset.readingPinned = "true"; }, { signal });
+      refreshUpcoming();
+      const timer = window.setInterval(refreshUpcoming, 60_000);
+      window.addEventListener("focus", refreshUpcoming, { signal });
+      document.addEventListener("visibilitychange", refreshUpcoming, { signal });
+      document.addEventListener("astro:before-swap", () => { window.clearInterval(timer); controller.abort(); stopWalkthrough(); }, { once: true });
+      return;
+    }
     function refreshDate() {
       if (root.dataset.fixed === "true") {
         root.dataset.readingsActive = "true";

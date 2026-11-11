@@ -1,6 +1,6 @@
 # Managing Filipino readings
 
-Rosarium uses the local Awit at Papuri lectionary to prepare `src/data/readings/snapshot.json` for next Sunday's prescribed readings. The page shows that snapshot without a celebration picker. See [Daily Sunday readings](daily-sunday-readings.md) for the current workflow. GitHub Actions validates, builds, and deploys committed data without downloading from the provider.
+Rosarium uses the local Awit at Papuri lectionary to prepare `src/data/readings/snapshot.json` for upcoming celebrations in the current and following week. The first upcoming celebration opens by default, with linked date tiles when several celebrations share the period and buttons for distinct Masses. See [Upcoming readings](upcoming-readings.md) for the current workflow and evening rules. GitHub Actions validates, builds, and deploys committed data without downloading from the provider.
 
 Reading text uses Gentium Plus and headings use Gentium Book Plus. The rest of the site keeps Figtree. Imported text remains attributed to its source; confirm applicable reuse terms when maintaining the site.
 
@@ -10,7 +10,7 @@ The interface is in `src/layouts/components/SundayReadings.astro`, its behavior 
 
 ## Download and preview only
 
-For the current **offline, next-Sunday** refresh, use `pnpm readings:update` or `bash scripts/update-sunday-readings.sh`. Preview with `--dry-run`. This is separate from the downloader and does not commit or push.
+For the current **offline, upcoming-celebrations** refresh, use `pnpm readings:update` or `bash scripts/update-upcoming-readings.sh`. Preview with `--dry-run`. This is separate from the downloader and does not commit or push.
 
 ```sh
 export PATH="$PWD/.local-tools/node_modules/.bin:$PATH" # this workstation

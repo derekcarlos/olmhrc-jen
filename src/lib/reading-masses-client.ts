@@ -1,4 +1,6 @@
 import { prepareReadingWalkthrough } from "./reading-walkthrough-client.ts";
+import { formatReadingDate } from "./readings.mjs";
+import { eveningContext, manilaClock, isSimbang } from "./reading-selection.mjs";
 
 /** Each Mass has its own guide; alternate forms share the parent reading step. */
 export function prepareReadingMasses(root: HTMLElement) {
@@ -16,19 +18,33 @@ export function prepareReadingMasses(root: HTMLElement) {
       ),
     );
   const requested = new URL(win.location.href).searchParams.get("mass");
+  const today = manilaClock().date;
+  const selectedDate = root.dataset.selected || today;
+  const clockContext = selectedDate === today ? eveningContext(new Date(), root.dataset.liturgicalId) : selectedDate > today && isSimbang(selectedDate) ? "anticipated" : selectedDate.endsWith("12-24") ? "christmas-vigil" : "day";
+  const clockMass = panels.find(panel => panel.dataset.readingMass === clockContext)?.dataset.readingMass;
   let active =
     inHash()?.dataset.readingMass ||
     (panels.some((p) => p.dataset.readingMass === requested)
       ? requested
-      : root.dataset.selectedMass) ||
+      : clockMass || root.dataset.selectedMass) ||
     panels[0]?.dataset.readingMass;
   function show() {
     panels.forEach(
       (panel) => (panel.hidden = panel.dataset.readingMass !== active),
     );
     if (select) select.value = active!;
+    root.querySelectorAll<HTMLElement>("[data-reading-mass-choice]").forEach(choice => {
+      if (choice.dataset.readingMassChoice === active) choice.setAttribute("aria-current", "true");
+      else choice.removeAttribute("aria-current");
+    });
     const panel = panels.find((p) => p.dataset.readingMass === active);
     if (panel) root.dataset.readingsView = panel.dataset.readingsView || "step";
+    const context = root.querySelector<HTMLElement>("[data-reading-context]");
+    if (context && panel) {
+      const date = panel.dataset.massReadingDate;
+      context.textContent = date && date !== root.dataset.selected ? `Anticipated Mass · Mga pagbasa para sa ${formatReadingDate(date)}` : panel.dataset.massContext || "";
+      context.hidden = !context.textContent;
+    }
   }
   show();
   const browser = root.querySelector<HTMLDetailsElement>(
@@ -63,6 +79,17 @@ export function prepareReadingMasses(root: HTMLElement) {
   const stops = panels.length
     ? panels.map((panel) => prepareReadingWalkthrough(panel))
     : [prepareReadingWalkthrough(root)];
+  root.querySelectorAll<HTMLAnchorElement>("[data-reading-mass-choice]").forEach(choice => {
+    choice.addEventListener("click", event => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      active = choice.dataset.readingMassChoice;
+      show();
+      const url = new URL(choice.href);
+      win.history.pushState({ ...win.history.state, readingsAuto: false }, "", url);
+      root.dataset.readingPinned = "true";
+    }, { signal });
+  });
   if (select) {
     root.querySelector<HTMLElement>("[data-reading-mass-picker]")!.hidden =
       false;

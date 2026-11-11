@@ -59,6 +59,7 @@ jobs:
         run: |
           node tests/calendar.integration.mjs
           node tests/readings.integration.mjs
+          node tests/upcoming-reader.integration.mjs
           node tests/social-preview.integration.mjs
           node --test tests/readings-client.integration.mjs tests/calendar-client.integration.mjs
         working-directory: ${{ env.BUILD_PATH }}

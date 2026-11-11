@@ -1,23 +1,22 @@
 {
   "schema_version": 1,
   "source": "awit-at-papuri",
-  "mode": "next-sunday",
+  "mode": "upcoming-celebrations",
   "dates": [
-    "2026-11-15"
+    "2026-11-15",
+    "2026-11-22"
   ],
   "records": [
     {
       "date": "2026-11-15",
       "celebration": "Thirty-third Sunday in Ordinary Time",
       "language": "fil",
+      "origin": "lectionary",
+      "retrieved_at": "2026-11-11T07:20:50.424Z",
       "source_url": "https://www.awitatpapuri.com/2026/11/15/linggo-nobyembre-15-2026/",
       "source_date": "2026-11-15",
-      "retrieved_at": "2026-11-09T09:11:04.372Z",
-      "origin": "lectionary",
       "lectionary_key": "year-a/ordinary_time_33_sunday",
-      "liturgical_id": "ordinary_time_33_sunday",
-      "mass_label": "Thirty-third Sunday in Ordinary Time (Green)",
-      "selection_rule": "first-daytime-mass-main-readings",
+      "selected_mass": "mass-1",
       "sections": [
         {
           "type": "first",
@@ -64,7 +63,8 @@
               "type": "paragraph",
               "text": "Ang Salita ng Diyos."
             }
-          ]
+          ],
+          "id": "first"
         },
         {
           "type": "psalm",
@@ -99,7 +99,8 @@
               "type": "response",
               "text": "Mapalad ang sumusunod\nna taong may takot sa D’yos."
             }
-          ]
+          ],
+          "id": "psalm"
         },
         {
           "type": "second",
@@ -118,7 +119,8 @@
               "type": "paragraph",
               "text": "Ang Salita ng Diyos."
             }
-          ]
+          ],
+          "id": "second"
         },
         {
           "type": "acclamation",
@@ -129,7 +131,8 @@
               "type": "stanza",
               "text": "Aleluya! Aleluya!\nSa Poon ay manatili\nsiya’y sa atin lalagi\nmamungang maluwalhati.\nAleluya! Aleluya!"
             }
-          ]
+          ],
+          "id": "acclamation"
         },
         {
           "type": "gospel",
@@ -152,11 +155,477 @@
               "type": "paragraph",
               "text": "Ang Mabuting Balita ng Panginoon."
             }
-          ]
+          ],
+          "alternatives": [
+            {
+              "label": "o kaya: Maikling Pagbasa",
+              "heading": "MABUTING BALITA",
+              "reference": "Mateo 25, 14-15. 19-21",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "text": "Ang Mabuting Balita ng Panginoon ayon kay San Mateo"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Noong panahong iyon, sinabi ni Hesus sa kanyang mga alagad ang talinghagang ito: “Ang paghahari ng Diyos ay maitutulad dito: May isang taong maglalakbay, kaya tinawag niya ang kanyang mga alipin at ipinagkatiwala sa kanila ang kanyang ari-arian. Binigyan niya ng salapi ang bawat isa ayon sa kanya-kanyang kakayahan: binigyan niya ang isa ng limanlibong piso, ang isa nama’y dalawanlibong piso, at ang isa pa’y sanlibong piso. Pagkatapos, siya’y umalis."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Pagkaraan ng mahabang panahon, bumalik ang panginoon ng mga aliping iyon at pinapagsulit sila. Lumapit ang tumanggap ng limang libo. Wika niya, ‘Panginoon, heto po ang limanlibo na bigay ninyo sa akin. Heto pa po ang limanlibo na tinubo ko.’ Sinabi sa kanya ng panginoon, ‘Magaling! Tapat at mabuting alipin! Yamang naging tapat ka sa kaunting halaga, pamamahalain kita sa malaking halaga. Makihati ka sa aking kagalakan!’"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Ang Mabuting Balita ng Panginoon."
+                }
+              ]
+            }
+          ],
+          "id": "gospel"
         }
-      ]
+      ],
+      "masses": [
+        {
+          "id": "mass-1",
+          "label": "Thirty-third Sunday in Ordinary Time (Green)",
+          "display_label": "Thirty-third Sunday in Ordinary Time",
+          "vigil": false,
+          "source_url": "https://www.awitatpapuri.com/2026/11/15/linggo-nobyembre-15-2026/",
+          "source_date": "2026-11-15",
+          "lectionary_key": "year-a/ordinary_time_33_sunday",
+          "sections": [
+            {
+              "type": "first",
+              "heading": "UNANG PAGBASA",
+              "reference": "Kawikaan 31, 10-13. 19-20. 30-31",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "text": "Pagbasa mula sa aklat ng Mga Kawikaan"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Mahirap makakita ng mabuting asawa, higit sa mamahaling alahas ang kanyang halaga."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Lubos ang tiwala ng kanyang asawa, at saganang pakinabang ang makakamit niya."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Pinaglilingkuran niya ang kanyang asawa habang sila’y nabubuhay, pawang kabutihan ang ginagawa at di kasamaan."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Wala siyang tigil sa paggawa, hindi na halos nagpapahinga, humahabi ng kanyang lino at saka ng lana."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Siya’y gumagawa ng mga sinulid, at humahabi ng sariling damit."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Matulungin siya sa mahirap at sa nangangailangan ay bukas ang palad."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Magdaraya ang pang-akit at kumukupas ang ganda ngunit ang babaing may takot sa Panginoon ay pupurihin ng balana."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Ibunton sa kanya ang lahat ng parangal, karapat-dapat siya sa papuri ng bayan."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Ang Salita ng Diyos."
+                }
+              ],
+              "id": "first"
+            },
+            {
+              "type": "psalm",
+              "heading": "SALMONG TUGUNAN",
+              "reference": "Salmo 127, 1-2. 3. 4-5",
+              "blocks": [
+                {
+                  "type": "response",
+                  "text": "Mapalad ang sumusunod\nna taong may takot sa D’yos."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Mapalad ang bawat tao na sa Diyos ay may takot,\nang maalab na adhika’y sumunod sa kanyang utos.\nHindi siya magkukulang sa anumang kailangan,\nang buhay ay maligaya’t uunlad ang kanyang buhay."
+                },
+                {
+                  "type": "response",
+                  "text": "Mapalad ang sumusunod\nna taong may takot sa D’yos."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Sa tahanan, ang asawa’y parang ubas na mabunga.\nBagong tanim na olibo sa may dulang ang anak n’ya."
+                },
+                {
+                  "type": "response",
+                  "text": "Mapalad ang sumusunod\nna taong may takot sa D’yos."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Ang sinuman kung ang Diyos buong pusong susundin,\nbuhay niya ay uunlad at laging pagpapalain.\nMula sa Sion, pagpapala nawa ng Diyos ay tanggapin,\nat makita habang buhay, pag-unlad ng Jerusalem."
+                },
+                {
+                  "type": "response",
+                  "text": "Mapalad ang sumusunod\nna taong may takot sa D’yos."
+                }
+              ],
+              "id": "psalm"
+            },
+            {
+              "type": "second",
+              "heading": "IKALAWANG PAGBASA",
+              "reference": "1 Tesalonica 5, 1-6",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "text": "Pagbasa mula sa unang sulat ni Apostol San Pablo sa mga taga-Tesalonica"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Mga kapatid, hindi na kailangang isulat ko pa sa inyo kung kailan magaganap ang mga bagay na ito, sapagkat alam na ninyong ang pagdating ng Araw ng Panginoon ay tulad sa pagdating ng magnanakaw. Kapag sinasabi ng mga tao, “Tiwasay at panatag ang lahat,” biglang darating ang kapahamakan. Hindi sila makaiiwas sapagkat ang pagdating nito’y tulad ng pagsumpong ng pagdaramdam ng babaing manganganak. Ngunit hindi kayo nabubuhay sa kadiliman, mga kapatid, kaya’t hindi kayo mabibigla sa Araw na yaon na darating na parang magnanakaw. Kayong lahat ay kabilang sa panig ng kaliwanagan — sa panig ng araw — hindi sa panig ng kadiliman o ng gabi. Kaya nga, kailangang tayo’y manatiling gising, laging handa, at malinaw ang isip — di tulad ng iba."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Ang Salita ng Diyos."
+                }
+              ],
+              "id": "second"
+            },
+            {
+              "type": "acclamation",
+              "heading": "ALELUYA",
+              "reference": "Juan 15, 4a. 5b",
+              "blocks": [
+                {
+                  "type": "stanza",
+                  "text": "Aleluya! Aleluya!\nSa Poon ay manatili\nsiya’y sa atin lalagi\nmamungang maluwalhati.\nAleluya! Aleluya!"
+                }
+              ],
+              "id": "acclamation"
+            },
+            {
+              "type": "gospel",
+              "heading": "MABUTING BALITA",
+              "reference": "Mateo 25, 14-30",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "text": "Ang Mabuting Balita ng Panginoon ayon kay San Mateo"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Noong panahong iyon, sinabi ni Hesus sa kanyang mga alagad ang talinghagang ito: “Ang paghahari ng Diyos ay maitutulad dito: May isang taong maglalakbay, kaya tinawag niya ang kanyang mga alipin at ipinagkatiwala sa kanila ang kanyang ari-arian. Binigyan niya ng salapi ang bawat isa ayon sa kanya-kanyang kakayahan: binigyan niya ang isa ng limanlibong piso, ang isa nama’y dalawanlibong piso, at ang isa pa’y sanlibong piso. Pagkatapos, siya’y umalis. Humayo agad ang tumanggap ng limanlibong piso at ipinangalakal iyon. At nagtubo siya ng limanlibong piso. Gayun din naman, ang tumanggap ng dalawanlibong piso ay nagtubo ng dalawanlibong piso. Ngunit ang tumanggap ng sanlibong piso ay humukay sa lupa at itinago ang salapi ng kanyang panginoon."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "“Pagkaraan ng mahabang panahon, bumalik ang panginoon ng mga aliping iyon at pinapagsulit sila. Lumapit ang tumanggap ng limang libo. Wika niya, ‘Panginoon, heto po ang limanlibo na bigay ninyo sa akin. Heto pa po ang limanlibo na tinubo ko.’ Sinabi sa kanya ng panginoon, ‘Magaling! Tapat at mabuting alipin! Yamang naging tapat ka sa kaunting halaga, pamamahalain kita sa malaking halaga. Makihati ka sa aking kagalakan!’ Lumapit din ang tumanggap ng dalawanlibong piso, at ang sabi, ‘Panginoon, heto po ang ibinigay ninyong dalawanlibong piso. Heto naman po ang dalawanlibong pisong tinubo ko.’ Sinabi ng kanyang panginoon, ‘Magaling! Tapat at mabuting alipin! Naging tapat ka sa kaunting halaga, kaya pamamahalain kita sa malaking halaga. Makihati ka sa aking kagalakan.’ At lumapit naman ang tumanggap ng sanlibong piso. ‘Alam ko pong kayo’y mahigpit,’ aniya. ‘Gumagapas kayo sa hindi ninyo tinamnan, at nag-aani sa hindi ninyo hinasikan. Natakot po ako, kaya’t ibinaon ko sa lupa ang inyong salapi. Heto na po ang sanlibong piso ninyo.’ ‘Masama at tamad na alipin!’ Tugon ng kanyang panginoon. ‘Alam mo palang gumagapas ako sa hindi ko tinamnan at nag-aani sa hindi ko hinasikan! Bakit hindi mo iyan inilagak sa bangko, di sana’y may nakuha akong tubo ngayon? Kunin ninyo sa kanya ang sanlibong piso at ibigay sa may sampunlibong piso. Sapagkat ang mayroon ay bibigyan pa, at mananagana; ngunit ang wala, kahit ang kakaunting nasa kanya ay kukunin pa. Itapon ninyo sa kadiliman sa labas ang aliping walang kabuluhan. Doo’y tatangis siya at magngangalit ang kanyang ipin.’”"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Ang Mabuting Balita ng Panginoon."
+                }
+              ],
+              "alternatives": [
+                {
+                  "label": "o kaya: Maikling Pagbasa",
+                  "heading": "MABUTING BALITA",
+                  "reference": "Mateo 25, 14-15. 19-21",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Ang Mabuting Balita ng Panginoon ayon kay San Mateo"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Noong panahong iyon, sinabi ni Hesus sa kanyang mga alagad ang talinghagang ito: “Ang paghahari ng Diyos ay maitutulad dito: May isang taong maglalakbay, kaya tinawag niya ang kanyang mga alipin at ipinagkatiwala sa kanila ang kanyang ari-arian. Binigyan niya ng salapi ang bawat isa ayon sa kanya-kanyang kakayahan: binigyan niya ang isa ng limanlibong piso, ang isa nama’y dalawanlibong piso, at ang isa pa’y sanlibong piso. Pagkatapos, siya’y umalis."
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Pagkaraan ng mahabang panahon, bumalik ang panginoon ng mga aliping iyon at pinapagsulit sila. Lumapit ang tumanggap ng limang libo. Wika niya, ‘Panginoon, heto po ang limanlibo na bigay ninyo sa akin. Heto pa po ang limanlibo na tinubo ko.’ Sinabi sa kanya ng panginoon, ‘Magaling! Tapat at mabuting alipin! Yamang naging tapat ka sa kaunting halaga, pamamahalain kita sa malaking halaga. Makihati ka sa aking kagalakan!’"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Ang Mabuting Balita ng Panginoon."
+                    }
+                  ]
+                }
+              ],
+              "id": "gospel"
+            }
+          ],
+          "reading_date": "2026-11-15"
+        }
+      ],
+      "liturgical_id": "ordinary_time_33_sunday"
+    },
+    {
+      "date": "2026-11-22",
+      "celebration": "Our Lord Jesus Christ, King of the Universe",
+      "language": "fil",
+      "origin": "lectionary",
+      "retrieved_at": "2026-11-11T07:20:50.424Z",
+      "source_url": "https://www.awitatpapuri.com/2026/11/22/linggo-nobyembre-22-2026/",
+      "source_date": "2026-11-22",
+      "lectionary_key": "year-a/our_lord_jesus_christ_king_of_the_universe",
+      "selected_mass": "mass-1",
+      "sections": [
+        {
+          "type": "first",
+          "heading": "UNANG PAGBASA",
+          "reference": "Ezekiel 34, 11-12. 15-17",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Pagbasa mula sa aklat ni propeta Ezekiel"
+            },
+            {
+              "type": "paragraph",
+              "text": "Ito ang ipinasasabi ng Panginoong Diyos: “Ako mismo ang maghahanap at mag-aalaga sa aking mga tupa. Kung paanong hinahanap ng pastol ang tupa niyang nawawala, gayon ko hahanapin ang aking tupa. Kukunin ko sila saanman sila itinapon noong panahon ng kanilang kasamaan. Ako mismo ang magpapastol sa kanila at hahanap ng kanilang pahingahan. Hahanapin ko ang nawawala, ibabalik ang nalalayo, hihilutin ang napilay, palalakasin ang mahihina, at babantayan ang malulusog at malalakas. Ibibigay ko sa kanila ang kailangan nilang pagkain."
+            },
+            {
+              "type": "paragraph",
+              "text": "“Sa inyo, aking kawan, ito ang sinasabi ko na inyong Diyos na Panginoon: Ako ang magiging hukom ninyo. Pagbubukurin ko ang mabubuti’t masasama, ang mga tupa at ang mga kambing.”"
+            },
+            {
+              "type": "paragraph",
+              "text": "Ang Salita ng Diyos."
+            }
+          ],
+          "id": "first"
+        },
+        {
+          "type": "psalm",
+          "heading": "SALMONG TUGUNAN",
+          "reference": "Salmo 22, 1-2a. 2b-3. 5-6",
+          "blocks": [
+            {
+              "type": "response",
+              "text": "Pastol ko’y Panginoong D’yos,\nhindi ako magdarahop."
+            },
+            {
+              "type": "stanza",
+              "text": "Panginoo’y aking Pastol, hindi ako magkukulang.\nAko’y pinahihimlay sa mainam na pastulan."
+            },
+            {
+              "type": "response",
+              "text": "Pastol ko’y Panginoong D’yos,\nhindi ako magdarahop."
+            },
+            {
+              "type": "stanza",
+              "text": "At inaakay niya ako sa tahimik na batisan,\nbinibigyan niya ako niyong bagong kalakasan.\nAt sang-ayon sa pangako na kaniyang binitiwan\nsa matuwid na landasi’y doon ako inaakay."
+            },
+            {
+              "type": "response",
+              "text": "Pastol ko’y Panginoong D’yos,\nhindi ako magdarahop."
+            },
+            {
+              "type": "stanza",
+              "text": "Sa harapan ng lingkod mo, ikaw ay may handang dulang,\nito’y iyong ginagawang nakikita ng kaaway;\nnalulugod ka sa akin na ulo ko ay langisan\nat pati na ang kalis ko ay iyong pinaaapaw.\nTunay na ang pag-ibig mo at ang iyong kabutihan,\nsasaaki’t tataglayin habang ako’y nabubuhay;\ndoon ako sa templo lalagi at mananahan."
+            },
+            {
+              "type": "response",
+              "text": "Pastol ko’y Panginoong D’yos,\nhindi ako magdarahop."
+            }
+          ],
+          "id": "psalm"
+        },
+        {
+          "type": "second",
+          "heading": "IKALAWANG PAGBASA",
+          "reference": "1 Corinto 15, 20-26. 28",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Pagbasa mula sa unang sulat ni Apostol San Pablo sa mga taga-Corinto"
+            },
+            {
+              "type": "paragraph",
+              "text": "Mga kapatid, si Kristo’y muling binuhay bilang katibayan na muling bubuhayin ang mga patay. Kung paanong dumating ang kamatayan sa pamamagitan ng isang tao, gayon din naman, dumating din ang muling pagkabuhay sa pamamagitan ng isang tao. Sapagkat kung paanong mamamatay ang lahat dahil sa kanilang kaugnayan kay Adan, gayon din naman, mabubuhay ang lahat dahil sa kanilang kaugnayan kay Kristo, ngunit ang bawat isa’y sa kanya-kanyang takdang panahon: si Kristo ang pinakauna sa lahat; pagkatapos, ang mga kay Kristo sa panahon ng pagparito niya. At darating ang wakas, pagkatapos malupig ni Kristo ang lahat ng kaharian, pamahalaan at kapangyarihan; at ibibigay niya sa Diyos at Ama ang paghahari. Sapagkat si Kristo’y dapat maghari hanggang sa malupig niya at lubusang mapasuko ang kanyang mga kaaway. Ang kahuli-hulihang kaaway na kanyang pasusukuin ay ang kamatayan. At kapag ang lahat ay nasa ilalim na ng kapangyarihan ni Kristo, ang Anak naman ang paiilalim sa kapangyarihan ng Diyos na naglagay ng lahat ng bagay sa ilalim ng kapangyarihan niya. Sa gayon, lubusang maghahari ang Diyos sa kalahat-lahatan."
+            },
+            {
+              "type": "paragraph",
+              "text": "Ang Salita ng Diyos."
+            }
+          ],
+          "id": "second"
+        },
+        {
+          "type": "acclamation",
+          "heading": "ALELUYA",
+          "reference": "Marcos 11, 9. 10",
+          "blocks": [
+            {
+              "type": "stanza",
+              "text": "Aleluya! Aleluya!\nPagpalain dumarating\nsa ngalan ng Poon natin,\npaghahari’y kanyang angkin.\nAleluya! Aleluya!"
+            }
+          ],
+          "id": "acclamation"
+        },
+        {
+          "type": "gospel",
+          "heading": "MABUTING BALITA",
+          "reference": "Mateo 25, 31-46",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Ang Mabuting Balita ng Panginoon ayon kay San Mateo"
+            },
+            {
+              "type": "paragraph",
+              "text": "Noong panahong iyon, sinabi ni Hesus sa kanyang mga alagad: “Darating ang Anak ng Tao bilang Hari, kasama ang lahat ng anghel, at luluklok sa kanyang maringal na trono. Sa panahong iyon, matitipon sa harapan niya ang lahat ng tao. Sila’y pagbubukud-bukurin niya, tulad ng ginagawa ng pastol sa mga tupa at mga kambing. Ilalagay niya sa kanyang kanan ang mga tupa, at sa kaliwa ang mga kambing. At sasabihin ng Hari sa mga nasa kanan, ‘Halikayo, mga pinagpala ng aking Ama! Pumasok na kayo at manirahan sa kahariang inihanda para sa inyo mula pa nang likhain ang sanlibutan. Sapagkat ako’y nagutom at inyong pinakain, nauhaw at inyong pinainom. Ako’y isang dayuhan at inyong pinatuloy. Ako’y walang maisuot at inyong pinaramtan, nagkasakit at inyong dinalaw; ako’y nabilanggo at inyong pinuntahan.’ Sasagot ang mga matuwid, ‘Panginoon, kailan po namin kayo nakitang nagutom at aming pinakain, o nauhaw at aming pinainom? Kailan po kayo naging dayuhan at aming pinatuloy, o kaya’y walang maisuot at aming pinaramtan? At kailan po namin kayo nakitang may sakit o nasa bilangguan at aming dinalaw?’ Sasabihin ng Hari, ‘Sinasabi ko sa inyo: nang gawin ninyo ito sa pinakahamak sa mga kapatid kong ito, ito ay sa akin ninyo ginawa.’"
+            },
+            {
+              "type": "paragraph",
+              "text": "“At sasabihin naman niya sa mga nasa kaliwa, ‘Lumayo kayo sa akin, mga sinumpa! Kayo’y pasaapoy na di mamamatay, na inihanda para sa diyablo at sa kanyang mga kampon. Sapagkat ako’y nagutom at hindi ninyo pinakain, nauhaw at hindi ninyo pinainom. Ako’y naging isang dayuhan at hindi ninyo pinatuloy; ako’y nawalan ng maisuot at hindi ninyo pinaramtan. Ako’y may sakit at nasa bilangguan at hindi ninyo dinalaw.’ At sasagot din sila, ‘Panginoon, kailan po namin kayo nakitang nagutom, nauhaw, naging dayuhan, nawalan ng maisuot, may sakit o nasa bilangguan, at hindi namin kayo pinaglingkuran?’ At sasabihin sa kanila ng Hari, ‘Sinasabi ko sa inyo: nang pagkaitan ninyo ng tulong ang pinakahamak sa mga ito, ako ang inyong pinagkaitan.’ Itataboy ang mga ito sa kaparusahang walang hanggan, ngunit ang mga matuwid ay tatanggap ng buhay na walang hanggan.”"
+            },
+            {
+              "type": "paragraph",
+              "text": "Ang Mabuting Balita ng Panginoon."
+            }
+          ],
+          "id": "gospel"
+        }
+      ],
+      "masses": [
+        {
+          "id": "mass-1",
+          "label": "The Solemnity of Our Lord Jesus Christ, King of the Universe (White)",
+          "display_label": "The Solemnity of Our Lord Jesus Christ, King of the Universe",
+          "vigil": false,
+          "source_url": "https://www.awitatpapuri.com/2026/11/22/linggo-nobyembre-22-2026/",
+          "source_date": "2026-11-22",
+          "lectionary_key": "year-a/our_lord_jesus_christ_king_of_the_universe",
+          "sections": [
+            {
+              "type": "first",
+              "heading": "UNANG PAGBASA",
+              "reference": "Ezekiel 34, 11-12. 15-17",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "text": "Pagbasa mula sa aklat ni propeta Ezekiel"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Ito ang ipinasasabi ng Panginoong Diyos: “Ako mismo ang maghahanap at mag-aalaga sa aking mga tupa. Kung paanong hinahanap ng pastol ang tupa niyang nawawala, gayon ko hahanapin ang aking tupa. Kukunin ko sila saanman sila itinapon noong panahon ng kanilang kasamaan. Ako mismo ang magpapastol sa kanila at hahanap ng kanilang pahingahan. Hahanapin ko ang nawawala, ibabalik ang nalalayo, hihilutin ang napilay, palalakasin ang mahihina, at babantayan ang malulusog at malalakas. Ibibigay ko sa kanila ang kailangan nilang pagkain."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "“Sa inyo, aking kawan, ito ang sinasabi ko na inyong Diyos na Panginoon: Ako ang magiging hukom ninyo. Pagbubukurin ko ang mabubuti’t masasama, ang mga tupa at ang mga kambing.”"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Ang Salita ng Diyos."
+                }
+              ],
+              "id": "first"
+            },
+            {
+              "type": "psalm",
+              "heading": "SALMONG TUGUNAN",
+              "reference": "Salmo 22, 1-2a. 2b-3. 5-6",
+              "blocks": [
+                {
+                  "type": "response",
+                  "text": "Pastol ko’y Panginoong D’yos,\nhindi ako magdarahop."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Panginoo’y aking Pastol, hindi ako magkukulang.\nAko’y pinahihimlay sa mainam na pastulan."
+                },
+                {
+                  "type": "response",
+                  "text": "Pastol ko’y Panginoong D’yos,\nhindi ako magdarahop."
+                },
+                {
+                  "type": "stanza",
+                  "text": "At inaakay niya ako sa tahimik na batisan,\nbinibigyan niya ako niyong bagong kalakasan.\nAt sang-ayon sa pangako na kaniyang binitiwan\nsa matuwid na landasi’y doon ako inaakay."
+                },
+                {
+                  "type": "response",
+                  "text": "Pastol ko’y Panginoong D’yos,\nhindi ako magdarahop."
+                },
+                {
+                  "type": "stanza",
+                  "text": "Sa harapan ng lingkod mo, ikaw ay may handang dulang,\nito’y iyong ginagawang nakikita ng kaaway;\nnalulugod ka sa akin na ulo ko ay langisan\nat pati na ang kalis ko ay iyong pinaaapaw.\nTunay na ang pag-ibig mo at ang iyong kabutihan,\nsasaaki’t tataglayin habang ako’y nabubuhay;\ndoon ako sa templo lalagi at mananahan."
+                },
+                {
+                  "type": "response",
+                  "text": "Pastol ko’y Panginoong D’yos,\nhindi ako magdarahop."
+                }
+              ],
+              "id": "psalm"
+            },
+            {
+              "type": "second",
+              "heading": "IKALAWANG PAGBASA",
+              "reference": "1 Corinto 15, 20-26. 28",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "text": "Pagbasa mula sa unang sulat ni Apostol San Pablo sa mga taga-Corinto"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Mga kapatid, si Kristo’y muling binuhay bilang katibayan na muling bubuhayin ang mga patay. Kung paanong dumating ang kamatayan sa pamamagitan ng isang tao, gayon din naman, dumating din ang muling pagkabuhay sa pamamagitan ng isang tao. Sapagkat kung paanong mamamatay ang lahat dahil sa kanilang kaugnayan kay Adan, gayon din naman, mabubuhay ang lahat dahil sa kanilang kaugnayan kay Kristo, ngunit ang bawat isa’y sa kanya-kanyang takdang panahon: si Kristo ang pinakauna sa lahat; pagkatapos, ang mga kay Kristo sa panahon ng pagparito niya. At darating ang wakas, pagkatapos malupig ni Kristo ang lahat ng kaharian, pamahalaan at kapangyarihan; at ibibigay niya sa Diyos at Ama ang paghahari. Sapagkat si Kristo’y dapat maghari hanggang sa malupig niya at lubusang mapasuko ang kanyang mga kaaway. Ang kahuli-hulihang kaaway na kanyang pasusukuin ay ang kamatayan. At kapag ang lahat ay nasa ilalim na ng kapangyarihan ni Kristo, ang Anak naman ang paiilalim sa kapangyarihan ng Diyos na naglagay ng lahat ng bagay sa ilalim ng kapangyarihan niya. Sa gayon, lubusang maghahari ang Diyos sa kalahat-lahatan."
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Ang Salita ng Diyos."
+                }
+              ],
+              "id": "second"
+            },
+            {
+              "type": "acclamation",
+              "heading": "ALELUYA",
+              "reference": "Marcos 11, 9. 10",
+              "blocks": [
+                {
+                  "type": "stanza",
+                  "text": "Aleluya! Aleluya!\nPagpalain dumarating\nsa ngalan ng Poon natin,\npaghahari’y kanyang angkin.\nAleluya! Aleluya!"
+                }
+              ],
+              "id": "acclamation"
+            },
+            {
+              "type": "gospel",
+              "heading": "MABUTING BALITA",
+              "reference": "Mateo 25, 31-46",
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "text": "Ang Mabuting Balita ng Panginoon ayon kay San Mateo"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Noong panahong iyon, sinabi ni Hesus sa kanyang mga alagad: “Darating ang Anak ng Tao bilang Hari, kasama ang lahat ng anghel, at luluklok sa kanyang maringal na trono. Sa panahong iyon, matitipon sa harapan niya ang lahat ng tao. Sila’y pagbubukud-bukurin niya, tulad ng ginagawa ng pastol sa mga tupa at mga kambing. Ilalagay niya sa kanyang kanan ang mga tupa, at sa kaliwa ang mga kambing. At sasabihin ng Hari sa mga nasa kanan, ‘Halikayo, mga pinagpala ng aking Ama! Pumasok na kayo at manirahan sa kahariang inihanda para sa inyo mula pa nang likhain ang sanlibutan. Sapagkat ako’y nagutom at inyong pinakain, nauhaw at inyong pinainom. Ako’y isang dayuhan at inyong pinatuloy. Ako’y walang maisuot at inyong pinaramtan, nagkasakit at inyong dinalaw; ako’y nabilanggo at inyong pinuntahan.’ Sasagot ang mga matuwid, ‘Panginoon, kailan po namin kayo nakitang nagutom at aming pinakain, o nauhaw at aming pinainom? Kailan po kayo naging dayuhan at aming pinatuloy, o kaya’y walang maisuot at aming pinaramtan? At kailan po namin kayo nakitang may sakit o nasa bilangguan at aming dinalaw?’ Sasabihin ng Hari, ‘Sinasabi ko sa inyo: nang gawin ninyo ito sa pinakahamak sa mga kapatid kong ito, ito ay sa akin ninyo ginawa.’"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "“At sasabihin naman niya sa mga nasa kaliwa, ‘Lumayo kayo sa akin, mga sinumpa! Kayo’y pasaapoy na di mamamatay, na inihanda para sa diyablo at sa kanyang mga kampon. Sapagkat ako’y nagutom at hindi ninyo pinakain, nauhaw at hindi ninyo pinainom. Ako’y naging isang dayuhan at hindi ninyo pinatuloy; ako’y nawalan ng maisuot at hindi ninyo pinaramtan. Ako’y may sakit at nasa bilangguan at hindi ninyo dinalaw.’ At sasagot din sila, ‘Panginoon, kailan po namin kayo nakitang nagutom, nauhaw, naging dayuhan, nawalan ng maisuot, may sakit o nasa bilangguan, at hindi namin kayo pinaglingkuran?’ At sasabihin sa kanila ng Hari, ‘Sinasabi ko sa inyo: nang pagkaitan ninyo ng tulong ang pinakahamak sa mga ito, ako ang inyong pinagkaitan.’ Itataboy ang mga ito sa kaparusahang walang hanggan, ngunit ang mga matuwid ay tatanggap ng buhay na walang hanggan.”"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Ang Mabuting Balita ng Panginoon."
+                }
+              ],
+              "id": "gospel"
+            }
+          ],
+          "reading_date": "2026-11-22"
+        }
+      ],
+      "liturgical_id": "our_lord_jesus_christ_king_of_the_universe"
     }
   ],
   "errors": [],
-  "last_attempt": "2026-11-09T09:11:04.372Z"
+  "last_attempt": "2026-11-11T07:20:50.424Z"
 }

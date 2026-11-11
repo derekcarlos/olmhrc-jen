@@ -2,7 +2,9 @@
 import ContentPage from "@/layouts/ContentPage.astro";
 import SundayReadings from "@/components/SundayReadings.astro";
 import { getReadingSnapshot } from "@/lib/readings-store.mjs";
+import { upcomingCalendar } from "@/lib/upcoming-readings.mjs";
 const snapshot = getReadingSnapshot();
+const calendar = snapshot.mode === "upcoming-celebrations" ? await upcomingCalendar() : [];
 ---
 
 <ContentPage
@@ -10,5 +12,5 @@ const snapshot = getReadingSnapshot();
   title="Mga Pagbasa"
   description="Mga pagbasa sa Filipino para sa panalangin at paghahanda sa Banal na Misa."
 >
-  <SundayReadings snapshot={snapshot} />
+  <SundayReadings snapshot={snapshot} calendar={calendar} />
 </ContentPage>

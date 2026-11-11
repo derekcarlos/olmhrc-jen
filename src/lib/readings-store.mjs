@@ -39,7 +39,7 @@ export function writeSnapshot(snapshot) {
 }
 export function getReadingSnapshot() {
   const saved = readSnapshot();
-  if (saved?.mode === "next-celebration") return saved;
+  if (saved && ["next-celebration", "upcoming-celebrations"].includes(saved.mode)) return saved;
   const current = reconcileSnapshot(
     saved,
     [],

@@ -1,4 +1,7 @@
 {
-  "mode": "next-sunday",
-  "source": "awit-at-papuri"
+  "mode": "upcoming-celebrations",
+  "source": "awit-at-papuri",
+  "evening_hour": 18,
+  "sunday_preparation_hour": 18,
+  "simbang_sunday_hour": 24
 }

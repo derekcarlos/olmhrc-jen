@@ -8,9 +8,9 @@
   "type": "module",
   "scripts": {
     "readings:sync": "node scripts/sync-readings.mjs --refresh",
-    "readings:sync:lectionary": "bash scripts/update-sunday-readings.sh",
+    "readings:sync:lectionary": "bash scripts/update-upcoming-readings.sh",
     "readings:update:sunday": "bash scripts/update-sunday-readings.sh",
-    "readings:update": "bash scripts/update-sunday-readings.sh",
+    "readings:update": "bash scripts/update-upcoming-readings.sh",
     "songs:update:acclamations": "bash scripts/update-gospel-acclamations.sh",
     "readings:validate": "node scripts/validate-readings.mjs",
     "readings:publish": "bash scripts/publish-readings.sh",

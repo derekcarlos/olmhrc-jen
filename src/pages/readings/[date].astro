@@ -3,14 +3,27 @@ import ContentPage from "@/layouts/ContentPage.astro";
 import SundayReadings from "@/components/SundayReadings.astro";
 import { getReadingSnapshot } from "@/lib/readings-store.mjs";
 import { formatReadingDate } from "@/lib/readings.mjs";
-export function getStaticPaths() {
+import { upcomingCalendar, upcomingReading } from "@/lib/upcoming-readings.mjs";
+export async function getStaticPaths() {
   const snapshot = getReadingSnapshot();
+  if (snapshot.mode === "upcoming-celebrations") {
+    const calendar = await upcomingCalendar();
+    return Promise.all(calendar.map(async day => {
+      let record;
+      try { record = await upcomingReading(day.date); }
+      catch (error) { if (!(error instanceof Error && "code" in error && error.code === "READINGS_UNAVAILABLE")) throw error; }
+      return { params: { date: day.date }, props: {
+        date: day.date, calendar, celebrationName: day.name, fixed: true,
+        snapshot: { ...snapshot, dates: [day.date], records: record ? [record] : [], errors: record ? [] : [{ date: day.date, message: "Wala pang nakahandang pagbasa para sa pagdiriwang na ito." }] },
+      } };
+    }));
+  }
   return snapshot.dates.map((date) => ({
     params: { date },
-    props: { snapshot, date },
+    props: { snapshot, date, calendar: [], celebrationName: undefined, fixed: false },
   }));
 }
-const { snapshot, date } = Astro.props;
+const { snapshot, date, calendar = [], celebrationName, fixed = false } = Astro.props;
 ---
 
 <ContentPage
@@ -19,5 +32,5 @@ const { snapshot, date } = Astro.props;
   meta_title={`Mga Pagbasa — ${formatReadingDate(date)} | Rosarium`}
   description="Mga pagbasa sa Filipino para sa panalangin at paghahanda sa Banal na Misa."
 >
-  <SundayReadings snapshot={snapshot} date={date} />
+  <SundayReadings snapshot={snapshot} date={date} calendar={calendar} celebrationName={celebrationName} fixed={fixed} />
 </ContentPage>

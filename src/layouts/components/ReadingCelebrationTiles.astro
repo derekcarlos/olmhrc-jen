@@ -1,0 +1,28 @@
+---
+import { isSimbang } from "@/lib/reading-selection.mjs";
+interface Props { days: { date: string; id: string; name: string; category: string }[]; selected: string; }
+const { days, selected } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const labels: Record<string, string> = {
+  ash_wednesday: "Miyerkules ng Abo", holy_monday: "Lunes Santo", holy_tuesday: "Martes Santo", holy_wednesday: "Miyerkules Santo",
+  holy_thursday: "Huwebes Santo", friday_of_the_passion_of_the_lord: "Biyernes Santo", holy_saturday: "Magdamagang Pagtatanod",
+  easter_sunday: "Pasko ng Muling Pagkabuhay", nativity_of_the_lord: "Pasko ng Pagsilang", mary_mother_of_god: "Santa Maria, Ina ng Diyos",
+  christmas_eve: "Bisperas ng Pasko", immaculate_conception_of_the_blessed_virgin_mary: "Kalinis-linisang Paglilihi",
+  palm_sunday_of_the_passion_of_the_lord: "Linggo ng Palaspas",
+};
+const dateLabel = (date: string) => new Intl.DateTimeFormat("fil-PH", { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" }).format(new Date(`${date}T12:00:00Z`));
+const tileUrl = (date: string) => {
+  const mass = date.endsWith("12-24") ? "christmas-vigil" : isSimbang(date) && new Date(`${date}T12:00:00Z`).getUTCDay() !== 0 ? "anticipated" : null;
+  return `${base}/readings/${date}${mass ? `?mass=${mass}#${mass}-reading-guide` : ""}`;
+};
+---
+{days.length > 1 && <nav class="reading-celebration-tiles" aria-label="Mga pagdiriwang na may pagbasa">
+  <p class="page-eyebrow">Mga darating na pagdiriwang</p>
+  <div class="reading-tile-track">
+    {days.map(day => <a class="reading-celebration-tile" href={tileUrl(day.date)} aria-current={day.date === selected ? "date" : undefined}>
+      <time datetime={day.date}>{dateLabel(day.date)}</time>
+      <strong>{labels[day.id] || day.name}</strong>
+      <span>{isSimbang(day.date) ? "Simbang Gabi · 7:30 PM" : day.category}</span>
+    </a>)}
+  </div>
+</nav>}

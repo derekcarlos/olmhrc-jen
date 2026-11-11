@@ -153,7 +153,7 @@ export async function getSiteSearchIndex() {
   const active = targetDates(
     snapshot.mode,
     new Date(),
-    snapshot.calendar_dates,
+    snapshot.calendar_dates || snapshot.dates,
   );
   for (const record of snapshot.records.filter((record) =>
     active.includes(record.date),

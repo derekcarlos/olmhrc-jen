@@ -5,6 +5,7 @@ import { dayChoices, lectionaryKey, underlyingWeekday, romcalYear } from "./lect
 import { addDays, validDate } from "./readings.mjs";
 import { manilaToday } from "./calendar.mjs";
 import settings from "../config/gospel-acclamations.json" with { type: "json" };
+import { eveningContext, isSimbang } from "./reading-selection.mjs";
 
 const files = new Map();
 function localEntry({ collection, key }) {
@@ -24,6 +25,7 @@ function localEntry({ collection, key }) {
   }
   return entries[key];
 }
+export { localEntry as localLectionaryEntry };
 
 /** Strip only standalone Alleluia refrain lines at the boundaries of a verse. */
 export function acclamationVerse(blocks) {
@@ -76,6 +78,7 @@ export async function acclamationForDate(date, {
     celebration: day.name,
     lectionary_key: `${location.collection}/${location.key}`,
     setting: day.seasons.includes("LENT") || day.id === "friday_of_the_passion_of_the_lord" ? "lent" : "alleluia",
+    liturgical_id: day.id,
   };
   if (!entry) return { ...base, status: "unavailable", message: "Wala pang nakahandang taludtod sa lokal na lectionary para sa araw na ito." };
   if (!Array.isArray(entry.masses) || !entry.masses.length)
@@ -104,7 +107,24 @@ export async function buildAcclamationCalendar({ from = manilaToday(), days = 30
   if (!Number.isInteger(days) || days < 1 || days > 366)
     throw new Error("--days must be an integer between 1 and 366");
   const records = [];
-  for (let i = 0; i < days; i++) records.push(await acclamationForDate(addDays(from, i), options));
+  for (let i = 0; i < days; i++) {
+    const date = addDays(from, i);
+    const day = await acclamationForDate(date, { ...options, simbang: null });
+    const context = eveningContext(new Date(`${date}T15:59:00Z`), day.liturgical_id);
+    let evening;
+    if (context === "anticipated") {
+      evening = isSimbang(date)
+        ? await acclamationForDate(date, options)
+        : { ...await acclamationForDate(addDays(date, 1), { ...options, simbang: null }), date, context: "Anticipated Sunday Mass" };
+    } else if (context === "christmas-vigil") {
+      const mass = localEntry({ collection: "seasonal", key: "nativity_of_the_lord" })?.masses.find(mass => /Vigil/i.test(mass.label));
+      if (!mass) throw new Error("Missing Christmas Vigil acclamation");
+      evening = await acclamationForDate(date, { ...options, simbang: null, overrides: { [date]: { reading_date: addDays(date, 1), mass_label: mass.label } } });
+      evening.context = "Misa sa Bisperas ng Pasko";
+    }
+    if (evening) day.evening = evening;
+    records.push(day);
+  }
   return {
     schema_version: 1, timezone: "Asia/Manila", from, through: addDays(from, days - 1), records,
     lenten_practice: await buildLentenPractice({ year: Number(from.slice(0, 4)), readEntry: options.readEntry }),

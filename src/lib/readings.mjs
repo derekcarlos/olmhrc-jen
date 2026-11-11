@@ -3,7 +3,7 @@ import { manilaToday } from "./calendar.mjs";
 /** @typedef {{type: string, text: string}} ReadingBlock */
 /** @typedef {{label?: string, heading?: string, reference: string, blocks: ReadingBlock[]}} ReadingOption */
 /** @typedef {{type: string, heading: string, reference: string, blocks: ReadingBlock[], id?: string, label?: string, alternatives?: ReadingOption[]}} ReadingSection */
-/** @typedef {{id: string, label: string, display_label?: string, vigil?: boolean, source_url: string, source_date: string, lectionary_key?: string, sections: ReadingSection[]}} ReadingMass */
+/** @typedef {{id: string, label: string, display_label?: string, context?: string, reading_date?: string, vigil?: boolean, source_url: string, source_date: string, lectionary_key?: string, sections: ReadingSection[]}} ReadingMass */
 /** @typedef {{date: string, celebration: string, language: string, source_url: string, retrieved_at: string, sections: ReadingSection[], origin?: "lectionary", lectionary_key?: string, source_date?: string, masses?: ReadingMass[], selected_mass?: string}} ReadingRecord */
 /** @typedef {{schema_version: number, source: string, mode: string, dates: string[], calendar_dates?: string[], last_attempt: string, records: ReadingRecord[], errors: {date: string, message: string}[]}} ReadingSnapshot */
 
@@ -39,6 +39,12 @@ export function sundayDate(now = new Date()) {
   return addDays(today, (7 - weekday) % 7);
 }
 export function targetDates(mode, now = new Date(), calendarDates = []) {
+  if (mode === "upcoming-celebrations") {
+    const today = manilaToday(now);
+    const weekday = new Date(`${today}T12:00:00Z`).getUTCDay();
+    const start = addDays(today, -((weekday + 6) % 7));
+    return calendarDates.filter(date => date >= start && date <= addDays(start, 13));
+  }
   if (mode === "next-celebration") {
     const next = calendarDates.find((day) => day >= manilaToday(now));
     return next ? [next] : [];
@@ -204,10 +210,10 @@ export function validateSnapshot(value) {
     !s ||
     s.schema_version !== 1 ||
     s.source !== "awit-at-papuri" ||
-    !["next-sunday", "next-seven-days", "next-celebration"].includes(s.mode) ||
+    !["next-sunday", "next-seven-days", "next-celebration", "upcoming-celebrations"].includes(s.mode) ||
     !Array.isArray(s.dates) ||
     !s.dates.length ||
-    s.dates.length > 7 ||
+    s.dates.length > (s.mode === "upcoming-celebrations" ? 21 : 7) ||
     !s.dates.every(validDate) ||
     new Set(s.dates).size !== s.dates.length ||
     !Array.isArray(s.records) ||
@@ -220,6 +226,8 @@ export function validateSnapshot(value) {
     Number.isNaN(Date.parse(s.last_attempt))
   )
     return false;
+  if (s.mode === "upcoming-celebrations")
+    return s.dates.every((date, i) => i === 0 || date > s.dates[i - 1]);
   if (s.mode === "next-celebration")
     return (
       s.dates.length === 1 &&

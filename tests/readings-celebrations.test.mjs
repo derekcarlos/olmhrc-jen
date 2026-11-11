@@ -13,9 +13,28 @@ import {
   celebrationCalendar,
   celebrationReading,
   buildCelebrationSnapshot,
+  normalizeMassSections,
 } from "../src/lib/readings-celebrations.mjs";
 import { validateSnapshot } from "../src/lib/readings.mjs";
 import { targetDates } from "../src/lib/readings.mjs";
+
+test("Palm Sunday keeps the long and short Passion separate without changing source data", async () => {
+  const source = JSON.parse(readFileSync("src/data/readings/lectionary/year-b.json", "utf8"))
+    .entries.palm_sunday_of_the_passion_of_the_lord.masses[0].sections;
+  const original = JSON.stringify(source);
+  const gospel = normalizeMassSections(source).find((s) => s.type === "gospel");
+  const text = gospel.blocks.map((b) => b.text).join("\n");
+  assert.equal((text.match(/Ang Mabuting Balita ng Panginoon\./g) || []).length, 1);
+  assert.doesNotMatch(text, /o kaya:\s*Maikling Pagbasa/i);
+  assert.ok(gospel.blocks.some((b) => b.text === "Dito luluhod ang tanan at sandaling mananahimik."));
+  assert.match(text, /Nang magtatakipsilim na, dumating si Jose/);
+  assert.equal(gospel.alternatives.length, 1);
+  assert.match(gospel.alternatives[0].reference, /Marcos 15/);
+  assert.doesNotMatch(gospel.alternatives[0].blocks.map((b) => b.text).join("\n"), /Nang magtatakipsilim na, dumating si Jose/);
+  assert.equal(JSON.stringify(source), original);
+  const record = await celebrationReading("2027-03-21");
+  assert.deepEqual(record.sections.find((s) => s.type === "gospel"), gospel);
+});
 
 test("calendar includes Sundays, all solemnities, Ash Wednesday and every Holy Week weekday", async () => {
   const days = await celebrationCalendar([2027]);

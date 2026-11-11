@@ -3,21 +3,26 @@ import "@/styles/readings.css";
 import { formatReadingDate, sundayDate } from "@/lib/readings.mjs";
 import type { ReadingSnapshot, ReadingMass } from "@/lib/readings.mjs";
 import ReadingMassView from "@/components/ReadingMass.astro";
+import ReadingCelebrationTiles from "@/components/ReadingCelebrationTiles.astro";
+import { readingChoice, readingGroup } from "@/lib/reading-selection.mjs";
+import { manilaToday } from "@/lib/calendar.mjs";
 interface Props {
   snapshot: ReadingSnapshot;
   date?: string;
   fixed?: boolean;
   celebrationName?: string;
+  calendar?: { date: string; id: string; name: string; category: string }[];
 }
 const {
   snapshot,
   date,
   fixed = false,
   celebrationName,
+  calendar = [],
 } = Astro.props;
 const selected =
   date ||
-  (snapshot.mode === "next-celebration" ? snapshot.dates[0] : sundayDate());
+  (snapshot.mode === "upcoming-celebrations" ? readingChoice(calendar)?.date || snapshot.dates[0] : snapshot.mode === "next-celebration" ? snapshot.dates[0] : sundayDate());
 const record = snapshot.records.find((r) => r.date === selected);
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const readingUrl = (day: string) => `${base}/readings/${day}`;
@@ -36,6 +41,7 @@ const masses: ReadingMass[] =
       ]
     : []);
 const selectedMass = record?.selected_mass || masses[0]?.id;
+const tiles = readingGroup(calendar, selected).filter((day: (typeof calendar)[number]) => date || day.date >= manilaToday());
 ---
 
 <div
@@ -44,6 +50,8 @@ const selectedMass = record?.selected_mass || masses[0]?.id;
   data-readings
   data-fixed={String(fixed)}
   data-calendar-dates={JSON.stringify(snapshot.calendar_dates || [])}
+  data-reading-calendar={JSON.stringify(calendar)}
+  data-liturgical-id={calendar.find(day => day.date === selected)?.id || ""}
   data-selected-mass={selectedMass}
   data-selected={selected}
   data-entry={String(isEntry)}
@@ -55,6 +63,7 @@ const selectedMass = record?.selected_mass || masses[0]?.id;
   <p class="reading-intro">
     Makinig, magnilay, at maghanda para sa pagdiriwang ng Banal na Misa.
   </p>
+  <ReadingCelebrationTiles days={tiles} selected={selected} />
   <div class="reading-window">
     <span
       >{
@@ -62,6 +71,8 @@ const selectedMass = record?.selected_mass || masses[0]?.id;
           ? "Mga pagbasa para sa pagdiriwang na ito"
           : snapshot.mode === "next-celebration"
             ? "Mga pagbasa para sa darating na pagdiriwang"
+            : snapshot.mode === "upcoming-celebrations"
+              ? "Mga pagbasa para sa darating na pagdiriwang"
             : snapshot.mode === "next-seven-days"
               ? "Mga pagbasa sa susunod na 7 araw"
               : "Mga pagbasa para sa darating na Linggo"
@@ -69,7 +80,7 @@ const selectedMass = record?.selected_mass || masses[0]?.id;
     >
     <a
       href={`${base}/readings`}
-      aria-label="Bumalik sa mga pagbasa ngayong Linggo">Linggong Ito</a
+      aria-label="Bumalik sa napiling darating na pagdiriwang">{snapshot.mode === "upcoming-celebrations" ? "Para sa ngayon" : "Linggong Ito"}</a
     >
   </div>
   {
@@ -98,6 +109,9 @@ const selectedMass = record?.selected_mass || masses[0]?.id;
     <a href="https://www.awitatpapuri.com/">Bisitahin ang Awit at Papuri →</a>
   </div>
   <div data-readings-content>
+    {masses.length > 1 && <nav class="reading-mass-buttons" data-reading-mass-picker aria-label="Pumili ng Misa">
+      {masses.map(mass => <a data-reading-mass-choice={mass.id} aria-current={mass.id === selectedMass ? "true" : undefined} href={`${readingUrl(selected)}?mass=${mass.id}#${mass.id === selectedMass ? "" : `${mass.id}-`}reading-guide`}>{mass.display_label || mass.label}</a>)}
+    </nav>}
     <header class="reading-header">
       <p class="reading-banner-label">Liturhiya ng Salita</p>
       <p class="reading-date">
@@ -110,29 +124,19 @@ const selectedMass = record?.selected_mass || masses[0]?.id;
           </h2>
         )
       }
+      <p class="reading-mass-context" data-reading-context hidden></p>
     </header>
     {
       record ? (
         <>
-          {masses.length > 1 && (
-            <label class="reading-mass-picker" data-reading-mass-picker hidden>
-              Pumili ng Misa
-              <select data-reading-mass-select>
-                {masses.map((mass) => (
-                  <option value={mass.id} selected={mass.id === selectedMass}>
-                    {mass.display_label || mass.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-          )}
           {masses.map((mass) => (
-            <div data-reading-mass={mass.id}>
+            <div data-reading-mass={mass.id} data-mass-reading-date={mass.reading_date || selected} data-mass-context={mass.context || ""}>
               {masses.length > 1 && (
                 <h2 class="reading-mass-title">
                   {mass.display_label || mass.label}
                 </h2>
               )}
+              {mass.reading_date && mass.reading_date !== selected && <noscript><p class="reading-date-note">Anticipated Mass · Mga pagbasa para sa {formatReadingDate(mass.reading_date)}</p></noscript>}
               <ReadingMassView
                 record={record}
                 mass={mass}

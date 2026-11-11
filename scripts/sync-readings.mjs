@@ -13,7 +13,7 @@ if (process.argv.some((arg) => ["--published", "--disabled"].includes(arg)))
 const mode =
   process.argv.find((arg) => arg.startsWith("--mode="))?.split("=")[1] ||
   readingsConfig.mode;
-if (mode === "next-celebration" || readingsConfig.mode === "next-celebration")
+if (["next-celebration", "upcoming-celebrations"].includes(mode) || ["next-celebration", "upcoming-celebrations"].includes(readingsConfig.mode))
   throw new Error(
     "Use pnpm readings:update for the celebration reader. The legacy downloader cannot preserve multiple Masses, repeated readings, or alternatives; the snapshot was not changed.",
   );

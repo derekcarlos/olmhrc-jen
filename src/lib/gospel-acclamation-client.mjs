@@ -1,10 +1,13 @@
 // Browser-safe: contains only the prepared verse calendar, never Romcal or source files.
 import { manilaToday } from "./calendar.mjs";
 import { formatReadingDate } from "./readings.mjs";
+import { eveningContext } from "./reading-selection.mjs";
 
 export function acclamationView(calendar, setting, now = new Date()) {
   const date = manilaToday(now);
-  const record = calendar?.records?.find(r => r.date === date);
+  const day = calendar?.records?.find(r => r.date === date);
+  const context = eveningContext(now, day?.liturgical_id);
+  const record = context !== "day" && context !== "easter-vigil" && day?.evening ? day.evening : day;
   const state = {
     date, date_label: formatReadingDate(date), reading_date: record?.reading_date || date,
     celebration: record?.celebration || "", context: record?.context || "",
