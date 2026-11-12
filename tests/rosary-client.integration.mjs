@@ -190,7 +190,25 @@ test("persistent prayer controls keep their node and show the current step or be
     assert.equal(root.querySelector("[data-rosary-controls]"), controls);
     assert.equal(root.querySelector("[data-rosary-next]"), next);
     root.querySelector('[data-rosary-phase="closing"]').click();
-    for (let i = 0; i < 4; i++) click(root, "next");
+    for (const id of [
+      "hail-holy-queen",
+      "litany-opening",
+      "litany-trinity",
+      "litany-mary-1",
+      "litany-mary-2",
+      "litany-mary-3",
+      "litany-lamb-of-god",
+      "pray-for-us",
+      "rosary-prayer",
+      "sign-of-cross",
+    ]) {
+      const prayer = catalog.prayers.find((p) => p.id === id);
+      assert.equal(root.querySelector("[data-rosary-title]").textContent, prayer.title);
+      assert.equal(root.querySelector("[data-rosary-text]").textContent, prayer.text);
+      if (prayer.instruction)
+        assert.equal(root.querySelector("[data-rosary-rubric]").textContent, prayer.instruction);
+      click(root, "next");
+    }
     assert.equal(root.dataset.rosaryComplete, "true");
     assert.ok(controls.closest("[hidden]"));
     click(root, "restart");
@@ -306,7 +324,7 @@ test("opens with the full opening prayer and the Philippine-day mystery suggesti
 test("walks every prayer through all ten Hail Marys in each decade and the closing", () =>
   fixture("", (root) => {
     const observed = [];
-    for (let step = 0; step < 82; step++) {
+    for (let step = 0; step < rosaryWalkthrough(catalog.mysteries[0]).length; step++) {
       observed.push(root.querySelector("[data-rosary-title]").textContent);
       assert.ok(root.querySelector("[data-rosary-text]").textContent.trim());
       click(root, "next");

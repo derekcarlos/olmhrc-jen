@@ -8,6 +8,21 @@ import {
 
 const english = JSON.parse(readFileSync("src/data/rosary.json", "utf8"));
 
+test("both English guides share Litany text while Block Rosary keeps one Litany after the collect", () => {
+  const edited = structuredClone(english);
+  const litany = edited.prayers.find((p) => p.id === "litany-opening");
+  assert.ok(litany, "the English Rosary catalog contains the shared Litany");
+  litany.text = "Edited shared invocation.";
+  const catalog = blockRosaryCatalog(edited);
+  assert.equal(catalog.prayers.find((p) => p.id === litany.id).text, litany.text);
+  for (const set of edited.mysteries) {
+    const ids = blockRosaryWalkthrough(set).map((step) => step.prayer);
+    for (const prayer of edited.prayers.filter((p) => p.id.startsWith("litany-")))
+      assert.equal(ids.filter((id) => id === prayer.id).length, 1, prayer.id);
+    assert.ok(ids.indexOf("litany-opening") > ids.indexOf("rosary-prayer"));
+  }
+});
+
 test("Block Rosary uses editable shared English prayers and all twenty meditations", () => {
   const edited = structuredClone(english);
   edited.prayers.find((p) => p.id === "hail-mary").text =

@@ -159,6 +159,17 @@ export function rosaryWalkthrough(set, language = "en") {
       "Pagkatapos ng limang misteryo, dasalin ang Aba po Santa Mariang Hari.",
     ),
   );
+  if (!tl) {
+    for (const prayer of [
+      "litany-opening",
+      "litany-trinity",
+      "litany-mary-1",
+      "litany-mary-2",
+      "litany-mary-3",
+      "litany-lamb-of-god",
+    ])
+      add(prayer, "closing", "The leader says ℣ and the congregation responds ℟.");
+  }
   add(
     "pray-for-us",
     "closing",

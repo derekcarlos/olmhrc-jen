@@ -80,7 +80,8 @@ export function blockRosaryWalkthrough(set) {
     add(prayer, "welcome");
   for (const step of rosaryWalkthrough(set)) {
     // The booklet begins with its welcoming prayers and ends after the farewell.
-    if (step.prayer === "sign-of-cross") continue;
+    // Its Litany follows the Rosary collect, rather than Hail, Holy Queen.
+    if (step.prayer === "sign-of-cross" || step.prayer?.startsWith("litany-")) continue;
     steps.push(
       step.prayer === "fatima"
         ? {

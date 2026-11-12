@@ -10,7 +10,7 @@ const data = JSON.parse(readFileSync("src/data/rosary.json", "utf8"));
 test("each set has a complete opening, five ten-bead decades, and closing prayers", () => {
   for (const set of data.mysteries) {
     const steps = rosaryWalkthrough(set);
-    assert.equal(steps.length, 82);
+    assert.equal(steps.length, 88);
     const count = (id) => steps.filter((step) => step.prayer === id).length;
     assert.equal(count("hail-mary"), 53);
     assert.equal(count("our-father"), 6);
@@ -31,8 +31,19 @@ test("each set has a complete opening, five ten-bead decades, and closing prayer
       ],
     );
     assert.deepEqual(
-      steps.slice(-4).map((step) => step.prayer),
-      ["hail-holy-queen", "pray-for-us", "rosary-prayer", "sign-of-cross"],
+      steps.slice(-10).map((step) => step.prayer),
+      [
+        "hail-holy-queen",
+        "litany-opening",
+        "litany-trinity",
+        "litany-mary-1",
+        "litany-mary-2",
+        "litany-mary-3",
+        "litany-lamb-of-god",
+        "pray-for-us",
+        "rosary-prayer",
+        "sign-of-cross",
+      ],
     );
     for (let decade = 0; decade < 5; decade++) {
       const group = steps.filter((step) => step.decade === decade);

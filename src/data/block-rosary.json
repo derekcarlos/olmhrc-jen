@@ -43,42 +43,6 @@
       "instruction": "This may be prayed after reciting the Fatima Prayer after each decade."
     },
     {
-      "id": "litany-opening",
-      "title": "Litany · Lord, Have Mercy",
-      "text": "℣. Lord, have mercy.\n℟. Lord, have mercy.\n\n℣. Christ, have mercy.\n℟. Christ, have mercy.\n\n℣. Lord, have mercy.\n℟. Lord, have mercy.\n\n℣. Christ, hear us.\n℟. Christ, graciously hear us.",
-      "instruction": "The leader reads ℣ and all respond ℟."
-    },
-    {
-      "id": "litany-trinity",
-      "title": "Litany · The Holy Trinity",
-      "text": "℣. God the Father of heaven,\n℣. God the Son, Redeemer of the world,\n℣. God the Holy Spirit,\n℣. Holy Trinity, one God,",
-      "instruction": "The response to the following invocations is: Have mercy on us."
-    },
-    {
-      "id": "litany-mary-1",
-      "title": "Litany · Holy Mary, Mother of God",
-      "text": "℣. Holy Mary,\n℣. Holy Mother of God,\n℣. Holy Virgin of virgins,\n℣. Mother of Christ,\n℣. Mother of the Church,\n℣. Mother of Mercy,\n℣. Mother of divine grace,\n℣. Mother of Hope,\n℣. Mother most pure,\n℣. Mother most chaste,\n℣. Mother inviolate,\n℣. Mother undefiled,\n℣. Mother most amiable,\n℣. Mother most admirable,\n℣. Mother of good counsel,\n℣. Mother of our Creator,\n℣. Mother of our Savior,",
-      "instruction": "The response to the following invocations is: Pray for us."
-    },
-    {
-      "id": "litany-mary-2",
-      "title": "Litany · Virgin Most Prudent",
-      "text": "℣. Virgin most prudent,\n℣. Virgin most venerable,\n℣. Virgin most renowned,\n℣. Virgin most powerful,\n℣. Virgin most merciful,\n℣. Virgin most faithful,\n℣. Mirror of justice,\n℣. Seat of wisdom,\n℣. Cause of our joy,\n℣. Spiritual vessel,\n℣. Vessel of honor,\n℣. Singular vessel of devotion,\n℣. Mystical rose,\n℣. Tower of David,\n℣. Tower of ivory,\n℣. House of gold,\n℣. Ark of the covenant,\n℣. Gate of heaven,\n℣. Morning star,",
-      "instruction": "The response to the following invocations is: Pray for us."
-    },
-    {
-      "id": "litany-mary-3",
-      "title": "Litany · Comfort and Queenship of Mary",
-      "text": "℣. Health of the sick,\n℣. Refuge of sinners,\n℣. Solace of Migrants,\n℣. Comfort of the afflicted,\n℣. Help of Christians,\n℣. Queen of Angels,\n℣. Queen of Patriarchs,\n℣. Queen of Prophets,\n℣. Queen of Apostles,\n℣. Queen of Martyrs,\n℣. Queen of Confessors,\n℣. Queen of Virgins,\n℣. Queen of all Saints,\n℣. Queen conceived without original sin,\n℣. Queen assumed into heaven,\n℣. Queen of the most holy Rosary,\n℣. Queen of families,\n℣. Queen of peace.",
-      "instruction": "The response to the following invocations is: Pray for us."
-    },
-    {
-      "id": "litany-lamb-of-god",
-      "title": "Litany · Lamb of God",
-      "text": "℣. Lamb of God, who takes away the sins of the world,\n℟. Spare us, O Lord.\n\n℣. Lamb of God, who takes away the sins of the world,\n℟. Graciously hear us, O Lord.\n\n℣. Lamb of God, who takes away the sins of the world,\n℟. Have mercy on us.",
-      "instruction": "The leader reads ℣ and all respond ℟."
-    },
-    {
       "id": "litany-collect",
       "title": "Prayer after the Litany",
       "text": "℣. Pray for us, O holy Mother of God.\n℟. That we may be made worthy of the promises of Christ.\n\n℣. Let us pray.\n\n℟. Grant unto us, thy servants, we beseech Thee, Oh Lord God, at all times to enjoy health of soul and body. And by the glorious intercession of the Blessed Mary, ever virgin, when freed from the sorrows of this present life, to enter into that joy which has no end, through Christ our Lord. Amen.",
