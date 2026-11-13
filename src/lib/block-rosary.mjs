@@ -91,13 +91,6 @@ export function blockRosaryWalkthrough(set) {
           }
         : step,
     );
-    if (step.prayer === "fatima")
-      steps.push({
-        ...step,
-        prayer: "miraculous-medal",
-        optional: true,
-        instruction: "This invocation may follow the Fatima Prayer.",
-      });
   }
   for (const prayer of [
     "litany-opening",

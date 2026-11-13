@@ -10,12 +10,13 @@ const data = JSON.parse(readFileSync("src/data/rosary.json", "utf8"));
 test("each set has a complete opening, five ten-bead decades, and closing prayers", () => {
   for (const set of data.mysteries) {
     const steps = rosaryWalkthrough(set);
-    assert.equal(steps.length, 88);
+    assert.equal(steps.length, 93);
     const count = (id) => steps.filter((step) => step.prayer === id).length;
     assert.equal(count("hail-mary"), 53);
     assert.equal(count("our-father"), 6);
     assert.equal(count("glory-be"), 6);
     assert.equal(count("fatima"), 5);
+    assert.equal(count("miraculous-medal"), 5);
     assert.equal(count("sign-of-cross"), 2);
     assert.deepEqual(
       steps.slice(0, 8).map((step) => step.prayer),
@@ -56,6 +57,7 @@ test("each set has a complete opening, five ten-bead decades, and closing prayer
         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       );
       assert.equal(group.at(-1).optional, true);
+      assert.deepEqual(group.slice(-2).map((step) => step.prayer), ["fatima", "miraculous-medal"]);
     }
     for (const step of steps.filter((step) => step.prayer))
       assert.ok(
@@ -63,6 +65,12 @@ test("each set has a complete opening, five ten-bead decades, and closing prayer
         step.prayer,
       );
   }
+});
+
+test("the English invocation preserves the Block Rosary leader and response", () => {
+  const prayer = data.prayers.find((p) => p.id === "miraculous-medal");
+  assert.ok(prayer);
+  assert.equal(prayer.text, "℣. O Mary, conceived without sin,\n℟. Pray for us, who have recourse to thee.");
 });
 
 test("opening verses preserve all four leader/response pairs immediately before the Creed", () => {

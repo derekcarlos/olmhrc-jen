@@ -368,7 +368,18 @@ test("phase navigation, bead count, optional prayer and previous preserve the se
     click(root, "skip");
     assert.equal(
       root.querySelector("[data-rosary-title]").textContent,
+      "Invocation of the Miraculous Medal",
+    );
+    assert.equal(root.querySelector("[data-rosary-skip]").hidden, false);
+    click(root, "skip");
+    assert.equal(
+      root.querySelector("[data-rosary-title]").textContent,
       "The Visitation",
+    );
+    click(root, "previous");
+    assert.equal(
+      root.querySelector("[data-rosary-title]").textContent,
+      "Invocation of the Miraculous Medal",
     );
     click(root, "previous");
     assert.equal(

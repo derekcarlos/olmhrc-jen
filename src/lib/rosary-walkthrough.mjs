@@ -150,6 +150,13 @@ export function rosaryWalkthrough(set, language = "en") {
       ),
       { ...context, optional: true },
     );
+    if (!tl)
+      add(
+        "miraculous-medal",
+        "decade",
+        "This invocation may follow the Fatima Prayer.",
+        { ...context, optional: true },
+      );
   });
   add(
     "hail-holy-queen",

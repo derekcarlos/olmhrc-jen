@@ -367,6 +367,12 @@
       "text": "O my Jesus, forgive us our sins,\nsave us from the fires of hell;\nlead all souls to heaven,\nespecially those in most need of thy mercy.\nAmen."
     },
     {
+      "id": "miraculous-medal",
+      "title": "Invocation of the Miraculous Medal",
+      "text": "℣. O Mary, conceived without sin,\n℟. Pray for us, who have recourse to thee.",
+      "instruction": "This may be prayed after reciting the Fatima Prayer after each decade."
+    },
+    {
       "id": "hail-holy-queen",
       "title": "Hail, Holy Queen",
       "text": "Hail, holy Queen, Mother of mercy,\nour life, our sweetness, and our hope.\nTo thee do we cry, poor banished children of Eve.\nTo thee do we send up our sighs,\nmourning and weeping in this valley of tears.\n\nTurn then, most gracious advocate,\nthine eyes of mercy toward us,\nand after this our exile,\nshow unto us the blessed fruit of thy womb, Jesus.\nO clement, O loving, O sweet Virgin Mary."
