@@ -1,0 +1,38 @@
+{
+  "title": "Choir Practice",
+  "notes": "Songs to prepare for Advent and our upcoming celebrations.",
+  "items": [
+    {
+      "song": "luwalhati-kay-kristong-hari",
+      "note": "Processional for Christ the King (November 22)"
+    },
+    {
+      "song": "sa-iyoy-nananawagan",
+      "note": "Processional for the First Sunday of Advent (November 29)"
+    },
+    {
+      "song": "papuri-sa-diyos-missa-magnificat",
+      "note": "This will be our new Gloria starting Simbang Gabi"
+    },
+    {
+      "song": "sambayanan-ng-maykapal",
+      "note": "Processional for the Second Sunday of Advent (December 6)"
+    },
+    {
+      "song": "magalak-nang-palagian",
+      "note": "Processional for the Third Sunday of Advent (December 13)"
+    },
+    {
+      "song": "pumanaog-nawa-ang-hamog",
+      "note": "Processional for the Fourth Sunday of Advent and Misa de Aguinaldo (December 15)"
+    },
+    {
+      "song": "magalak-ka-o-lubos-na-kinalulugdan",
+      "note": "Offertory for Misa de Aguinaldo (December 15)"
+    },
+    {
+      "song": "sapagkat-si-kristoy-darating",
+      "note": "Recessional Song for Misa de Aguinaldo (December 15)"
+    }
+  ]
+}

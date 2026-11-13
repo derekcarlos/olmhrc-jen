@@ -3,20 +3,26 @@ import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
 import Base from "@/layouts/Base.astro";
 import PracticeAudio from "@/components/PracticeAudio.astro";
+import ChoirPracticeProgress from "@/components/ChoirPracticeProgress.astro";
+import { choirPracticePath } from "@/lib/choir-practice.mjs";
 import { selectionDate } from "@/lib/songs";
 import { selectionSongPath } from "@/lib/selection-dates.mjs";
 import { massPartLabel } from "@/lib/mass-parts";
 import { FaArrowLeft, FaArrowRight, FaMusic } from "react-icons/fa";
 import "@/styles/song-practice.css";
+import "@/styles/choir-practice.css";
 
 interface Props {
   song: CollectionEntry<"songs">;
   tracks: { id: string; title: string; part: string }[];
   selection: { title: string; date: string; id: string } | null;
+  practice?: { title: string; items: { song: string; note: string }[] };
 }
-const { song, tracks, selection } = Astro.props;
+const { song, tracks, selection, practice } = Astro.props;
+const listHref = practice ? choirPracticePath("", import.meta.env.BASE_URL) : selection ? `/songs/selections/${selection.id}` : "/songs";
 const songHref = (id: string) =>
-  selectionSongPath(selection?.id, id, import.meta.env.BASE_URL);
+  practice ? choirPracticePath(id, import.meta.env.BASE_URL) : selectionSongPath(selection?.id, id, import.meta.env.BASE_URL);
+const practiceNote = practice?.items.find(item => item.song === song.id)?.note;
 const { Content } = await render(song);
 const position = tracks.findIndex((track) => track.id === song.id);
 const previous = position > 0 ? tracks[position - 1] : null;
@@ -37,11 +43,11 @@ const languageCodes: Record<string, string> = {
     Astro.site || Astro.url,
   ).href}
 >
-  <main class="rehearsal-page container" data-song-rehearsal>
+  <main class="rehearsal-page container" data-song-rehearsal data-choir-practice={practice ? true : undefined} data-practice-songs={practice ? JSON.stringify(practice.items.map(item => item.song)) : undefined} data-base={import.meta.env.BASE_URL}>
     <nav class="rehearsal-breadcrumb" aria-label="Song navigation">
-      <a href={selection ? `/songs/selections/${selection.id}` : "/songs"}
+      <a href={listHref}
         ><FaArrowLeft aria-hidden="true" />{
-          selection ? "Back to this lineup" : "Song selections"
+          practice ? "Back to Choir Practice" : selection ? "Back to this lineup" : "Song selections"
         }</a
       >
       <a href={song.data.marian ? "/songs/marian" : "/songs/mass"}
@@ -65,6 +71,11 @@ const languageCodes: Record<string, string> = {
         <FaMusic /><span>Listen.<br />Learn.<br />Sing together.</span>
       </div>
     </header>
+    {practice && <>
+      {practiceNote && <p class="choir-practice-note">{practiceNote}</p>}
+      <label class="choir-practised" data-choir-mark-wrap hidden><input type="checkbox" data-choir-mark value={song.id} disabled /><span>Practised<span class="sr-only">: {song.data.title}</span></span></label>
+      <ChoirPracticeProgress total={practice.items.length} />
+    </>}
     {
       song.data.placeholder && (
         <p class="song-pending">
@@ -120,9 +131,9 @@ const languageCodes: Record<string, string> = {
           <Content />
         </div>
         {
-          selection && (
+          (selection || practice) && (
             <div class="sheet-selection-label">
-              From {selection.title} · Song {position + 1} of {tracks.length}
+              From {practice?.title || selection!.title} · Song {position + 1} of {tracks.length}
             </div>
           )
         }
@@ -213,22 +224,22 @@ const languageCodes: Record<string, string> = {
           </details>
         </div>
         {
-          selection && (
+          (selection || practice) && (
             <div class="practice-setlist-frame">
               <details class="practice-setlist">
                 <summary>
                   <FaMusic aria-hidden="true" />
-                  In this selection<span>{tracks.length} songs</span>
+                  {practice ? "In this practice list" : "In this selection"}<span>{tracks.length} songs</span>
                 </summary>
                 <div class="practice-setlist-heading">
-                  <p>{selection.title}</p>
-                  {selection.date && (
+                  <p>{practice?.title || selection!.title}</p>
+                  {selection?.date && (
                     <time datetime={selection.date}>
                       {selectionDate(selection.date)}
                     </time>
                   )}
-                  <a href={`/songs/selections/${selection.id}`}>
-                    View full selection →
+                  <a href={listHref}>
+                    {practice ? "View practice list →" : "View full selection →"}
                   </a>
                 </div>
                 <ol>
@@ -260,6 +271,11 @@ const languageCodes: Record<string, string> = {
 
 <script>
   import { prepareSongPractice } from "@/lib/song-practice-client";
+  import { prepareChoirPractice } from "@/lib/choir-practice-client";
   prepareSongPractice();
-  document.addEventListener("astro:page-load", () => prepareSongPractice());
+  prepareChoirPractice();
+  document.addEventListener("astro:page-load", () => {
+    prepareSongPractice();
+    prepareChoirPractice();
+  });
 </script>

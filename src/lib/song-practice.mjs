@@ -8,3 +8,7 @@ export function lyricSize(value) {
   if (!Number.isFinite(parsed)) return 24;
   return Math.min(36, Math.max(20, Math.round(parsed / 2) * 2));
 }
+
+export function choirPracticePath(songId = "", base = "") {
+  return `${base.replace(/\/+$/, "")}/songs/practice${songId ? `/${encodeURIComponent(songId)}` : ""}`;
+}

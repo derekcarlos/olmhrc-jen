@@ -36,3 +36,7 @@ Tuwing sasapit ang Pasko,
 Ang Pilipino ay nagdiriwang.  
 Sapagkat si Kristo'y darating  
 Upang lahat ay tubusin.  
+
+CODA:  
+Sapagkat si Kristo'y darating  
+Upang lahat ay tubusin.  

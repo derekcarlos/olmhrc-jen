@@ -1,0 +1,9 @@
+---
+interface Props { total: number }
+const { total } = Astro.props;
+---
+<section class="choir-progress" data-choir-progress hidden aria-label="Your choir practice progress">
+  <div><strong>Your practice</strong><span data-choir-count aria-live="polite">0 of {total} practised</span></div>
+  <progress data-choir-meter value="0" max={total || 1} aria-label="Songs you have practised" />
+  <p data-choir-storage>Your progress is saved only on this device.</p>
+</section>

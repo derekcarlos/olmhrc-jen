@@ -177,6 +177,8 @@ Edit `src/config/song-selections.json` for Sunday and future celebrations. Any n
 
 Every published lineup has a complete practice page at `/songs/selections/<id>`, with recording previews and a checklist saved separately on the current device. Lyrics opened from that lineup use `/songs/selections/<id>/<song-id>` so Previous/Next, the setlist and return links stay in the chosen celebration. The ordinary `/songs/<song-id>` links remain available for the shared songbook. New or edited lineups still require a rebuild and deployment; date rollover needs no daily workflow.
 
+For ongoing rehearsals across celebrations, edit `src/config/choir-practice.json` and open **Choir Practice** at `/songs/practice`. Add any published song IDs in your chosen order, with optional practice notes; no Mass parts or dates are required. Song links open full lyrics and listening samples with Previous/Next inside this list. Practised checkmarks are personal, stored on each device, and remain independent of dated lineup progress. Update the list as rehearsal priorities change. See [Managing the choir practice list](docs/managing-choir-practice.md).
+
 ```json
 {
   "part": "pater-noster",

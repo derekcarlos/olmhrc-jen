@@ -51,6 +51,7 @@ const summaries = selections.map(({ id, date, status }) => ({
     </header>
 
     <nav class="lineup-quick-links" aria-label="Browse choir lineups">
+      <a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/songs/practice`}>Choir Practice →</a>
       <a href="#future-lineups-title"
         >Prepare ahead · <span data-lineup-shortcut-count
           >{grouped.future.length}

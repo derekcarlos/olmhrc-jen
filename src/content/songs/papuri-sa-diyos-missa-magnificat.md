@@ -8,7 +8,7 @@ mass_parts: ["gloria"]
 marian: false
 seasons: ["Ordinary Time"]
 occasions: []
-audio: "/audio/papuri-sa-diyos-missa-magnificat.mp3"
+audio: "/audio/papuri-sa-diyos-missa-magnificat.m4a"
 audio_credit: ""
 youtube: "https://www.youtube.com/watch?v=rCb5A4qhS54"
 placeholder: false

@@ -1,0 +1,57 @@
+.choir-practice-page, [data-choir-practice] {
+  --choir-ink: #17394d;
+  --choir-muted: #506270;
+  --choir-gold: #86622c;
+  --choir-line: #ddd9cf;
+  --choir-surface: #f5f3ee;
+  --choir-paper: #fff;
+}
+.dark .choir-practice-page, .dark [data-choir-practice] {
+  --choir-ink: #e8eef1;
+  --choir-muted: #bac6ce;
+  --choir-gold: #e2bd7c;
+  --choir-line: #40515e;
+  --choir-surface: #202e39;
+  --choir-paper: #192630;
+}
+.choir-practice-page { padding-top: var(--page-top-gap); padding-bottom: 5rem; color: var(--choir-ink); }
+.choir-back { display: inline-flex; align-items: center; gap: .6rem; color: var(--choir-muted); margin-bottom: 2rem; }
+.choir-heading > p:last-of-type { max-width: 42rem; color: var(--choir-muted); font-size: 1.2rem; line-height: 1.7; margin-top: 1rem; }
+.choir-start { display: inline-flex; align-items: center; gap: 1rem; background: #183d54; color: #fff; padding: .85rem 1.2rem; border-radius: .4rem; margin-top: 1.25rem; font-weight: 600; }
+.dark .choir-start { background: #e2bd7c; color: #142532; }
+.choir-progress { border: 1px solid var(--choir-line); border-radius: .7rem; background: var(--choir-surface); padding: 1.2rem 1.5rem; margin: 2rem 0; color: var(--choir-ink); }
+.choir-progress > div { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.choir-progress progress { display: block; width: 100%; height: .5rem; margin: .8rem 0; accent-color: var(--choir-gold); border: 0; border-radius: 1rem; overflow: hidden; background: var(--choir-line); }
+.choir-progress progress::-webkit-progress-bar { background: var(--choir-line); }
+.choir-progress progress::-webkit-progress-value { background: var(--choir-gold); }
+.choir-progress progress::-moz-progress-bar { background: var(--choir-gold); }
+.choir-progress > p { color: var(--choir-muted); font-size: .95rem; }
+.choir-list-section { margin-top: 2.5rem; }
+.choir-list-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.choir-list-heading h2, .choir-empty h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--choir-ink); }
+.choir-list-heading > span, .choir-list-intro { color: var(--choir-muted); }
+.choir-list-intro { margin: .8rem 0 1.5rem; font-size: 1.1rem; }
+.choir-song-list { list-style: none; padding: 0; border-top: 1px solid var(--choir-line); }
+.choir-song-list > li { display: flex; align-items: center; gap: 1rem; border-bottom: 1px solid var(--choir-line); padding: .7rem 0; }
+.choir-song-link { display: flex; align-items: center; gap: 1.25rem; min-width: 0; flex: 1; padding: 1rem .5rem; border-radius: .4rem; }
+.choir-song-link:hover { background: var(--choir-surface); }
+.choir-song-number { font-size: 1.6rem; color: var(--choir-gold); font-family: var(--font-secondary); }
+.choir-song-link h3 { color: var(--choir-ink); font-size: clamp(1.35rem, 2vw, 1.7rem); overflow-wrap: anywhere; }
+.choir-song-parts { color: var(--choir-gold); font-size: .85rem; letter-spacing: .06em; text-transform: uppercase; }
+.choir-song-composer { color: var(--choir-muted); font-size: 1rem; }
+.choir-song-note { color: var(--choir-ink); font-size: 1.1rem; margin-top: .45rem; }
+.choir-song-arrow { flex-shrink: 0; margin-left: auto; color: var(--choir-gold); }
+.choir-practised { display: inline-flex; align-items: center; gap: .65rem; padding: .8rem .5rem; min-height: 44px; cursor: pointer; color: var(--choir-ink); }
+.choir-practised input { width: 1.25rem; height: 1.25rem; accent-color: #247157; flex-shrink: 0; }
+.choir-practised:has(input:checked) { color: var(--choir-gold); }
+.choir-empty { margin-top: 3rem; padding: clamp(1.5rem, 4vw, 3rem); background: var(--choir-surface); border: 1px solid var(--choir-line); border-radius: .7rem; }
+.choir-empty > p:not(.page-eyebrow) { max-width: 38rem; color: var(--choir-muted); font-size: 1.15rem; line-height: 1.7; margin-top: .9rem; }
+.choir-practice-note { margin: 1rem 0; color: var(--choir-muted); font-size: 1.1rem; }
+[data-choir-practice] [hidden] { display: none !important; }
+.choir-song-link:focus-visible, .choir-start:focus-visible, .choir-practised:focus-within { outline: 2px solid var(--choir-gold); outline-offset: 4px; }
+@media (max-width: 640px) {
+  .choir-song-list > li { flex-wrap: wrap; gap: 0; }
+  .choir-song-link { flex-basis: 100%; gap: .85rem; }
+  .choir-song-list .choir-practised { margin-left: 2.6rem; }
+  .choir-progress { padding: 1rem; }
+}

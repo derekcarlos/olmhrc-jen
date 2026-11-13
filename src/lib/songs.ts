@@ -2,6 +2,8 @@ import { z } from "astro/zod";
 import type { CollectionEntry } from "astro:content";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import selectionsData from "@/config/song-selections.json";
+import practiceData from "@/config/choir-practice.json";
+import { parseChoirPractice } from "./choir-practice.mjs";
 import { massParts } from "@/lib/mass-parts";
 
 import { selectionSchema, parseSelections } from "./selection-catalog.mjs";
@@ -45,7 +47,7 @@ export async function getChoirLibrary() {
   );
   const songMap = new Map(songs.map((song) => [song.id, song]));
   for (const song of songs) {
-    if (["mass", "marian", "selections"].includes(song.id))
+    if (["mass", "marian", "selections", "practice"].includes(song.id))
       throw new Error(`Reserved song filename: ${song.id}`);
   }
   const selections = parseSelections(
@@ -54,6 +56,13 @@ export async function getChoirLibrary() {
     new Set(songMap.keys()),
   );
   return { songs, songMap, selections };
+}
+
+export async function getChoirPractice() {
+  const { songMap } = await getChoirLibrary();
+  const list = parseChoirPractice(practiceData, new Set(songMap.keys()));
+  const entries = list.items.map(item => ({ ...item, entry: songMap.get(item.song)! }));
+  return { list, entries };
 }
 
 export function selectionDate(date: string) {

@@ -1,0 +1,37 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { JSDOM } from "jsdom";
+import { prepareChoirPractice } from "../src/lib/choir-practice-client.ts";
+const live = process.argv.includes("--live");
+const readPage = async path => live ? await (await fetch(`http://localhost:4321${path}`)).text() : readFileSync(`dist${path}/index.html`, "utf8");
+const list = JSON.parse(readFileSync("src/config/choir-practice.json", "utf8"));
+const dom = new JSDOM(await readPage("/songs/practice"), { url: "http://localhost:4321/songs/practice" });
+const root = dom.window.document.querySelector("[data-choir-practice]");
+assert.ok(root);
+assert.equal(root.querySelector("h1").textContent, list.title);
+assert.equal(root.querySelectorAll(".choir-song-list > li").length, list.items.length);
+assert.equal(new JSDOM(await readPage("/songs")).window.document.querySelector('a[href="/songs/practice"]').textContent, "Choir Practice →");
+if (!list.items.length) assert.ok(root.querySelector(".choir-empty"));
+for (const [index, item] of list.items.entries()) {
+  const link = root.querySelectorAll(".choir-song-link")[index];
+  assert.equal(link.getAttribute("href"), `/songs/practice/${item.song}`);
+  const detail = new JSDOM(await readPage(`/songs/practice/${item.song}`), { url: `http://localhost:4321/songs/practice/${item.song}` });
+  const doc = detail.window.document;
+  assert.ok(doc.querySelector('a[href="/songs/practice"]'));
+  assert.ok(doc.querySelector("[data-lyrics-copy]").textContent.trim());
+  assert.ok(doc.querySelector("[data-choir-mark]"));
+  assert.equal(doc.querySelectorAll('.practice-setlist a[href*="/songs/practice/"]').length, list.items.length);
+  assert.equal(doc.querySelectorAll('a[href*="/songs/selections/"]').length, 0);
+  if (index > 0) assert.equal(doc.querySelector(".previous-song").getAttribute("href"), `/songs/practice/${list.items[index - 1].song}`);
+  if (index < list.items.length - 1) assert.equal(doc.querySelector(".next-song").getAttribute("href"), `/songs/practice/${list.items[index + 1].song}`);
+  const canonical = new JSDOM(await readPage(`/songs/${item.song}`));
+  assert.equal(doc.querySelector("[data-lyrics-copy]").textContent.trim(), canonical.window.document.querySelector("[data-lyrics-copy]").textContent.trim());
+  canonical.window.close();
+  prepareChoirPractice(doc);
+  doc.querySelector("[data-choir-mark]").click();
+  assert.equal(JSON.parse(detail.window.localStorage.getItem("rosarium-choir-practice"))[0], item.song);
+  assert.equal(doc.querySelector("[data-choir-count]").textContent, `1 of ${list.items.length} practised`);
+  detail.window.close();
+}
+dom.window.close();
+console.log(`PASS: choir practice page and ${list.items.length} full-lyrics pages, ordering, context, navigation and checks.`);

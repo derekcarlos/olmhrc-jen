@@ -1,0 +1,44 @@
+---
+import Base from "@/layouts/Base.astro";
+import ChoirPracticeProgress from "@/components/ChoirPracticeProgress.astro";
+import { getChoirPractice } from "@/lib/songs";
+import { choirPracticePath } from "@/lib/choir-practice.mjs";
+import { massPartLabel } from "@/lib/mass-parts";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import "@/styles/choir-practice.css";
+const { list, entries } = await getChoirPractice();
+const base = import.meta.env.BASE_URL;
+---
+<Base title={`${list.title} | Rosarium`} description="Coro de Rosarium's ongoing rehearsal list. Open the lyrics, listen, and track your personal practice.">
+  <main class="choir-practice-page container" data-choir-practice data-practice-songs={JSON.stringify(list.items.map(item => item.song))} data-base={base}>
+    <a class="choir-back" href={`${base.replace(/\/$/, "")}/songs`}><FaArrowLeft aria-hidden="true" /> Back to Songs</a>
+    <header class="choir-heading">
+      <p class="page-eyebrow">Coro de Rosarium · Rehearse together</p>
+      <h1 class="page-title">{list.title}</h1>
+      <p>{list.notes}</p>
+      {entries.length > 0 && <a class="choir-start" data-choir-resume href={choirPracticePath(entries[0].song, base)}><span data-choir-resume-label>Start practising</span><FaArrowRight aria-hidden="true" /></a>}
+    </header>
+    {entries.length > 0 ? <>
+      <ChoirPracticeProgress total={entries.length} />
+      <section aria-labelledby="practice-list-title" class="choir-list-section">
+        <div class="choir-list-heading"><div><p class="page-eyebrow">One list · At your own pace</p><h2 id="practice-list-title">On our music stands</h2></div><span>{entries.length} {entries.length === 1 ? "song" : "songs"}</span></div>
+        <p class="choir-list-intro">Choose a song to open its lyrics and practice recording.</p>
+        <ol class="choir-song-list">
+          {entries.map(({ song, note, entry }, index) => <li>
+            <a class="choir-song-link" href={choirPracticePath(song, base)}>
+              <span class="choir-song-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+              <div><p class="choir-song-parts">{entry.data.mass_parts.map(massPartLabel).join(" · ") || "Choir repertoire"}</p><h3>{entry.data.title}</h3><p class="choir-song-composer">{entry.data.composer}</p>{note && <p class="choir-song-note">{note}</p>}</div>
+              <FaArrowRight className="choir-song-arrow" aria-hidden="true" />
+            </a>
+            <label class="choir-practised" data-choir-mark-wrap hidden><input type="checkbox" data-choir-mark value={song} disabled /><span>Practised<span class="sr-only">: {entry.data.title}</span></span></label>
+          </li>)}
+        </ol>
+      </section>
+    </> : <section class="choir-empty" aria-labelledby="practice-empty-title"><p class="page-eyebrow">Our next rehearsal</p><h2 id="practice-empty-title">A little preparation. A stronger voice.</h2><p>Our practice list is being prepared. In the meantime, explore the songbook and keep singing.</p><a class="choir-start" href={`${base.replace(/\/$/, "")}/songs/mass`}>Browse the songbook <FaArrowRight aria-hidden="true" /></a></section>}
+  </main>
+</Base>
+<script>
+  import { prepareChoirPractice } from "@/lib/choir-practice-client";
+  prepareChoirPractice();
+  document.addEventListener("astro:page-load", () => prepareChoirPractice());
+</script>
