@@ -157,7 +157,7 @@
     "date": "2026-11-22",
     "celebration": "Solemnity of Our Lord Jesus Christ, King of the Universe",
     "status": "published",
-    "readiness": "preliminary",
+    "readiness": "confirmed",
     "notes": "Preliminary line up for the last Sunday of Ordinary Time, most commonly known as Christ the King.",
     "items": [
       {
@@ -172,7 +172,7 @@
       },
       {
         "part": "gloria",
-        "song": "papuri-sa-diyos-tinapay-ng-buhay",
+        "song": "papuri-sa-diyos-missa-magnificat",
         "used": true
       },
       {
@@ -202,7 +202,7 @@
       },
       {
         "part": "pater-noster",
-        "song": "ama-namin-missa-magnificat",
+        "song": "ama-namin-tinapay-ng-buhay",
         "used": true
       },
       {
@@ -222,7 +222,7 @@
       },
       {
         "part": "recessional",
-        "song": "salamat-sa-biyaya-missa-magnificat",
+        "song": "christus-vincit",
         "used": true
       }
     ]
