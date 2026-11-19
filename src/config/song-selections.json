@@ -293,7 +293,7 @@
       },
       {
         "part": "communion",
-        "song": "anima-christi-bukas-palad",
+        "song": "sa-kanyang-pagdating",
         "used": true
       },
       {
@@ -369,7 +369,7 @@
       },
       {
         "part": "communion",
-        "song": "anima-christi-bukas-palad",
+        "song": "sa-kanyang-pagdating",
         "used": true
       },
       {
@@ -445,7 +445,7 @@
       },
       {
         "part": "communion",
-        "song": "anima-christi-bukas-palad",
+        "song": "sa-kanyang-pagdating",
         "used": true
       },
       {
@@ -458,7 +458,7 @@
   {
     "id": "fourth-sunday-of-advent-2026",
     "title": "Fourth Sunday of Advent",
-    "date": "2026-12-13",
+    "date": "2026-12-15",
     "celebration": "Fourth Sunday of Advent",
     "status": "published",
     "readiness": "preliminary",
@@ -521,7 +521,7 @@
       },
       {
         "part": "communion",
-        "song": "anima-christi-bukas-palad",
+        "song": "masdan-ninyot-kamanghaan",
         "used": true
       },
       {
