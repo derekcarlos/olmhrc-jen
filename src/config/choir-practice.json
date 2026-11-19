@@ -15,6 +15,10 @@
       "note": "This will be our new Gloria starting Simbang Gabi"
     },
     {
+      "song": "balang-araw",
+      "note": "Recessional song for the First, Second, and Third Sundays of Advent"
+    },
+    {
       "song": "sambayanan-ng-maykapal",
       "note": "Processional for the Second Sunday of Advent (December 6)"
     },
@@ -28,11 +32,15 @@
     },
     {
       "song": "magalak-ka-o-lubos-na-kinalulugdan",
-      "note": "Offertory for Misa de Aguinaldo (December 15)"
+      "note": "Offertory for the Fourth Sunday of Advent and Misa de Aguinaldo (December 15)"
+    },
+    {
+      "song": "masdan-ninyot-kamanghaan",
+      "note": "Communion for the Fourth Sunday of Advent and Misa de Aguinaldo (December 15)"
     },
     {
       "song": "sapagkat-si-kristoy-darating",
-      "note": "Recessional Song for Misa de Aguinaldo (December 15)"
+      "note": "Recessional for the Fourth Sunday of Advent and Misa de Aguinaldo (December 15)"
     }
   ]
 }
